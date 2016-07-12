@@ -18,9 +18,9 @@ package newsapi
 
 type CategoryLinks struct {
 
-	// A URL points to the category
+	// A URL pointing to the category
 	Self string `json:"self,omitempty"`
 
-	// A URL points to the parent category
+	// A URL pointing to the parent category
 	Parent string `json:"parent,omitempty"`
 }

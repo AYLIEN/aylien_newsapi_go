@@ -36,4 +36,7 @@ type Coverages struct {
 
 	// An array of coverages for the input story
 	Coverages []Story `json:"coverages,omitempty"`
+
+	// An array of clusters
+	Clusters []StoryCluster `json:"clusters,omitempty"`
 }

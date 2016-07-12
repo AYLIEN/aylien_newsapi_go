@@ -18,7 +18,7 @@ package newsapi
 
 type Media struct {
 
-	// Type of the media
+	// The type of media
 	Type_ string `json:"type,omitempty"`
 
 	// A URL which points to the media file

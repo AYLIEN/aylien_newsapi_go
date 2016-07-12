@@ -22,7 +22,7 @@ import (
 
 type Story struct {
 
-	// ID of the story which is unique identification
+	// ID of the story which is a unique identification
 	Id int64 `json:"id,omitempty"`
 
 	// Title of the story
@@ -49,16 +49,16 @@ type Story struct {
 	// An array of suggested Story hashtags
 	Hashtags []string `json:"hashtags,omitempty"`
 
-	// Characters count of the story body
+	// Character count of the story body
 	CharactersCount int32 `json:"characters_count,omitempty"`
 
-	// Words count of the story body
+	// Word count of the story body
 	WordsCount int32 `json:"words_count,omitempty"`
 
-	// Sentences count of the story body
+	// Sentence count of the story body
 	SentencesCount int32 `json:"sentences_count,omitempty"`
 
-	// Paragraphs count of the story body
+	// Paragraph count of the story body
 	ParagraphsCount int32 `json:"paragraphs_count,omitempty"`
 
 	// Suggested categories for the story

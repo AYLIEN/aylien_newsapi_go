@@ -29,4 +29,7 @@ type RelatedStories struct {
 
 	// An array of related stories for the input story
 	RelatedStories []Story `json:"related_stories,omitempty"`
+
+	// An array of clusters
+	Clusters []StoryCluster `json:"clusters,omitempty"`
 }

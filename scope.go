@@ -18,15 +18,15 @@ package newsapi
 
 type Scope struct {
 
-	// The country code of the scope. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
+	// The source scope by country code. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
 	Country string `json:"country,omitempty"`
 
-	// The state of the scope
+	// The scope by state
 	State string `json:"state,omitempty"`
 
-	// The city of the scope
+	// The scope by city
 	City string `json:"city,omitempty"`
 
-	// The level of the scope
+	// The scope by level
 	Level string `json:"level,omitempty"`
 }

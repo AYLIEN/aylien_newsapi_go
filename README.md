@@ -115,7 +115,6 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
-
 ## app_id
 
 - **Type**: API key 

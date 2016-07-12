@@ -46,7 +46,7 @@ func NewConfiguration() *Configuration {
 		DefaultHeader: make(map[string]string),
 		APIKey:        make(map[string]string),
 		APIKeyPrefix:  make(map[string]string),
-		UserAgent:     "aylien-news-api/0.0.1/go",
+		UserAgent:     "aylien-news-api/0.1.0/go",
 	}
 }
 

@@ -36,6 +36,10 @@ type TrendsParams struct {
 	EntitiesBodyLinksDbpedia  []string
 	SentimentTitlePolarity    string
 	SentimentBodyPolarity     string
+	MediaImagesCountMin       string
+	MediaImagesCountMax       string
+	MediaVideosCountMin       string
+	MediaVideosCountMax       string
 	AuthorId                  []int32
 	AuthorName                string
 	SourceId                  []int32

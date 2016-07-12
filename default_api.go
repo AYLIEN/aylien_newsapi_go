@@ -48,10 +48,10 @@ func NewDefaultApiWithBasePath(basePath string) *DefaultApi {
  *
  * @param params This is an AutocompletesParams struct which accepts following parameters:
  ** @param Type This parameter is used for defining the type of autocompletes.
- ** @param Term This parameter is used for finding autocomplete objects whose contains the specified value.
+ ** @param Term This parameter is used for finding autocomplete objects that contain the specified value.
  ** @param Language This parameter is used for autocompletes whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
- ** @param PerPage This parameter is used for specifying number of the items in each page.
- * @return Autocompletes
+ ** @param PerPage This parameter is used for specifying number of items in each page.
+ * @return *Autocompletes
  */
 func (a DefaultApi) ListAutocompletes(params *AutocompletesParams) (*Autocompletes, *APIResponse, error) {
 
@@ -135,7 +135,7 @@ func (a DefaultApi) ListAutocompletes(params *AutocompletesParams) (*Autocomplet
 
 /**
  * List coverages
- * This endpoint is used for finding story coverages based on provided parameters. The number of coverages to return, up to a maximum of 100.
+ * This endpoint is used for finding story coverages based on the parameters provided. The maximum number of related stories returned is 100.
  *
  * @param params This is an CoveragesParams struct which accepts following parameters:
  ** @param Id This parameter is used for finding stroies by story id.
@@ -143,41 +143,47 @@ func (a DefaultApi) ListAutocompletes(params *AutocompletesParams) (*Autocomplet
  ** @param Body This parameter is used for finding stories whose body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Text This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Language This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
- ** @param PublishedAtStart This parameter is used for finding stories whose published at is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
- ** @param PublishedAtEnd This parameter is used for finding stories whose published at is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
- ** @param CategoriesTaxonomy This parameter is used for defining type of the taxonomy for the rest of categories queries.
+ ** @param PublishedAtStart This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
+ ** @param PublishedAtEnd This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
+ ** @param CategoriesTaxonomy This parameter is used for defining the type of the taxonomy for the rest of the categories queries.
  ** @param CategoriesConfident This parameter is used for finding stories whose categories are confident.
- ** @param CategoriesId This parameter is used for finding stories whose categories id is the specified value.
- ** @param CategoriesLevel This parameter is used for finding stories whose categories level is the specified value.
- ** @param EntitiesTitleText This parameter is used for finding stories whose entities text in title is the specified value.
- ** @param EntitiesTitleType This parameter is used for finding stories whose entities type in title is the specified value.
- ** @param EntitiesTitleLinksDbpedia This parameter is used for finding stories whose entities dbpedia url in title is the specified value.
- ** @param EntitiesBodyText This parameter is used for finding stories whose entities text in body is the specified value.
- ** @param EntitiesBodyType This parameter is used for finding stories whose entities type in body is the specified value.
- ** @param EntitiesBodyLinksDbpedia This parameter is used for finding stories whose entities dbpedia url in body is the specified value.
+ ** @param CategoriesId This parameter is used for finding stories by categories id.
+ ** @param CategoriesLevel This parameter is used for finding stories by categories level.
+ ** @param EntitiesTitleText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles.
+ ** @param EntitiesTitleType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles.
+ ** @param EntitiesTitleLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in story titles.
+ ** @param EntitiesBodyText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories.
+ ** @param EntitiesBodyType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories.
+ ** @param EntitiesBodyLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories.
  ** @param SentimentTitlePolarity This parameter is used for finding stories whose title sentiment is the specified value.
  ** @param SentimentBodyPolarity This parameter is used for finding stories whose body sentiment is the specified value.
+ ** @param MediaImagesCountMin This parameter is used for finding stories whose number of images is greater than or equal to the specified value.
+ ** @param MediaImagesCountMax This parameter is used for finding stories whose number of images is less than or equal to the specified value.
+ ** @param MediaVideosCountMin This parameter is used for finding stories whose number of videos is greater than or equal to the specified value.
+ ** @param MediaVideosCountMax This parameter is used for finding stories whose number of videos is less than or equal to the specified value.
  ** @param AuthorId This parameter is used for finding stories whose author id is the specified value.
  ** @param AuthorName This parameter is used for finding stories whose author full name contains the specified value.
  ** @param SourceId This parameter is used for finding stories whose source id is the specified value.
  ** @param SourceName This parameter is used for finding stories whose source name contains the specified value.
  ** @param SourceDomain This parameter is used for finding stories whose source domain is the specified value.
- ** @param SourceLocationsCountry This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
- ** @param SourceLocationsState This parameter is used for finding stories whose source state/province is the specified value.
- ** @param SourceLocationsCity This parameter is used for finding stories whose source city is the specified value.
- ** @param SourceScopesCountry This parameter is used for finding stories whose source scopes country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
- ** @param SourceScopesState This parameter is used for finding stories whose source scopes state/province is the specified value.
- ** @param SourceScopesCity This parameter is used for finding stories whose source scopes city is the specified value.
- ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes level is the specified value.
+ ** @param SourceLocationsCountry This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceLocationsState This parameter is used for finding stories whose source state/province is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceLocationsCity This parameter is used for finding stories whose source city is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesCountry This parameter is used for finding stories whose source scopes  is the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesState This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesCity This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes  is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param Cluster This parameter enables clustering for the returned stories.
+ ** @param ClusterAlgorithm This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms.
  ** @param Return This parameter is used for specifying return fields.
  ** @param StoryId A story id
  ** @param StoryUrl An article or webpage
  ** @param StoryTitle Title of the article
  ** @param StoryBody Body of the article
- ** @param StoryPublishedAt Publish date of the article. If you use url or title and body for getting coverages, this parameter is required. The format used is a restricted form of the canonical representation of dateTime in the [XML Schema specification (ISO 8601)](https://www.w3.org/TR/xmlschema-2/#dateTime).
- ** @param StoryLanguage This parameter is used for setting language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
- ** @param PerPage This parameter is used for specifying number of the items in each page.
- * @return Coverages
+ ** @param StoryPublishedAt Publish date of the article. If you use a url or title and body of an article for getting coverages, this parameter is required. The format used is a restricted form of the canonical representation of dateTime in the [XML Schema specification (ISO 8601)](https://www.w3.org/TR/xmlschema-2/#dateTime).
+ ** @param StoryLanguage This parameter is used for setting the language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
+ ** @param PerPage This parameter is used for specifying number of items in each page.
+ * @return *Coverages
  */
 func (a DefaultApi) ListCoverages(params *CoveragesParams) (*Coverages, *APIResponse, error) {
 
@@ -336,6 +342,30 @@ func (a DefaultApi) ListCoverages(params *CoveragesParams) (*Coverages, *APIResp
 			Item2: a.Configuration.APIClient.ParameterToString(params.SentimentBodyPolarity)})
 	}
 
+	if len(params.MediaImagesCountMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.count.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMin)})
+	}
+
+	if len(params.MediaImagesCountMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.count.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMax)})
+	}
+
+	if len(params.MediaVideosCountMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.videos.count.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaVideosCountMin)})
+	}
+
+	if len(params.MediaVideosCountMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.videos.count.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaVideosCountMax)})
+	}
+
 	for _, f := range params.AuthorId {
 		formParams = append(formParams, FormParams{
 			Item1: "author.id[]",
@@ -408,6 +438,18 @@ func (a DefaultApi) ListCoverages(params *CoveragesParams) (*Coverages, *APIResp
 			Item2: a.Configuration.APIClient.ParameterToString(f)})
 	}
 
+	if len(params.Cluster) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "cluster",
+			Item2: a.Configuration.APIClient.ParameterToString(params.Cluster)})
+	}
+
+	if len(params.ClusterAlgorithm) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "cluster.algorithm",
+			Item2: a.Configuration.APIClient.ParameterToString(params.ClusterAlgorithm)})
+	}
+
 	for _, f := range params.Return {
 		formParams = append(formParams, FormParams{
 			Item1: "return[]",
@@ -472,7 +514,7 @@ func (a DefaultApi) ListCoverages(params *CoveragesParams) (*Coverages, *APIResp
 
 /**
  * List histograms
- * This endpoint is used for getting histograms based on the field parameter is passed.
+ * This endpoint is used for getting histograms based on the &#x60;field&#x60; parameter passed to the API.
  *
  * @param params This is an HistogramsParams struct which accepts following parameters:
  ** @param Id This parameter is used for finding stroies by story id.
@@ -480,37 +522,41 @@ func (a DefaultApi) ListCoverages(params *CoveragesParams) (*Coverages, *APIResp
  ** @param Body This parameter is used for finding stories whose body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Text This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Language This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
- ** @param PublishedAtStart This parameter is used for finding stories whose published at is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
- ** @param PublishedAtEnd This parameter is used for finding stories whose published at is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
- ** @param CategoriesTaxonomy This parameter is used for defining type of the taxonomy for the rest of categories queries.
+ ** @param PublishedAtStart This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
+ ** @param PublishedAtEnd This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
+ ** @param CategoriesTaxonomy This parameter is used for defining the type of the taxonomy for the rest of the categories queries.
  ** @param CategoriesConfident This parameter is used for finding stories whose categories are confident.
- ** @param CategoriesId This parameter is used for finding stories whose categories id is the specified value.
- ** @param CategoriesLevel This parameter is used for finding stories whose categories level is the specified value.
- ** @param EntitiesTitleText This parameter is used for finding stories whose entities text in title is the specified value.
- ** @param EntitiesTitleType This parameter is used for finding stories whose entities type in title is the specified value.
- ** @param EntitiesTitleLinksDbpedia This parameter is used for finding stories whose entities dbpedia url in title is the specified value.
- ** @param EntitiesBodyText This parameter is used for finding stories whose entities text in body is the specified value.
- ** @param EntitiesBodyType This parameter is used for finding stories whose entities type in body is the specified value.
- ** @param EntitiesBodyLinksDbpedia This parameter is used for finding stories whose entities dbpedia url in body is the specified value.
+ ** @param CategoriesId This parameter is used for finding stories by categories id.
+ ** @param CategoriesLevel This parameter is used for finding stories by categories level.
+ ** @param EntitiesTitleText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles.
+ ** @param EntitiesTitleType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles.
+ ** @param EntitiesTitleLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in story titles.
+ ** @param EntitiesBodyText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories.
+ ** @param EntitiesBodyType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories.
+ ** @param EntitiesBodyLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories.
  ** @param SentimentTitlePolarity This parameter is used for finding stories whose title sentiment is the specified value.
  ** @param SentimentBodyPolarity This parameter is used for finding stories whose body sentiment is the specified value.
+ ** @param MediaImagesCountMin This parameter is used for finding stories whose number of images is greater than or equal to the specified value.
+ ** @param MediaImagesCountMax This parameter is used for finding stories whose number of images is less than or equal to the specified value.
+ ** @param MediaVideosCountMin This parameter is used for finding stories whose number of videos is greater than or equal to the specified value.
+ ** @param MediaVideosCountMax This parameter is used for finding stories whose number of videos is less than or equal to the specified value.
  ** @param AuthorId This parameter is used for finding stories whose author id is the specified value.
  ** @param AuthorName This parameter is used for finding stories whose author full name contains the specified value.
  ** @param SourceId This parameter is used for finding stories whose source id is the specified value.
  ** @param SourceName This parameter is used for finding stories whose source name contains the specified value.
  ** @param SourceDomain This parameter is used for finding stories whose source domain is the specified value.
- ** @param SourceLocationsCountry This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
- ** @param SourceLocationsState This parameter is used for finding stories whose source state/province is the specified value.
- ** @param SourceLocationsCity This parameter is used for finding stories whose source city is the specified value.
- ** @param SourceScopesCountry This parameter is used for finding stories whose source scopes country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
- ** @param SourceScopesState This parameter is used for finding stories whose source scopes state/province is the specified value.
- ** @param SourceScopesCity This parameter is used for finding stories whose source scopes city is the specified value.
- ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes level is the specified value.
+ ** @param SourceLocationsCountry This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceLocationsState This parameter is used for finding stories whose source state/province is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceLocationsCity This parameter is used for finding stories whose source city is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesCountry This parameter is used for finding stories whose source scopes is the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesState This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesCity This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param IntervalStart This parameter is used for setting the start data point of histogram intervals.
  ** @param IntervalEnd This parameter is used for setting the end data point of histogram intervals.
  ** @param IntervalWidth This parameter is used for setting the width of histogram intervals.
  ** @param Field This parameter is used for specifying the y-axis variable for the histogram.
- * @return Histograms
+ * @return *Histograms
  */
 func (a DefaultApi) ListHistograms(params *HistogramsParams) (*Histograms, *APIResponse, error) {
 
@@ -649,6 +695,30 @@ func (a DefaultApi) ListHistograms(params *HistogramsParams) (*Histograms, *APIR
 			Item2: a.Configuration.APIClient.ParameterToString(params.SentimentBodyPolarity)})
 	}
 
+	if len(params.MediaImagesCountMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.count.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMin)})
+	}
+
+	if len(params.MediaImagesCountMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.count.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMax)})
+	}
+
+	if len(params.MediaVideosCountMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.videos.count.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaVideosCountMin)})
+	}
+
+	if len(params.MediaVideosCountMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.videos.count.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaVideosCountMax)})
+	}
+
 	for _, f := range params.AuthorId {
 		queryParams = append(queryParams, QueryParams{
 			Item1: "author.id[]",
@@ -779,7 +849,7 @@ func (a DefaultApi) ListHistograms(params *HistogramsParams) (*Histograms, *APIR
 
 /**
  * List related stories
- * This endpoint is used for finding related stories based on provided parameters. The number of related stories to return, up to a maximum of 100.
+ * This endpoint is used for finding related stories based on the parameters provided. The maximum number of related stories returned is 100.
  *
  * @param params This is an RelatedStoriesParams struct which accepts following parameters:
  ** @param Id This parameter is used for finding stroies by story id.
@@ -787,41 +857,47 @@ func (a DefaultApi) ListHistograms(params *HistogramsParams) (*Histograms, *APIR
  ** @param Body This parameter is used for finding stories whose body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Text This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Language This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
- ** @param PublishedAtStart This parameter is used for finding stories whose published at is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
- ** @param PublishedAtEnd This parameter is used for finding stories whose published at is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
- ** @param CategoriesTaxonomy This parameter is used for defining type of the taxonomy for the rest of categories queries.
+ ** @param PublishedAtStart This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
+ ** @param PublishedAtEnd This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
+ ** @param CategoriesTaxonomy This parameter is used for defining the type of the taxonomy for the rest of the categories queries.
  ** @param CategoriesConfident This parameter is used for finding stories whose categories are confident.
- ** @param CategoriesId This parameter is used for finding stories whose categories id is the specified value.
- ** @param CategoriesLevel This parameter is used for finding stories whose categories level is the specified value.
- ** @param EntitiesTitleText This parameter is used for finding stories whose entities text in title is the specified value.
- ** @param EntitiesTitleType This parameter is used for finding stories whose entities type in title is the specified value.
- ** @param EntitiesTitleLinksDbpedia This parameter is used for finding stories whose entities dbpedia url in title is the specified value.
- ** @param EntitiesBodyText This parameter is used for finding stories whose entities text in body is the specified value.
- ** @param EntitiesBodyType This parameter is used for finding stories whose entities type in body is the specified value.
- ** @param EntitiesBodyLinksDbpedia This parameter is used for finding stories whose entities dbpedia url in body is the specified value.
+ ** @param CategoriesId This parameter is used for finding stories by categories id.
+ ** @param CategoriesLevel This parameter is used for finding stories by categories level.
+ ** @param EntitiesTitleText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles.
+ ** @param EntitiesTitleType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles.
+ ** @param EntitiesTitleLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in story titles.
+ ** @param EntitiesBodyText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories.
+ ** @param EntitiesBodyType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories.
+ ** @param EntitiesBodyLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories.
  ** @param SentimentTitlePolarity This parameter is used for finding stories whose title sentiment is the specified value.
  ** @param SentimentBodyPolarity This parameter is used for finding stories whose body sentiment is the specified value.
+ ** @param MediaImagesCountMin This parameter is used for finding stories whose number of images is greater than or equal to the specified value.
+ ** @param MediaImagesCountMax This parameter is used for finding stories whose number of images is less than or equal to the specified value.
+ ** @param MediaVideosCountMin This parameter is used for finding stories whose number of videos is greater than or equal to the specified value.
+ ** @param MediaVideosCountMax This parameter is used for finding stories whose number of videos is less than or equal to the specified value.
  ** @param AuthorId This parameter is used for finding stories whose author id is the specified value.
  ** @param AuthorName This parameter is used for finding stories whose author full name contains the specified value.
  ** @param SourceId This parameter is used for finding stories whose source id is the specified value.
  ** @param SourceName This parameter is used for finding stories whose source name contains the specified value.
  ** @param SourceDomain This parameter is used for finding stories whose source domain is the specified value.
- ** @param SourceLocationsCountry This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
- ** @param SourceLocationsState This parameter is used for finding stories whose source state/province is the specified value.
- ** @param SourceLocationsCity This parameter is used for finding stories whose source city is the specified value.
- ** @param SourceScopesCountry This parameter is used for finding stories whose source scopes country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
- ** @param SourceScopesState This parameter is used for finding stories whose source scopes state/province is the specified value.
- ** @param SourceScopesCity This parameter is used for finding stories whose source scopes city is the specified value.
- ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes level is the specified value.
+ ** @param SourceLocationsCountry This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceLocationsState This parameter is used for finding stories whose source state/province is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceLocationsCity This parameter is used for finding stories whose source city is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesCountry This parameter is used for finding stories whose source scopes  is the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesState This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesCity This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes  is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param Cluster This parameter enables clustering for the returned stories.
+ ** @param ClusterAlgorithm This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms.
  ** @param Return This parameter is used for specifying return fields.
  ** @param StoryId A story id
  ** @param StoryUrl An article or webpage
  ** @param StoryTitle Title of the article
  ** @param StoryBody Body of the article
- ** @param BoostBy This parameter is used for boosting result by the specified value.
- ** @param StoryLanguage This parameter is used for setting language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
- ** @param PerPage This parameter is used for specifying number of the items in each page.
- * @return RelatedStories
+ ** @param BoostBy This parameter is used for boosting the result by the specified value.
+ ** @param StoryLanguage This parameter is used for setting the language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
+ ** @param PerPage This parameter is used for specifying number of items in each page.
+ * @return *RelatedStories
  */
 func (a DefaultApi) ListRelatedStories(params *RelatedStoriesParams) (*RelatedStories, *APIResponse, error) {
 
@@ -980,6 +1056,30 @@ func (a DefaultApi) ListRelatedStories(params *RelatedStoriesParams) (*RelatedSt
 			Item2: a.Configuration.APIClient.ParameterToString(params.SentimentBodyPolarity)})
 	}
 
+	if len(params.MediaImagesCountMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.count.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMin)})
+	}
+
+	if len(params.MediaImagesCountMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.count.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMax)})
+	}
+
+	if len(params.MediaVideosCountMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.videos.count.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaVideosCountMin)})
+	}
+
+	if len(params.MediaVideosCountMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.videos.count.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaVideosCountMax)})
+	}
+
 	for _, f := range params.AuthorId {
 		formParams = append(formParams, FormParams{
 			Item1: "author.id[]",
@@ -1052,6 +1152,18 @@ func (a DefaultApi) ListRelatedStories(params *RelatedStoriesParams) (*RelatedSt
 			Item2: a.Configuration.APIClient.ParameterToString(f)})
 	}
 
+	if len(params.Cluster) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "cluster",
+			Item2: a.Configuration.APIClient.ParameterToString(params.Cluster)})
+	}
+
+	if len(params.ClusterAlgorithm) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "cluster.algorithm",
+			Item2: a.Configuration.APIClient.ParameterToString(params.ClusterAlgorithm)})
+	}
+
 	for _, f := range params.Return {
 		formParams = append(formParams, FormParams{
 			Item1: "return[]",
@@ -1115,7 +1227,7 @@ func (a DefaultApi) ListRelatedStories(params *RelatedStoriesParams) (*RelatedSt
 
 /**
  * List Stories
- * This endpoint is used for getting list of stories.
+ * This endpoint is used for getting a list of stories.
  *
  * @param params This is an StoriesParams struct which accepts following parameters:
  ** @param Id This parameter is used for finding stroies by story id.
@@ -1123,40 +1235,44 @@ func (a DefaultApi) ListRelatedStories(params *RelatedStoriesParams) (*RelatedSt
  ** @param Body This parameter is used for finding stories whose body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Text This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Language This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
- ** @param PublishedAtStart This parameter is used for finding stories whose published at is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
- ** @param PublishedAtEnd This parameter is used for finding stories whose published at is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
- ** @param CategoriesTaxonomy This parameter is used for defining type of the taxonomy for the rest of categories queries.
+ ** @param PublishedAtStart This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
+ ** @param PublishedAtEnd This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
+ ** @param CategoriesTaxonomy This parameter is used for defining the type of the taxonomy for the rest of the categories queries.
  ** @param CategoriesConfident This parameter is used for finding stories whose categories are confident.
- ** @param CategoriesId This parameter is used for finding stories whose categories id is the specified value.
- ** @param CategoriesLevel This parameter is used for finding stories whose categories level is the specified value.
- ** @param EntitiesTitleText This parameter is used for finding stories whose entities text in title is the specified value.
- ** @param EntitiesTitleType This parameter is used for finding stories whose entities type in title is the specified value.
- ** @param EntitiesTitleLinksDbpedia This parameter is used for finding stories whose entities dbpedia url in title is the specified value.
- ** @param EntitiesBodyText This parameter is used for finding stories whose entities text in body is the specified value.
- ** @param EntitiesBodyType This parameter is used for finding stories whose entities type in body is the specified value.
- ** @param EntitiesBodyLinksDbpedia This parameter is used for finding stories whose entities dbpedia url in body is the specified value.
+ ** @param CategoriesId This parameter is used for finding stories by categories id.
+ ** @param CategoriesLevel This parameter is used for finding stories by categories level.
+ ** @param EntitiesTitleText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles.
+ ** @param EntitiesTitleType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles.
+ ** @param EntitiesTitleLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in story titles.
+ ** @param EntitiesBodyText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories.
+ ** @param EntitiesBodyType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories.
+ ** @param EntitiesBodyLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories.
  ** @param SentimentTitlePolarity This parameter is used for finding stories whose title sentiment is the specified value.
  ** @param SentimentBodyPolarity This parameter is used for finding stories whose body sentiment is the specified value.
+ ** @param MediaImagesCountMin This parameter is used for finding stories whose number of images is greater than or equal to the specified value.
+ ** @param MediaImagesCountMax This parameter is used for finding stories whose number of images is less than or equal to the specified value.
+ ** @param MediaVideosCountMin This parameter is used for finding stories whose number of videos is greater than or equal to the specified value.
+ ** @param MediaVideosCountMax This parameter is used for finding stories whose number of videos is less than or equal to the specified value.
  ** @param AuthorId This parameter is used for finding stories whose author id is the specified value.
  ** @param AuthorName This parameter is used for finding stories whose author full name contains the specified value.
  ** @param SourceId This parameter is used for finding stories whose source id is the specified value.
  ** @param SourceName This parameter is used for finding stories whose source name contains the specified value.
  ** @param SourceDomain This parameter is used for finding stories whose source domain is the specified value.
- ** @param SourceLocationsCountry This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
- ** @param SourceLocationsState This parameter is used for finding stories whose source state/province is the specified value.
- ** @param SourceLocationsCity This parameter is used for finding stories whose source city is the specified value.
- ** @param SourceScopesCountry This parameter is used for finding stories whose source scopes country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
- ** @param SourceScopesState This parameter is used for finding stories whose source scopes state/province is the specified value.
- ** @param SourceScopesCity This parameter is used for finding stories whose source scopes city is the specified value.
- ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes level is the specified value.
+ ** @param SourceLocationsCountry This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceLocationsState This parameter is used for finding stories whose source state/province is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceLocationsCity This parameter is used for finding stories whose source city is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesCountry This parameter is used for finding stories whose source scopes is the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesState This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesCity This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param Cluster This parameter enables clustering for the returned stories.
- ** @param ClusterAlgorithm This parameter is used for specifying the clustering algorithm. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms.
+ ** @param ClusterAlgorithm This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms.
  ** @param Return This parameter is used for specifying return fields.
- ** @param SortBy This parameter is used for changing the order column of the result.
+ ** @param SortBy This parameter is used for changing the order column of the results.
  ** @param SortDirection This parameter is used for changing the order direction of the result.
  ** @param Cursor This parameter is used for finding a specific page.
- ** @param PerPage This parameter is used for specifying number of the items in each page.
- * @return Stories
+ ** @param PerPage This parameter is used for specifying number of items in each page.
+ * @return *Stories
  */
 func (a DefaultApi) ListStories(params *StoriesParams) (*Stories, *APIResponse, error) {
 
@@ -1293,6 +1409,30 @@ func (a DefaultApi) ListStories(params *StoriesParams) (*Stories, *APIResponse, 
 		queryParams = append(queryParams, QueryParams{
 			Item1: "sentiment.body.polarity",
 			Item2: a.Configuration.APIClient.ParameterToString(params.SentimentBodyPolarity)})
+	}
+
+	if len(params.MediaImagesCountMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.count.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMin)})
+	}
+
+	if len(params.MediaImagesCountMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.count.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMax)})
+	}
+
+	if len(params.MediaVideosCountMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.videos.count.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaVideosCountMin)})
+	}
+
+	if len(params.MediaVideosCountMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.videos.count.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaVideosCountMax)})
 	}
 
 	for _, f := range params.AuthorId {
@@ -1451,34 +1591,38 @@ func (a DefaultApi) ListStories(params *StoriesParams) (*Stories, *APIResponse, 
  ** @param Body This parameter is used for finding stories whose body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Text This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Language This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
- ** @param CategoriesTaxonomy This parameter is used for defining type of the taxonomy for the rest of categories queries.
+ ** @param CategoriesTaxonomy This parameter is used for defining the type of the taxonomy for the rest of the categories queries.
  ** @param CategoriesConfident This parameter is used for finding stories whose categories are confident.
- ** @param CategoriesId This parameter is used for finding stories whose categories id is the specified value.
- ** @param CategoriesLevel This parameter is used for finding stories whose categories level is the specified value.
- ** @param EntitiesTitleText This parameter is used for finding stories whose entities text in title is the specified value.
- ** @param EntitiesTitleType This parameter is used for finding stories whose entities type in title is the specified value.
- ** @param EntitiesTitleLinksDbpedia This parameter is used for finding stories whose entities dbpedia url in title is the specified value.
- ** @param EntitiesBodyText This parameter is used for finding stories whose entities text in body is the specified value.
- ** @param EntitiesBodyType This parameter is used for finding stories whose entities type in body is the specified value.
- ** @param EntitiesBodyLinksDbpedia This parameter is used for finding stories whose entities dbpedia url in body is the specified value.
+ ** @param CategoriesId This parameter is used for finding stories by categories id.
+ ** @param CategoriesLevel This parameter is used for finding stories by categories level.
+ ** @param EntitiesTitleText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles.
+ ** @param EntitiesTitleType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles.
+ ** @param EntitiesTitleLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in story titles.
+ ** @param EntitiesBodyText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories.
+ ** @param EntitiesBodyType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories.
+ ** @param EntitiesBodyLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories.
  ** @param SentimentTitlePolarity This parameter is used for finding stories whose title sentiment is the specified value.
  ** @param SentimentBodyPolarity This parameter is used for finding stories whose body sentiment is the specified value.
+ ** @param MediaImagesCountMin This parameter is used for finding stories whose number of images is greater than or equal to the specified value.
+ ** @param MediaImagesCountMax This parameter is used for finding stories whose number of images is less than or equal to the specified value.
+ ** @param MediaVideosCountMin This parameter is used for finding stories whose number of videos is greater than or equal to the specified value.
+ ** @param MediaVideosCountMax This parameter is used for finding stories whose number of videos is less than or equal to the specified value.
  ** @param AuthorId This parameter is used for finding stories whose author id is the specified value.
  ** @param AuthorName This parameter is used for finding stories whose author full name contains the specified value.
  ** @param SourceId This parameter is used for finding stories whose source id is the specified value.
  ** @param SourceName This parameter is used for finding stories whose source name contains the specified value.
  ** @param SourceDomain This parameter is used for finding stories whose source domain is the specified value.
- ** @param SourceLocationsCountry This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
- ** @param SourceLocationsState This parameter is used for finding stories whose source state/province is the specified value.
- ** @param SourceLocationsCity This parameter is used for finding stories whose source city is the specified value.
- ** @param SourceScopesCountry This parameter is used for finding stories whose source scopes country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
- ** @param SourceScopesState This parameter is used for finding stories whose source scopes state/province is the specified value.
- ** @param SourceScopesCity This parameter is used for finding stories whose source scopes city is the specified value.
- ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes level is the specified value.
- ** @param PublishedAtStart This parameter is used for finding stories whose published at is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
- ** @param PublishedAtEnd This parameter is used for finding stories whose published at is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
- ** @param Period The size of each date range expressed as an interval to be added to the lower bound. It supports Date Math Syntax. Valid options are &#x60;+&#x60; following an integer number greater than 0 and one of the Date Math keywords. e.g. &#x60;+1DAY&#x60;, &#x60;+2MINUTES&#x60; and &#x60;+1MONTH&#x60;. Here are [Supported keywords](https://newsapi.aylien.com/docs/working-with-dates#date-math).
- * @return TimeSeriesList
+ ** @param SourceLocationsCountry This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceLocationsState This parameter is used for finding stories whose source state/province is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceLocationsCity This parameter is used for finding stories whose source city is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesCountry This parameter is used for finding stories whose source scopes is the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesState This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesCity This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param PublishedAtStart This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
+ ** @param PublishedAtEnd This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
+ ** @param Period The size of each date range is expressed as an interval to be added to the lower bound. It supports Date Math Syntax. Valid options are &#x60;+&#x60; following an integer number greater than 0 and one of the Date Math keywords. e.g. &#x60;+1DAY&#x60;, &#x60;+2MINUTES&#x60; and &#x60;+1MONTH&#x60;. Here are [Supported keywords](https://newsapi.aylien.com/docs/working-with-dates#date-math).
+ * @return *TimeSeriesList
  */
 func (a DefaultApi) ListTimeSeries(params *TimeSeriesParams) (*TimeSeriesList, *APIResponse, error) {
 
@@ -1605,6 +1749,30 @@ func (a DefaultApi) ListTimeSeries(params *TimeSeriesParams) (*TimeSeriesList, *
 			Item2: a.Configuration.APIClient.ParameterToString(params.SentimentBodyPolarity)})
 	}
 
+	if len(params.MediaImagesCountMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.count.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMin)})
+	}
+
+	if len(params.MediaImagesCountMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.count.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMax)})
+	}
+
+	if len(params.MediaVideosCountMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.videos.count.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaVideosCountMin)})
+	}
+
+	if len(params.MediaVideosCountMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.videos.count.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaVideosCountMax)})
+	}
+
 	for _, f := range params.AuthorId {
 		queryParams = append(queryParams, QueryParams{
 			Item1: "author.id[]",
@@ -1729,7 +1897,7 @@ func (a DefaultApi) ListTimeSeries(params *TimeSeriesParams) (*TimeSeriesList, *
 
 /**
  * List trends
- * This endpoint is used for finding news trendings based on stories resource.
+ * This endpoint is used for finding trends based on stories.
  *
  * @param params This is an TrendsParams struct which accepts following parameters:
  ** @param Id This parameter is used for finding stroies by story id.
@@ -1737,34 +1905,38 @@ func (a DefaultApi) ListTimeSeries(params *TimeSeriesParams) (*TimeSeriesList, *
  ** @param Body This parameter is used for finding stories whose body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Text This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Language This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
- ** @param PublishedAtStart This parameter is used for finding stories whose published at is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
- ** @param PublishedAtEnd This parameter is used for finding stories whose published at is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
- ** @param CategoriesTaxonomy This parameter is used for defining type of the taxonomy for the rest of categories queries.
+ ** @param PublishedAtStart This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
+ ** @param PublishedAtEnd This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
+ ** @param CategoriesTaxonomy This parameter is used for defining the type of the taxonomy for the rest of the categories queries.
  ** @param CategoriesConfident This parameter is used for finding stories whose categories are confident.
- ** @param CategoriesId This parameter is used for finding stories whose categories id is the specified value.
- ** @param CategoriesLevel This parameter is used for finding stories whose categories level is the specified value.
- ** @param EntitiesTitleText This parameter is used for finding stories whose entities text in title is the specified value.
- ** @param EntitiesTitleType This parameter is used for finding stories whose entities type in title is the specified value.
- ** @param EntitiesTitleLinksDbpedia This parameter is used for finding stories whose entities dbpedia url in title is the specified value.
- ** @param EntitiesBodyText This parameter is used for finding stories whose entities text in body is the specified value.
- ** @param EntitiesBodyType This parameter is used for finding stories whose entities type in body is the specified value.
- ** @param EntitiesBodyLinksDbpedia This parameter is used for finding stories whose entities dbpedia url in body is the specified value.
+ ** @param CategoriesId This parameter is used for finding stories by categories id.
+ ** @param CategoriesLevel This parameter is used for finding stories by categories level.
+ ** @param EntitiesTitleText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles.
+ ** @param EntitiesTitleType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles.
+ ** @param EntitiesTitleLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in story titles.
+ ** @param EntitiesBodyText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories.
+ ** @param EntitiesBodyType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories.
+ ** @param EntitiesBodyLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories.
  ** @param SentimentTitlePolarity This parameter is used for finding stories whose title sentiment is the specified value.
  ** @param SentimentBodyPolarity This parameter is used for finding stories whose body sentiment is the specified value.
+ ** @param MediaImagesCountMin This parameter is used for finding stories whose number of images is greater than or equal to the specified value.
+ ** @param MediaImagesCountMax This parameter is used for finding stories whose number of images is less than or equal to the specified value.
+ ** @param MediaVideosCountMin This parameter is used for finding stories whose number of videos is greater than or equal to the specified value.
+ ** @param MediaVideosCountMax This parameter is used for finding stories whose number of videos is less than or equal to the specified value.
  ** @param AuthorId This parameter is used for finding stories whose author id is the specified value.
  ** @param AuthorName This parameter is used for finding stories whose author full name contains the specified value.
  ** @param SourceId This parameter is used for finding stories whose source id is the specified value.
  ** @param SourceName This parameter is used for finding stories whose source name contains the specified value.
  ** @param SourceDomain This parameter is used for finding stories whose source domain is the specified value.
- ** @param SourceLocationsCountry This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
- ** @param SourceLocationsState This parameter is used for finding stories whose source state/province is the specified value.
- ** @param SourceLocationsCity This parameter is used for finding stories whose source city is the specified value.
- ** @param SourceScopesCountry This parameter is used for finding stories whose source scopes country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
- ** @param SourceScopesState This parameter is used for finding stories whose source scopes state/province is the specified value.
- ** @param SourceScopesCity This parameter is used for finding stories whose source scopes city is the specified value.
- ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes level is the specified value.
+ ** @param SourceLocationsCountry This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceLocationsState This parameter is used for finding stories whose source state/province is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceLocationsCity This parameter is used for finding stories whose source city is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesCountry This parameter is used for finding stories whose source scopes is the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesState This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesCity This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param Field This parameter is used to specify the trend field.
- * @return Trends
+ * @return *Trends
  */
 func (a DefaultApi) ListTrends(params *TrendsParams) (*Trends, *APIResponse, error) {
 
@@ -1901,6 +2073,30 @@ func (a DefaultApi) ListTrends(params *TrendsParams) (*Trends, *APIResponse, err
 		queryParams = append(queryParams, QueryParams{
 			Item1: "sentiment.body.polarity",
 			Item2: a.Configuration.APIClient.ParameterToString(params.SentimentBodyPolarity)})
+	}
+
+	if len(params.MediaImagesCountMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.count.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMin)})
+	}
+
+	if len(params.MediaImagesCountMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.count.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMax)})
+	}
+
+	if len(params.MediaVideosCountMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.videos.count.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaVideosCountMin)})
+	}
+
+	if len(params.MediaVideosCountMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.videos.count.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaVideosCountMax)})
 	}
 
 	for _, f := range params.AuthorId {

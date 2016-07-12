@@ -41,7 +41,7 @@ func main() {
 	api.Configuration.APIKeyPrefix["X-AYLIEN-NewsAPI-Application-Key"] = "YOUR APP KEY"
 
 	type_ := "type_example" // string | This parameter is used for defining the type of autocompletes.
-	term := "term_example"  // string | This parameter is used for finding autocomplete objects whose contains the specified value.
+	term := "term_example"  // string | This parameter is used for finding autocomplete objects that contain the specified value.
 	language := "en"        // string | This parameter is used for autocompletes whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
 	perPage := 3            // int32 | This parameter is used for specifying number of the items in each page.
 
@@ -66,9 +66,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **Type** | **string**| This parameter is used for defining the type of autocompletes. | 
- **Term** | **string**| This parameter is used for finding autocomplete objects whose contains the specified value. | 
+ **Term** | **string**| This parameter is used for finding autocomplete objects that contain the specified value. | 
  **Language** | **string**| This parameter is used for autocompletes whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. | [optional] [default to en]
- **PerPage** | **int32**| This parameter is used for specifying number of the items in each page. | [optional] [default to 3]
+ **PerPage** | **int32**| This parameter is used for specifying number of items in each page. | [optional] [default to 3]
 
 ### Return type
 
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 
 List coverages
 
-This endpoint is used for finding story coverages based on provided parameters. The number of coverages to return, up to a maximum of 100.
+This endpoint is used for finding story coverages based on the parameters provided. The maximum number of related stories returned is 100.
 
 ### Example
 
@@ -113,45 +113,51 @@ func main() {
 	// Configure API key authorization: app_key
 	api.Configuration.APIKeyPrefix["X-AYLIEN-NewsAPI-Application-Key"] = "YOUR APP KEY"
 
-	id := []int64{112}                                                         // []int64 | This parameter is used for finding stroies by story id.
-	title := "title_example"                                                   // string | This parameter is used for finding stories whose title contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
-	body := "body_example"                                                     // string | This parameter is used for finding stories whose title contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
-	text := "text_example"                                                     // string | This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
-	language := []string{"en"}                                                 // []string | This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
-	publishedAtStart := "publishedAtStart_example"                             // string | This parameter is used for finding stories whose published at is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
-	publishedAtEnd := "publishedAtEnd_example"                                 // string | This parameter is used for finding stories whose published at is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
-	categoriesTaxonomy := "categoriesTaxonomy_example"                         // string | This parameter is used for defining type of the taxonomy for the rest of categories queries.
-	categoriesConfident := "categoriesConfident_example"                       // string | This parameter is used for finding stories whose categories are confident.
-	categoriesId := []string{"categoriesId_example"}                           // []string | This parameter is used for finding stories whose categories id is the specified value.
-	categoriesLevel := []int32{3}                                              // []int32 | This parameter is used for finding stories whose categories level is the specified value.
-	entitiesTitleText := []string{"entitiesTitleText_example"}                 // []string | This parameter is used for finding stories whose entities text in title is the specified value.
-	entitiesTitleType := []string{"entitiesTitleType_example"}                 // []string| This parameter is used for finding stories whose entities type in title is the specified value.
-	entitiesTitleLinksDbpedia := []string{"entitiesTitleLinksDbpedia_example"} // []string | This parameter is used for finding stories whose entities dbpedia url in title is the specified value.
-	entitiesBodyText := []string{"entitiesBodyText_example"}                   // []string | This parameter is used for finding stories whose entities text in body is the specified value.
-	entitiesBodyType := []string{"entitiesBodyType_example"}                   // []string | This parameter is used for finding stories whose entities type in body is the specified value.
-	entitiesBodyLinksDbpedia := []string{"entitiesBodyLinksDbpedia_example"}   // []string | This parameter is used for finding stories whose entities dbpedia url in body is the specified value.
-	sentimentTitlePolarity := "sentimentTitlePolarity_example"                 // string | This parameter is used for finding stories whose title sentiment is the specified value.
-	sentimentBodyPolarity := "sentimentBodyPolarity_example"                   // string | This parameter is used for finding stories whose body sentiment is the specified value.
-	authorId := []int32{25}                                                    // []int32 | This parameter is used for finding stories whose author id is the specified value.
-	authorName := "authorName_example"                                         // string | This parameter is used for finding stories whose author full name contains the specified value.
-	sourceId := []int32{45}                                                    // []int32 | This parameter is used for finding stories whose source id is the specified value.
-	sourceName := []string{"sourceName_example"}                               // []string | This parameter is used for finding stories whose source name contains the specified value.
-	sourceDomain := []string{"sourceDomain_example"}                           // []string | This parameter is used for finding stories whose source domain is the specified value.
-	sourceLocationsCountry := []string{"sourceLocationsCountry_example"}       // []string | This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
-	sourceLocationsState := []string{"sourceLocationsState_example"}           // []string | This parameter is used for finding stories whose source state/province is the specified value.
-	sourceLocationsCity := []string{"sourceLocationsCity_example"}             // []string | This parameter is used for finding stories whose source city is the specified value.
-	sourceScopesCountry := []string{"sourceScopesCountry_example"}             // []string | This parameter is used for finding stories whose source scopes country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
-	sourceScopesState := []string{"sourceScopesState_example"}                 // []string | This parameter is used for finding stories whose source scopes state/province is the specified value.
-	sourceScopesCity := []string{"sourceScopesCity_example"}                   // []string | This parameter is used for finding stories whose source scopes city is the specified value.
-	sourceScopesLevel := []string{"sourceScopesLevel_example"}                 // []string | This parameter is used for finding stories whose source scopes level is the specified value.
-	_return := []string{"_return_example"}                                     // []string | This parameter is used for specifying return fields.
-	storyId := 789                                                             // int64 | A story id
-	storyUrl := "storyUrl_example"                                             // string | An article or webpage
-	storyTitle := "storyTitle_example"                                         //string | Title of the article
-	storyBody := "storyBody_example"                                           // string | Body of the article
-	storyPublishedAt := time.Now()                                             // time.Time | Publish date of the article. If you use url or title and body for getting coverages, this parameter is required. The format used is a restricted form of the canonical representation of dateTime in the [XML Schema specification (ISO 8601)](https://www.w3.org/TR/xmlschema-2/#dateTime).
-	storyLanguage := "auto"                                                    // string | This parameter is used for setting language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
-	perPage := 3                                                               // int32 | This parameter is used for specifying number of the items in each page.
+	id := []int64{112}
+	title := "title_example"
+	body := "body_example"
+	text := "text_example"
+	language := []string{"en"}
+	publishedAtStart := "publishedAtStart_example"
+	publishedAtEnd := "publishedAtEnd_example"
+	categoriesTaxonomy := "categoriesTaxonomy_example"
+	categoriesConfident := "categoriesConfident_example"
+	categoriesId := []string{"categoriesId_example"}
+	categoriesLevel := []int32{3}
+	entitiesTitleText := []string{"entitiesTitleText_example"}
+	entitiesTitleType := []string{"entitiesTitleType_example"}
+	entitiesTitleLinksDbpedia := []string{"entitiesTitleLinksDbpedia_example"}
+	entitiesBodyText := []string{"entitiesBodyText_example"}
+	entitiesBodyType := []string{"entitiesBodyType_example"}
+	entitiesBodyLinksDbpedia := []string{"entitiesBodyLinksDbpedia_example"}
+	sentimentTitlePolarity := "sentimentTitlePolarity_example"
+	sentimentBodyPolarity := "sentimentBodyPolarity_example"
+	mediaImagesCountMin := 56
+	mediaImagesCountMax := 56
+	mediaVideosCountMin := 56
+	mediaVideosCountMax := 56
+	authorId := []int32{25}
+	authorName := "authorName_example"
+	sourceId := []int32{45}
+	sourceName := []string{"sourceName_example"}
+	sourceDomain := []string{"sourceDomain_example"}
+	sourceLocationsCountry := []string{"sourceLocationsCountry_example"}
+	sourceLocationsState := []string{"sourceLocationsState_example"}
+	sourceLocationsCity := []string{"sourceLocationsCity_example"}
+	sourceScopesCountry := []string{"sourceScopesCountry_example"}
+	sourceScopesState := []string{"sourceScopesState_example"}
+	sourceScopesCity := []string{"sourceScopesCity_example"}
+	sourceScopesLevel := []string{"sourceScopesLevel_example"}
+	cluster := true
+	clusterAlgorithm := "lingo"
+	_return := []string{"_return_example"}
+	storyId := 789
+	storyUrl := "storyUrl_example"
+	storyTitle := "storyTitle_example"
+	storyBody := "storyBody_example"
+	storyPublishedAt := time.Now()
+	storyLanguage := "auto"
+	perPage := 3
 
 	coveragesParams := &newsapi.CoveragesParams{
 		Id:                        id,
@@ -173,6 +179,10 @@ func main() {
 		EntitiesBodyLinksDbpedia:  entitiesBodyLinksDbpedia,
 		SentimentTitlePolarity:    sentimentTitlePolarity,
 		SentimentBodyPolarity:     sentimentBodyPolarity,
+		MediaImagesCountMin:       mediaImagesCountMin,
+		MediaImagesCountMax:       mediaImagesCountMax,
+		MediaVideosCountMin:       mediaVideosCountMin,
+		MediaVideosCountMin:       mediaVideosCountMin,
 		AuthorId:                  authorId,
 		AuthorName:                authorName,
 		SourceId:                  sourceId,
@@ -185,6 +195,8 @@ func main() {
 		SourceScopesState:         sourceScopesState,
 		SourceScopesCity:          sourceScopesCity,
 		SourceScopesLevel:         sourceScopesLevel,
+		Cluster:                   cluster,
+		ClusterAlgorithm:          clusterAlgorithm,
 		Return:                    _return,
 		StoryId:                   storyId,
 		StoryUrl:                  storyUrl,
@@ -213,40 +225,46 @@ Name | Type | Description  | Notes
  **Body** | **string**| This parameter is used for finding stories whose body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). | [optional] 
  **Text** | **string**| This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). | [optional] 
  **Language** | [**[]string**](string.md)| This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. | [optional] 
- **PublishedAtStart** | **string**| This parameter is used for finding stories whose published at is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] 
- **PublishedAtEnd** | **string**| This parameter is used for finding stories whose published at is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] 
- **CategoriesTaxonomy** | **string**| This parameter is used for defining type of the taxonomy for the rest of categories queries. | [optional] 
+ **PublishedAtStart** | **string**| This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] 
+ **PublishedAtEnd** | **string**| This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] 
+ **CategoriesTaxonomy** | **string**| This parameter is used for defining the type of the taxonomy for the rest of the categories queries. | [optional] 
  **CategoriesConfident** | **bool**| This parameter is used for finding stories whose categories are confident. | [optional] [default to true]
- **CategoriesId** | [**[]string**](string.md)| This parameter is used for finding stories whose categories id is the specified value. | [optional] 
- **CategoriesLevel** | [**[]int32**](int32.md)| This parameter is used for finding stories whose categories level is the specified value. | [optional] 
- **EntitiesTitleText** | [**[]string**](string.md)| This parameter is used for finding stories whose entities text in title is the specified value. | [optional] 
- **EntitiesTitleType** | [**[]string**](string.md)| This parameter is used for finding stories whose entities type in title is the specified value. | [optional] 
- **EntitiesTitleLinksDbpedia** | [**[]string**](string.md)| This parameter is used for finding stories whose entities dbpedia url in title is the specified value. | [optional] 
- **EntitiesBodyText** | [**[]string**](string.md)| This parameter is used for finding stories whose entities text in body is the specified value. | [optional] 
- **EntitiesBodyType** | [**[]string**](string.md)| This parameter is used for finding stories whose entities type in body is the specified value. | [optional] 
- **EntitiesBodyLinksDbpedia** | [**[]string**](string.md)| This parameter is used for finding stories whose entities dbpedia url in body is the specified value. | [optional] 
+ **CategoriesId** | [**[]string**](string.md)| This parameter is used for finding stories by categories id. | [optional] 
+ **CategoriesLevel** | [**[]int32**](int32.md)| This parameter is used for finding stories by categories level. | [optional] 
+ **EntitiesTitleText** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles. | [optional] 
+ **EntitiesTitleType** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles. | [optional] 
+ **EntitiesTitleLinksDbpedia** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities dbpedia URL in story titles. | [optional] 
+ **EntitiesBodyText** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories. | [optional] 
+ **EntitiesBodyType** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories. | [optional] 
+ **EntitiesBodyLinksDbpedia** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. | [optional] 
  **SentimentTitlePolarity** | **string**| This parameter is used for finding stories whose title sentiment is the specified value. | [optional] 
  **SentimentBodyPolarity** | **string**| This parameter is used for finding stories whose body sentiment is the specified value. | [optional] 
+ **MediaImagesCountMin** | **int32**| This parameter is used for finding stories whose number of images is greater than or equal to the specified value. | [optional] 
+ **MediaImagesCountMax** | **int32**| This parameter is used for finding stories whose number of images is less than or equal to the specified value. | [optional] 
+ **MediaVideosCountMin** | **int32**| This parameter is used for finding stories whose number of videos is greater than or equal to the specified value. | [optional] 
+ **MediaVideosCountMax** | **int32**| This parameter is used for finding stories whose number of videos is less than or equal to the specified value. | [optional] 
  **AuthorId** | [**[]int32**](int32.md)| This parameter is used for finding stories whose author id is the specified value. | [optional] 
  **AuthorName** | **string**| This parameter is used for finding stories whose author full name contains the specified value. | [optional] 
  **SourceId** | [**[]int32**](int32.md)| This parameter is used for finding stories whose source id is the specified value. | [optional] 
  **SourceName** | [**[]string**](string.md)| This parameter is used for finding stories whose source name contains the specified value. | [optional] 
  **SourceDomain** | [**[]string**](string.md)| This parameter is used for finding stories whose source domain is the specified value. | [optional] 
- **SourceLocationsCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. | [optional] 
- **SourceLocationsState** | [**[]string**](string.md)| This parameter is used for finding stories whose source state/province is the specified value. | [optional] 
- **SourceLocationsCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source city is the specified value. | [optional] 
- **SourceScopesCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. | [optional] 
- **SourceScopesState** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes state/province is the specified value. | [optional] 
- **SourceScopesCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes city is the specified value. | [optional] 
- **SourceScopesLevel** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes level is the specified value. | [optional] 
+ **SourceLocationsCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceLocationsState** | [**[]string**](string.md)| This parameter is used for finding stories whose source state/province is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceLocationsCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source city is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes  is the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesState** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesLevel** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes  is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **Cluster** | **bool**| This parameter enables clustering for the returned stories. | [optional] [default to false]
+ **ClusterAlgorithm** | **string**| This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms. | [optional] [default to lingo]
  **Return** | [**[]string**](string.md)| This parameter is used for specifying return fields. | [optional] 
  **StoryId** | **int64**| A story id | [optional] 
  **StoryUrl** | **string**| An article or webpage | [optional] 
  **StoryTitle** | **string**| Title of the article | [optional] 
  **StoryBody** | **string**| Body of the article | [optional] 
- **StoryPublishedAt** | **time.Time**| Publish date of the article. If you use url or title and body for getting coverages, this parameter is required. The format used is a restricted form of the canonical representation of dateTime in the [XML Schema specification (ISO 8601)](https://www.w3.org/TR/xmlschema-2/#dateTime). | [optional] 
- **StoryLanguage** | **string**| This parameter is used for setting language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. | [optional] [default to auto]
- **PerPage** | **int32**| This parameter is used for specifying number of the items in each page. | [optional] [default to 3]
+ **StoryPublishedAt** | **time.Time**| Publish date of the article. If you use a url or title and body of an article for getting coverages, this parameter is required. The format used is a restricted form of the canonical representation of dateTime in the [XML Schema specification (ISO 8601)](https://www.w3.org/TR/xmlschema-2/#dateTime). | [optional] 
+ **StoryLanguage** | **string**| This parameter is used for setting the language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. | [optional] [default to auto]
+ **PerPage** | **int32**| This parameter is used for specifying number of items in each page. | [optional] [default to 3]
 
 ### Return type
 
@@ -268,7 +286,8 @@ Name | Type | Description  | Notes
 
 List histograms
 
-This endpoint is used for getting histograms based on the field parameter is passed.
+This endpoint is used for getting histograms based on the `field` parameter passed to the API.
+
 
 ### Example
 
@@ -290,41 +309,45 @@ func main() {
 	// Configure API key authorization: app_key
 	api.Configuration.APIKeyPrefix["X-AYLIEN-NewsAPI-Application-Key"] = "YOUR APP KEY"
 
-	id := []int64{112}                                                         // []int64 | This parameter is used for finding stroies by story id.
-	title := "title_example"                                                   // string | This parameter is used for finding stories whose title contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
-	body := "body_example"                                                     // string | This parameter is used for finding stories whose title contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
-	text := "text_example"                                                     // string | This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
-	language := []string{"en"}                                                 // []string | This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
-	publishedAtStart := "publishedAtStart_example"                             // string | This parameter is used for finding stories whose published at is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
-	publishedAtEnd := "publishedAtEnd_example"                                 // string | This parameter is used for finding stories whose published at is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
-	categoriesTaxonomy := "categoriesTaxonomy_example"                         // string | This parameter is used for defining type of the taxonomy for the rest of categories queries.
-	categoriesConfident := "categoriesConfident_example"                       // string | This parameter is used for finding stories whose categories are confident.
-	categoriesId := []string{"categoriesId_example"}                           // []string | This parameter is used for finding stories whose categories id is the specified value.
-	categoriesLevel := []int32{3}                                              // []int32 | This parameter is used for finding stories whose categories level is the specified value.
-	entitiesTitleText := []string{"entitiesTitleText_example"}                 // []string | This parameter is used for finding stories whose entities text in title is the specified value.
-	entitiesTitleType := []string{"entitiesTitleType_example"}                 // []string| This parameter is used for finding stories whose entities type in title is the specified value.
-	entitiesTitleLinksDbpedia := []string{"entitiesTitleLinksDbpedia_example"} // []string | This parameter is used for finding stories whose entities dbpedia url in title is the specified value.
-	entitiesBodyText := []string{"entitiesBodyText_example"}                   // []string | This parameter is used for finding stories whose entities text in body is the specified value.
-	entitiesBodyType := []string{"entitiesBodyType_example"}                   // []string | This parameter is used for finding stories whose entities type in body is the specified value.
-	entitiesBodyLinksDbpedia := []string{"entitiesBodyLinksDbpedia_example"}   // []string | This parameter is used for finding stories whose entities dbpedia url in body is the specified value.
-	sentimentTitlePolarity := "sentimentTitlePolarity_example"                 // string | This parameter is used for finding stories whose title sentiment is the specified value.
-	sentimentBodyPolarity := "sentimentBodyPolarity_example"                   // string | This parameter is used for finding stories whose body sentiment is the specified value.
-	authorId := []int32{25}                                                    // []int32 | This parameter is used for finding stories whose author id is the specified value.
-	authorName := "authorName_example"                                         // string | This parameter is used for finding stories whose author full name contains the specified value.
-	sourceId := []int32{45}                                                    // []int32 | This parameter is used for finding stories whose source id is the specified value.
-	sourceName := []string{"sourceName_example"}                               // []string | This parameter is used for finding stories whose source name contains the specified value.
-	sourceDomain := []string{"sourceDomain_example"}                           // []string | This parameter is used for finding stories whose source domain is the specified value.
-	sourceLocationsCountry := []string{"sourceLocationsCountry_example"}       // []string | This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
-	sourceLocationsState := []string{"sourceLocationsState_example"}           // []string | This parameter is used for finding stories whose source state/province is the specified value.
-	sourceLocationsCity := []string{"sourceLocationsCity_example"}             // []string | This parameter is used for finding stories whose source city is the specified value.
-	sourceScopesCountry := []string{"sourceScopesCountry_example"}             // []string | This parameter is used for finding stories whose source scopes country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
-	sourceScopesState := []string{"sourceScopesState_example"}                 // []string | This parameter is used for finding stories whose source scopes state/province is the specified value.
-	sourceScopesCity := []string{"sourceScopesCity_example"}                   // []string | This parameter is used for finding stories whose source scopes city is the specified value.
-	sourceScopesLevel := []string{"sourceScopesLevel_example"}                 // []string | This parameter is used for finding stories whose source scopes level is the specified value.
-	intervalStart := 56                                                        // int32 | This parameter is used for setting the start data point of histogram intervals.
-	intervalEnd := 22                                                          // int32 | This parameter is used for setting the end data point of histogram intervals.
-	intervalWidth := 20                                                        // int32 | This parameter is used for setting the width of histogram intervals.
-	field := "social_shares_count"                                             // string | This parameter is used for specifying the y-axis variable for the histogram.
+	id := []int64{112}
+	title := "title_example"
+	body := "body_example"
+	text := "text_example"
+	language := []string{"en"}
+	publishedAtStart := "publishedAtStart_example"
+	publishedAtEnd := "publishedAtEnd_example"
+	categoriesTaxonomy := "categoriesTaxonomy_example"
+	categoriesConfident := "categoriesConfident_example"
+	categoriesId := []string{"categoriesId_example"}
+	categoriesLevel := []int32{3}
+	entitiesTitleText := []string{"entitiesTitleText_example"}
+	entitiesTitleType := []string{"entitiesTitleType_example"}
+	entitiesTitleLinksDbpedia := []string{"entitiesTitleLinksDbpedia_example"}
+	entitiesBodyText := []string{"entitiesBodyText_example"}
+	entitiesBodyType := []string{"entitiesBodyType_example"}
+	entitiesBodyLinksDbpedia := []string{"entitiesBodyLinksDbpedia_example"}
+	sentimentTitlePolarity := "sentimentTitlePolarity_example"
+	sentimentBodyPolarity := "sentimentBodyPolarity_example"
+	mediaImagesCountMin := 56
+	mediaImagesCountMax := 56
+	mediaVideosCountMin := 56
+	mediaVideosCountMax := 56
+	authorId := []int32{25}
+	authorName := "authorName_example"
+	sourceId := []int32{45}
+	sourceName := []string{"sourceName_example"}
+	sourceDomain := []string{"sourceDomain_example"}
+	sourceLocationsCountry := []string{"sourceLocationsCountry_example"}
+	sourceLocationsState := []string{"sourceLocationsState_example"}
+	sourceLocationsCity := []string{"sourceLocationsCity_example"}
+	sourceScopesCountry := []string{"sourceScopesCountry_example"}
+	sourceScopesState := []string{"sourceScopesState_example"}
+	sourceScopesCity := []string{"sourceScopesCity_example"}
+	sourceScopesLevel := []string{"sourceScopesLevel_example"}
+	intervalStart := 56
+	intervalEnd := 56
+	intervalWidth := 56
+	field := "social_shares_count"
 
 	histogramsParams := &newsapi.HistogramsParams{
 		Id:                        id,
@@ -346,6 +369,10 @@ func main() {
 		EntitiesBodyLinksDbpedia:  entitiesBodyLinksDbpedia,
 		SentimentTitlePolarity:    sentimentTitlePolarity,
 		SentimentBodyPolarity:     sentimentBodyPolarity,
+		MediaImagesCountMin:       mediaImagesCountMin,
+		MediaImagesCountMax:       mediaImagesCountMax,
+		MediaVideosCountMin:       mediaVideosCountMin,
+		MediaVideosCountMin:       mediaVideosCountMin,
 		AuthorId:                  authorId,
 		AuthorName:                authorName,
 		SourceId:                  sourceId,
@@ -382,32 +409,36 @@ Name | Type | Description  | Notes
  **Body** | **string**| This parameter is used for finding stories whose body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). | [optional] 
  **Text** | **string**| This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). | [optional] 
  **Language** | [**[]string**](string.md)| This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. | [optional] 
- **PublishedAtStart** | **string**| This parameter is used for finding stories whose published at is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] 
- **PublishedAtEnd** | **string**| This parameter is used for finding stories whose published at is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] 
- **CategoriesTaxonomy** | **string**| This parameter is used for defining type of the taxonomy for the rest of categories queries. | [optional] 
+ **PublishedAtStart** | **string**| This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] 
+ **PublishedAtEnd** | **string**| This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] 
+ **CategoriesTaxonomy** | **string**| This parameter is used for defining the type of the taxonomy for the rest of the categories queries. | [optional] 
  **CategoriesConfident** | **bool**| This parameter is used for finding stories whose categories are confident. | [optional] [default to true]
- **CategoriesId** | [**[]string**](string.md)| This parameter is used for finding stories whose categories id is the specified value. | [optional] 
- **CategoriesLevel** | [**[]int32**](int32.md)| This parameter is used for finding stories whose categories level is the specified value. | [optional] 
- **EntitiesTitleText** | [**[]string**](string.md)| This parameter is used for finding stories whose entities text in title is the specified value. | [optional] 
- **EntitiesTitleType** | [**[]string**](string.md)| This parameter is used for finding stories whose entities type in title is the specified value. | [optional] 
- **EntitiesTitleLinksDbpedia** | [**[]string**](string.md)| This parameter is used for finding stories whose entities dbpedia url in title is the specified value. | [optional] 
- **EntitiesBodyText** | [**[]string**](string.md)| This parameter is used for finding stories whose entities text in body is the specified value. | [optional] 
- **EntitiesBodyType** | [**[]string**](string.md)| This parameter is used for finding stories whose entities type in body is the specified value. | [optional] 
- **EntitiesBodyLinksDbpedia** | [**[]string**](string.md)| This parameter is used for finding stories whose entities dbpedia url in body is the specified value. | [optional] 
+ **CategoriesId** | [**[]string**](string.md)| This parameter is used for finding stories by categories id. | [optional] 
+ **CategoriesLevel** | [**[]int32**](int32.md)| This parameter is used for finding stories by categories level. | [optional] 
+ **EntitiesTitleText** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles. | [optional] 
+ **EntitiesTitleType** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles. | [optional] 
+ **EntitiesTitleLinksDbpedia** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities dbpedia URL in story titles. | [optional] 
+ **EntitiesBodyText** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories. | [optional] 
+ **EntitiesBodyType** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories. | [optional] 
+ **EntitiesBodyLinksDbpedia** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. | [optional] 
  **SentimentTitlePolarity** | **string**| This parameter is used for finding stories whose title sentiment is the specified value. | [optional] 
  **SentimentBodyPolarity** | **string**| This parameter is used for finding stories whose body sentiment is the specified value. | [optional] 
+ **MediaImagesCountMin** | **int32**| This parameter is used for finding stories whose number of images is greater than or equal to the specified value. | [optional] 
+ **MediaImagesCountMax** | **int32**| This parameter is used for finding stories whose number of images is less than or equal to the specified value. | [optional] 
+ **MediaVideosCountMin** | **int32**| This parameter is used for finding stories whose number of videos is greater than or equal to the specified value. | [optional] 
+ **MediaVideosCountMax** | **int32**| This parameter is used for finding stories whose number of videos is less than or equal to the specified value. | [optional] 
  **AuthorId** | [**[]int32**](int32.md)| This parameter is used for finding stories whose author id is the specified value. | [optional] 
  **AuthorName** | **string**| This parameter is used for finding stories whose author full name contains the specified value. | [optional] 
  **SourceId** | [**[]int32**](int32.md)| This parameter is used for finding stories whose source id is the specified value. | [optional] 
  **SourceName** | [**[]string**](string.md)| This parameter is used for finding stories whose source name contains the specified value. | [optional] 
  **SourceDomain** | [**[]string**](string.md)| This parameter is used for finding stories whose source domain is the specified value. | [optional] 
- **SourceLocationsCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. | [optional] 
- **SourceLocationsState** | [**[]string**](string.md)| This parameter is used for finding stories whose source state/province is the specified value. | [optional] 
- **SourceLocationsCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source city is the specified value. | [optional] 
- **SourceScopesCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. | [optional] 
- **SourceScopesState** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes state/province is the specified value. | [optional] 
- **SourceScopesCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes city is the specified value. | [optional] 
- **SourceScopesLevel** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes level is the specified value. | [optional] 
+ **SourceLocationsCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceLocationsState** | [**[]string**](string.md)| This parameter is used for finding stories whose source state/province is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceLocationsCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source city is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesState** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesLevel** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
  **IntervalStart** | **int32**| This parameter is used for setting the start data point of histogram intervals. | [optional] 
  **IntervalEnd** | **int32**| This parameter is used for setting the end data point of histogram intervals. | [optional] 
  **IntervalWidth** | **int32**| This parameter is used for setting the width of histogram intervals. | [optional] 
@@ -433,7 +464,8 @@ Name | Type | Description  | Notes
 
 List related stories
 
-This endpoint is used for finding related stories based on provided parameters. The number of related stories to return, up to a maximum of 100.
+This endpoint is used for finding related stories based on the parameters provided. The maximum number of related stories returned is 100.
+
 
 ### Example
 
@@ -455,45 +487,51 @@ func main() {
 	// Configure API key authorization: app_key
 	api.Configuration.APIKeyPrefix["X-AYLIEN-NewsAPI-Application-Key"] = "YOUR APP KEY"
 
-	id := []int64{112}                                                         // []int64 | This parameter is used for finding stroies by story id.
-	title := "title_example"                                                   // string | This parameter is used for finding stories whose title contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
-	body := "body_example"                                                     // string | This parameter is used for finding stories whose title contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
-	text := "text_example"                                                     // string | This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
-	language := []string{"en"}                                                 // []string | This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
-	publishedAtStart := "publishedAtStart_example"                             // string | This parameter is used for finding stories whose published at is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
-	publishedAtEnd := "publishedAtEnd_example"                                 // string | This parameter is used for finding stories whose published at is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
-	categoriesTaxonomy := "categoriesTaxonomy_example"                         // string | This parameter is used for defining type of the taxonomy for the rest of categories queries.
-	categoriesConfident := "categoriesConfident_example"                       // string | This parameter is used for finding stories whose categories are confident.
-	categoriesId := []string{"categoriesId_example"}                           // []string | This parameter is used for finding stories whose categories id is the specified value.
-	categoriesLevel := []int32{3}                                              // []int32 | This parameter is used for finding stories whose categories level is the specified value.
-	entitiesTitleText := []string{"entitiesTitleText_example"}                 // []string | This parameter is used for finding stories whose entities text in title is the specified value.
-	entitiesTitleType := []string{"entitiesTitleType_example"}                 // []string| This parameter is used for finding stories whose entities type in title is the specified value.
-	entitiesTitleLinksDbpedia := []string{"entitiesTitleLinksDbpedia_example"} // []string | This parameter is used for finding stories whose entities dbpedia url in title is the specified value.
-	entitiesBodyText := []string{"entitiesBodyText_example"}                   // []string | This parameter is used for finding stories whose entities text in body is the specified value.
-	entitiesBodyType := []string{"entitiesBodyType_example"}                   // []string | This parameter is used for finding stories whose entities type in body is the specified value.
-	entitiesBodyLinksDbpedia := []string{"entitiesBodyLinksDbpedia_example"}   // []string | This parameter is used for finding stories whose entities dbpedia url in body is the specified value.
-	sentimentTitlePolarity := "sentimentTitlePolarity_example"                 // string | This parameter is used for finding stories whose title sentiment is the specified value.
-	sentimentBodyPolarity := "sentimentBodyPolarity_example"                   // string | This parameter is used for finding stories whose body sentiment is the specified value.
-	authorId := []int32{25}                                                    // []int32 | This parameter is used for finding stories whose author id is the specified value.
-	authorName := "authorName_example"                                         // string | This parameter is used for finding stories whose author full name contains the specified value.
-	sourceId := []int32{45}                                                    // []int32 | This parameter is used for finding stories whose source id is the specified value.
-	sourceName := []string{"sourceName_example"}                               // []string | This parameter is used for finding stories whose source name contains the specified value.
-	sourceDomain := []string{"sourceDomain_example"}                           // []string | This parameter is used for finding stories whose source domain is the specified value.
-	sourceLocationsCountry := []string{"sourceLocationsCountry_example"}       // []string | This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
-	sourceLocationsState := []string{"sourceLocationsState_example"}           // []string | This parameter is used for finding stories whose source state/province is the specified value.
-	sourceLocationsCity := []string{"sourceLocationsCity_example"}             // []string | This parameter is used for finding stories whose source city is the specified value.
-	sourceScopesCountry := []string{"sourceScopesCountry_example"}             // []string | This parameter is used for finding stories whose source scopes country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
-	sourceScopesState := []string{"sourceScopesState_example"}                 // []string | This parameter is used for finding stories whose source scopes state/province is the specified value.
-	sourceScopesCity := []string{"sourceScopesCity_example"}                   // []string | This parameter is used for finding stories whose source scopes city is the specified value.
-	sourceScopesLevel := []string{"sourceScopesLevel_example"}                 // []string | This parameter is used for finding stories whose source scopes level is the specified value.
-	_return := []string{"_return_example"}                                     // []string | This parameter is used for specifying return fields.
-	storyId := 789                                                             // int64 | A story id
-	storyUrl := "storyUrl_example"                                             // string | An article or webpage
-	storyTitle := "storyTitle_example"                                         //string | Title of the article
-	storyBody := "storyBody_example"                                           // string | Body of the article
-	boostBy := "boostBy_example"                                               // string | This parameter is used for boosting result by the specified value.
-	storyLanguage := "auto"                                                    // string | This parameter is used for setting language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
-	perPage := 3                                                               // int32 | This parameter is used for specifying number of the items in each page.
+	id := []int64{112}
+	title := "title_example"
+	body := "body_example"
+	text := "text_example"
+	language := []string{"en"}
+	publishedAtStart := "publishedAtStart_example"
+	publishedAtEnd := "publishedAtEnd_example"
+	categoriesTaxonomy := "categoriesTaxonomy_example"
+	categoriesConfident := "categoriesConfident_example"
+	categoriesId := []string{"categoriesId_example"}
+	categoriesLevel := []int32{3}
+	entitiesTitleText := []string{"entitiesTitleText_example"}
+	entitiesTitleType := []string{"entitiesTitleType_example"}
+	entitiesTitleLinksDbpedia := []string{"entitiesTitleLinksDbpedia_example"}
+	entitiesBodyText := []string{"entitiesBodyText_example"}
+	entitiesBodyType := []string{"entitiesBodyType_example"}
+	entitiesBodyLinksDbpedia := []string{"entitiesBodyLinksDbpedia_example"}
+	sentimentTitlePolarity := "sentimentTitlePolarity_example"
+	sentimentBodyPolarity := "sentimentBodyPolarity_example"
+	mediaImagesCountMin := 56
+	mediaImagesCountMax := 56
+	mediaVideosCountMin := 56
+	mediaVideosCountMax := 56
+	authorId := []int32{25}
+	authorName := "authorName_example"
+	sourceId := []int32{45}
+	sourceName := []string{"sourceName_example"}
+	sourceDomain := []string{"sourceDomain_example"}
+	sourceLocationsCountry := []string{"sourceLocationsCountry_example"}
+	sourceLocationsState := []string{"sourceLocationsState_example"}
+	sourceLocationsCity := []string{"sourceLocationsCity_example"}
+	sourceScopesCountry := []string{"sourceScopesCountry_example"}
+	sourceScopesState := []string{"sourceScopesState_example"}
+	sourceScopesCity := []string{"sourceScopesCity_example"}
+	sourceScopesLevel := []string{"sourceScopesLevel_example"}
+	cluster := true
+	clusterAlgorithm := "lingo"
+	_return := []string{"_return_example"}
+	storyId := 789
+	storyUrl := "storyUrl_example"
+	storyTitle := "storyTitle_example"
+	storyBody := "storyBody_example"
+	boostBy := "recency"
+	storyLanguage := "auto"
+	perPage := 3
 
 	relatedStoriesParams := &newsapi.RelatedStoriesParams{
 		Id:                        id,
@@ -515,6 +553,10 @@ func main() {
 		EntitiesBodyLinksDbpedia:  entitiesBodyLinksDbpedia,
 		SentimentTitlePolarity:    sentimentTitlePolarity,
 		SentimentBodyPolarity:     sentimentBodyPolarity,
+		MediaImagesCountMin:       mediaImagesCountMin,
+		MediaImagesCountMax:       mediaImagesCountMax,
+		MediaVideosCountMin:       mediaVideosCountMin,
+		MediaVideosCountMin:       mediaVideosCountMin,
 		AuthorId:                  authorId,
 		AuthorName:                authorName,
 		SourceId:                  sourceId,
@@ -527,6 +569,8 @@ func main() {
 		SourceScopesState:         sourceScopesState,
 		SourceScopesCity:          sourceScopesCity,
 		SourceScopesLevel:         sourceScopesLevel,
+		Cluster:                   cluster,
+		ClusterAlgorithm:          clusterAlgorithm,
 		Return:                    _return,
 		StoryId:                   storyId,
 		StoryUrl:                  storyUrl,
@@ -555,40 +599,46 @@ Name | Type | Description  | Notes
  **Body** | **string**| This parameter is used for finding stories whose body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). | [optional] 
  **Text** | **string**| This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). | [optional] 
  **Language** | [**[]string**](string.md)| This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. | [optional] 
- **PublishedAtStart** | **string**| This parameter is used for finding stories whose published at is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] 
- **PublishedAtEnd** | **string**| This parameter is used for finding stories whose published at is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] 
- **CategoriesTaxonomy** | **string**| This parameter is used for defining type of the taxonomy for the rest of categories queries. | [optional] 
+ **PublishedAtStart** | **string**| This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] 
+ **PublishedAtEnd** | **string**| This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] 
+ **CategoriesTaxonomy** | **string**| This parameter is used for defining the type of the taxonomy for the rest of the categories queries. | [optional] 
  **CategoriesConfident** | **bool**| This parameter is used for finding stories whose categories are confident. | [optional] [default to true]
- **CategoriesId** | [**[]string**](string.md)| This parameter is used for finding stories whose categories id is the specified value. | [optional] 
- **CategoriesLevel** | [**[]int32**](int32.md)| This parameter is used for finding stories whose categories level is the specified value. | [optional] 
- **EntitiesTitleText** | [**[]string**](string.md)| This parameter is used for finding stories whose entities text in title is the specified value. | [optional] 
- **EntitiesTitleType** | [**[]string**](string.md)| This parameter is used for finding stories whose entities type in title is the specified value. | [optional] 
- **EntitiesTitleLinksDbpedia** | [**[]string**](string.md)| This parameter is used for finding stories whose entities dbpedia url in title is the specified value. | [optional] 
- **EntitiesBodyText** | [**[]string**](string.md)| This parameter is used for finding stories whose entities text in body is the specified value. | [optional] 
- **EntitiesBodyType** | [**[]string**](string.md)| This parameter is used for finding stories whose entities type in body is the specified value. | [optional] 
- **EntitiesBodyLinksDbpedia** | [**[]string**](string.md)| This parameter is used for finding stories whose entities dbpedia url in body is the specified value. | [optional] 
+ **CategoriesId** | [**[]string**](string.md)| This parameter is used for finding stories by categories id. | [optional] 
+ **CategoriesLevel** | [**[]int32**](int32.md)| This parameter is used for finding stories by categories level. | [optional] 
+ **EntitiesTitleText** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles. | [optional] 
+ **EntitiesTitleType** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles. | [optional] 
+ **EntitiesTitleLinksDbpedia** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities dbpedia URL in story titles. | [optional] 
+ **EntitiesBodyText** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories. | [optional] 
+ **EntitiesBodyType** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories. | [optional] 
+ **EntitiesBodyLinksDbpedia** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. | [optional] 
  **SentimentTitlePolarity** | **string**| This parameter is used for finding stories whose title sentiment is the specified value. | [optional] 
  **SentimentBodyPolarity** | **string**| This parameter is used for finding stories whose body sentiment is the specified value. | [optional] 
+ **MediaImagesCountMin** | **int32**| This parameter is used for finding stories whose number of images is greater than or equal to the specified value. | [optional] 
+ **MediaImagesCountMax** | **int32**| This parameter is used for finding stories whose number of images is less than or equal to the specified value. | [optional] 
+ **MediaVideosCountMin** | **int32**| This parameter is used for finding stories whose number of videos is greater than or equal to the specified value. | [optional] 
+ **MediaVideosCountMax** | **int32**| This parameter is used for finding stories whose number of videos is less than or equal to the specified value. | [optional] 
  **AuthorId** | [**[]int32**](int32.md)| This parameter is used for finding stories whose author id is the specified value. | [optional] 
  **AuthorName** | **string**| This parameter is used for finding stories whose author full name contains the specified value. | [optional] 
  **SourceId** | [**[]int32**](int32.md)| This parameter is used for finding stories whose source id is the specified value. | [optional] 
  **SourceName** | [**[]string**](string.md)| This parameter is used for finding stories whose source name contains the specified value. | [optional] 
  **SourceDomain** | [**[]string**](string.md)| This parameter is used for finding stories whose source domain is the specified value. | [optional] 
- **SourceLocationsCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. | [optional] 
- **SourceLocationsState** | [**[]string**](string.md)| This parameter is used for finding stories whose source state/province is the specified value. | [optional] 
- **SourceLocationsCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source city is the specified value. | [optional] 
- **SourceScopesCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. | [optional] 
- **SourceScopesState** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes state/province is the specified value. | [optional] 
- **SourceScopesCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes city is the specified value. | [optional] 
- **sourceScopesLevel** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes level is the specified value. | [optional] 
+ **SourceLocationsCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceLocationsState** | [**[]string**](string.md)| This parameter is used for finding stories whose source state/province is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceLocationsCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source city is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes  is the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesState** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesLevel** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes  is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **Cluster** | **bool**| This parameter enables clustering for the returned stories. | [optional] [default to false]
+ **ClusterAlgorithm** | **string**| This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms. | [optional] [default to lingo]
  **Return** | [**[]string**](string.md)| This parameter is used for specifying return fields. | [optional] 
  **StoryId** | **int64**| A story id | [optional] 
  **StoryUrl** | **string**| An article or webpage | [optional] 
  **StoryTitle** | **string**| Title of the article | [optional] 
  **StoryBody** | **string**| Body of the article | [optional] 
- **BoostBy** | **string**| This parameter is used for boosting result by the specified value. | [optional] 
- **StoryLanguage** | **string**| This parameter is used for setting language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. | [optional] [default to auto]
- **PerPage** | **int32**| This parameter is used for specifying number of the items in each page. | [optional] [default to 3]
+ **BoostBy** | **string**| This parameter is used for boosting the result by the specified value. | [optional] 
+ **StoryLanguage** | **string**| This parameter is used for setting the language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. | [optional] [default to auto]
+ **PerPage** | **int32**| This parameter is used for specifying number of items in each page. | [optional] [default to 3]
 
 ### Return type
 
@@ -610,7 +660,7 @@ Name | Type | Description  | Notes
 
 List Stories
 
-This endpoint is used for getting list of stories.
+This endpoint is used for getting a list of stories.
 
 ### Example
 
@@ -632,44 +682,48 @@ func main() {
 	// Configure API key authorization: app_key
 	api.Configuration.APIKeyPrefix["X-AYLIEN-NewsAPI-Application-Key"] = "YOUR APP KEY"
 
-	id := []int64{112}                                                         // []int64 | This parameter is used for finding stroies by story id.
-	title := "title_example"                                                   // string | This parameter is used for finding stories whose title contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
-	body := "body_example"                                                     // string | This parameter is used for finding stories whose title contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
-	text := "text_example"                                                     // string | This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
-	language := []string{"en"}                                                 // []string | This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
-	publishedAtStart := "publishedAtStart_example"                             // string | This parameter is used for finding stories whose published at is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
-	publishedAtEnd := "publishedAtEnd_example"                                 // string | This parameter is used for finding stories whose published at is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
-	categoriesTaxonomy := "categoriesTaxonomy_example"                         // string | This parameter is used for defining type of the taxonomy for the rest of categories queries.
-	categoriesConfident := "categoriesConfident_example"                       // string | This parameter is used for finding stories whose categories are confident.
-	categoriesId := []string{"categoriesId_example"}                           // []string | This parameter is used for finding stories whose categories id is the specified value.
-	categoriesLevel := []int32{3}                                              // []int32 | This parameter is used for finding stories whose categories level is the specified value.
-	entitiesTitleText := []string{"entitiesTitleText_example"}                 // []string | This parameter is used for finding stories whose entities text in title is the specified value.
-	entitiesTitleType := []string{"entitiesTitleType_example"}                 // []string| This parameter is used for finding stories whose entities type in title is the specified value.
-	entitiesTitleLinksDbpedia := []string{"entitiesTitleLinksDbpedia_example"} // []string | This parameter is used for finding stories whose entities dbpedia url in title is the specified value.
-	entitiesBodyText := []string{"entitiesBodyText_example"}                   // []string | This parameter is used for finding stories whose entities text in body is the specified value.
-	entitiesBodyType := []string{"entitiesBodyType_example"}                   // []string | This parameter is used for finding stories whose entities type in body is the specified value.
-	entitiesBodyLinksDbpedia := []string{"entitiesBodyLinksDbpedia_example"}   // []string | This parameter is used for finding stories whose entities dbpedia url in body is the specified value.
-	sentimentTitlePolarity := "sentimentTitlePolarity_example"                 // string | This parameter is used for finding stories whose title sentiment is the specified value.
-	sentimentBodyPolarity := "sentimentBodyPolarity_example"                   // string | This parameter is used for finding stories whose body sentiment is the specified value.
-	authorId := []int32{25}                                                    // []int32 | This parameter is used for finding stories whose author id is the specified value.
-	authorName := "authorName_example"                                         // string | This parameter is used for finding stories whose author full name contains the specified value.
-	sourceId := []int32{45}                                                    // []int32 | This parameter is used for finding stories whose source id is the specified value.
-	sourceName := []string{"sourceName_example"}                               // []string | This parameter is used for finding stories whose source name contains the specified value.
-	sourceDomain := []string{"sourceDomain_example"}                           // []string | This parameter is used for finding stories whose source domain is the specified value.
-	sourceLocationsCountry := []string{"sourceLocationsCountry_example"}       // []string | This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
-	sourceLocationsState := []string{"sourceLocationsState_example"}           // []string | This parameter is used for finding stories whose source state/province is the specified value.
-	sourceLocationsCity := []string{"sourceLocationsCity_example"}             // []string | This parameter is used for finding stories whose source city is the specified value.
-	sourceScopesCountry := []string{"sourceScopesCountry_example"}             // []string | This parameter is used for finding stories whose source scopes country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
-	sourceScopesState := []string{"sourceScopesState_example"}                 // []string | This parameter is used for finding stories whose source scopes state/province is the specified value.
-	sourceScopesCity := []string{"sourceScopesCity_example"}                   // []string | This parameter is used for finding stories whose source scopes city is the specified value.
-	sourceScopesLevel := []string{"sourceScopesLevel_example"}                 // []string | This parameter is used for finding stories whose source scopes level is the specified value.
-	cluster := "false"                                                         // string | This parameter enables clustering for the returned stories.
-	clusterAlgorithm := "lingo"                                                // string | This parameter is used for specifying the clustering algorithm. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms.
-	_return := []string{"_return_example"}                                     // []string | This parameter is used for specifying return fields.
-	sortBy := "published_at"                                                   // string | This parameter is used for changing the order column of the result.
-	sortDirection := "desc"                                                    // string | This parameter is used for changing the order direction of the result.
-	cursor := "*"                                                              // string | This parameter is used for finding a specific page.
-	perPage := 10                                                              // int32 | This parameter is used for specifying number of the items in each page.
+	id := []int64{112}
+	title := "title_example"
+	body := "body_example"
+	text := "text_example"
+	language := []string{"en"}
+	publishedAtStart := "publishedAtStart_example"
+	publishedAtEnd := "publishedAtEnd_example"
+	categoriesTaxonomy := "categoriesTaxonomy_example"
+	categoriesConfident := "categoriesConfident_example"
+	categoriesId := []string{"categoriesId_example"}
+	categoriesLevel := []int32{3}
+	entitiesTitleText := []string{"entitiesTitleText_example"}
+	entitiesTitleType := []string{"entitiesTitleType_example"}
+	entitiesTitleLinksDbpedia := []string{"entitiesTitleLinksDbpedia_example"}
+	entitiesBodyText := []string{"entitiesBodyText_example"}
+	entitiesBodyType := []string{"entitiesBodyType_example"}
+	entitiesBodyLinksDbpedia := []string{"entitiesBodyLinksDbpedia_example"}
+	sentimentTitlePolarity := "sentimentTitlePolarity_example"
+	sentimentBodyPolarity := "sentimentBodyPolarity_example"
+	mediaImagesCountMin := 56
+	mediaImagesCountMax := 56
+	mediaVideosCountMin := 56
+	mediaVideosCountMax := 56
+	authorId := []int32{25}
+	authorName := "authorName_example"
+	sourceId := []int32{45}
+	sourceName := []string{"sourceName_example"}
+	sourceDomain := []string{"sourceDomain_example"}
+	sourceLocationsCountry := []string{"sourceLocationsCountry_example"}
+	sourceLocationsState := []string{"sourceLocationsState_example"}
+	sourceLocationsCity := []string{"sourceLocationsCity_example"}
+	sourceScopesCountry := []string{"sourceScopesCountry_example"}
+	sourceScopesState := []string{"sourceScopesState_example"}
+	sourceScopesCity := []string{"sourceScopesCity_example"}
+	sourceScopesLevel := []string{"sourceScopesLevel_example"}
+	cluster := true
+	clusterAlgorithm := "lingo"
+	_return := []string{"_return_example"}
+	sortBy := "hotness"
+	sortDirection := "desc"
+	cursor := "*"
+	perPage := 10
 
 	storiesParams := &newsapi.StoriesParams{
 		Id:                        id,
@@ -691,6 +745,10 @@ func main() {
 		EntitiesBodyLinksDbpedia:  entitiesBodyLinksDbpedia,
 		SentimentTitlePolarity:    sentimentTitlePolarity,
 		SentimentBodyPolarity:     sentimentBodyPolarity,
+		MediaImagesCountMin:       mediaImagesCountMin,
+		MediaImagesCountMax:       mediaImagesCountMax,
+		MediaVideosCountMin:       mediaVideosCountMin,
+		MediaVideosCountMin:       mediaVideosCountMin,
 		AuthorId:                  authorId,
 		AuthorName:                authorName,
 		SourceId:                  sourceId,
@@ -730,39 +788,43 @@ Name | Type | Description  | Notes
  **Body** | **string**| This parameter is used for finding stories whose body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). | [optional] 
  **Text** | **string**| This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). | [optional] 
  **Language** | [**[]string**](string.md)| This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. | [optional] 
- **PublishedAtStart** | **string**| This parameter is used for finding stories whose published at is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] 
- **PublishedAtEnd** | **string**| This parameter is used for finding stories whose published at is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] 
- **CategoriesTaxonomy** | **string**| This parameter is used for defining type of the taxonomy for the rest of categories queries. | [optional] 
+ **PublishedAtStart** | **string**| This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] 
+ **PublishedAtEnd** | **string**| This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] 
+ **CategoriesTaxonomy** | **string**| This parameter is used for defining the type of the taxonomy for the rest of the categories queries. | [optional] 
  **CategoriesConfident** | **bool**| This parameter is used for finding stories whose categories are confident. | [optional] [default to true]
- **CategoriesId** | [**[]string**](string.md)| This parameter is used for finding stories whose categories id is the specified value. | [optional] 
- **CategoriesLevel** | [**[]int32**](int32.md)| This parameter is used for finding stories whose categories level is the specified value. | [optional] 
- **EntitiesTitleText** | [**[]string**](string.md)| This parameter is used for finding stories whose entities text in title is the specified value. | [optional] 
- **EntitiesTitleType** | [**[]string**](string.md)| This parameter is used for finding stories whose entities type in title is the specified value. | [optional] 
- **EntitiesTitleLinksDbpedia** | [**[]string**](string.md)| This parameter is used for finding stories whose entities dbpedia url in title is the specified value. | [optional] 
- **EntitiesBodyText** | [**[]string**](string.md)| This parameter is used for finding stories whose entities text in body is the specified value. | [optional] 
- **EntitiesBodyType** | [**[]string**](string.md)| This parameter is used for finding stories whose entities type in body is the specified value. | [optional] 
- **EntitiesBodyLinksDbpedia** | [**[]string**](string.md)| This parameter is used for finding stories whose entities dbpedia url in body is the specified value. | [optional] 
+ **CategoriesId** | [**[]string**](string.md)| This parameter is used for finding stories by categories id. | [optional] 
+ **CategoriesLevel** | [**[]int32**](int32.md)| This parameter is used for finding stories by categories level. | [optional] 
+ **EntitiesTitleText** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles. | [optional] 
+ **EntitiesTitleType** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles. | [optional] 
+ **EntitiesTitleLinksDbpedia** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities dbpedia URL in story titles. | [optional] 
+ **EntitiesBodyText** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories. | [optional] 
+ **EntitiesBodyType** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories. | [optional] 
+ **EntitiesBodyLinksDbpedia** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. | [optional] 
  **SentimentTitlePolarity** | **string**| This parameter is used for finding stories whose title sentiment is the specified value. | [optional] 
  **SentimentBodyPolarity** | **string**| This parameter is used for finding stories whose body sentiment is the specified value. | [optional] 
+ **MediaImagesCountMin** | **int32**| This parameter is used for finding stories whose number of images is greater than or equal to the specified value. | [optional] 
+ **MediaImagesCountMax** | **int32**| This parameter is used for finding stories whose number of images is less than or equal to the specified value. | [optional] 
+ **MediaVideosCountMin** | **int32**| This parameter is used for finding stories whose number of videos is greater than or equal to the specified value. | [optional] 
+ **MediaVideosCountMax** | **int32**| This parameter is used for finding stories whose number of videos is less than or equal to the specified value. | [optional] 
  **AuthorId** | [**[]int32**](int32.md)| This parameter is used for finding stories whose author id is the specified value. | [optional] 
  **AuthorName** | **string**| This parameter is used for finding stories whose author full name contains the specified value. | [optional] 
  **SourceId** | [**[]int32**](int32.md)| This parameter is used for finding stories whose source id is the specified value. | [optional] 
  **SourceName** | [**[]string**](string.md)| This parameter is used for finding stories whose source name contains the specified value. | [optional] 
  **SourceDomain** | [**[]string**](string.md)| This parameter is used for finding stories whose source domain is the specified value. | [optional] 
- **SourceLocationsCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. | [optional] 
- **SourceLocationsState** | [**[]string**](string.md)| This parameter is used for finding stories whose source state/province is the specified value. | [optional] 
- **SourceLocationsCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source city is the specified value. | [optional] 
- **SourceScopesCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. | [optional] 
- **SourceScopesState** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes state/province is the specified value. | [optional] 
- **SourceScopesCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes city is the specified value. | [optional] 
- **SourceScopesLevel** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes level is the specified value. | [optional] 
+ **SourceLocationsCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceLocationsState** | [**[]string**](string.md)| This parameter is used for finding stories whose source state/province is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceLocationsCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source city is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesState** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesLevel** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
  **Cluster** | **bool**| This parameter enables clustering for the returned stories. | [optional] [default to false]
- **ClusterAlgorithm** | **string**| This parameter is used for specifying the clustering algorithm. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms. | [optional] [default to lingo]
+ **ClusterAlgorithm** | **string**| This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms. | [optional] [default to lingo]
  **Return** | [**[]string**](string.md)| This parameter is used for specifying return fields. | [optional] 
- **SortBy** | **string**| This parameter is used for changing the order column of the result. | [optional] [default to published_at]
+ **SortBy** | **string**| This parameter is used for changing the order column of the results. | [optional] [default to published_at]
  **SortDirection** | **string**| This parameter is used for changing the order direction of the result. | [optional] [default to desc]
  **Cursor** | **string**| This parameter is used for finding a specific page. | [optional] [default to *]
- **PerPage** | **int32**| This parameter is used for specifying number of the items in each page. | [optional] [default to 10]
+ **PerPage** | **int32**| This parameter is used for specifying number of items in each page. | [optional] [default to 10]
 
 ### Return type
 
@@ -806,38 +868,42 @@ func main() {
 	// Configure API key authorization: app_key
 	api.Configuration.APIKeyPrefix["X-AYLIEN-NewsAPI-Application-Key"] = "YOUR APP KEY"
 
-	id := []int64{112}                                                         // []int64 | This parameter is used for finding stroies by story id.
-	title := "title_example"                                                   // string | This parameter is used for finding stories whose title contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
-	body := "body_example"                                                     // string | This parameter is used for finding stories whose title contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
-	text := "text_example"                                                     // string | This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
-	language := []string{"en"}                                                 // []string | This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
-	categoriesTaxonomy := "categoriesTaxonomy_example"                         // string | This parameter is used for defining type of the taxonomy for the rest of categories queries.
-	categoriesConfident := "categoriesConfident_example"                       // string | This parameter is used for finding stories whose categories are confident.
-	categoriesId := []string{"categoriesId_example"}                           // []string | This parameter is used for finding stories whose categories id is the specified value.
-	categoriesLevel := []int32{3}                                              // []int32 | This parameter is used for finding stories whose categories level is the specified value.
-	entitiesTitleText := []string{"entitiesTitleText_example"}                 // []string | This parameter is used for finding stories whose entities text in title is the specified value.
-	entitiesTitleType := []string{"entitiesTitleType_example"}                 // []string| This parameter is used for finding stories whose entities type in title is the specified value.
-	entitiesTitleLinksDbpedia := []string{"entitiesTitleLinksDbpedia_example"} // []string | This parameter is used for finding stories whose entities dbpedia url in title is the specified value.
-	entitiesBodyText := []string{"entitiesBodyText_example"}                   // []string | This parameter is used for finding stories whose entities text in body is the specified value.
-	entitiesBodyType := []string{"entitiesBodyType_example"}                   // []string | This parameter is used for finding stories whose entities type in body is the specified value.
-	entitiesBodyLinksDbpedia := []string{"entitiesBodyLinksDbpedia_example"}   // []string | This parameter is used for finding stories whose entities dbpedia url in body is the specified value.
-	sentimentTitlePolarity := "sentimentTitlePolarity_example"                 // string | This parameter is used for finding stories whose title sentiment is the specified value.
-	sentimentBodyPolarity := "sentimentBodyPolarity_example"                   // string | This parameter is used for finding stories whose body sentiment is the specified value.
-	authorId := []int32{25}                                                    // []int32 | This parameter is used for finding stories whose author id is the specified value.
-	authorName := "authorName_example"                                         // string | This parameter is used for finding stories whose author full name contains the specified value.
-	sourceId := []int32{45}                                                    // []int32 | This parameter is used for finding stories whose source id is the specified value.
-	sourceName := []string{"sourceName_example"}                               // []string | This parameter is used for finding stories whose source name contains the specified value.
-	sourceDomain := []string{"sourceDomain_example"}                           // []string | This parameter is used for finding stories whose source domain is the specified value.
-	sourceLocationsCountry := []string{"sourceLocationsCountry_example"}       // []string | This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
-	sourceLocationsState := []string{"sourceLocationsState_example"}           // []string | This parameter is used for finding stories whose source state/province is the specified value.
-	sourceLocationsCity := []string{"sourceLocationsCity_example"}             // []string | This parameter is used for finding stories whose source city is the specified value.
-	sourceScopesCountry := []string{"sourceScopesCountry_example"}             // []string | This parameter is used for finding stories whose source scopes country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
-	sourceScopesState := []string{"sourceScopesState_example"}                 // []string | This parameter is used for finding stories whose source scopes state/province is the specified value.
-	sourceScopesCity := []string{"sourceScopesCity_example"}                   // []string | This parameter is used for finding stories whose source scopes city is the specified value.
-	sourceScopesLevel := []string{"sourceScopesLevel_example"}                 // []string | This parameter is used for finding stories whose source scopes level is the specified value.
-	publishedAtStart := "NOW-7DAYS/DAY"                                        // string | This parameter is used for finding stories whose published at is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
-	publishedAtEnd := "NOW/DAY"                                                // string | This parameter is used for finding stories whose published at is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
-	period := "+1DAY"                                                          // string | The size of each date range expressed as an interval to be added to the lower bound. It supports Date Math Syntax. Valid options are `+` following an integer number greater than 0 and one of the Date Math keywords. e.g. `+1DAY`, `+2MINUTES` and `+1MONTH`. Here are [Supported keywords](https://newsapi.aylien.com/docs/working-with-dates#date-math).
+	id := []int64{112}
+	title := "title_example"
+	body := "body_example"
+	text := "text_example"
+	language := []string{"en"}
+	categoriesTaxonomy := "categoriesTaxonomy_example"
+	categoriesConfident := "categoriesConfident_example"
+	categoriesId := []string{"categoriesId_example"}
+	categoriesLevel := []int32{3}
+	entitiesTitleText := []string{"entitiesTitleText_example"}
+	entitiesTitleType := []string{"entitiesTitleType_example"}
+	entitiesTitleLinksDbpedia := []string{"entitiesTitleLinksDbpedia_example"}
+	entitiesBodyText := []string{"entitiesBodyText_example"}
+	entitiesBodyType := []string{"entitiesBodyType_example"}
+	entitiesBodyLinksDbpedia := []string{"entitiesBodyLinksDbpedia_example"}
+	sentimentTitlePolarity := "sentimentTitlePolarity_example"
+	sentimentBodyPolarity := "sentimentBodyPolarity_example"
+	mediaImagesCountMin := 56
+	mediaImagesCountMax := 56
+	mediaVideosCountMin := 56
+	mediaVideosCountMax := 56
+	authorId := []int32{25}
+	authorName := "authorName_example"
+	sourceId := []int32{45}
+	sourceName := []string{"sourceName_example"}
+	sourceDomain := []string{"sourceDomain_example"}
+	sourceLocationsCountry := []string{"sourceLocationsCountry_example"}
+	sourceLocationsState := []string{"sourceLocationsState_example"}
+	sourceLocationsCity := []string{"sourceLocationsCity_example"}
+	sourceScopesCountry := []string{"sourceScopesCountry_example"}
+	sourceScopesState := []string{"sourceScopesState_example"}
+	sourceScopesCity := []string{"sourceScopesCity_example"}
+	sourceScopesLevel := []string{"sourceScopesLevel_example"}
+	publishedAtStart := "publishedAtStart_example"
+	publishedAtEnd := "publishedAtEnd_example"
+	period := "+1DAY"
 
 	timeSeriesParams := &newsapi.TimeSeriesParams{
 		Id:                        id,
@@ -857,6 +923,10 @@ func main() {
 		EntitiesBodyLinksDbpedia:  entitiesBodyLinksDbpedia,
 		SentimentTitlePolarity:    sentimentTitlePolarity,
 		SentimentBodyPolarity:     sentimentBodyPolarity,
+		MediaImagesCountMin:       mediaImagesCountMin,
+		MediaImagesCountMax:       mediaImagesCountMax,
+		MediaVideosCountMin:       mediaVideosCountMin,
+		MediaVideosCountMin:       mediaVideosCountMin,
 		AuthorId:                  authorId,
 		AuthorName:                authorName,
 		SourceId:                  sourceId,
@@ -892,33 +962,37 @@ Name | Type | Description  | Notes
  **Body** | **string**| This parameter is used for finding stories whose body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). | [optional] 
  **Text** | **string**| This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). | [optional] 
  **Language** | [**[]string**](string.md)| This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. | [optional] 
- **CategoriesTaxonomy** | **string**| This parameter is used for defining type of the taxonomy for the rest of categories queries. | [optional] 
+ **CategoriesTaxonomy** | **string**| This parameter is used for defining the type of the taxonomy for the rest of the categories queries. | [optional] 
  **CategoriesConfident** | **bool**| This parameter is used for finding stories whose categories are confident. | [optional] [default to true]
- **CategoriesId** | [**[]string**](string.md)| This parameter is used for finding stories whose categories id is the specified value. | [optional] 
- **CategoriesLevel** | [**[]int32**](int32.md)| This parameter is used for finding stories whose categories level is the specified value. | [optional] 
- **EntitiesTitleText** | [**[]string**](string.md)| This parameter is used for finding stories whose entities text in title is the specified value. | [optional] 
- **EntitiesTitleType** | [**[]string**](string.md)| This parameter is used for finding stories whose entities type in title is the specified value. | [optional] 
- **EntitiesTitleLinksDbpedia** | [**[]string**](string.md)| This parameter is used for finding stories whose entities dbpedia url in title is the specified value. | [optional] 
- **EntitiesBodyText** | [**[]string**](string.md)| This parameter is used for finding stories whose entities text in body is the specified value. | [optional] 
- **EntitiesBodyType** | [**[]string**](string.md)| This parameter is used for finding stories whose entities type in body is the specified value. | [optional] 
- **EntitiesBodyLinksDbpedia** | [**[]string**](string.md)| This parameter is used for finding stories whose entities dbpedia url in body is the specified value. | [optional] 
+ **CategoriesId** | [**[]string**](string.md)| This parameter is used for finding stories by categories id. | [optional] 
+ **CategoriesLevel** | [**[]int32**](int32.md)| This parameter is used for finding stories by categories level. | [optional] 
+ **EntitiesTitleText** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles. | [optional] 
+ **EntitiesTitleType** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles. | [optional] 
+ **EntitiesTitleLinksDbpedia** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities dbpedia URL in story titles. | [optional] 
+ **EntitiesBodyText** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories. | [optional] 
+ **EntitiesBodyType** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories. | [optional] 
+ **EntitiesBodyLinksDbpedia** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. | [optional] 
  **SentimentTitlePolarity** | **string**| This parameter is used for finding stories whose title sentiment is the specified value. | [optional] 
  **SentimentBodyPolarity** | **string**| This parameter is used for finding stories whose body sentiment is the specified value. | [optional] 
+ **MediaImagesCountMin** | **int32**| This parameter is used for finding stories whose number of images is greater than or equal to the specified value. | [optional] 
+ **MediaImagesCountMax** | **int32**| This parameter is used for finding stories whose number of images is less than or equal to the specified value. | [optional] 
+ **MediaVideosCountMin** | **int32**| This parameter is used for finding stories whose number of videos is greater than or equal to the specified value. | [optional] 
+ **MediaVideosCountMax** | **int32**| This parameter is used for finding stories whose number of videos is less than or equal to the specified value. | [optional] 
  **AuthorId** | [**[]int32**](int32.md)| This parameter is used for finding stories whose author id is the specified value. | [optional] 
  **AuthorName** | **string**| This parameter is used for finding stories whose author full name contains the specified value. | [optional] 
  **SourceId** | [**[]int32**](int32.md)| This parameter is used for finding stories whose source id is the specified value. | [optional] 
  **SourceName** | [**[]string**](string.md)| This parameter is used for finding stories whose source name contains the specified value. | [optional] 
  **SourceDomain** | [**[]string**](string.md)| This parameter is used for finding stories whose source domain is the specified value. | [optional] 
- **SourceLocationsCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. | [optional] 
- **SourceLocationsState** | [**[]string**](string.md)| This parameter is used for finding stories whose source state/province is the specified value. | [optional] 
- **SourceLocationsCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source city is the specified value. | [optional] 
- **SourceScopesCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. | [optional] 
- **SourceScopesState** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes state/province is the specified value. | [optional] 
- **SourceScopesCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes city is the specified value. | [optional] 
- **SourceScopesLevel** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes level is the specified value. | [optional] 
- **PublishedAtStart** | **string**| This parameter is used for finding stories whose published at is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] [default to NOW-7DAYS/DAY]
- **PublishedAtEnd** | **string**| This parameter is used for finding stories whose published at is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] [default to NOW/DAY]
- **Period** | **string**| The size of each date range expressed as an interval to be added to the lower bound. It supports Date Math Syntax. Valid options are &#x60;+&#x60; following an integer number greater than 0 and one of the Date Math keywords. e.g. &#x60;+1DAY&#x60;, &#x60;+2MINUTES&#x60; and &#x60;+1MONTH&#x60;. Here are [Supported keywords](https://newsapi.aylien.com/docs/working-with-dates#date-math). | [optional] [default to +1DAY]
+ **SourceLocationsCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceLocationsState** | [**[]string**](string.md)| This parameter is used for finding stories whose source state/province is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceLocationsCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source city is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesState** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesLevel** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **PublishedAtStart** | **string**| This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] [default to NOW-7DAYS/DAY]
+ **PublishedAtEnd** | **string**| This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] [default to NOW/DAY]
+ **Period** | **string**| The size of each date range is expressed as an interval to be added to the lower bound. It supports Date Math Syntax. Valid options are &#x60;+&#x60; following an integer number greater than 0 and one of the Date Math keywords. e.g. &#x60;+1DAY&#x60;, &#x60;+2MINUTES&#x60; and &#x60;+1MONTH&#x60;. Here are [Supported keywords](https://newsapi.aylien.com/docs/working-with-dates#date-math). | [optional] [default to +1DAY]
 
 ### Return type
 
@@ -940,7 +1014,7 @@ Name | Type | Description  | Notes
 
 List trends
 
-This endpoint is used for finding news trendings based on stories resource.
+This endpoint is used for finding trends based on stories.
 
 ### Example
 
@@ -962,38 +1036,42 @@ func main() {
 	// Configure API key authorization: app_key
 	api.Configuration.APIKeyPrefix["X-AYLIEN-NewsAPI-Application-Key"] = "YOUR APP KEY"
 
-	id := []int64{112}                                                         // []int64 | This parameter is used for finding stroies by story id.
-	title := "title_example"                                                   // string | This parameter is used for finding stories whose title contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
-	body := "body_example"                                                     // string | This parameter is used for finding stories whose title contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
-	text := "text_example"                                                     // string | This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
-	language := []string{"en"}                                                 // []string | This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
-	publishedAtStart := "publishedAtStart_example"                             // string | This parameter is used for finding stories whose published at is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
-	publishedAtEnd := "publishedAtEnd_example"                                 // string | This parameter is used for finding stories whose published at is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
-	categoriesTaxonomy := "categoriesTaxonomy_example"                         // string | This parameter is used for defining type of the taxonomy for the rest of categories queries.
-	categoriesConfident := "categoriesConfident_example"                       // string | This parameter is used for finding stories whose categories are confident.
-	categoriesId := []string{"categoriesId_example"}                           // []string | This parameter is used for finding stories whose categories id is the specified value.
-	categoriesLevel := []int32{3}                                              // []int32 | This parameter is used for finding stories whose categories level is the specified value.
-	entitiesTitleText := []string{"entitiesTitleText_example"}                 // []string | This parameter is used for finding stories whose entities text in title is the specified value.
-	entitiesTitleType := []string{"entitiesTitleType_example"}                 // []string| This parameter is used for finding stories whose entities type in title is the specified value.
-	entitiesTitleLinksDbpedia := []string{"entitiesTitleLinksDbpedia_example"} // []string | This parameter is used for finding stories whose entities dbpedia url in title is the specified value.
-	entitiesBodyText := []string{"entitiesBodyText_example"}                   // []string | This parameter is used for finding stories whose entities text in body is the specified value.
-	entitiesBodyType := []string{"entitiesBodyType_example"}                   // []string | This parameter is used for finding stories whose entities type in body is the specified value.
-	entitiesBodyLinksDbpedia := []string{"entitiesBodyLinksDbpedia_example"}   // []string | This parameter is used for finding stories whose entities dbpedia url in body is the specified value.
-	sentimentTitlePolarity := "sentimentTitlePolarity_example"                 // string | This parameter is used for finding stories whose title sentiment is the specified value.
-	sentimentBodyPolarity := "sentimentBodyPolarity_example"                   // string | This parameter is used for finding stories whose body sentiment is the specified value.
-	authorId := []int32{25}                                                    // []int32 | This parameter is used for finding stories whose author id is the specified value.
-	authorName := "authorName_example"                                         // string | This parameter is used for finding stories whose author full name contains the specified value.
-	sourceId := []int32{45}                                                    // []int32 | This parameter is used for finding stories whose source id is the specified value.
-	sourceName := []string{"sourceName_example"}                               // []string | This parameter is used for finding stories whose source name contains the specified value.
-	sourceDomain := []string{"sourceDomain_example"}                           // []string | This parameter is used for finding stories whose source domain is the specified value.
-	sourceLocationsCountry := []string{"sourceLocationsCountry_example"}       // []string | This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
-	sourceLocationsState := []string{"sourceLocationsState_example"}           // []string | This parameter is used for finding stories whose source state/province is the specified value.
-	sourceLocationsCity := []string{"sourceLocationsCity_example"}             // []string | This parameter is used for finding stories whose source city is the specified value.
-	sourceScopesCountry := []string{"sourceScopesCountry_example"}             // []string | This parameter is used for finding stories whose source scopes country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
-	sourceScopesState := []string{"sourceScopesState_example"}                 // []string | This parameter is used for finding stories whose source scopes state/province is the specified value.
-	sourceScopesCity := []string{"sourceScopesCity_example"}                   // []string | This parameter is used for finding stories whose source scopes city is the specified value.
-	sourceScopesLevel := []string{"sourceScopesLevel_example"}                 // []string | This parameter is used for finding stories whose source scopes level is the specified value.
-	field := "field_example"                                                   // string | This parameter is used to specify the trend field.
+	id := []int64{112}
+	title := "title_example"
+	body := "body_example"
+	text := "text_example"
+	language := []string{"en"}
+	publishedAtStart := "publishedAtStart_example"
+	publishedAtEnd := "publishedAtEnd_example"
+	categoriesTaxonomy := "categoriesTaxonomy_example"
+	categoriesConfident := "categoriesConfident_example"
+	categoriesId := []string{"categoriesId_example"}
+	categoriesLevel := []int32{3}
+	entitiesTitleText := []string{"entitiesTitleText_example"}
+	entitiesTitleType := []string{"entitiesTitleType_example"}
+	entitiesTitleLinksDbpedia := []string{"entitiesTitleLinksDbpedia_example"}
+	entitiesBodyText := []string{"entitiesBodyText_example"}
+	entitiesBodyType := []string{"entitiesBodyType_example"}
+	entitiesBodyLinksDbpedia := []string{"entitiesBodyLinksDbpedia_example"}
+	sentimentTitlePolarity := "sentimentTitlePolarity_example"
+	sentimentBodyPolarity := "sentimentBodyPolarity_example"
+	mediaImagesCountMin := 56
+	mediaImagesCountMax := 56
+	mediaVideosCountMin := 56
+	mediaVideosCountMax := 56
+	authorId := []int32{25}
+	authorName := "authorName_example"
+	sourceId := []int32{45}
+	sourceName := []string{"sourceName_example"}
+	sourceDomain := []string{"sourceDomain_example"}
+	sourceLocationsCountry := []string{"sourceLocationsCountry_example"}
+	sourceLocationsState := []string{"sourceLocationsState_example"}
+	sourceLocationsCity := []string{"sourceLocationsCity_example"}
+	sourceScopesCountry := []string{"sourceScopesCountry_example"}
+	sourceScopesState := []string{"sourceScopesState_example"}
+	sourceScopesCity := []string{"sourceScopesCity_example"}
+	sourceScopesLevel := []string{"sourceScopesLevel_example"}
+	field := "keywords"
 
 	trendsParams := &newsapi.TrendsParams{
 		Id:                        id,
@@ -1015,6 +1093,10 @@ func main() {
 		EntitiesBodyLinksDbpedia:  entitiesBodyLinksDbpedia,
 		SentimentTitlePolarity:    sentimentTitlePolarity,
 		SentimentBodyPolarity:     sentimentBodyPolarity,
+		MediaImagesCountMin:       mediaImagesCountMin,
+		MediaImagesCountMax:       mediaImagesCountMax,
+		MediaVideosCountMin:       mediaVideosCountMin,
+		MediaVideosCountMin:       mediaVideosCountMin,
 		AuthorId:                  authorId,
 		AuthorName:                authorName,
 		SourceId:                  sourceId,
@@ -1048,32 +1130,36 @@ Name | Type | Description  | Notes
  **Body** | **string**| This parameter is used for finding stories whose body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). | [optional] 
  **Text** | **string**| This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). | [optional] 
  **Language** | [**[]string**](string.md)| This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. | [optional] 
- **PublishedAtStart** | **string**| This parameter is used for finding stories whose published at is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] 
- **PublishedAtEnd** | **string**| This parameter is used for finding stories whose published at is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] 
- **CategoriesTaxonomy** | **string**| This parameter is used for defining type of the taxonomy for the rest of categories queries. | [optional] 
+ **PublishedAtStart** | **string**| This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] 
+ **PublishedAtEnd** | **string**| This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] 
+ **CategoriesTaxonomy** | **string**| This parameter is used for defining the type of the taxonomy for the rest of the categories queries. | [optional] 
  **CategoriesConfident** | **bool**| This parameter is used for finding stories whose categories are confident. | [optional] [default to true]
- **CategoriesId** | [**[]string**](string.md)| This parameter is used for finding stories whose categories id is the specified value. | [optional] 
- **CategoriesLevel** | [**[]int32**](int32.md)| This parameter is used for finding stories whose categories level is the specified value. | [optional] 
- **EntitiesTitleText** | [**[]string**](string.md)| This parameter is used for finding stories whose entities text in title is the specified value. | [optional] 
- **EntitiesTitleType** | [**[]string**](string.md)| This parameter is used for finding stories whose entities type in title is the specified value. | [optional] 
- **EntitiesTitleLinksDbpedia** | [**[]string**](string.md)| This parameter is used for finding stories whose entities dbpedia url in title is the specified value. | [optional] 
- **EntitiesBodyText** | [**[]string**](string.md)| This parameter is used for finding stories whose entities text in body is the specified value. | [optional] 
- **EntitiesBodyType** | [**[]string**](string.md)| This parameter is used for finding stories whose entities type in body is the specified value. | [optional] 
- **EntitiesBodyLinksDbpedia** | [**[]string**](string.md)| This parameter is used for finding stories whose entities dbpedia url in body is the specified value. | [optional] 
+ **CategoriesId** | [**[]string**](string.md)| This parameter is used for finding stories by categories id. | [optional] 
+ **CategoriesLevel** | [**[]int32**](int32.md)| This parameter is used for finding stories by categories level. | [optional] 
+ **EntitiesTitleText** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles. | [optional] 
+ **EntitiesTitleType** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles. | [optional] 
+ **EntitiesTitleLinksDbpedia** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities dbpedia URL in story titles. | [optional] 
+ **EntitiesBodyText** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories. | [optional] 
+ **EntitiesBodyType** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories. | [optional] 
+ **EntitiesBodyLinksDbpedia** | [**[]string**](string.md)| This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. | [optional] 
  **SentimentTitlePolarity** | **string**| This parameter is used for finding stories whose title sentiment is the specified value. | [optional] 
  **SentimentBodyPolarity** | **string**| This parameter is used for finding stories whose body sentiment is the specified value. | [optional] 
+ **MediaImagesCountMin** | **int32**| This parameter is used for finding stories whose number of images is greater than or equal to the specified value. | [optional] 
+ **MediaImagesCountMax** | **int32**| This parameter is used for finding stories whose number of images is less than or equal to the specified value. | [optional] 
+ **MediaVideosCountMin** | **int32**| This parameter is used for finding stories whose number of videos is greater than or equal to the specified value. | [optional] 
+ **MediaVideosCountMax** | **int32**| This parameter is used for finding stories whose number of videos is less than or equal to the specified value. | [optional] 
  **AuthorId** | [**[]int32**](int32.md)| This parameter is used for finding stories whose author id is the specified value. | [optional] 
  **AuthorName** | **string**| This parameter is used for finding stories whose author full name contains the specified value. | [optional] 
  **SourceId** | [**[]int32**](int32.md)| This parameter is used for finding stories whose source id is the specified value. | [optional] 
  **SourceName** | [**[]string**](string.md)| This parameter is used for finding stories whose source name contains the specified value. | [optional] 
  **SourceDomain** | [**[]string**](string.md)| This parameter is used for finding stories whose source domain is the specified value. | [optional] 
- **SourceLocationsCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. | [optional] 
- **SourceLocationsState** | [**[]string**](string.md)| This parameter is used for finding stories whose source state/province is the specified value. | [optional] 
- **SourceLocationsCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source city is the specified value. | [optional] 
- **SourceScopesCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. | [optional] 
- **SourceScopesState** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes state/province is the specified value. | [optional] 
- **SourceScopesCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes city is the specified value. | [optional] 
- **SourceScopesLevel** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes level is the specified value. | [optional] 
+ **SourceLocationsCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceLocationsState** | [**[]string**](string.md)| This parameter is used for finding stories whose source state/province is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceLocationsCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source city is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesCountry** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesState** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceScopesLevel** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
  **Field** | **string**| This parameter is used to specify the trend field. | [optional] 
 
 ### Return type

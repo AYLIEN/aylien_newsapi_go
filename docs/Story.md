@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **int64** | ID of the story which is unique identification | [optional] [default to null]
+**Id** | **int64** | ID of the story which is a unique identification | [optional] [default to null]
 **Title** | **string** | Title of the story | [optional] [default to null]
 **Body** | **string** | Body of the story | [optional] [default to null]
 **Summary** | [**Summary**](Summary.md) | The suggested story summary | [optional] [default to null]
@@ -12,10 +12,10 @@ Name | Type | Description | Notes
 **Entities** | [**Entities**](Entities.md) | Extracted entities from the story title or body | [optional] [default to null]
 **Keywords** | **[]string** | Extracted keywords mentioned in the story title or body | [optional] [default to null]
 **Hashtags** | **[]string** | An array of suggested Story hashtags | [optional] [default to null]
-**CharactersCount** | **int32** | Characters count of the story body | [optional] [default to null]
-**WordsCount** | **int32** | Words count of the story body | [optional] [default to null]
-**SentencesCount** | **int32** | Sentences count of the story body | [optional] [default to null]
-**ParagraphsCount** | **int32** | Paragraphs count of the story body | [optional] [default to null]
+**CharactersCount** | **int32** | Character count of the story body | [optional] [default to null]
+**WordsCount** | **int32** | Word count of the story body | [optional] [default to null]
+**SentencesCount** | **int32** | Sentence count of the story body | [optional] [default to null]
+**ParagraphsCount** | **int32** | Paragraph count of the story body | [optional] [default to null]
 **Categories** | [**[]Category**](Category.md) | Suggested categories for the story | [optional] [default to null]
 **SocialSharesCount** | [**ShareCounts**](ShareCounts.md) | Social shares count for the story | [optional] [default to null]
 **Media** | [**[]Media**](Media.md) | An array of extracted media such as images and videos | [optional] [default to null]

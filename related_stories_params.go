@@ -36,6 +36,10 @@ type RelatedStoriesParams struct {
 	EntitiesBodyLinksDbpedia  []string
 	SentimentTitlePolarity    string
 	SentimentBodyPolarity     string
+	MediaImagesCountMin       string
+	MediaImagesCountMax       string
+	MediaVideosCountMin       string
+	MediaVideosCountMax       string
 	AuthorId                  []int32
 	AuthorName                string
 	SourceId                  []int32
@@ -48,6 +52,8 @@ type RelatedStoriesParams struct {
 	SourceScopesState         []string
 	SourceScopesCity          []string
 	SourceScopesLevel         []string
+	Cluster                   string
+	ClusterAlgorithm          string
 	Return                    []string
 	StoryId                   int64
 	StoryUrl                  string
