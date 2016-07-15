@@ -2,7 +2,7 @@
 
 AYLIEN News API is the most powerful way of sourcing, searching and syndicating analyzed and enriched news content. If you haven't already done so, you will need to [sign up](https://newsapi.aylien.com/signup).
 
-Visit our [interactive documentation](https://newsapi.aylien.com/docs/#swagger-ui-container) to familiarize yourself with the API.
+Visit our [interactive documentation](https://newsapi.aylien.com/docs/interactive_doc) to familiarize yourself with the API.
 
 
 ## Installation
@@ -29,10 +29,10 @@ func main() {
 	api := newsapi.NewDefaultApi()
 
 	// Configure API key authorization: app_id
-	api.Configuration.APIKeyPrefix["X-AYLIEN-NewsAPI-Application-ID"] = "YOUR APP ID"
+	api.Configuration.APIKeyPrefix["X-AYLIEN-NewsAPI-Application-ID"] = "YOUR_APP_ID"
 
 	// Configure API key authorization: app_key
-	api.Configuration.APIKeyPrefix["X-AYLIEN-NewsAPI-Application-Key"] = "YOUR APP KEY"
+	api.Configuration.APIKeyPrefix["X-AYLIEN-NewsAPI-Application-Key"] = "YOUR_APP_KEY"
 
 	title := "trump"
 	until := "NOW"
