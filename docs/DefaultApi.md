@@ -148,6 +148,11 @@ func main() {
 	sourceScopesState := []string{"sourceScopesState_example"}
 	sourceScopesCity := []string{"sourceScopesCity_example"}
 	sourceScopesLevel := []string{"sourceScopesLevel_example"}
+	sourceLinksInCountMin := 56
+	sourceLinksInCountMax := 56
+	sourceRankingsAlexaRankMin := 56
+	sourceRankingsAlexaRankMax := 56
+	sourceRankingsAlexaCountry := []string{"sourceRankingsAlexaCountry_example"}
 	cluster := true
 	clusterAlgorithm := "lingo"
 	_return := []string{"_return_example"}
@@ -160,51 +165,56 @@ func main() {
 	perPage := 3
 
 	coveragesParams := &newsapi.CoveragesParams{
-		Id:                        id,
-		Title:                     title,
-		Body:                      body,
-		Text:                      text,
-		Language:                  language,
-		PublishedAtStart:          publishedAtStart,
-		PublishedAtEnd:            publishedAtEnd,
-		CategoriesTaxonomy:        categoriesTaxonomy,
-		CategoriesConfident:       categoriesConfident,
-		CategoriesId:              categoriesId,
-		CategoriesLevel:           categoriesLevel,
-		EntitiesTitleText:         entitiesTitleText,
-		EntitiesTitleType:         entitiesTitleType,
-		EntitiesTitleLinksDbpedia: entitiesTitleLinksDbpedia,
-		EntitiesBodyText:          entitiesBodyText,
-		EntitiesBodyType:          entitiesBodyType,
-		EntitiesBodyLinksDbpedia:  entitiesBodyLinksDbpedia,
-		SentimentTitlePolarity:    sentimentTitlePolarity,
-		SentimentBodyPolarity:     sentimentBodyPolarity,
-		MediaImagesCountMin:       mediaImagesCountMin,
-		MediaImagesCountMax:       mediaImagesCountMax,
-		MediaVideosCountMin:       mediaVideosCountMin,
-		MediaVideosCountMin:       mediaVideosCountMin,
-		AuthorId:                  authorId,
-		AuthorName:                authorName,
-		SourceId:                  sourceId,
-		SourceName:                sourceName,
-		SourceDomain:              sourceDomain,
-		SourceLocationsCountry:    sourceLocationsCountry,
-		SourceLocationsState:      sourceLocationsState,
-		SourceLocationsCity:       sourceLocationsCity,
-		SourceScopesCountry:       sourceScopesCountry,
-		SourceScopesState:         sourceScopesState,
-		SourceScopesCity:          sourceScopesCity,
-		SourceScopesLevel:         sourceScopesLevel,
-		Cluster:                   cluster,
-		ClusterAlgorithm:          clusterAlgorithm,
-		Return:                    _return,
-		StoryId:                   storyId,
-		StoryUrl:                  storyUrl,
-		StoryTitle:                storyTitle,
-		StoryBody:                 storyBody,
-		StoryPublishedAt:          storyPublishedAt,
-		StoryLanguage:             storyLanguage,
-		PerPage:                   perPage}
+		Id:                         id,
+		Title:                      title,
+		Body:                       body,
+		Text:                       text,
+		Language:                   language,
+		PublishedAtStart:           publishedAtStart,
+		PublishedAtEnd:             publishedAtEnd,
+		CategoriesTaxonomy:         categoriesTaxonomy,
+		CategoriesConfident:        categoriesConfident,
+		CategoriesId:               categoriesId,
+		CategoriesLevel:            categoriesLevel,
+		EntitiesTitleText:          entitiesTitleText,
+		EntitiesTitleType:          entitiesTitleType,
+		EntitiesTitleLinksDbpedia:  entitiesTitleLinksDbpedia,
+		EntitiesBodyText:           entitiesBodyText,
+		EntitiesBodyType:           entitiesBodyType,
+		EntitiesBodyLinksDbpedia:   entitiesBodyLinksDbpedia,
+		SentimentTitlePolarity:     sentimentTitlePolarity,
+		SentimentBodyPolarity:      sentimentBodyPolarity,
+		MediaImagesCountMin:        mediaImagesCountMin,
+		MediaImagesCountMax:        mediaImagesCountMax,
+		MediaVideosCountMin:        mediaVideosCountMin,
+		MediaVideosCountMin:        mediaVideosCountMin,
+		AuthorId:                   authorId,
+		AuthorName:                 authorName,
+		SourceId:                   sourceId,
+		SourceName:                 sourceName,
+		SourceDomain:               sourceDomain,
+		SourceLocationsCountry:     sourceLocationsCountry,
+		SourceLocationsState:       sourceLocationsState,
+		SourceLocationsCity:        sourceLocationsCity,
+		SourceScopesCountry:        sourceScopesCountry,
+		SourceScopesState:          sourceScopesState,
+		SourceScopesCity:           sourceScopesCity,
+		SourceScopesLevel:          sourceScopesLevel,
+		SourceLinksInCountMin:      sourceLinksInCountMin,
+		SourceLinksInCountMax:      sourceLinksInCountMax,
+		SourceRankingsAlexaRankMin: sourceRankingsAlexaRankMin,
+		SourceRankingsAlexaRankMax: sourceRankingsAlexaRankMax,
+		SourceRankingsAlexaCountry: sourceRankingsAlexaCountry,
+		Cluster:                    cluster,
+		ClusterAlgorithm:           clusterAlgorithm,
+		Return:                     _return,
+		StoryId:                    storyId,
+		StoryUrl:                   storyUrl,
+		StoryTitle:                 storyTitle,
+		StoryBody:                  storyBody,
+		StoryPublishedAt:           storyPublishedAt,
+		StoryLanguage:              storyLanguage,
+		PerPage:                    perPage}
 
 	coveragesResponse, res, err := api.ListCoverages(coveragesParams)
 	if err != nil {
@@ -255,6 +265,11 @@ Name | Type | Description  | Notes
  **SourceScopesState** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
  **SourceScopesCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
  **SourceScopesLevel** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes  is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceLinksInCountMin** | **int32**| This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count). | [optional] 
+ **SourceLinksInCountMax** | **int32**| This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count). | [optional] 
+ **SourceRankingsAlexaRankMin** | **int32**| This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks). | [optional] 
+ **SourceRankingsAlexaRankMax** | **int32**| This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks). | [optional] 
+ **SourceRankingsAlexaCountry** | [**[]string**](string.md)| This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks). | [optional] 
  **Cluster** | **bool**| This parameter enables clustering for the returned stories. | [optional] [default to false]
  **ClusterAlgorithm** | **string**| This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms. | [optional] [default to lingo]
  **Return** | [**[]string**](string.md)| This parameter is used for specifying return fields. | [optional] 
@@ -287,7 +302,6 @@ Name | Type | Description  | Notes
 List histograms
 
 This endpoint is used for getting histograms based on the `field` parameter passed to the API.
-
 
 ### Example
 
@@ -344,51 +358,61 @@ func main() {
 	sourceScopesState := []string{"sourceScopesState_example"}
 	sourceScopesCity := []string{"sourceScopesCity_example"}
 	sourceScopesLevel := []string{"sourceScopesLevel_example"}
+	sourceLinksInCountMin := 56
+  sourceLinksInCountMax := 56
+  sourceRankingsAlexaRankMin := 56
+  sourceRankingsAlexaRankMax := 56
+  sourceRankingsAlexaCountry := []string{"sourceRankingsAlexaCountry_example"}
 	intervalStart := 56
 	intervalEnd := 56
 	intervalWidth := 56
 	field := "social_shares_count"
 
 	histogramsParams := &newsapi.HistogramsParams{
-		Id:                        id,
-		Title:                     title,
-		Body:                      body,
-		Text:                      text,
-		Language:                  language,
-		PublishedAtStart:          publishedAtStart,
-		PublishedAtEnd:            publishedAtEnd,
-		CategoriesTaxonomy:        categoriesTaxonomy,
-		CategoriesConfident:       categoriesConfident,
-		CategoriesId:              categoriesId,
-		CategoriesLevel:           categoriesLevel,
-		EntitiesTitleText:         entitiesTitleText,
-		EntitiesTitleType:         entitiesTitleType,
-		EntitiesTitleLinksDbpedia: entitiesTitleLinksDbpedia,
-		EntitiesBodyText:          entitiesBodyText,
-		EntitiesBodyType:          entitiesBodyType,
-		EntitiesBodyLinksDbpedia:  entitiesBodyLinksDbpedia,
-		SentimentTitlePolarity:    sentimentTitlePolarity,
-		SentimentBodyPolarity:     sentimentBodyPolarity,
-		MediaImagesCountMin:       mediaImagesCountMin,
-		MediaImagesCountMax:       mediaImagesCountMax,
-		MediaVideosCountMin:       mediaVideosCountMin,
-		MediaVideosCountMin:       mediaVideosCountMin,
-		AuthorId:                  authorId,
-		AuthorName:                authorName,
-		SourceId:                  sourceId,
-		SourceName:                sourceName,
-		SourceDomain:              sourceDomain,
-		SourceLocationsCountry:    sourceLocationsCountry,
-		SourceLocationsState:      sourceLocationsState,
-		SourceLocationsCity:       sourceLocationsCity,
-		SourceScopesCountry:       sourceScopesCountry,
-		SourceScopesState:         sourceScopesState,
-		SourceScopesCity:          sourceScopesCity,
-		SourceScopesLevel:         sourceScopesLevel,
-		IntervalStart:             intervalStart,
-		IntervalEnd:               intervalEnd,
-		IntervalWidth:             intervalWidth,
-		Field:                     field}
+		Id:                         id,
+		Title:                      title,
+		Body:                       body,
+		Text:                       text,
+		Language:                   language,
+		PublishedAtStart:           publishedAtStart,
+		PublishedAtEnd:             publishedAtEnd,
+		CategoriesTaxonomy:         categoriesTaxonomy,
+		CategoriesConfident:        categoriesConfident,
+		CategoriesId:               categoriesId,
+		CategoriesLevel:            categoriesLevel,
+		EntitiesTitleText:          entitiesTitleText,
+		EntitiesTitleType:          entitiesTitleType,
+		EntitiesTitleLinksDbpedia:  entitiesTitleLinksDbpedia,
+		EntitiesBodyText:           entitiesBodyText,
+		EntitiesBodyType:           entitiesBodyType,
+		EntitiesBodyLinksDbpedia:   entitiesBodyLinksDbpedia,
+		SentimentTitlePolarity:     sentimentTitlePolarity,
+		SentimentBodyPolarity:      sentimentBodyPolarity,
+		MediaImagesCountMin:        mediaImagesCountMin,
+		MediaImagesCountMax:        mediaImagesCountMax,
+		MediaVideosCountMin:        mediaVideosCountMin,
+		MediaVideosCountMin:        mediaVideosCountMin,
+		AuthorId:                   authorId,
+		AuthorName:                 authorName,
+		SourceId:                   sourceId,
+		SourceName:                 sourceName,
+		SourceDomain:               sourceDomain,
+		SourceLocationsCountry:     sourceLocationsCountry,
+		SourceLocationsState:       sourceLocationsState,
+		SourceLocationsCity:        sourceLocationsCity,
+		SourceScopesCountry:        sourceScopesCountry,
+		SourceScopesState:          sourceScopesState,
+		SourceScopesCity:           sourceScopesCity,
+		SourceScopesLevel:          sourceScopesLevel,
+		SourceLinksInCountMin:      sourceLinksInCountMin,
+		SourceLinksInCountMax:      sourceLinksInCountMax,
+		SourceRankingsAlexaRankMin: sourceRankingsAlexaRankMin,
+		SourceRankingsAlexaRankMax: sourceRankingsAlexaRankMax,
+		SourceRankingsAlexaCountry: sourceRankingsAlexaCountry,
+		IntervalStart:              intervalStart,
+		IntervalEnd:                intervalEnd,
+		IntervalWidth:              intervalWidth,
+		Field:                      field}
 
 	histogramsResponse, res, err := api.ListHistograms(histogramsParams)
 	if err != nil {
@@ -439,6 +463,11 @@ Name | Type | Description  | Notes
  **SourceScopesState** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
  **SourceScopesCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
  **SourceScopesLevel** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceLinksInCountMin** | **int32**| This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count). | [optional] 
+ **SourceLinksInCountMax** | **int32**| This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count). | [optional] 
+ **SourceRankingsAlexaRankMin** | **int32**| This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks). | [optional] 
+ **SourceRankingsAlexaRankMax** | **int32**| This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks). | [optional] 
+ **SourceRankingsAlexaCountry** | [**[]string**](string.md)| This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks). | [optional] 
  **IntervalStart** | **int32**| This parameter is used for setting the start data point of histogram intervals. | [optional] 
  **IntervalEnd** | **int32**| This parameter is used for setting the end data point of histogram intervals. | [optional] 
  **IntervalWidth** | **int32**| This parameter is used for setting the width of histogram intervals. | [optional] 
@@ -465,7 +494,6 @@ Name | Type | Description  | Notes
 List related stories
 
 This endpoint is used for finding related stories based on the parameters provided. The maximum number of related stories returned is 100.
-
 
 ### Example
 
@@ -522,6 +550,11 @@ func main() {
 	sourceScopesState := []string{"sourceScopesState_example"}
 	sourceScopesCity := []string{"sourceScopesCity_example"}
 	sourceScopesLevel := []string{"sourceScopesLevel_example"}
+	sourceLinksInCountMin := 56
+  sourceLinksInCountMax := 56
+  sourceRankingsAlexaRankMin := 56
+  sourceRankingsAlexaRankMax := 56
+  sourceRankingsAlexaCountry := []string{"sourceRankingsAlexaCountry_example"}
 	cluster := true
 	clusterAlgorithm := "lingo"
 	_return := []string{"_return_example"}
@@ -534,51 +567,56 @@ func main() {
 	perPage := 3
 
 	relatedStoriesParams := &newsapi.RelatedStoriesParams{
-		Id:                        id,
-		Title:                     title,
-		Body:                      body,
-		Text:                      text,
-		Language:                  language,
-		PublishedAtStart:          publishedAtStart,
-		PublishedAtEnd:            publishedAtEnd,
-		CategoriesTaxonomy:        categoriesTaxonomy,
-		CategoriesConfident:       categoriesConfident,
-		CategoriesId:              categoriesId,
-		CategoriesLevel:           categoriesLevel,
-		EntitiesTitleText:         entitiesTitleText,
-		EntitiesTitleType:         entitiesTitleType,
-		EntitiesTitleLinksDbpedia: entitiesTitleLinksDbpedia,
-		EntitiesBodyText:          entitiesBodyText,
-		EntitiesBodyType:          entitiesBodyType,
-		EntitiesBodyLinksDbpedia:  entitiesBodyLinksDbpedia,
-		SentimentTitlePolarity:    sentimentTitlePolarity,
-		SentimentBodyPolarity:     sentimentBodyPolarity,
-		MediaImagesCountMin:       mediaImagesCountMin,
-		MediaImagesCountMax:       mediaImagesCountMax,
-		MediaVideosCountMin:       mediaVideosCountMin,
-		MediaVideosCountMin:       mediaVideosCountMin,
-		AuthorId:                  authorId,
-		AuthorName:                authorName,
-		SourceId:                  sourceId,
-		SourceName:                sourceName,
-		SourceDomain:              sourceDomain,
-		SourceLocationsCountry:    sourceLocationsCountry,
-		SourceLocationsState:      sourceLocationsState,
-		SourceLocationsCity:       sourceLocationsCity,
-		SourceScopesCountry:       sourceScopesCountry,
-		SourceScopesState:         sourceScopesState,
-		SourceScopesCity:          sourceScopesCity,
-		SourceScopesLevel:         sourceScopesLevel,
-		Cluster:                   cluster,
-		ClusterAlgorithm:          clusterAlgorithm,
-		Return:                    _return,
-		StoryId:                   storyId,
-		StoryUrl:                  storyUrl,
-		StoryTitle:                storyTitle,
-		StoryBody:                 storyBody,
-		BoostBy:                   boostBy,
-		StoryLanguage:             storyLanguage,
-		PerPage:                   perPage}
+		Id:                         id,
+		Title:                      title,
+		Body:                       body,
+		Text:                       text,
+		Language:                   language,
+		PublishedAtStart:           publishedAtStart,
+		PublishedAtEnd:             publishedAtEnd,
+		CategoriesTaxonomy:         categoriesTaxonomy,
+		CategoriesConfident:        categoriesConfident,
+		CategoriesId:               categoriesId,
+		CategoriesLevel:            categoriesLevel,
+		EntitiesTitleText:          entitiesTitleText,
+		EntitiesTitleType:          entitiesTitleType,
+		EntitiesTitleLinksDbpedia:  entitiesTitleLinksDbpedia,
+		EntitiesBodyText:           entitiesBodyText,
+		EntitiesBodyType:           entitiesBodyType,
+		EntitiesBodyLinksDbpedia:   entitiesBodyLinksDbpedia,
+		SentimentTitlePolarity:     sentimentTitlePolarity,
+		SentimentBodyPolarity:      sentimentBodyPolarity,
+		MediaImagesCountMin:        mediaImagesCountMin,
+		MediaImagesCountMax:        mediaImagesCountMax,
+		MediaVideosCountMin:        mediaVideosCountMin,
+		MediaVideosCountMin:        mediaVideosCountMin,
+		AuthorId:                   authorId,
+		AuthorName:                 authorName,
+		SourceId:                   sourceId,
+		SourceName:                 sourceName,
+		SourceDomain:               sourceDomain,
+		SourceLocationsCountry:     sourceLocationsCountry,
+		SourceLocationsState:       sourceLocationsState,
+		SourceLocationsCity:        sourceLocationsCity,
+		SourceScopesCountry:        sourceScopesCountry,
+		SourceScopesState:          sourceScopesState,
+		SourceScopesCity:           sourceScopesCity,
+		SourceScopesLevel:          sourceScopesLevel,
+		SourceLinksInCountMin:      sourceLinksInCountMin,
+		SourceLinksInCountMax:      sourceLinksInCountMax,
+		SourceRankingsAlexaRankMin: sourceRankingsAlexaRankMin,
+		SourceRankingsAlexaRankMax: sourceRankingsAlexaRankMax,
+		SourceRankingsAlexaCountry: sourceRankingsAlexaCountry,
+		Cluster:                    cluster,
+		ClusterAlgorithm:           clusterAlgorithm,
+		Return:                     _return,
+		StoryId:                    storyId,
+		StoryUrl:                   storyUrl,
+		StoryTitle:                 storyTitle,
+		StoryBody:                  storyBody,
+		BoostBy:                    boostBy,
+		StoryLanguage:              storyLanguage,
+		PerPage:                    perPage}
 
 	relatedStoriesResponse, res, err := api.ListRelatedStories(relatedStoriesParams)
 	if err != nil {
@@ -629,6 +667,11 @@ Name | Type | Description  | Notes
  **SourceScopesState** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
  **SourceScopesCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
  **SourceScopesLevel** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes  is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceLinksInCountMin** | **int32**| This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count). | [optional] 
+ **SourceLinksInCountMax** | **int32**| This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count). | [optional] 
+ **SourceRankingsAlexaRankMin** | **int32**| This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks). | [optional] 
+ **SourceRankingsAlexaRankMax** | **int32**| This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks). | [optional] 
+ **SourceRankingsAlexaCountry** | [**[]string**](string.md)| This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks). | [optional] 
  **Cluster** | **bool**| This parameter enables clustering for the returned stories. | [optional] [default to false]
  **ClusterAlgorithm** | **string**| This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms. | [optional] [default to lingo]
  **Return** | [**[]string**](string.md)| This parameter is used for specifying return fields. | [optional] 
@@ -717,6 +760,11 @@ func main() {
 	sourceScopesState := []string{"sourceScopesState_example"}
 	sourceScopesCity := []string{"sourceScopesCity_example"}
 	sourceScopesLevel := []string{"sourceScopesLevel_example"}
+	sourceLinksInCountMin := 56
+  sourceLinksInCountMax := 56
+  sourceRankingsAlexaRankMin := 56
+  sourceRankingsAlexaRankMax := 56
+  sourceRankingsAlexaCountry := []string{"sourceRankingsAlexaCountry_example"}
 	cluster := true
 	clusterAlgorithm := "lingo"
 	_return := []string{"_return_example"}
@@ -726,48 +774,53 @@ func main() {
 	perPage := 10
 
 	storiesParams := &newsapi.StoriesParams{
-		Id:                        id,
-		Title:                     title,
-		Body:                      body,
-		Text:                      text,
-		Language:                  language,
-		PublishedAtStart:          publishedAtStart,
-		PublishedAtEnd:            publishedAtEnd,
-		CategoriesTaxonomy:        categoriesTaxonomy,
-		CategoriesConfident:       categoriesConfident,
-		CategoriesId:              categoriesId,
-		CategoriesLevel:           categoriesLevel,
-		EntitiesTitleText:         entitiesTitleText,
-		EntitiesTitleType:         entitiesTitleType,
-		EntitiesTitleLinksDbpedia: entitiesTitleLinksDbpedia,
-		EntitiesBodyText:          entitiesBodyText,
-		EntitiesBodyType:          entitiesBodyType,
-		EntitiesBodyLinksDbpedia:  entitiesBodyLinksDbpedia,
-		SentimentTitlePolarity:    sentimentTitlePolarity,
-		SentimentBodyPolarity:     sentimentBodyPolarity,
-		MediaImagesCountMin:       mediaImagesCountMin,
-		MediaImagesCountMax:       mediaImagesCountMax,
-		MediaVideosCountMin:       mediaVideosCountMin,
-		MediaVideosCountMin:       mediaVideosCountMin,
-		AuthorId:                  authorId,
-		AuthorName:                authorName,
-		SourceId:                  sourceId,
-		SourceName:                sourceName,
-		SourceDomain:              sourceDomain,
-		SourceLocationsCountry:    sourceLocationsCountry,
-		SourceLocationsState:      sourceLocationsState,
-		SourceLocationsCity:       sourceLocationsCity,
-		SourceScopesCountry:       sourceScopesCountry,
-		SourceScopesState:         sourceScopesState,
-		SourceScopesCity:          sourceScopesCity,
-		SourceScopesLevel:         sourceScopesLevel,
-		Cluster:                   cluster,
-		ClusterAlgorithm:          clusterAlgorithm,
-		Return:                    _return,
-		SortBy:                    sortBy,
-		SortDirection:             sortDirection,
-		Cursor:                    cursor,
-		PerPage:                   perPage}
+		Id:                         id,
+		Title:                      title,
+		Body:                       body,
+		Text:                       text,
+		Language:                   language,
+		PublishedAtStart:           publishedAtStart,
+		PublishedAtEnd:             publishedAtEnd,
+		CategoriesTaxonomy:         categoriesTaxonomy,
+		CategoriesConfident:        categoriesConfident,
+		CategoriesId:               categoriesId,
+		CategoriesLevel:            categoriesLevel,
+		EntitiesTitleText:          entitiesTitleText,
+		EntitiesTitleType:          entitiesTitleType,
+		EntitiesTitleLinksDbpedia:  entitiesTitleLinksDbpedia,
+		EntitiesBodyText:           entitiesBodyText,
+		EntitiesBodyType:           entitiesBodyType,
+		EntitiesBodyLinksDbpedia:   entitiesBodyLinksDbpedia,
+		SentimentTitlePolarity:     sentimentTitlePolarity,
+		SentimentBodyPolarity:      sentimentBodyPolarity,
+		MediaImagesCountMin:        mediaImagesCountMin,
+		MediaImagesCountMax:        mediaImagesCountMax,
+		MediaVideosCountMin:        mediaVideosCountMin,
+		MediaVideosCountMin:        mediaVideosCountMin,
+		AuthorId:                   authorId,
+		AuthorName:                 authorName,
+		SourceId:                   sourceId,
+		SourceName:                 sourceName,
+		SourceDomain:               sourceDomain,
+		SourceLocationsCountry:     sourceLocationsCountry,
+		SourceLocationsState:       sourceLocationsState,
+		SourceLocationsCity:        sourceLocationsCity,
+		SourceScopesCountry:        sourceScopesCountry,
+		SourceScopesState:          sourceScopesState,
+		SourceScopesCity:           sourceScopesCity,
+		SourceScopesLevel:          sourceScopesLevel,
+		SourceLinksInCountMin:      sourceLinksInCountMin,
+		SourceLinksInCountMax:      sourceLinksInCountMax,
+		SourceRankingsAlexaRankMin: sourceRankingsAlexaRankMin,
+		SourceRankingsAlexaRankMax: sourceRankingsAlexaRankMax,
+		SourceRankingsAlexaCountry: sourceRankingsAlexaCountry,
+		Cluster:                    cluster,
+		ClusterAlgorithm:           clusterAlgorithm,
+		Return:                     _return,
+		SortBy:                     sortBy,
+		SortDirection:              sortDirection,
+		Cursor:                     cursor,
+		PerPage:                    perPage}
 
 	storiesResponse, res, err := api.ListStories(storiesParams)
 	if err != nil {
@@ -818,6 +871,11 @@ Name | Type | Description  | Notes
  **SourceScopesState** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
  **SourceScopesCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
  **SourceScopesLevel** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceLinksInCountMin** | **int32**| This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count). | [optional] 
+ **SourceLinksInCountMax** | **int32**| This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count). | [optional] 
+ **SourceRankingsAlexaRankMin** | **int32**| This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks). | [optional] 
+ **SourceRankingsAlexaRankMax** | **int32**| This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks). | [optional] 
+ **SourceRankingsAlexaCountry** | [**[]string**](string.md)| This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks). | [optional] 
  **Cluster** | **bool**| This parameter enables clustering for the returned stories. | [optional] [default to false]
  **ClusterAlgorithm** | **string**| This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms. | [optional] [default to lingo]
  **Return** | [**[]string**](string.md)| This parameter is used for specifying return fields. | [optional] 
@@ -901,47 +959,57 @@ func main() {
 	sourceScopesState := []string{"sourceScopesState_example"}
 	sourceScopesCity := []string{"sourceScopesCity_example"}
 	sourceScopesLevel := []string{"sourceScopesLevel_example"}
+	sourceLinksInCountMin := 56
+  sourceLinksInCountMax := 56
+  sourceRankingsAlexaRankMin := 56
+  sourceRankingsAlexaRankMax := 56
+  sourceRankingsAlexaCountry := []string{"sourceRankingsAlexaCountry_example"}
 	publishedAtStart := "publishedAtStart_example"
 	publishedAtEnd := "publishedAtEnd_example"
 	period := "+1DAY"
 
 	timeSeriesParams := &newsapi.TimeSeriesParams{
-		Id:                        id,
-		Title:                     title,
-		Body:                      body,
-		Text:                      text,
-		Language:                  language,
-		CategoriesTaxonomy:        categoriesTaxonomy,
-		CategoriesConfident:       categoriesConfident,
-		CategoriesId:              categoriesId,
-		CategoriesLevel:           categoriesLevel,
-		EntitiesTitleText:         entitiesTitleText,
-		EntitiesTitleType:         entitiesTitleType,
-		EntitiesTitleLinksDbpedia: entitiesTitleLinksDbpedia,
-		EntitiesBodyText:          entitiesBodyText,
-		EntitiesBodyType:          entitiesBodyType,
-		EntitiesBodyLinksDbpedia:  entitiesBodyLinksDbpedia,
-		SentimentTitlePolarity:    sentimentTitlePolarity,
-		SentimentBodyPolarity:     sentimentBodyPolarity,
-		MediaImagesCountMin:       mediaImagesCountMin,
-		MediaImagesCountMax:       mediaImagesCountMax,
-		MediaVideosCountMin:       mediaVideosCountMin,
-		MediaVideosCountMin:       mediaVideosCountMin,
-		AuthorId:                  authorId,
-		AuthorName:                authorName,
-		SourceId:                  sourceId,
-		SourceName:                sourceName,
-		SourceDomain:              sourceDomain,
-		SourceLocationsCountry:    sourceLocationsCountry,
-		SourceLocationsState:      sourceLocationsState,
-		SourceLocationsCity:       sourceLocationsCity,
-		SourceScopesCountry:       sourceScopesCountry,
-		SourceScopesState:         sourceScopesState,
-		SourceScopesCity:          sourceScopesCity,
-		SourceScopesLevel:         sourceScopesLevel,
-		PublishedAtStart:          publishedAtStart,
-		PublishedAtEnd:            publishedAtEnd,
-		Period:                    period}
+		Id:                         id,
+		Title:                      title,
+		Body:                       body,
+		Text:                       text,
+		Language:                   language,
+		CategoriesTaxonomy:         categoriesTaxonomy,
+		CategoriesConfident:        categoriesConfident,
+		CategoriesId:               categoriesId,
+		CategoriesLevel:            categoriesLevel,
+		EntitiesTitleText:          entitiesTitleText,
+		EntitiesTitleType:          entitiesTitleType,
+		EntitiesTitleLinksDbpedia:  entitiesTitleLinksDbpedia,
+		EntitiesBodyText:           entitiesBodyText,
+		EntitiesBodyType:           entitiesBodyType,
+		EntitiesBodyLinksDbpedia:   entitiesBodyLinksDbpedia,
+		SentimentTitlePolarity:     sentimentTitlePolarity,
+		SentimentBodyPolarity:      sentimentBodyPolarity,
+		MediaImagesCountMin:        mediaImagesCountMin,
+		MediaImagesCountMax:        mediaImagesCountMax,
+		MediaVideosCountMin:        mediaVideosCountMin,
+		MediaVideosCountMin:        mediaVideosCountMin,
+		AuthorId:                   authorId,
+		AuthorName:                 authorName,
+		SourceId:                   sourceId,
+		SourceName:                 sourceName,
+		SourceDomain:               sourceDomain,
+		SourceLocationsCountry:     sourceLocationsCountry,
+		SourceLocationsState:       sourceLocationsState,
+		SourceLocationsCity:        sourceLocationsCity,
+		SourceScopesCountry:        sourceScopesCountry,
+		SourceScopesState:          sourceScopesState,
+		SourceScopesCity:           sourceScopesCity,
+		SourceScopesLevel:          sourceScopesLevel,
+		SourceLinksInCountMin:      sourceLinksInCountMin,
+		SourceLinksInCountMax:      sourceLinksInCountMax,
+		SourceRankingsAlexaRankMin: sourceRankingsAlexaRankMin,
+		SourceRankingsAlexaRankMax: sourceRankingsAlexaRankMax,
+		SourceRankingsAlexaCountry: sourceRankingsAlexaCountry,
+		PublishedAtStart:           publishedAtStart,
+		PublishedAtEnd:             publishedAtEnd,
+		Period:                     period}
 
 	timeSeriesResponse, res, err := api.ListTimeSeries(timeSeriesParams)
 	if err != nil {
@@ -990,6 +1058,11 @@ Name | Type | Description  | Notes
  **SourceScopesState** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
  **SourceScopesCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
  **SourceScopesLevel** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceLinksInCountMin** | **int32**| This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count). | [optional] 
+ **SourceLinksInCountMax** | **int32**| This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count). | [optional] 
+ **SourceRankingsAlexaRankMin** | **int32**| This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks). | [optional] 
+ **SourceRankingsAlexaRankMax** | **int32**| This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks). | [optional] 
+ **SourceRankingsAlexaCountry** | [**[]string**](string.md)| This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks). | [optional] 
  **PublishedAtStart** | **string**| This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] [default to NOW-7DAYS/DAY]
  **PublishedAtEnd** | **string**| This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). | [optional] [default to NOW/DAY]
  **Period** | **string**| The size of each date range is expressed as an interval to be added to the lower bound. It supports Date Math Syntax. Valid options are &#x60;+&#x60; following an integer number greater than 0 and one of the Date Math keywords. e.g. &#x60;+1DAY&#x60;, &#x60;+2MINUTES&#x60; and &#x60;+1MONTH&#x60;. Here are [Supported keywords](https://newsapi.aylien.com/docs/working-with-dates#date-math). | [optional] [default to +1DAY]
@@ -1071,45 +1144,55 @@ func main() {
 	sourceScopesState := []string{"sourceScopesState_example"}
 	sourceScopesCity := []string{"sourceScopesCity_example"}
 	sourceScopesLevel := []string{"sourceScopesLevel_example"}
+	sourceLinksInCountMin := 56
+  sourceLinksInCountMax := 56
+  sourceRankingsAlexaRankMin := 56
+  sourceRankingsAlexaRankMax := 56
+  sourceRankingsAlexaCountry := []string{"sourceRankingsAlexaCountry_example"}
 	field := "keywords"
 
 	trendsParams := &newsapi.TrendsParams{
-		Id:                        id,
-		Title:                     title,
-		Body:                      body,
-		Text:                      text,
-		Language:                  language,
-		PublishedAtStart:          publishedAtStart,
-		PublishedAtEnd:            publishedAtEnd,
-		CategoriesTaxonomy:        categoriesTaxonomy,
-		CategoriesConfident:       categoriesConfident,
-		CategoriesId:              categoriesId,
-		CategoriesLevel:           categoriesLevel,
-		EntitiesTitleText:         entitiesTitleText,
-		EntitiesTitleType:         entitiesTitleType,
-		EntitiesTitleLinksDbpedia: entitiesTitleLinksDbpedia,
-		EntitiesBodyText:          entitiesBodyText,
-		EntitiesBodyType:          entitiesBodyType,
-		EntitiesBodyLinksDbpedia:  entitiesBodyLinksDbpedia,
-		SentimentTitlePolarity:    sentimentTitlePolarity,
-		SentimentBodyPolarity:     sentimentBodyPolarity,
-		MediaImagesCountMin:       mediaImagesCountMin,
-		MediaImagesCountMax:       mediaImagesCountMax,
-		MediaVideosCountMin:       mediaVideosCountMin,
-		MediaVideosCountMin:       mediaVideosCountMin,
-		AuthorId:                  authorId,
-		AuthorName:                authorName,
-		SourceId:                  sourceId,
-		SourceName:                sourceName,
-		SourceDomain:              sourceDomain,
-		SourceLocationsCountry:    sourceLocationsCountry,
-		SourceLocationsState:      sourceLocationsState,
-		SourceLocationsCity:       sourceLocationsCity,
-		SourceScopesCountry:       sourceScopesCountry,
-		SourceScopesState:         sourceScopesState,
-		SourceScopesCity:          sourceScopesCity,
-		SourceScopesLevel:         sourceScopesLevel,
-		Field:                     field}
+		Id:                         id,
+		Title:                      title,
+		Body:                       body,
+		Text:                       text,
+		Language:                   language,
+		PublishedAtStart:           publishedAtStart,
+		PublishedAtEnd:             publishedAtEnd,
+		CategoriesTaxonomy:         categoriesTaxonomy,
+		CategoriesConfident:        categoriesConfident,
+		CategoriesId:               categoriesId,
+		CategoriesLevel:            categoriesLevel,
+		EntitiesTitleText:          entitiesTitleText,
+		EntitiesTitleType:          entitiesTitleType,
+		EntitiesTitleLinksDbpedia:  entitiesTitleLinksDbpedia,
+		EntitiesBodyText:           entitiesBodyText,
+		EntitiesBodyType:           entitiesBodyType,
+		EntitiesBodyLinksDbpedia:   entitiesBodyLinksDbpedia,
+		SentimentTitlePolarity:     sentimentTitlePolarity,
+		SentimentBodyPolarity:      sentimentBodyPolarity,
+		MediaImagesCountMin:        mediaImagesCountMin,
+		MediaImagesCountMax:        mediaImagesCountMax,
+		MediaVideosCountMin:        mediaVideosCountMin,
+		MediaVideosCountMin:        mediaVideosCountMin,
+		AuthorId:                   authorId,
+		AuthorName:                 authorName,
+		SourceId:                   sourceId,
+		SourceName:                 sourceName,
+		SourceDomain:               sourceDomain,
+		SourceLocationsCountry:     sourceLocationsCountry,
+		SourceLocationsState:       sourceLocationsState,
+		SourceLocationsCity:        sourceLocationsCity,
+		SourceScopesCountry:        sourceScopesCountry,
+		SourceScopesState:          sourceScopesState,
+		SourceScopesCity:           sourceScopesCity,
+		SourceScopesLevel:          sourceScopesLevel,
+		SourceLinksInCountMin:      sourceLinksInCountMin,
+		SourceLinksInCountMax:      sourceLinksInCountMax,
+		SourceRankingsAlexaRankMin: sourceRankingsAlexaRankMin,
+		SourceRankingsAlexaRankMax: sourceRankingsAlexaRankMax,
+		SourceRankingsAlexaCountry: sourceRankingsAlexaCountry,
+		Field:                      field}
 
 	trendsResponse, res, err := api.ListTrends(trendsParams)
 	if err != nil {
@@ -1160,6 +1243,11 @@ Name | Type | Description  | Notes
  **SourceScopesState** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
  **SourceScopesCity** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
  **SourceScopesLevel** | [**[]string**](string.md)| This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). | [optional] 
+ **SourceLinksInCountMin** | **int32**| This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count). | [optional] 
+ **SourceLinksInCountMax** | **int32**| This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count). | [optional] 
+ **SourceRankingsAlexaRankMin** | **int32**| This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks). | [optional] 
+ **SourceRankingsAlexaRankMax** | **int32**| This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks). | [optional] 
+ **SourceRankingsAlexaCountry** | [**[]string**](string.md)| This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks). | [optional] 
  **Field** | **string**| This parameter is used to specify the trend field. | [optional] 
 
 ### Return type

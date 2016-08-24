@@ -173,6 +173,11 @@ func (a DefaultApi) ListAutocompletes(params *AutocompletesParams) (*Autocomplet
  ** @param SourceScopesState This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesCity This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes  is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param sourceLinksInCountMin This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param sourceLinksInCountMax This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param sourceRankingsAlexaRankMin This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param sourceRankingsAlexaRankMax This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param sourceRankingsAlexaCountry This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
  ** @param Cluster This parameter enables clustering for the returned stories.
  ** @param ClusterAlgorithm This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms.
  ** @param Return This parameter is used for specifying return fields.
@@ -438,6 +443,36 @@ func (a DefaultApi) ListCoverages(params *CoveragesParams) (*Coverages, *APIResp
 			Item2: a.Configuration.APIClient.ParameterToString(f)})
 	}
 
+	if params.SourceLinksInCountMin > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "source.links_in_count.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceLinksInCountMin)})
+	}
+
+	if params.SourceLinksInCountMax > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "source.links_in_count.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceLinksInCountMax)})
+	}
+
+	if params.SourceRankingsAlexaRankMin > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "source.rankings.alexa.rank.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceRankingsAlexaRankMin)})
+	}
+
+	if params.SourceRankingsAlexaRankMax > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "source.rankings.alexa.rank.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceRankingsAlexaRankMax)})
+	}
+
+	for _, f := range params.SourceRankingsAlexaCountry {
+		formParams = append(formParams, FormParams{
+			Item1: "source.rankings.alexa.country[]",
+			Item2: a.Configuration.APIClient.ParameterToString(f)})
+	}
+
 	if len(params.Cluster) > 0 {
 		formParams = append(formParams, FormParams{
 			Item1: "cluster",
@@ -552,6 +587,11 @@ func (a DefaultApi) ListCoverages(params *CoveragesParams) (*Coverages, *APIResp
  ** @param SourceScopesState This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesCity This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param sourceLinksInCountMin This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param sourceLinksInCountMax This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param sourceRankingsAlexaRankMin This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param sourceRankingsAlexaRankMax This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param sourceRankingsAlexaCountry This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
  ** @param IntervalStart This parameter is used for setting the start data point of histogram intervals.
  ** @param IntervalEnd This parameter is used for setting the end data point of histogram intervals.
  ** @param IntervalWidth This parameter is used for setting the width of histogram intervals.
@@ -791,6 +831,36 @@ func (a DefaultApi) ListHistograms(params *HistogramsParams) (*Histograms, *APIR
 			Item2: a.Configuration.APIClient.ParameterToString(f)})
 	}
 
+	if params.SourceLinksInCountMin > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "source.links_in_count.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceLinksInCountMin)})
+	}
+
+	if params.SourceLinksInCountMax > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "source.links_in_count.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceLinksInCountMax)})
+	}
+
+	if params.SourceRankingsAlexaRankMin > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "source.rankings.alexa.rank.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceRankingsAlexaRankMin)})
+	}
+
+	if params.SourceRankingsAlexaRankMax > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "source.rankings.alexa.rank.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceRankingsAlexaRankMax)})
+	}
+
+	for _, f := range params.SourceRankingsAlexaCountry {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "source.rankings.alexa.country[]",
+			Item2: a.Configuration.APIClient.ParameterToString(f)})
+	}
+
 	if params.IntervalStart != 0 {
 		queryParams = append(queryParams, QueryParams{
 			Item1: "interval.start",
@@ -887,6 +957,11 @@ func (a DefaultApi) ListHistograms(params *HistogramsParams) (*Histograms, *APIR
  ** @param SourceScopesState This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesCity This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes  is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param sourceLinksInCountMin This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param sourceLinksInCountMax This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param sourceRankingsAlexaRankMin This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param sourceRankingsAlexaRankMax This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param sourceRankingsAlexaCountry This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
  ** @param Cluster This parameter enables clustering for the returned stories.
  ** @param ClusterAlgorithm This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms.
  ** @param Return This parameter is used for specifying return fields.
@@ -1152,6 +1227,36 @@ func (a DefaultApi) ListRelatedStories(params *RelatedStoriesParams) (*RelatedSt
 			Item2: a.Configuration.APIClient.ParameterToString(f)})
 	}
 
+	if params.SourceLinksInCountMin > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "source.links_in_count.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceLinksInCountMin)})
+	}
+
+	if params.SourceLinksInCountMax > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "source.links_in_count.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceLinksInCountMax)})
+	}
+
+	if params.SourceRankingsAlexaRankMin > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "source.rankings.alexa.rank.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceRankingsAlexaRankMin)})
+	}
+
+	if params.SourceRankingsAlexaRankMax > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "source.rankings.alexa.rank.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceRankingsAlexaRankMax)})
+	}
+
+	for _, f := range params.SourceRankingsAlexaCountry {
+		formParams = append(formParams, FormParams{
+			Item1: "source.rankings.alexa.country[]",
+			Item2: a.Configuration.APIClient.ParameterToString(f)})
+	}
+
 	if len(params.Cluster) > 0 {
 		formParams = append(formParams, FormParams{
 			Item1: "cluster",
@@ -1265,6 +1370,11 @@ func (a DefaultApi) ListRelatedStories(params *RelatedStoriesParams) (*RelatedSt
  ** @param SourceScopesState This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesCity This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param sourceLinksInCountMin This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param sourceLinksInCountMax This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param sourceRankingsAlexaRankMin This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param sourceRankingsAlexaRankMax This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param sourceRankingsAlexaCountry This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
  ** @param Cluster This parameter enables clustering for the returned stories.
  ** @param ClusterAlgorithm This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms.
  ** @param Return This parameter is used for specifying return fields.
@@ -1507,6 +1617,36 @@ func (a DefaultApi) ListStories(params *StoriesParams) (*Stories, *APIResponse, 
 			Item2: a.Configuration.APIClient.ParameterToString(f)})
 	}
 
+	if params.SourceLinksInCountMin > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "source.links_in_count.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceLinksInCountMin)})
+	}
+
+	if params.SourceLinksInCountMax > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "source.links_in_count.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceLinksInCountMax)})
+	}
+
+	if params.SourceRankingsAlexaRankMin > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "source.rankings.alexa.rank.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceRankingsAlexaRankMin)})
+	}
+
+	if params.SourceRankingsAlexaRankMax > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "source.rankings.alexa.rank.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceRankingsAlexaRankMax)})
+	}
+
+	for _, f := range params.SourceRankingsAlexaCountry {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "source.rankings.alexa.country[]",
+			Item2: a.Configuration.APIClient.ParameterToString(f)})
+	}
+
 	if len(params.Cluster) > 0 {
 		queryParams = append(queryParams, QueryParams{
 			Item1: "cluster",
@@ -1619,6 +1759,11 @@ func (a DefaultApi) ListStories(params *StoriesParams) (*Stories, *APIResponse, 
  ** @param SourceScopesState This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesCity This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param sourceLinksInCountMin This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param sourceLinksInCountMax This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param sourceRankingsAlexaRankMin This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param sourceRankingsAlexaRankMax This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param sourceRankingsAlexaCountry This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
  ** @param PublishedAtStart This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
  ** @param PublishedAtEnd This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
  ** @param Period The size of each date range is expressed as an interval to be added to the lower bound. It supports Date Math Syntax. Valid options are &#x60;+&#x60; following an integer number greater than 0 and one of the Date Math keywords. e.g. &#x60;+1DAY&#x60;, &#x60;+2MINUTES&#x60; and &#x60;+1MONTH&#x60;. Here are [Supported keywords](https://newsapi.aylien.com/docs/working-with-dates#date-math).
@@ -1845,6 +1990,36 @@ func (a DefaultApi) ListTimeSeries(params *TimeSeriesParams) (*TimeSeriesList, *
 			Item2: a.Configuration.APIClient.ParameterToString(f)})
 	}
 
+	if params.SourceLinksInCountMin > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "source.links_in_count.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceLinksInCountMin)})
+	}
+
+	if params.SourceLinksInCountMax > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "source.links_in_count.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceLinksInCountMax)})
+	}
+
+	if params.SourceRankingsAlexaRankMin > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "source.rankings.alexa.rank.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceRankingsAlexaRankMin)})
+	}
+
+	if params.SourceRankingsAlexaRankMax > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "source.rankings.alexa.rank.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceRankingsAlexaRankMax)})
+	}
+
+	for _, f := range params.SourceRankingsAlexaCountry {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "source.rankings.alexa.country[]",
+			Item2: a.Configuration.APIClient.ParameterToString(f)})
+	}
+
 	if len(params.PublishedAtStart) > 0 {
 		queryParams = append(queryParams, QueryParams{
 			Item1: "published_at.start",
@@ -1935,6 +2110,11 @@ func (a DefaultApi) ListTimeSeries(params *TimeSeriesParams) (*TimeSeriesList, *
  ** @param SourceScopesState This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesCity This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+ ** @param sourceLinksInCountMin This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param sourceLinksInCountMax This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param sourceRankingsAlexaRankMin This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param sourceRankingsAlexaRankMax This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param sourceRankingsAlexaCountry This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
  ** @param Field This parameter is used to specify the trend field.
  * @return *Trends
  */
@@ -2168,6 +2348,36 @@ func (a DefaultApi) ListTrends(params *TrendsParams) (*Trends, *APIResponse, err
 	for _, f := range params.SourceScopesLevel {
 		queryParams = append(queryParams, QueryParams{
 			Item1: "source.scopes.level[]",
+			Item2: a.Configuration.APIClient.ParameterToString(f)})
+	}
+
+	if params.SourceLinksInCountMin > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "source.links_in_count.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceLinksInCountMin)})
+	}
+
+	if params.SourceLinksInCountMax > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "source.links_in_count.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceLinksInCountMax)})
+	}
+
+	if params.SourceRankingsAlexaRankMin > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "source.rankings.alexa.rank.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceRankingsAlexaRankMin)})
+	}
+
+	if params.SourceRankingsAlexaRankMax > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "source.rankings.alexa.rank.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SourceRankingsAlexaRankMax)})
+	}
+
+	for _, f := range params.SourceRankingsAlexaCountry {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "source.rankings.alexa.country[]",
 			Item2: a.Configuration.APIClient.ParameterToString(f)})
 	}
 

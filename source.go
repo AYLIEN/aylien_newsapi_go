@@ -24,7 +24,19 @@ type Source struct {
 	// The source name
 	Name string `json:"name,omitempty"`
 
-	// Domain name of the source which is extracted from the source URL
+	// The title of the home page URL
+	Title string `json:"title,omitempty"`
+
+	// A general explanation about the source
+	Description string `json:"description,omitempty"`
+
+	// The number of websites that link to the source
+	LinksInCount int32 `json:"links_in_count,omitempty"`
+
+	// The home page URL of the source
+	HomePageUrl string `json:"home_page_url,omitempty"`
+
+	// The domain name of the source which is extracted from the source URL
 	Domain string `json:"domain,omitempty"`
 
 	// A URL which points to the source logo
@@ -35,4 +47,7 @@ type Source struct {
 
 	// The source scopes which is tend to be scope locations of the source, e.g. BBC scopes is international.
 	Scopes []Scope `json:"scopes,omitempty"`
+
+	// The web rankings of the source
+	Rankings Rankings `json:"rankings,omitempty"`
 }
