@@ -98,7 +98,7 @@ func (a DefaultApi) ListAutocompletes(params *AutocompletesParams) (*Autocomplet
 		Item2: a.Configuration.APIClient.ParameterToString(params.Language)})
 
 	queryParams = append(queryParams, QueryParams{
-		Item1: "perPage",
+		Item1: "per_page",
 		Item2: a.Configuration.APIClient.ParameterToString(params.PerPage)})
 
 	// to determine the Content-Type header
