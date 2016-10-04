@@ -87,7 +87,7 @@ func (c *APIClient) ParameterToString(obj interface{}) string {
 	case "bool":
 		return strconv.FormatBool(obj.(bool))
 	case "time.Time":
-		return obj.(time.Time).UTC().Format("2006-01-02T15:04:05:Z")
+		return obj.(time.Time).UTC().Format("2006-01-02T15:04:05Z")
 	default:
 		return obj.(string)
 	}
