@@ -23,4 +23,16 @@ type Media struct {
 
 	// A URL which points to the media file
 	Url string `json:"url,omitempty"`
+
+	// The format of media
+	Format string `json:"format,omitempty"`
+
+	// The content length of media
+	ContentLength int32 `json:"content_length,omitempty"`
+
+	// The width of media
+	Width int32 `json:"width,omitempty"`
+
+	// The height of media
+	Height int32 `json:"height,omitempty"`
 }

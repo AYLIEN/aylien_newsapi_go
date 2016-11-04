@@ -21,6 +21,7 @@ import (
 )
 
 type Rank struct {
+
 	// The rank
 	Rank int32 `json:"rank,omitempty"`
 

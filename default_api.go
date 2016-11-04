@@ -138,27 +138,34 @@ func (a DefaultApi) ListAutocompletes(params *AutocompletesParams) (*Autocomplet
  * This endpoint is used for finding story coverages based on the parameters provided. The maximum number of related stories returned is 100.
  *
  * @param params This is an CoveragesParams struct which accepts following parameters:
- ** @param Id This parameter is used for finding stroies by story id.
+ ** @param Id This parameter is used for finding stories by story id.
  ** @param Title This parameter is used for finding stories whose title contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Body This parameter is used for finding stories whose body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Text This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Language This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
  ** @param PublishedAtStart This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
  ** @param PublishedAtEnd This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
- ** @param CategoriesTaxonomy This parameter is used for defining the type of the taxonomy for the rest of the categories queries.
- ** @param CategoriesConfident This parameter is used for finding stories whose categories are confident.
- ** @param CategoriesId This parameter is used for finding stories by categories id.
- ** @param CategoriesLevel This parameter is used for finding stories by categories level.
- ** @param EntitiesTitleText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles.
- ** @param EntitiesTitleType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles.
- ** @param EntitiesTitleLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in story titles.
- ** @param EntitiesBodyText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories.
- ** @param EntitiesBodyType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories.
- ** @param EntitiesBodyLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories.
+ ** @param CategoriesTaxonomy This parameter is used for defining the type of the taxonomy for the rest of the categories queries. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param CategoriesConfident This parameter is used for finding stories whose categories are confident. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param CategoriesId This parameter is used for finding stories by categories id. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param CategoriesLevel This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param EntitiesTitleText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesTitleType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesTitleLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesBodyText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesBodyType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesBodyLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
  ** @param SentimentTitlePolarity This parameter is used for finding stories whose title sentiment is the specified value.
  ** @param SentimentBodyPolarity This parameter is used for finding stories whose body sentiment is the specified value.
  ** @param MediaImagesCountMin This parameter is used for finding stories whose number of images is greater than or equal to the specified value.
  ** @param MediaImagesCountMax This parameter is used for finding stories whose number of images is less than or equal to the specified value.
+ ** @param MediaImagesWidthMin This parameter is used for finding stories whose width of images are greater than or equal to the specified value.
+ ** @param MediaImagesWidthMax This parameter is used for finding stories whose width of images are less than or equal to the specified value.
+ ** @param MediaImagesHeightMin This parameter is used for finding stories whose height of images are greater than or equal to the specified value.
+ ** @param MediaImagesHeightMax This parameter is used for finding stories whose height of images are less than or equal to the specified value.
+ ** @param MediaImagesContentLengthMin This parameter is used for finding stories whose images content length are greater than or equal to the specified value.
+ ** @param MediaImagesContentLengthMax This parameter is used for finding stories whose images content length are less than or equal to the specified value.
+ ** @param MediaImagesFormat This parameter is used for finding stories whose images format are the specified value.
  ** @param MediaVideosCountMin This parameter is used for finding stories whose number of videos is greater than or equal to the specified value.
  ** @param MediaVideosCountMax This parameter is used for finding stories whose number of videos is less than or equal to the specified value.
  ** @param AuthorId This parameter is used for finding stories whose author id is the specified value.
@@ -173,13 +180,21 @@ func (a DefaultApi) ListAutocompletes(params *AutocompletesParams) (*Autocomplet
  ** @param SourceScopesState This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesCity This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes  is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
- ** @param sourceLinksInCountMin This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
- ** @param sourceLinksInCountMax This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
- ** @param sourceRankingsAlexaRankMin This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
- ** @param sourceRankingsAlexaRankMax This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
- ** @param sourceRankingsAlexaCountry This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
- ** @param Cluster This parameter enables clustering for the returned stories.
- ** @param ClusterAlgorithm This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms.
+ ** @param SourceLinksInCountMin This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count [here](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param SourceLinksInCountMax This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count [here](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param SourceRankingsAlexaRankMin This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param SourceRankingsAlexaRankMax This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param SourceRankingsAlexaCountry This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param SocialSharesCountFacebookMin This parameter is used for finding stories whose Facebook social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountFacebookMax This parameter is used for finding stories whose Facebook social shares count is less than or equal to the specified value.
+ ** @param SocialSharesCountGooglePlusMin This parameter is used for finding stories whose Google+ social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountGooglePlusMax This parameter is used for finding stories whose Google+ social shares count is less than or equal to the specified value.
+ ** @param SocialSharesCountLinkedinMin This parameter is used for finding stories whose LinkedIn social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountLinkedinMax This parameter is used for finding stories whose LinkedIn social shares count is less than or equal to the specified value.
+ ** @param SocialSharesCountRedditMin This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountRedditMax This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value.
+ ** @param Cluster This parameter enables clustering for the returned stories. You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering).
+ ** @param ClusterAlgorithm This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms. You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering).
  ** @param Return This parameter is used for specifying return fields.
  ** @param StoryId A story id
  ** @param StoryUrl An article or webpage
@@ -359,6 +374,48 @@ func (a DefaultApi) ListCoverages(params *CoveragesParams) (*Coverages, *APIResp
 			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMax)})
 	}
 
+	if len(params.MediaImagesWidthMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.width.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesWidthMin)})
+	}
+
+	if len(params.MediaImagesWidthMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.width.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesWidthMax)})
+	}
+
+	if len(params.MediaImagesHeightMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.height.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesHeightMin)})
+	}
+
+	if len(params.MediaImagesHeightMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.height.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesHeightMax)})
+	}
+
+	if len(params.MediaImagesContentLengthMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.content_length.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesContentLengthMin)})
+	}
+
+	if len(params.MediaImagesContentLengthMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.content_length.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesContentLengthMax)})
+	}
+
+	for _, f := range params.MediaImagesFormat {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.format[]",
+			Item2: a.Configuration.APIClient.ParameterToString(f)})
+	}
+
 	if len(params.MediaVideosCountMin) > 0 {
 		formParams = append(formParams, FormParams{
 			Item1: "media.videos.count.min",
@@ -473,6 +530,54 @@ func (a DefaultApi) ListCoverages(params *CoveragesParams) (*Coverages, *APIResp
 			Item2: a.Configuration.APIClient.ParameterToString(f)})
 	}
 
+	if len(params.SocialSharesCountFacebookMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "social_shares_count.facebook.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountFacebookMin)})
+	}
+
+	if len(params.SocialSharesCountFacebookMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "social_shares_count.facebook.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountFacebookMax)})
+	}
+
+	if len(params.SocialSharesCountGooglePlusMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "social_shares_count.google_plus.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountGooglePlusMin)})
+	}
+
+	if len(params.SocialSharesCountGooglePlusMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "social_shares_count.google_plus.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountGooglePlusMax)})
+	}
+
+	if len(params.SocialSharesCountLinkedinMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "social_shares_count.linkedin.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountLinkedinMin)})
+	}
+
+	if len(params.SocialSharesCountLinkedinMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "social_shares_count.linkedin.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountLinkedinMax)})
+	}
+
+	if len(params.SocialSharesCountRedditMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "social_shares_count.reddit.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountRedditMin)})
+	}
+
+	if len(params.SocialSharesCountRedditMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "social_shares_count.reddit.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountRedditMax)})
+	}
+
 	if len(params.Cluster) > 0 {
 		formParams = append(formParams, FormParams{
 			Item1: "cluster",
@@ -552,27 +657,34 @@ func (a DefaultApi) ListCoverages(params *CoveragesParams) (*Coverages, *APIResp
  * This endpoint is used for getting histograms based on the &#x60;field&#x60; parameter passed to the API.
  *
  * @param params This is an HistogramsParams struct which accepts following parameters:
- ** @param Id This parameter is used for finding stroies by story id.
+ ** @param Id This parameter is used for finding stories by story id.
  ** @param Title This parameter is used for finding stories whose title contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Body This parameter is used for finding stories whose body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Text This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Language This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
  ** @param PublishedAtStart This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
  ** @param PublishedAtEnd This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
- ** @param CategoriesTaxonomy This parameter is used for defining the type of the taxonomy for the rest of the categories queries.
- ** @param CategoriesConfident This parameter is used for finding stories whose categories are confident.
- ** @param CategoriesId This parameter is used for finding stories by categories id.
- ** @param CategoriesLevel This parameter is used for finding stories by categories level.
- ** @param EntitiesTitleText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles.
- ** @param EntitiesTitleType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles.
- ** @param EntitiesTitleLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in story titles.
- ** @param EntitiesBodyText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories.
- ** @param EntitiesBodyType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories.
- ** @param EntitiesBodyLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories.
+ ** @param CategoriesTaxonomy This parameter is used for defining the type of the taxonomy for the rest of the categories queries. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param CategoriesConfident This parameter is used for finding stories whose categories are confident. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param CategoriesId This parameter is used for finding stories by categories id. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param CategoriesLevel This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param EntitiesTitleText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesTitleType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesTitleLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesBodyText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesBodyType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesBodyLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
  ** @param SentimentTitlePolarity This parameter is used for finding stories whose title sentiment is the specified value.
  ** @param SentimentBodyPolarity This parameter is used for finding stories whose body sentiment is the specified value.
  ** @param MediaImagesCountMin This parameter is used for finding stories whose number of images is greater than or equal to the specified value.
  ** @param MediaImagesCountMax This parameter is used for finding stories whose number of images is less than or equal to the specified value.
+ ** @param MediaImagesWidthMin This parameter is used for finding stories whose width of images are greater than or equal to the specified value.
+ ** @param MediaImagesWidthMax This parameter is used for finding stories whose width of images are less than or equal to the specified value.
+ ** @param MediaImagesHeightMin This parameter is used for finding stories whose height of images are greater than or equal to the specified value.
+ ** @param MediaImagesHeightMax This parameter is used for finding stories whose height of images are less than or equal to the specified value.
+ ** @param MediaImagesContentLengthMin This parameter is used for finding stories whose images content length are greater than or equal to the specified value.
+ ** @param MediaImagesContentLengthMax This parameter is used for finding stories whose images content length are less than or equal to the specified value.
+ ** @param MediaImagesFormat This parameter is used for finding stories whose images format are the specified value.
  ** @param MediaVideosCountMin This parameter is used for finding stories whose number of videos is greater than or equal to the specified value.
  ** @param MediaVideosCountMax This parameter is used for finding stories whose number of videos is less than or equal to the specified value.
  ** @param AuthorId This parameter is used for finding stories whose author id is the specified value.
@@ -587,11 +699,19 @@ func (a DefaultApi) ListCoverages(params *CoveragesParams) (*Coverages, *APIResp
  ** @param SourceScopesState This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesCity This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
- ** @param sourceLinksInCountMin This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
- ** @param sourceLinksInCountMax This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
- ** @param sourceRankingsAlexaRankMin This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
- ** @param sourceRankingsAlexaRankMax This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
- ** @param sourceRankingsAlexaCountry This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param SourceLinksInCountMin This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count [here](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param SourceLinksInCountMax This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count [here](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param SourceRankingsAlexaRankMin This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param SourceRankingsAlexaRankMax This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param SourceRankingsAlexaCountry This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param SocialSharesCountFacebookMin This parameter is used for finding stories whose Facebook social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountFacebookMax This parameter is used for finding stories whose Facebook social shares count is less than or equal to the specified value.
+ ** @param SocialSharesCountGooglePlusMin This parameter is used for finding stories whose Google+ social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountGooglePlusMax This parameter is used for finding stories whose Google+ social shares count is less than or equal to the specified value.
+ ** @param SocialSharesCountLinkedinMin This parameter is used for finding stories whose LinkedIn social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountLinkedinMax This parameter is used for finding stories whose LinkedIn social shares count is less than or equal to the specified value.
+ ** @param SocialSharesCountRedditMin This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountRedditMax This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value.
  ** @param IntervalStart This parameter is used for setting the start data point of histogram intervals.
  ** @param IntervalEnd This parameter is used for setting the end data point of histogram intervals.
  ** @param IntervalWidth This parameter is used for setting the width of histogram intervals.
@@ -736,25 +856,67 @@ func (a DefaultApi) ListHistograms(params *HistogramsParams) (*Histograms, *APIR
 	}
 
 	if len(params.MediaImagesCountMin) > 0 {
-		formParams = append(formParams, FormParams{
+		queryParams = append(queryParams, QueryParams{
 			Item1: "media.images.count.min",
 			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMin)})
 	}
 
 	if len(params.MediaImagesCountMax) > 0 {
-		formParams = append(formParams, FormParams{
+		queryParams = append(queryParams, QueryParams{
 			Item1: "media.images.count.max",
 			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMax)})
 	}
 
+	if len(params.MediaImagesWidthMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.width.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesWidthMin)})
+	}
+
+	if len(params.MediaImagesWidthMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.width.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesWidthMax)})
+	}
+
+	if len(params.MediaImagesHeightMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.height.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesHeightMin)})
+	}
+
+	if len(params.MediaImagesHeightMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.height.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesHeightMax)})
+	}
+
+	if len(params.MediaImagesContentLengthMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.content_length.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesContentLengthMin)})
+	}
+
+	if len(params.MediaImagesContentLengthMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.content_length.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesContentLengthMax)})
+	}
+
+	for _, f := range params.MediaImagesFormat {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.format[]",
+			Item2: a.Configuration.APIClient.ParameterToString(f)})
+	}
+
 	if len(params.MediaVideosCountMin) > 0 {
-		formParams = append(formParams, FormParams{
+		queryParams = append(queryParams, QueryParams{
 			Item1: "media.videos.count.min",
 			Item2: a.Configuration.APIClient.ParameterToString(params.MediaVideosCountMin)})
 	}
 
 	if len(params.MediaVideosCountMax) > 0 {
-		formParams = append(formParams, FormParams{
+		queryParams = append(queryParams, QueryParams{
 			Item1: "media.videos.count.max",
 			Item2: a.Configuration.APIClient.ParameterToString(params.MediaVideosCountMax)})
 	}
@@ -861,6 +1023,54 @@ func (a DefaultApi) ListHistograms(params *HistogramsParams) (*Histograms, *APIR
 			Item2: a.Configuration.APIClient.ParameterToString(f)})
 	}
 
+	if len(params.SocialSharesCountFacebookMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.facebook.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountFacebookMin)})
+	}
+
+	if len(params.SocialSharesCountFacebookMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.facebook.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountFacebookMax)})
+	}
+
+	if len(params.SocialSharesCountGooglePlusMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.google_plus.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountGooglePlusMin)})
+	}
+
+	if len(params.SocialSharesCountGooglePlusMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.google_plus.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountGooglePlusMax)})
+	}
+
+	if len(params.SocialSharesCountLinkedinMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.linkedin.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountLinkedinMin)})
+	}
+
+	if len(params.SocialSharesCountLinkedinMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.linkedin.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountLinkedinMax)})
+	}
+
+	if len(params.SocialSharesCountRedditMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.reddit.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountRedditMin)})
+	}
+
+	if len(params.SocialSharesCountRedditMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.reddit.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountRedditMax)})
+	}
+
 	if params.IntervalStart != 0 {
 		queryParams = append(queryParams, QueryParams{
 			Item1: "interval.start",
@@ -922,27 +1132,34 @@ func (a DefaultApi) ListHistograms(params *HistogramsParams) (*Histograms, *APIR
  * This endpoint is used for finding related stories based on the parameters provided. The maximum number of related stories returned is 100.
  *
  * @param params This is an RelatedStoriesParams struct which accepts following parameters:
- ** @param Id This parameter is used for finding stroies by story id.
+ ** @param Id This parameter is used for finding stories by story id.
  ** @param Title This parameter is used for finding stories whose title contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Body This parameter is used for finding stories whose body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Text This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Language This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
  ** @param PublishedAtStart This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
  ** @param PublishedAtEnd This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
- ** @param CategoriesTaxonomy This parameter is used for defining the type of the taxonomy for the rest of the categories queries.
- ** @param CategoriesConfident This parameter is used for finding stories whose categories are confident.
- ** @param CategoriesId This parameter is used for finding stories by categories id.
- ** @param CategoriesLevel This parameter is used for finding stories by categories level.
- ** @param EntitiesTitleText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles.
- ** @param EntitiesTitleType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles.
- ** @param EntitiesTitleLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in story titles.
- ** @param EntitiesBodyText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories.
- ** @param EntitiesBodyType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories.
- ** @param EntitiesBodyLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories.
+ ** @param CategoriesTaxonomy This parameter is used for defining the type of the taxonomy for the rest of the categories queries. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param CategoriesConfident This parameter is used for finding stories whose categories are confident. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param CategoriesId This parameter is used for finding stories by categories id. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param CategoriesLevel This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param EntitiesTitleText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesTitleType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesTitleLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesBodyText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesBodyType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesBodyLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
  ** @param SentimentTitlePolarity This parameter is used for finding stories whose title sentiment is the specified value.
  ** @param SentimentBodyPolarity This parameter is used for finding stories whose body sentiment is the specified value.
  ** @param MediaImagesCountMin This parameter is used for finding stories whose number of images is greater than or equal to the specified value.
  ** @param MediaImagesCountMax This parameter is used for finding stories whose number of images is less than or equal to the specified value.
+ ** @param MediaImagesWidthMin This parameter is used for finding stories whose width of images are greater than or equal to the specified value.
+ ** @param MediaImagesWidthMax This parameter is used for finding stories whose width of images are less than or equal to the specified value.
+ ** @param MediaImagesHeightMin This parameter is used for finding stories whose height of images are greater than or equal to the specified value.
+ ** @param MediaImagesHeightMax This parameter is used for finding stories whose height of images are less than or equal to the specified value.
+ ** @param MediaImagesContentLengthMin This parameter is used for finding stories whose images content length are greater than or equal to the specified value.
+ ** @param MediaImagesContentLengthMax This parameter is used for finding stories whose images content length are less than or equal to the specified value.
+ ** @param MediaImagesFormat This parameter is used for finding stories whose images format are the specified value.
  ** @param MediaVideosCountMin This parameter is used for finding stories whose number of videos is greater than or equal to the specified value.
  ** @param MediaVideosCountMax This parameter is used for finding stories whose number of videos is less than or equal to the specified value.
  ** @param AuthorId This parameter is used for finding stories whose author id is the specified value.
@@ -957,13 +1174,21 @@ func (a DefaultApi) ListHistograms(params *HistogramsParams) (*Histograms, *APIR
  ** @param SourceScopesState This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesCity This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes  is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
- ** @param sourceLinksInCountMin This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
- ** @param sourceLinksInCountMax This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
- ** @param sourceRankingsAlexaRankMin This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
- ** @param sourceRankingsAlexaRankMax This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
- ** @param sourceRankingsAlexaCountry This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
- ** @param Cluster This parameter enables clustering for the returned stories.
- ** @param ClusterAlgorithm This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms.
+ ** @param SourceLinksInCountMin This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count [here](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param SourceLinksInCountMax This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count [here](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param SourceRankingsAlexaRankMin This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param SourceRankingsAlexaRankMax This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param SourceRankingsAlexaCountry This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param SocialSharesCountFacebookMin This parameter is used for finding stories whose Facebook social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountFacebookMax This parameter is used for finding stories whose Facebook social shares count is less than or equal to the specified value.
+ ** @param SocialSharesCountGooglePlusMin This parameter is used for finding stories whose Google+ social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountGooglePlusMax This parameter is used for finding stories whose Google+ social shares count is less than or equal to the specified value.
+ ** @param SocialSharesCountLinkedinMin This parameter is used for finding stories whose LinkedIn social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountLinkedinMax This parameter is used for finding stories whose LinkedIn social shares count is less than or equal to the specified value.
+ ** @param SocialSharesCountRedditMin This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountRedditMax This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value.
+ ** @param Cluster This parameter enables clustering for the returned stories. You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering).
+ ** @param ClusterAlgorithm This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms. You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering).
  ** @param Return This parameter is used for specifying return fields.
  ** @param StoryId A story id
  ** @param StoryUrl An article or webpage
@@ -1143,6 +1368,48 @@ func (a DefaultApi) ListRelatedStories(params *RelatedStoriesParams) (*RelatedSt
 			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMax)})
 	}
 
+	if len(params.MediaImagesWidthMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.width.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesWidthMin)})
+	}
+
+	if len(params.MediaImagesWidthMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.width.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesWidthMax)})
+	}
+
+	if len(params.MediaImagesHeightMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.height.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesHeightMin)})
+	}
+
+	if len(params.MediaImagesHeightMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.height.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesHeightMax)})
+	}
+
+	if len(params.MediaImagesContentLengthMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.content_length.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesContentLengthMin)})
+	}
+
+	if len(params.MediaImagesContentLengthMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.content_length.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesContentLengthMax)})
+	}
+
+	for _, f := range params.MediaImagesFormat {
+		formParams = append(formParams, FormParams{
+			Item1: "media.images.format[]",
+			Item2: a.Configuration.APIClient.ParameterToString(f)})
+	}
+
 	if len(params.MediaVideosCountMin) > 0 {
 		formParams = append(formParams, FormParams{
 			Item1: "media.videos.count.min",
@@ -1257,6 +1524,54 @@ func (a DefaultApi) ListRelatedStories(params *RelatedStoriesParams) (*RelatedSt
 			Item2: a.Configuration.APIClient.ParameterToString(f)})
 	}
 
+	if len(params.SocialSharesCountFacebookMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "social_shares_count.facebook.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountFacebookMin)})
+	}
+
+	if len(params.SocialSharesCountFacebookMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "social_shares_count.facebook.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountFacebookMax)})
+	}
+
+	if len(params.SocialSharesCountGooglePlusMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "social_shares_count.google_plus.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountGooglePlusMin)})
+	}
+
+	if len(params.SocialSharesCountGooglePlusMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "social_shares_count.google_plus.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountGooglePlusMax)})
+	}
+
+	if len(params.SocialSharesCountLinkedinMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "social_shares_count.linkedin.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountLinkedinMin)})
+	}
+
+	if len(params.SocialSharesCountLinkedinMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "social_shares_count.linkedin.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountLinkedinMax)})
+	}
+
+	if len(params.SocialSharesCountRedditMin) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "social_shares_count.reddit.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountRedditMin)})
+	}
+
+	if len(params.SocialSharesCountRedditMax) > 0 {
+		formParams = append(formParams, FormParams{
+			Item1: "social_shares_count.reddit.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountRedditMax)})
+	}
+
 	if len(params.Cluster) > 0 {
 		formParams = append(formParams, FormParams{
 			Item1: "cluster",
@@ -1335,27 +1650,34 @@ func (a DefaultApi) ListRelatedStories(params *RelatedStoriesParams) (*RelatedSt
  * This endpoint is used for getting a list of stories.
  *
  * @param params This is an StoriesParams struct which accepts following parameters:
- ** @param Id This parameter is used for finding stroies by story id.
+ ** @param Id This parameter is used for finding stories by story id.
  ** @param Title This parameter is used for finding stories whose title contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Body This parameter is used for finding stories whose body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Text This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Language This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
  ** @param PublishedAtStart This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
  ** @param PublishedAtEnd This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
- ** @param CategoriesTaxonomy This parameter is used for defining the type of the taxonomy for the rest of the categories queries.
- ** @param CategoriesConfident This parameter is used for finding stories whose categories are confident.
- ** @param CategoriesId This parameter is used for finding stories by categories id.
- ** @param CategoriesLevel This parameter is used for finding stories by categories level.
- ** @param EntitiesTitleText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles.
- ** @param EntitiesTitleType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles.
- ** @param EntitiesTitleLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in story titles.
- ** @param EntitiesBodyText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories.
- ** @param EntitiesBodyType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories.
- ** @param EntitiesBodyLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories.
+ ** @param CategoriesTaxonomy This parameter is used for defining the type of the taxonomy for the rest of the categories queries. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param CategoriesConfident This parameter is used for finding stories whose categories are confident. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param CategoriesId This parameter is used for finding stories by categories id. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param CategoriesLevel This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param EntitiesTitleText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesTitleType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesTitleLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesBodyText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesBodyType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesBodyLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
  ** @param SentimentTitlePolarity This parameter is used for finding stories whose title sentiment is the specified value.
  ** @param SentimentBodyPolarity This parameter is used for finding stories whose body sentiment is the specified value.
  ** @param MediaImagesCountMin This parameter is used for finding stories whose number of images is greater than or equal to the specified value.
  ** @param MediaImagesCountMax This parameter is used for finding stories whose number of images is less than or equal to the specified value.
+ ** @param MediaImagesWidthMin This parameter is used for finding stories whose width of images are greater than or equal to the specified value.
+ ** @param MediaImagesWidthMax This parameter is used for finding stories whose width of images are less than or equal to the specified value.
+ ** @param MediaImagesHeightMin This parameter is used for finding stories whose height of images are greater than or equal to the specified value.
+ ** @param MediaImagesHeightMax This parameter is used for finding stories whose height of images are less than or equal to the specified value.
+ ** @param MediaImagesContentLengthMin This parameter is used for finding stories whose images content length are greater than or equal to the specified value.
+ ** @param MediaImagesContentLengthMax This parameter is used for finding stories whose images content length are less than or equal to the specified value.
+ ** @param MediaImagesFormat This parameter is used for finding stories whose images format are the specified value.
  ** @param MediaVideosCountMin This parameter is used for finding stories whose number of videos is greater than or equal to the specified value.
  ** @param MediaVideosCountMax This parameter is used for finding stories whose number of videos is less than or equal to the specified value.
  ** @param AuthorId This parameter is used for finding stories whose author id is the specified value.
@@ -1370,18 +1692,26 @@ func (a DefaultApi) ListRelatedStories(params *RelatedStoriesParams) (*RelatedSt
  ** @param SourceScopesState This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesCity This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
- ** @param sourceLinksInCountMin This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
- ** @param sourceLinksInCountMax This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
- ** @param sourceRankingsAlexaRankMin This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
- ** @param sourceRankingsAlexaRankMax This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
- ** @param sourceRankingsAlexaCountry This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
- ** @param Cluster This parameter enables clustering for the returned stories.
- ** @param ClusterAlgorithm This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms.
+ ** @param SourceLinksInCountMin This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count [here](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param SourceLinksInCountMax This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count [here](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param SourceRankingsAlexaRankMin This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param SourceRankingsAlexaRankMax This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param SourceRankingsAlexaCountry This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param SocialSharesCountFacebookMin This parameter is used for finding stories whose Facebook social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountFacebookMax This parameter is used for finding stories whose Facebook social shares count is less than or equal to the specified value.
+ ** @param SocialSharesCountGooglePlusMin This parameter is used for finding stories whose Google+ social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountGooglePlusMax This parameter is used for finding stories whose Google+ social shares count is less than or equal to the specified value.
+ ** @param SocialSharesCountLinkedinMin This parameter is used for finding stories whose LinkedIn social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountLinkedinMax This parameter is used for finding stories whose LinkedIn social shares count is less than or equal to the specified value.
+ ** @param SocialSharesCountRedditMin This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountRedditMax This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value.
+ ** @param Cluster This parameter enables clustering for the returned stories. You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering).
+ ** @param ClusterAlgorithm This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms. You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering).
  ** @param Return This parameter is used for specifying return fields.
  ** @param SortBy This parameter is used for changing the order column of the results.
  ** @param SortDirection This parameter is used for changing the order direction of the result.
- ** @param Cursor This parameter is used for finding a specific page.
- ** @param PerPage This parameter is used for specifying number of items in each page.
+ ** @param Cursor This parameter is used for finding a specific page. You can read more about pagination of results [here](https://newsapi.aylien.com/docs/pagination-of-results).
+ ** @param PerPage This parameter is used for specifying number of items in each page You can read more about pagination of results [here](https://newsapi.aylien.com/docs/pagination-of-results)
  * @return *Stories
  */
 func (a DefaultApi) ListStories(params *StoriesParams) (*Stories, *APIResponse, error) {
@@ -1522,25 +1852,67 @@ func (a DefaultApi) ListStories(params *StoriesParams) (*Stories, *APIResponse, 
 	}
 
 	if len(params.MediaImagesCountMin) > 0 {
-		formParams = append(formParams, FormParams{
+		queryParams = append(queryParams, QueryParams{
 			Item1: "media.images.count.min",
 			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMin)})
 	}
 
+	if len(params.MediaImagesWidthMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.width.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesWidthMin)})
+	}
+
+	if len(params.MediaImagesWidthMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.width.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesWidthMax)})
+	}
+
+	if len(params.MediaImagesHeightMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.height.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesHeightMin)})
+	}
+
+	if len(params.MediaImagesHeightMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.height.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesHeightMax)})
+	}
+
+	if len(params.MediaImagesContentLengthMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.content_length.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesContentLengthMin)})
+	}
+
+	if len(params.MediaImagesContentLengthMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.content_length.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesContentLengthMax)})
+	}
+
+	for _, f := range params.MediaImagesFormat {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.format[]",
+			Item2: a.Configuration.APIClient.ParameterToString(f)})
+	}
+
 	if len(params.MediaImagesCountMax) > 0 {
-		formParams = append(formParams, FormParams{
+		queryParams = append(queryParams, QueryParams{
 			Item1: "media.images.count.max",
 			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMax)})
 	}
 
 	if len(params.MediaVideosCountMin) > 0 {
-		formParams = append(formParams, FormParams{
+		queryParams = append(queryParams, QueryParams{
 			Item1: "media.videos.count.min",
 			Item2: a.Configuration.APIClient.ParameterToString(params.MediaVideosCountMin)})
 	}
 
 	if len(params.MediaVideosCountMax) > 0 {
-		formParams = append(formParams, FormParams{
+		queryParams = append(queryParams, QueryParams{
 			Item1: "media.videos.count.max",
 			Item2: a.Configuration.APIClient.ParameterToString(params.MediaVideosCountMax)})
 	}
@@ -1647,6 +2019,54 @@ func (a DefaultApi) ListStories(params *StoriesParams) (*Stories, *APIResponse, 
 			Item2: a.Configuration.APIClient.ParameterToString(f)})
 	}
 
+	if len(params.SocialSharesCountFacebookMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.facebook.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountFacebookMin)})
+	}
+
+	if len(params.SocialSharesCountFacebookMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.facebook.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountFacebookMax)})
+	}
+
+	if len(params.SocialSharesCountGooglePlusMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.google_plus.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountGooglePlusMin)})
+	}
+
+	if len(params.SocialSharesCountGooglePlusMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.google_plus.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountGooglePlusMax)})
+	}
+
+	if len(params.SocialSharesCountLinkedinMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.linkedin.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountLinkedinMin)})
+	}
+
+	if len(params.SocialSharesCountLinkedinMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.linkedin.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountLinkedinMax)})
+	}
+
+	if len(params.SocialSharesCountRedditMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.reddit.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountRedditMin)})
+	}
+
+	if len(params.SocialSharesCountRedditMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.reddit.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountRedditMax)})
+	}
+
 	if len(params.Cluster) > 0 {
 		queryParams = append(queryParams, QueryParams{
 			Item1: "cluster",
@@ -1726,25 +2146,32 @@ func (a DefaultApi) ListStories(params *StoriesParams) (*Stories, *APIResponse, 
  * This endpoint is used for getting time series by stories.
  *
  * @param params This is an TimeSeriesParams struct which accepts following parameters:
- ** @param Id This parameter is used for finding stroies by story id.
+ ** @param Id This parameter is used for finding stories by story id.
  ** @param Title This parameter is used for finding stories whose title contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Body This parameter is used for finding stories whose body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Text This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Language This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
- ** @param CategoriesTaxonomy This parameter is used for defining the type of the taxonomy for the rest of the categories queries.
- ** @param CategoriesConfident This parameter is used for finding stories whose categories are confident.
- ** @param CategoriesId This parameter is used for finding stories by categories id.
- ** @param CategoriesLevel This parameter is used for finding stories by categories level.
- ** @param EntitiesTitleText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles.
- ** @param EntitiesTitleType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles.
- ** @param EntitiesTitleLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in story titles.
- ** @param EntitiesBodyText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories.
- ** @param EntitiesBodyType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories.
- ** @param EntitiesBodyLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories.
+ ** @param CategoriesTaxonomy This parameter is used for defining the type of the taxonomy for the rest of the categories queries. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param CategoriesConfident This parameter is used for finding stories whose categories are confident. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param CategoriesId This parameter is used for finding stories by categories id. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param CategoriesLevel This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param EntitiesTitleText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesTitleType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesTitleLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesBodyText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesBodyType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesBodyLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
  ** @param SentimentTitlePolarity This parameter is used for finding stories whose title sentiment is the specified value.
  ** @param SentimentBodyPolarity This parameter is used for finding stories whose body sentiment is the specified value.
  ** @param MediaImagesCountMin This parameter is used for finding stories whose number of images is greater than or equal to the specified value.
  ** @param MediaImagesCountMax This parameter is used for finding stories whose number of images is less than or equal to the specified value.
+ ** @param MediaImagesWidthMin This parameter is used for finding stories whose width of images are greater than or equal to the specified value.
+ ** @param MediaImagesWidthMax This parameter is used for finding stories whose width of images are less than or equal to the specified value.
+ ** @param MediaImagesHeightMin This parameter is used for finding stories whose height of images are greater than or equal to the specified value.
+ ** @param MediaImagesHeightMax This parameter is used for finding stories whose height of images are less than or equal to the specified value.
+ ** @param MediaImagesContentLengthMin This parameter is used for finding stories whose images content length are greater than or equal to the specified value.
+ ** @param MediaImagesContentLengthMax This parameter is used for finding stories whose images content length are less than or equal to the specified value.
+ ** @param MediaImagesFormat This parameter is used for finding stories whose images format are the specified value.
  ** @param MediaVideosCountMin This parameter is used for finding stories whose number of videos is greater than or equal to the specified value.
  ** @param MediaVideosCountMax This parameter is used for finding stories whose number of videos is less than or equal to the specified value.
  ** @param AuthorId This parameter is used for finding stories whose author id is the specified value.
@@ -1759,11 +2186,19 @@ func (a DefaultApi) ListStories(params *StoriesParams) (*Stories, *APIResponse, 
  ** @param SourceScopesState This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesCity This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
- ** @param sourceLinksInCountMin This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
- ** @param sourceLinksInCountMax This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
- ** @param sourceRankingsAlexaRankMin This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
- ** @param sourceRankingsAlexaRankMax This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
- ** @param sourceRankingsAlexaCountry This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param SourceLinksInCountMin This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count [here](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param SourceLinksInCountMax This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count [here](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param SourceRankingsAlexaRankMin This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param SourceRankingsAlexaRankMax This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param SourceRankingsAlexaCountry This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param SocialSharesCountFacebookMin This parameter is used for finding stories whose Facebook social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountFacebookMax This parameter is used for finding stories whose Facebook social shares count is less than or equal to the specified value.
+ ** @param SocialSharesCountGooglePlusMin This parameter is used for finding stories whose Google+ social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountGooglePlusMax This parameter is used for finding stories whose Google+ social shares count is less than or equal to the specified value.
+ ** @param SocialSharesCountLinkedinMin This parameter is used for finding stories whose LinkedIn social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountLinkedinMax This parameter is used for finding stories whose LinkedIn social shares count is less than or equal to the specified value.
+ ** @param SocialSharesCountRedditMin This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountRedditMax This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value.
  ** @param PublishedAtStart This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
  ** @param PublishedAtEnd This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
  ** @param Period The size of each date range is expressed as an interval to be added to the lower bound. It supports Date Math Syntax. Valid options are &#x60;+&#x60; following an integer number greater than 0 and one of the Date Math keywords. e.g. &#x60;+1DAY&#x60;, &#x60;+2MINUTES&#x60; and &#x60;+1MONTH&#x60;. Here are [Supported keywords](https://newsapi.aylien.com/docs/working-with-dates#date-math).
@@ -1895,25 +2330,67 @@ func (a DefaultApi) ListTimeSeries(params *TimeSeriesParams) (*TimeSeriesList, *
 	}
 
 	if len(params.MediaImagesCountMin) > 0 {
-		formParams = append(formParams, FormParams{
+		queryParams = append(queryParams, QueryParams{
 			Item1: "media.images.count.min",
 			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMin)})
 	}
 
 	if len(params.MediaImagesCountMax) > 0 {
-		formParams = append(formParams, FormParams{
+		queryParams = append(queryParams, QueryParams{
 			Item1: "media.images.count.max",
 			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMax)})
 	}
 
+	if len(params.MediaImagesWidthMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.width.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesWidthMin)})
+	}
+
+	if len(params.MediaImagesWidthMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.width.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesWidthMax)})
+	}
+
+	if len(params.MediaImagesHeightMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.height.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesHeightMin)})
+	}
+
+	if len(params.MediaImagesHeightMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.height.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesHeightMax)})
+	}
+
+	if len(params.MediaImagesContentLengthMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.content_length.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesContentLengthMin)})
+	}
+
+	if len(params.MediaImagesContentLengthMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.content_length.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesContentLengthMax)})
+	}
+
+	for _, f := range params.MediaImagesFormat {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.format[]",
+			Item2: a.Configuration.APIClient.ParameterToString(f)})
+	}
+
 	if len(params.MediaVideosCountMin) > 0 {
-		formParams = append(formParams, FormParams{
+		queryParams = append(queryParams, QueryParams{
 			Item1: "media.videos.count.min",
 			Item2: a.Configuration.APIClient.ParameterToString(params.MediaVideosCountMin)})
 	}
 
 	if len(params.MediaVideosCountMax) > 0 {
-		formParams = append(formParams, FormParams{
+		queryParams = append(queryParams, QueryParams{
 			Item1: "media.videos.count.max",
 			Item2: a.Configuration.APIClient.ParameterToString(params.MediaVideosCountMax)})
 	}
@@ -2020,6 +2497,54 @@ func (a DefaultApi) ListTimeSeries(params *TimeSeriesParams) (*TimeSeriesList, *
 			Item2: a.Configuration.APIClient.ParameterToString(f)})
 	}
 
+	if len(params.SocialSharesCountFacebookMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.facebook.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountFacebookMin)})
+	}
+
+	if len(params.SocialSharesCountFacebookMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.facebook.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountFacebookMax)})
+	}
+
+	if len(params.SocialSharesCountGooglePlusMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.google_plus.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountGooglePlusMin)})
+	}
+
+	if len(params.SocialSharesCountGooglePlusMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.google_plus.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountGooglePlusMax)})
+	}
+
+	if len(params.SocialSharesCountLinkedinMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.linkedin.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountLinkedinMin)})
+	}
+
+	if len(params.SocialSharesCountLinkedinMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.linkedin.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountLinkedinMax)})
+	}
+
+	if len(params.SocialSharesCountRedditMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.reddit.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountRedditMin)})
+	}
+
+	if len(params.SocialSharesCountRedditMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.reddit.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountRedditMax)})
+	}
+
 	if len(params.PublishedAtStart) > 0 {
 		queryParams = append(queryParams, QueryParams{
 			Item1: "published_at.start",
@@ -2075,27 +2600,34 @@ func (a DefaultApi) ListTimeSeries(params *TimeSeriesParams) (*TimeSeriesList, *
  * This endpoint is used for finding trends based on stories.
  *
  * @param params This is an TrendsParams struct which accepts following parameters:
- ** @param Id This parameter is used for finding stroies by story id.
+ ** @param Id This parameter is used for finding stories by story id.
  ** @param Title This parameter is used for finding stories whose title contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Body This parameter is used for finding stories whose body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Text This parameter is used for finding stories whose title or body contains a specfic keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators).
  ** @param Language This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
  ** @param PublishedAtStart This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
  ** @param PublishedAtEnd This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
- ** @param CategoriesTaxonomy This parameter is used for defining the type of the taxonomy for the rest of the categories queries.
- ** @param CategoriesConfident This parameter is used for finding stories whose categories are confident.
- ** @param CategoriesId This parameter is used for finding stories by categories id.
- ** @param CategoriesLevel This parameter is used for finding stories by categories level.
- ** @param EntitiesTitleText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles.
- ** @param EntitiesTitleType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles.
- ** @param EntitiesTitleLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in story titles.
- ** @param EntitiesBodyText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories.
- ** @param EntitiesBodyType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories.
- ** @param EntitiesBodyLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories.
+ ** @param CategoriesTaxonomy This parameter is used for defining the type of the taxonomy for the rest of the categories queries. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param CategoriesConfident This parameter is used for finding stories whose categories are confident. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param CategoriesId This parameter is used for finding stories by categories id. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param CategoriesLevel This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).
+ ** @param EntitiesTitleText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesTitleType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesTitleLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesBodyText This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesBodyType This parameter is used to find stories based on the specified entities &#x60;type&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+ ** @param EntitiesBodyLinksDbpedia This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
  ** @param SentimentTitlePolarity This parameter is used for finding stories whose title sentiment is the specified value.
  ** @param SentimentBodyPolarity This parameter is used for finding stories whose body sentiment is the specified value.
  ** @param MediaImagesCountMin This parameter is used for finding stories whose number of images is greater than or equal to the specified value.
  ** @param MediaImagesCountMax This parameter is used for finding stories whose number of images is less than or equal to the specified value.
+ ** @param MediaImagesWidthMin This parameter is used for finding stories whose width of images are greater than or equal to the specified value.
+ ** @param MediaImagesWidthMax This parameter is used for finding stories whose width of images are less than or equal to the specified value.
+ ** @param MediaImagesHeightMin This parameter is used for finding stories whose height of images are greater than or equal to the specified value.
+ ** @param MediaImagesHeightMax This parameter is used for finding stories whose height of images are less than or equal to the specified value.
+ ** @param MediaImagesContentLengthMin This parameter is used for finding stories whose images content length are greater than or equal to the specified value.
+ ** @param MediaImagesContentLengthMax This parameter is used for finding stories whose images content length are less than or equal to the specified value.
+ ** @param MediaImagesFormat This parameter is used for finding stories whose images format are the specified value.
  ** @param MediaVideosCountMin This parameter is used for finding stories whose number of videos is greater than or equal to the specified value.
  ** @param MediaVideosCountMax This parameter is used for finding stories whose number of videos is less than or equal to the specified value.
  ** @param AuthorId This parameter is used for finding stories whose author id is the specified value.
@@ -2110,11 +2642,19 @@ func (a DefaultApi) ListTimeSeries(params *TimeSeriesParams) (*TimeSeriesList, *
  ** @param SourceScopesState This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesCity This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
  ** @param SourceScopesLevel This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
- ** @param sourceLinksInCountMin This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
- ** @param sourceLinksInCountMax This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
- ** @param sourceRankingsAlexaRankMin This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
- ** @param sourceRankingsAlexaRankMax This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
- ** @param sourceRankingsAlexaCountry This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param SourceLinksInCountMin This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count [here](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param SourceLinksInCountMax This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count [here](https://newsapi.aylien.com/docs/working-with-links-in-count).
+ ** @param SourceRankingsAlexaRankMin This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param SourceRankingsAlexaRankMax This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param SourceRankingsAlexaCountry This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+ ** @param SocialSharesCountFacebookMin This parameter is used for finding stories whose Facebook social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountFacebookMax This parameter is used for finding stories whose Facebook social shares count is less than or equal to the specified value.
+ ** @param SocialSharesCountGooglePlusMin This parameter is used for finding stories whose Google+ social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountGooglePlusMax This parameter is used for finding stories whose Google+ social shares count is less than or equal to the specified value.
+ ** @param SocialSharesCountLinkedinMin This parameter is used for finding stories whose LinkedIn social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountLinkedinMax This parameter is used for finding stories whose LinkedIn social shares count is less than or equal to the specified value.
+ ** @param SocialSharesCountRedditMin This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value.
+ ** @param SocialSharesCountRedditMax This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value.
  ** @param Field This parameter is used to specify the trend field.
  * @return *Trends
  */
@@ -2256,25 +2796,67 @@ func (a DefaultApi) ListTrends(params *TrendsParams) (*Trends, *APIResponse, err
 	}
 
 	if len(params.MediaImagesCountMin) > 0 {
-		formParams = append(formParams, FormParams{
+		queryParams = append(queryParams, QueryParams{
 			Item1: "media.images.count.min",
 			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMin)})
 	}
 
 	if len(params.MediaImagesCountMax) > 0 {
-		formParams = append(formParams, FormParams{
+		queryParams = append(queryParams, QueryParams{
 			Item1: "media.images.count.max",
 			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesCountMax)})
 	}
 
+	if len(params.MediaImagesWidthMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.width.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesWidthMin)})
+	}
+
+	if len(params.MediaImagesWidthMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.width.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesWidthMax)})
+	}
+
+	if len(params.MediaImagesHeightMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.height.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesHeightMin)})
+	}
+
+	if len(params.MediaImagesHeightMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.height.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesHeightMax)})
+	}
+
+	if len(params.MediaImagesContentLengthMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.content_length.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesContentLengthMin)})
+	}
+
+	if len(params.MediaImagesContentLengthMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.content_length.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.MediaImagesContentLengthMax)})
+	}
+
+	for _, f := range params.MediaImagesFormat {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "media.images.format[]",
+			Item2: a.Configuration.APIClient.ParameterToString(f)})
+	}
+
 	if len(params.MediaVideosCountMin) > 0 {
-		formParams = append(formParams, FormParams{
+		queryParams = append(queryParams, QueryParams{
 			Item1: "media.videos.count.min",
 			Item2: a.Configuration.APIClient.ParameterToString(params.MediaVideosCountMin)})
 	}
 
 	if len(params.MediaVideosCountMax) > 0 {
-		formParams = append(formParams, FormParams{
+		queryParams = append(queryParams, QueryParams{
 			Item1: "media.videos.count.max",
 			Item2: a.Configuration.APIClient.ParameterToString(params.MediaVideosCountMax)})
 	}
@@ -2379,6 +2961,54 @@ func (a DefaultApi) ListTrends(params *TrendsParams) (*Trends, *APIResponse, err
 		queryParams = append(queryParams, QueryParams{
 			Item1: "source.rankings.alexa.country[]",
 			Item2: a.Configuration.APIClient.ParameterToString(f)})
+	}
+
+	if len(params.SocialSharesCountFacebookMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.facebook.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountFacebookMin)})
+	}
+
+	if len(params.SocialSharesCountFacebookMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.facebook.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountFacebookMax)})
+	}
+
+	if len(params.SocialSharesCountGooglePlusMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.google_plus.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountGooglePlusMin)})
+	}
+
+	if len(params.SocialSharesCountGooglePlusMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.google_plus.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountGooglePlusMax)})
+	}
+
+	if len(params.SocialSharesCountLinkedinMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.linkedin.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountLinkedinMin)})
+	}
+
+	if len(params.SocialSharesCountLinkedinMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.linkedin.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountLinkedinMax)})
+	}
+
+	if len(params.SocialSharesCountRedditMin) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.reddit.min",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountRedditMin)})
+	}
+
+	if len(params.SocialSharesCountRedditMax) > 0 {
+		queryParams = append(queryParams, QueryParams{
+			Item1: "social_shares_count.reddit.max",
+			Item2: a.Configuration.APIClient.ParameterToString(params.SocialSharesCountRedditMax)})
 	}
 
 	if len(params.Field) > 0 {
