@@ -1,5 +1,5 @@
 /*
-Copyright 2016 Aylien, Inc. All Rights Reserved.
+Copyright 2017 Aylien, Inc. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,8 +21,20 @@ import (
 )
 
 type APIResponse struct {
-	*http.Response
-	Message string `json:"message,omitempty"`
+	*http.Response `json:"-"`
+	Message        string `json:"message,omitempty"`
+	// Operation is the name of the api operation.
+	Operation string `json:"operation,omitempty"`
+	// RequestURL is the request URL. This value is always available, even if the
+	// embedded *http.Response is nil.
+	RequestURL string `json:"url,omitempty"`
+	// Method is the HTTP method used for the request.  This value is always
+	// available, even if the embedded *http.Response is nil.
+	Method string `json:"method,omitempty"`
+	// Payload holds the contents of the response body (which may be nil or empty).
+	// This is provided here as the raw response.Body() reader will have already
+	// been drained.
+	Payload []byte `json:"-"`
 }
 
 func NewAPIResponse(r *http.Response) *APIResponse {

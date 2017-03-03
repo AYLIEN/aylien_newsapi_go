@@ -18,22 +18,34 @@ package newsapi
 
 type TimeSeriesParams struct {
 	Id                             []int64
+	NotId                          []int64
 	Title                          string
 	Body                           string
 	Text                           string
 	Language                       []string
+	NotLanguage                    []string
 	CategoriesTaxonomy             string
 	CategoriesConfident            string
 	CategoriesId                   []string
+	NotCategoriesId                []string
 	CategoriesLevel                []int32
+	NotCategoriesLevel             []int32
 	EntitiesTitleText              []string
+	NotEntitiesTitleText           []string
 	EntitiesTitleType              []string
+	NotEntitiesTitleType           []string
 	EntitiesTitleLinksDbpedia      []string
+	NotEntitiesTitleLinksDbpedia   []string
 	EntitiesBodyText               []string
+	NotEntitiesBodyText            []string
 	EntitiesBodyType               []string
+	NotEntitiesBodyType            []string
 	EntitiesBodyLinksDbpedia       []string
+	NotEntitiesBodyLinksDbpedia    []string
 	SentimentTitlePolarity         string
+	NotSentimentTitlePolarity      string
 	SentimentBodyPolarity          string
+	NotSentimentBodyPolarity       string
 	MediaImagesCountMin            string
 	MediaImagesCountMax            string
 	MediaImagesWidthMin            string
@@ -43,20 +55,33 @@ type TimeSeriesParams struct {
 	MediaImagesContentLengthMin    string
 	MediaImagesContentLengthMax    string
 	MediaImagesFormat              []string
+	NotMediaImagesFormat           []string
 	MediaVideosCountMin            string
 	MediaVideosCountMax            string
 	AuthorId                       []int32
+	NotAuthorId                    []int32
 	AuthorName                     string
+	NotAuthorName                  string
 	SourceId                       []int32
+	NotSourceId                    []int32
 	SourceName                     []string
+	NotSourceName                  []string
 	SourceDomain                   []string
+	NotSourceDomain                []string
 	SourceLocationsCountry         []string
+	NotSourceLocationsCountry      []string
 	SourceLocationsState           []string
+	NotSourceLocationsState        []string
 	SourceLocationsCity            []string
+	NotSourceLocationsCity         []string
 	SourceScopesCountry            []string
+	NotSourceScopesCountry         []string
 	SourceScopesState              []string
+	NotSourceScopesState           []string
 	SourceScopesCity               []string
+	NotSourceScopesCity            []string
 	SourceScopesLevel              []string
+	NotSourceScopesLevel           []string
 	SourceLinksInCountMin          int32
 	SourceLinksInCountMax          int32
 	SourceRankingsAlexaRankMin     int32
