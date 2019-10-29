@@ -1,9 +1,10 @@
 # Summary
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Sentences** | **[]string** | An array of the suggested summary sentences | [optional] [default to null]
+**Sentences** | **[]string** | An array of the suggested summary sentences | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
