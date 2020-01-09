@@ -15,8 +15,7 @@ type Scope struct {
 	City string `json:"city,omitempty"`
 	// The source scope by country code. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. 
 	Country string `json:"country,omitempty"`
-	// The scope by level
-	Level string `json:"level,omitempty"`
+	Level ScopeLevel `json:"level,omitempty"`
 	// The scope by state
 	State string `json:"state,omitempty"`
 }

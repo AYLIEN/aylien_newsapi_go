@@ -192,7 +192,6 @@ func (a *DefaultApiService) ListAutocompletes(ctx _context.Context, type_ string
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -449,7 +448,6 @@ func (a *DefaultApiService) ListClusters(ctx _context.Context, localVarOptionals
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -476,6 +474,8 @@ type ListCoveragesOpts struct {
     TranslationsEnTitle optional.String
     TranslationsEnBody optional.String
     TranslationsEnText optional.String
+    LinksPermalink optional.Interface
+    NotLinksPermalink optional.Interface
     Language optional.Interface
     NotLanguage optional.Interface
     PublishedAtStart optional.String
@@ -575,6 +575,8 @@ The coverages endpoint allows you to understand the reach a document has had. Fo
  * @param "TranslationsEnTitle" (optional.String) -  This parameter is used for finding stories whose translation title contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
  * @param "TranslationsEnBody" (optional.String) -  This parameter is used for finding stories whose translation body contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
  * @param "TranslationsEnText" (optional.String) -  This parameter is used for finding stories whose translation title or body contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
+ * @param "LinksPermalink" (optional.Interface of []string) -  This parameter is used to find stories based on their url. 
+ * @param "NotLinksPermalink" (optional.Interface of []string) -  This parameter is used to exclude stories based on their url. 
  * @param "Language" (optional.Interface of []string) -  This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
  * @param "NotLanguage" (optional.Interface of []string) -  This parameter is used for excluding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
  * @param "PublishedAtStart" (optional.String) -  This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
@@ -717,6 +719,28 @@ func (a *DefaultApiService) ListCoverages(ctx _context.Context, localVarOptional
 	}
 	if localVarOptionals != nil && localVarOptionals.TranslationsEnText.IsSet() {
 		localVarQueryParams.Add("translations.en.text", parameterToString(localVarOptionals.TranslationsEnText.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.LinksPermalink.IsSet() {
+		t:=localVarOptionals.LinksPermalink.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("links.permalink[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("links.permalink[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotLinksPermalink.IsSet() {
+		t:=localVarOptionals.NotLinksPermalink.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!links.permalink[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!links.permalink[]", parameterToString(t, "multi"))
+		}
 	}
 	if localVarOptionals != nil && localVarOptionals.Language.IsSet() {
 		t:=localVarOptionals.Language.Value()
@@ -1450,7 +1474,6 @@ func (a *DefaultApiService) ListCoverages(ctx _context.Context, localVarOptional
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1477,6 +1500,8 @@ type ListHistogramsOpts struct {
     TranslationsEnTitle optional.String
     TranslationsEnBody optional.String
     TranslationsEnText optional.String
+    LinksPermalink optional.Interface
+    NotLinksPermalink optional.Interface
     Language optional.Interface
     NotLanguage optional.Interface
     PublishedAtStart optional.String
@@ -1571,6 +1596,8 @@ For the numerical metadata that the News API gathers (such as word counts or soc
  * @param "TranslationsEnTitle" (optional.String) -  This parameter is used for finding stories whose translation title contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
  * @param "TranslationsEnBody" (optional.String) -  This parameter is used for finding stories whose translation body contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
  * @param "TranslationsEnText" (optional.String) -  This parameter is used for finding stories whose translation title or body contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
+ * @param "LinksPermalink" (optional.Interface of []string) -  This parameter is used to find stories based on their url. 
+ * @param "NotLinksPermalink" (optional.Interface of []string) -  This parameter is used to exclude stories based on their url. 
  * @param "Language" (optional.Interface of []string) -  This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
  * @param "NotLanguage" (optional.Interface of []string) -  This parameter is used for excluding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
  * @param "PublishedAtStart" (optional.String) -  This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
@@ -1708,6 +1735,28 @@ func (a *DefaultApiService) ListHistograms(ctx _context.Context, localVarOptiona
 	}
 	if localVarOptionals != nil && localVarOptionals.TranslationsEnText.IsSet() {
 		localVarQueryParams.Add("translations.en.text", parameterToString(localVarOptionals.TranslationsEnText.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.LinksPermalink.IsSet() {
+		t:=localVarOptionals.LinksPermalink.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("links.permalink[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("links.permalink[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotLinksPermalink.IsSet() {
+		t:=localVarOptionals.NotLinksPermalink.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!links.permalink[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!links.permalink[]", parameterToString(t, "multi"))
+		}
 	}
 	if localVarOptionals != nil && localVarOptionals.Language.IsSet() {
 		t:=localVarOptionals.Language.Value()
@@ -2410,7 +2459,6 @@ func (a *DefaultApiService) ListHistograms(ctx _context.Context, localVarOptiona
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2437,6 +2485,8 @@ type ListRelatedStoriesOpts struct {
     TranslationsEnTitle optional.String
     TranslationsEnBody optional.String
     TranslationsEnText optional.String
+    LinksPermalink optional.Interface
+    NotLinksPermalink optional.Interface
     Language optional.Interface
     NotLanguage optional.Interface
     PublishedAtStart optional.String
@@ -2536,6 +2586,8 @@ This endpoint is used for finding semantically similar stories based on the para
  * @param "TranslationsEnTitle" (optional.String) -  This parameter is used for finding stories whose translation title contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
  * @param "TranslationsEnBody" (optional.String) -  This parameter is used for finding stories whose translation body contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
  * @param "TranslationsEnText" (optional.String) -  This parameter is used for finding stories whose translation title or body contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
+ * @param "LinksPermalink" (optional.Interface of []string) -  This parameter is used to find stories based on their url. 
+ * @param "NotLinksPermalink" (optional.Interface of []string) -  This parameter is used to exclude stories based on their url. 
  * @param "Language" (optional.Interface of []string) -  This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
  * @param "NotLanguage" (optional.Interface of []string) -  This parameter is used for excluding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
  * @param "PublishedAtStart" (optional.String) -  This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
@@ -2678,6 +2730,28 @@ func (a *DefaultApiService) ListRelatedStories(ctx _context.Context, localVarOpt
 	}
 	if localVarOptionals != nil && localVarOptionals.TranslationsEnText.IsSet() {
 		localVarQueryParams.Add("translations.en.text", parameterToString(localVarOptionals.TranslationsEnText.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.LinksPermalink.IsSet() {
+		t:=localVarOptionals.LinksPermalink.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("links.permalink[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("links.permalink[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotLinksPermalink.IsSet() {
+		t:=localVarOptionals.NotLinksPermalink.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!links.permalink[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!links.permalink[]", parameterToString(t, "multi"))
+		}
 	}
 	if localVarOptionals != nil && localVarOptionals.Language.IsSet() {
 		t:=localVarOptionals.Language.Value()
@@ -3411,7 +3485,6 @@ func (a *DefaultApiService) ListRelatedStories(ctx _context.Context, localVarOpt
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3440,6 +3513,8 @@ type ListStoriesOpts struct {
     TranslationsEnText optional.String
     Language optional.Interface
     NotLanguage optional.Interface
+    LinksPermalink optional.Interface
+    NotLinksPermalink optional.Interface
     PublishedAtStart optional.String
     PublishedAtEnd optional.String
     CategoriesTaxonomy optional.String
@@ -3536,6 +3611,8 @@ The stories endpoint is used to return stories based on parameters you set in yo
  * @param "TranslationsEnText" (optional.String) -  This parameter is used for finding stories whose translation title or body contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
  * @param "Language" (optional.Interface of []string) -  This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
  * @param "NotLanguage" (optional.Interface of []string) -  This parameter is used for excluding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
+ * @param "LinksPermalink" (optional.Interface of []string) -  This parameter is used to find stories based on their url. 
+ * @param "NotLinksPermalink" (optional.Interface of []string) -  This parameter is used to exclude stories based on their url. 
  * @param "PublishedAtStart" (optional.String) -  This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
  * @param "PublishedAtEnd" (optional.String) -  This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
  * @param "CategoriesTaxonomy" (optional.String) -  This parameter is used for defining the type of the taxonomy for the rest of the categories queries. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
@@ -3694,6 +3771,28 @@ func (a *DefaultApiService) ListStories(ctx _context.Context, localVarOptionals 
 			}
 		} else {
 			localVarQueryParams.Add("!language[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.LinksPermalink.IsSet() {
+		t:=localVarOptionals.LinksPermalink.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("links.permalink[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("links.permalink[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotLinksPermalink.IsSet() {
+		t:=localVarOptionals.NotLinksPermalink.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!links.permalink[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!links.permalink[]", parameterToString(t, "multi"))
 		}
 	}
 	if localVarOptionals != nil && localVarOptionals.PublishedAtStart.IsSet() {
@@ -4397,7 +4496,6 @@ func (a *DefaultApiService) ListStories(ctx _context.Context, localVarOptionals 
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -5342,7 +5440,6 @@ func (a *DefaultApiService) ListTimeSeries(ctx _context.Context, localVarOptiona
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -5369,6 +5466,8 @@ type ListTrendsOpts struct {
     TranslationsEnTitle optional.String
     TranslationsEnBody optional.String
     TranslationsEnText optional.String
+    LinksPermalink optional.Interface
+    NotLinksPermalink optional.Interface
     Language optional.Interface
     NotLanguage optional.Interface
     PublishedAtStart optional.String
@@ -5460,6 +5559,8 @@ The trends endpoint allows you to identify the most-mentioned entities, concepts
  * @param "TranslationsEnTitle" (optional.String) -  This parameter is used for finding stories whose translation title contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
  * @param "TranslationsEnBody" (optional.String) -  This parameter is used for finding stories whose translation body contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
  * @param "TranslationsEnText" (optional.String) -  This parameter is used for finding stories whose translation title or body contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
+ * @param "LinksPermalink" (optional.Interface of []string) -  This parameter is used to find stories based on their url. 
+ * @param "NotLinksPermalink" (optional.Interface of []string) -  This parameter is used to exclude stories based on their url. 
  * @param "Language" (optional.Interface of []string) -  This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
  * @param "NotLanguage" (optional.Interface of []string) -  This parameter is used for excluding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
  * @param "PublishedAtStart" (optional.String) -  This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
@@ -5593,6 +5694,28 @@ func (a *DefaultApiService) ListTrends(ctx _context.Context, field string, local
 	}
 	if localVarOptionals != nil && localVarOptionals.TranslationsEnText.IsSet() {
 		localVarQueryParams.Add("translations.en.text", parameterToString(localVarOptionals.TranslationsEnText.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.LinksPermalink.IsSet() {
+		t:=localVarOptionals.LinksPermalink.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("links.permalink[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("links.permalink[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotLinksPermalink.IsSet() {
+		t:=localVarOptionals.NotLinksPermalink.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!links.permalink[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!links.permalink[]", parameterToString(t, "multi"))
+		}
 	}
 	if localVarOptionals != nil && localVarOptionals.Language.IsSet() {
 		t:=localVarOptionals.Language.Value()
@@ -6284,7 +6407,6 @@ func (a *DefaultApiService) ListTrends(ctx _context.Context, field string, local
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

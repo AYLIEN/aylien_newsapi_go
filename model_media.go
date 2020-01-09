@@ -13,12 +13,10 @@ package newsapi
 type Media struct {
 	// The content length of media
 	ContentLength int32 `json:"content_length,omitempty"`
-	// The format of media
-	Format string `json:"format,omitempty"`
+	Format MediaFormat `json:"format,omitempty"`
 	// The height of media
 	Height int32 `json:"height,omitempty"`
-	// The type of media
-	Type string `json:"type,omitempty"`
+	Type MediaType `json:"type,omitempty"`
 	// A URL which points to the media file
 	Url string `json:"url,omitempty"`
 	// The width of media

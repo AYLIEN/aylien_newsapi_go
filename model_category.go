@@ -20,6 +20,5 @@ type Category struct {
 	Links CategoryLinks `json:"links,omitempty"`
 	// The score of the category
 	Score float64 `json:"score,omitempty"`
-	// The taxonomy of the category
-	Taxonomy string `json:"taxonomy,omitempty"`
+	Taxonomy CategoryTaxonomy `json:"taxonomy,omitempty"`
 }

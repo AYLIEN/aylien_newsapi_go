@@ -11,8 +11,7 @@
 package newsapi
 // Sentiment struct for Sentiment
 type Sentiment struct {
-	// Polarity of the sentiment
-	Polarity string `json:"polarity,omitempty"`
+	Polarity SentimentPolarity `json:"polarity,omitempty"`
 	// Polarity score of the sentiment
 	Score float64 `json:"score,omitempty"`
 }

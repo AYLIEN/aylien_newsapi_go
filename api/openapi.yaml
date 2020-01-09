@@ -521,6 +521,30 @@ paths:
           type: string
         style: form
       - description: |
+          This parameter is used to find stories based on their url.
+        explode: true
+        in: query
+        name: links.permalink[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on their url.
+        explode: true
+        in: query
+        name: '!links.permalink[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
           This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
         explode: true
         in: query
@@ -1811,6 +1835,30 @@ paths:
         schema:
           nullable: true
           type: string
+        style: form
+      - description: |
+          This parameter is used to find stories based on their url.
+        explode: true
+        in: query
+        name: links.permalink[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on their url.
+        explode: true
+        in: query
+        name: '!links.permalink[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
         style: form
       - description: |
           This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
@@ -3287,6 +3335,30 @@ paths:
           type: string
         style: form
       - description: |
+          This parameter is used to find stories based on their url.
+        explode: true
+        in: query
+        name: links.permalink[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on their url.
+        explode: true
+        in: query
+        name: '!links.permalink[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
           This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
         explode: true
         in: query
@@ -4614,6 +4686,30 @@ paths:
             - it
             - es
             - pt
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on their url.
+        explode: true
+        in: query
+        name: links.permalink[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on their url.
+        explode: true
+        in: query
+        name: '!links.permalink[]'
+        required: false
+        schema:
+          items:
             type: string
           nullable: true
           type: array
@@ -7285,6 +7381,30 @@ paths:
           type: string
         style: form
       - description: |
+          This parameter is used to find stories based on their url.
+        explode: true
+        in: query
+        name: links.permalink[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on their url.
+        explode: true
+        in: query
+        name: '!links.permalink[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
           This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.
         explode: true
         in: query
@@ -8481,6 +8601,32 @@ components:
       explode: true
       in: query
       name: clusters[]
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    links_permalink:
+      description: |
+        This parameter is used to find stories based on their url.
+      explode: true
+      in: query
+      name: links.permalink[]
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    notlinks_permalink:
+      description: |
+        This parameter is used to exclude stories based on their url.
+      explode: true
+      in: query
+      name: '!links.permalink[]'
       required: false
       schema:
         items:
@@ -10026,7 +10172,6 @@ components:
           parent: parent
           self: self
         id: id
-        taxonomy: iab-qag
       properties:
         confident:
           description: It defines whether the extracted category is confident or not
@@ -10045,12 +10190,14 @@ components:
           format: double
           type: number
         taxonomy:
-          description: The taxonomy of the category
-          enum:
-          - iab-qag
-          - iptc-subjectcode
-          type: string
+          $ref: '#/components/schemas/CategoryTaxonomy'
       type: object
+    CategoryTaxonomy:
+      description: The taxonomy of the category
+      enum:
+      - iab-qag
+      - iptc-subjectcode
+      type: string
     CategoryLinks:
       example:
         parent: parent
@@ -10164,10 +10311,8 @@ components:
           sentiment:
             body:
               score: 0.10246457001441578
-              polarity: positive
             title:
               score: 0.10246457001441578
-              polarity: positive
           hashtags:
           - hashtags
           - hashtags
@@ -10182,15 +10327,11 @@ components:
           paragraphs_count: 7
           language: language
           media:
-          - format: BMP
-            width: 4
-            type: image
+          - width: 4
             content_length: 3
             url: url
             height: 2
-          - format: BMP
-            width: 4
-            type: image
+          - width: 4
             content_length: 3
             url: url
             height: 2
@@ -10220,11 +10361,9 @@ components:
             scopes:
             - country: country
               city: city
-              level: international
               state: state
             - country: country
               city: city
-              level: international
               state: state
             title: title
           body: body
@@ -10299,7 +10438,6 @@ components:
               parent: parent
               self: self
             id: id
-            taxonomy: iab-qag
           - score: 1.4658129805029452
             level: 6
             confident: true
@@ -10307,7 +10445,6 @@ components:
               parent: parent
               self: self
             id: id
-            taxonomy: iab-qag
           id: 9
           social_shares_count:
             facebook:
@@ -10342,10 +10479,8 @@ components:
           sentiment:
             body:
               score: 0.10246457001441578
-              polarity: positive
             title:
               score: 0.10246457001441578
-              polarity: positive
           hashtags:
           - hashtags
           - hashtags
@@ -10360,15 +10495,11 @@ components:
           paragraphs_count: 7
           language: language
           media:
-          - format: BMP
-            width: 4
-            type: image
+          - width: 4
             content_length: 3
             url: url
             height: 2
-          - format: BMP
-            width: 4
-            type: image
+          - width: 4
             content_length: 3
             url: url
             height: 2
@@ -10398,11 +10529,9 @@ components:
             scopes:
             - country: country
               city: city
-              level: international
               state: state
             - country: country
               city: city
-              level: international
               state: state
             title: title
           body: body
@@ -10477,7 +10606,6 @@ components:
               parent: parent
               self: self
             id: id
-            taxonomy: iab-qag
           - score: 1.4658129805029452
             level: 6
             confident: true
@@ -10485,7 +10613,6 @@ components:
               parent: parent
               self: self
             id: id
-            taxonomy: iab-qag
           id: 9
           social_shares_count:
             facebook:
@@ -10738,11 +10865,29 @@ components:
           description: The state of the location
           type: string
       type: object
+    MediaFormat:
+      description: The format of media
+      enum:
+      - BMP
+      - GIF
+      - JPEG
+      - PNG
+      - TIFF
+      - PSD
+      - ICO
+      - CUR
+      - WEBP
+      - SVG
+      type: string
+    MediaType:
+      description: The type of media
+      enum:
+      - image
+      - video
+      type: string
     Media:
       example:
-        format: BMP
         width: 4
-        type: image
         content_length: 3
         url: url
         height: 2
@@ -10752,29 +10897,13 @@ components:
           format: int32
           type: integer
         format:
-          description: The format of media
-          enum:
-          - BMP
-          - GIF
-          - JPEG
-          - PNG
-          - TIFF
-          - PSD
-          - ICO
-          - CUR
-          - WEBP
-          - SVG
-          type: string
+          $ref: '#/components/schemas/MediaFormat'
         height:
           description: The height of media
           format: int32
           type: integer
         type:
-          description: The type of media
-          enum:
-          - image
-          - video
-          type: string
+          $ref: '#/components/schemas/MediaType'
         url:
           description: A URL which points to the media file
           type: string
@@ -10828,10 +10957,8 @@ components:
           sentiment:
             body:
               score: 0.10246457001441578
-              polarity: positive
             title:
               score: 0.10246457001441578
-              polarity: positive
           hashtags:
           - hashtags
           - hashtags
@@ -10846,15 +10973,11 @@ components:
           paragraphs_count: 7
           language: language
           media:
-          - format: BMP
-            width: 4
-            type: image
+          - width: 4
             content_length: 3
             url: url
             height: 2
-          - format: BMP
-            width: 4
-            type: image
+          - width: 4
             content_length: 3
             url: url
             height: 2
@@ -10884,11 +11007,9 @@ components:
             scopes:
             - country: country
               city: city
-              level: international
               state: state
             - country: country
               city: city
-              level: international
               state: state
             title: title
           body: body
@@ -10963,7 +11084,6 @@ components:
               parent: parent
               self: self
             id: id
-            taxonomy: iab-qag
           - score: 1.4658129805029452
             level: 6
             confident: true
@@ -10971,7 +11091,6 @@ components:
               parent: parent
               self: self
             id: id
-            taxonomy: iab-qag
           id: 9
           social_shares_count:
             facebook:
@@ -11006,10 +11125,8 @@ components:
           sentiment:
             body:
               score: 0.10246457001441578
-              polarity: positive
             title:
               score: 0.10246457001441578
-              polarity: positive
           hashtags:
           - hashtags
           - hashtags
@@ -11024,15 +11141,11 @@ components:
           paragraphs_count: 7
           language: language
           media:
-          - format: BMP
-            width: 4
-            type: image
+          - width: 4
             content_length: 3
             url: url
             height: 2
-          - format: BMP
-            width: 4
-            type: image
+          - width: 4
             content_length: 3
             url: url
             height: 2
@@ -11062,11 +11175,9 @@ components:
             scopes:
             - country: country
               city: city
-              level: international
               state: state
             - country: country
               city: city
-              level: international
               state: state
             title: title
           body: body
@@ -11141,7 +11252,6 @@ components:
               parent: parent
               self: self
             id: id
-            taxonomy: iab-qag
           - score: 1.4658129805029452
             level: 6
             confident: true
@@ -11149,7 +11259,6 @@ components:
               parent: parent
               self: self
             id: id
-            taxonomy: iab-qag
           id: 9
           social_shares_count:
             facebook:
@@ -11216,11 +11325,17 @@ components:
           description: Title of the story
           type: string
       type: object
+    ScopeLevel:
+      description: The scope by level
+      enum:
+      - international
+      - national
+      - local
+      type: string
     Scope:
       example:
         country: country
         city: city
-        level: international
         state: state
       properties:
         city:
@@ -11231,28 +11346,24 @@ components:
             The source scope by country code. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
           type: string
         level:
-          description: The scope by level
-          enum:
-          - international
-          - national
-          - local
-          type: string
+          $ref: '#/components/schemas/ScopeLevel'
         state:
           description: The scope by state
           type: string
       type: object
+    SentimentPolarity:
+      description: Polarity of the sentiment
+      enum:
+      - positive
+      - neutral
+      - negative
+      type: string
     Sentiment:
       example:
         score: 0.10246457001441578
-        polarity: positive
       properties:
         polarity:
-          description: Polarity of the sentiment
-          enum:
-          - positive
-          - neutral
-          - negative
-          type: string
+          $ref: '#/components/schemas/SentimentPolarity'
         score:
           description: Polarity score of the sentiment
           format: double
@@ -11264,10 +11375,8 @@ components:
       example:
         body:
           score: 0.10246457001441578
-          polarity: positive
         title:
           score: 0.10246457001441578
-          polarity: positive
       properties:
         body:
           $ref: '#/components/schemas/Sentiment'
@@ -11359,11 +11468,9 @@ components:
         scopes:
         - country: country
           city: city
-          level: international
           state: state
         - country: country
           city: city
-          level: international
           state: state
         title: title
       properties:
@@ -11419,10 +11526,8 @@ components:
           sentiment:
             body:
               score: 0.10246457001441578
-              polarity: positive
             title:
               score: 0.10246457001441578
-              polarity: positive
           hashtags:
           - hashtags
           - hashtags
@@ -11437,15 +11542,11 @@ components:
           paragraphs_count: 7
           language: language
           media:
-          - format: BMP
-            width: 4
-            type: image
+          - width: 4
             content_length: 3
             url: url
             height: 2
-          - format: BMP
-            width: 4
-            type: image
+          - width: 4
             content_length: 3
             url: url
             height: 2
@@ -11475,11 +11576,9 @@ components:
             scopes:
             - country: country
               city: city
-              level: international
               state: state
             - country: country
               city: city
-              level: international
               state: state
             title: title
           body: body
@@ -11554,7 +11653,6 @@ components:
               parent: parent
               self: self
             id: id
-            taxonomy: iab-qag
           - score: 1.4658129805029452
             level: 6
             confident: true
@@ -11562,7 +11660,6 @@ components:
               parent: parent
               self: self
             id: id
-            taxonomy: iab-qag
           id: 9
           social_shares_count:
             facebook:
@@ -11597,10 +11694,8 @@ components:
           sentiment:
             body:
               score: 0.10246457001441578
-              polarity: positive
             title:
               score: 0.10246457001441578
-              polarity: positive
           hashtags:
           - hashtags
           - hashtags
@@ -11615,15 +11710,11 @@ components:
           paragraphs_count: 7
           language: language
           media:
-          - format: BMP
-            width: 4
-            type: image
+          - width: 4
             content_length: 3
             url: url
             height: 2
-          - format: BMP
-            width: 4
-            type: image
+          - width: 4
             content_length: 3
             url: url
             height: 2
@@ -11653,11 +11744,9 @@ components:
             scopes:
             - country: country
               city: city
-              level: international
               state: state
             - country: country
               city: city
-              level: international
               state: state
             title: title
           body: body
@@ -11732,7 +11821,6 @@ components:
               parent: parent
               self: self
             id: id
-            taxonomy: iab-qag
           - score: 1.4658129805029452
             level: 6
             confident: true
@@ -11740,7 +11828,6 @@ components:
               parent: parent
               self: self
             id: id
-            taxonomy: iab-qag
           id: 9
           social_shares_count:
             facebook:
@@ -11788,10 +11875,8 @@ components:
         sentiment:
           body:
             score: 0.10246457001441578
-            polarity: positive
           title:
             score: 0.10246457001441578
-            polarity: positive
         hashtags:
         - hashtags
         - hashtags
@@ -11806,15 +11891,11 @@ components:
         paragraphs_count: 7
         language: language
         media:
-        - format: BMP
-          width: 4
-          type: image
+        - width: 4
           content_length: 3
           url: url
           height: 2
-        - format: BMP
-          width: 4
-          type: image
+        - width: 4
           content_length: 3
           url: url
           height: 2
@@ -11844,11 +11925,9 @@ components:
           scopes:
           - country: country
             city: city
-            level: international
             state: state
           - country: country
             city: city
-            level: international
             state: state
           title: title
         body: body
@@ -11923,7 +12002,6 @@ components:
             parent: parent
             self: self
           id: id
-          taxonomy: iab-qag
         - score: 1.4658129805029452
           level: 6
           confident: true
@@ -11931,7 +12009,6 @@ components:
             parent: parent
             self: self
           id: id
-          taxonomy: iab-qag
         id: 9
         social_shares_count:
           facebook:
