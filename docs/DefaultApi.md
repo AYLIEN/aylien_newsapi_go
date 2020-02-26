@@ -18,6 +18,7 @@ Method | HTTP request | Description
 ## ListAutocompletes
 
 > Autocompletes ListAutocompletes(ctx, type_, term, optional)
+
 List autocompletes
 
 The autocompletes endpoint a string of characters provided to it, and then returns suggested terms that are the most likely full words or strings. The terms returned by the News API are based on parameters the type parameters you can see below. For example, if you provide the autocompletes endpoint with the term `New York C` and select the type `dbpedia_resources`, the API will return links to the DBpedia resources `New_York_City`, `New_York_City_Subway`, `New_York_City_Police_Department`, and so on. 
@@ -65,6 +66,7 @@ Name | Type | Description  | Notes
 ## ListClusters
 
 > Clusters ListClusters(ctx, optional)
+
 List Clusters
 
 The clusters endpoint is used to return clusters based on parameters you set in your query. 
@@ -118,6 +120,7 @@ Name | Type | Description  | Notes
 ## ListCoverages
 
 > Coverages ListCoverages(ctx, optional)
+
 List coverages
 
 The coverages endpoint allows you to understand the reach a document has had. For example, you can track the coverage of a press release or a Tweet based on how many times it has been mentioned in stories. 
@@ -253,6 +256,7 @@ Name | Type | Description  | Notes
 ## ListHistograms
 
 > Histograms ListHistograms(ctx, optional)
+
 List histograms
 
 For the numerical metadata that the News API gathers (such as word counts or social shares for example), you can use the histograms endpoint to access and display this information. As this endpoint does not return actual stories, the results you are given will not count towards your story allowance provided by your subscription, so you can effectively query this endpoint free of charge. 
@@ -383,6 +387,7 @@ Name | Type | Description  | Notes
 ## ListRelatedStories
 
 > RelatedStories ListRelatedStories(ctx, optional)
+
 List related stories
 
 This endpoint is used for finding semantically similar stories based on the parameters you provide as inputs. For example, if you want to find stories similar to a Tweet or any text extract you input, the related stories endpoint will analyze the entities present and the meaning of the text, and find stories with a similar meaning. The maximum number of related stories returned is 100. 
@@ -518,6 +523,7 @@ Name | Type | Description  | Notes
 ## ListStories
 
 > Stories ListStories(ctx, optional)
+
 List Stories
 
 The stories endpoint is used to return stories based on parameters you set in your query. The News API crawler gathers articles in near real-time and stores information about them, or metadata. Below you can see all of the query parameters, which you can use to narrow down your query. 
@@ -650,6 +656,7 @@ Name | Type | Description  | Notes
 ## ListTimeSeries
 
 > TimeSeriesList ListTimeSeries(ctx, optional)
+
 List time series
 
 The time series endpoint allows you to track information contained in stories over time. This information can be anything from mentions of a topic or entities, sentiment about a topic, or the volume of stories published by a source, to name but a few. The full list of parameters is given below. Using the [Date Math Syntax](https://newsapi.aylien.com/docs/working-with-dates), you can easily set your query to return information from any time period, from the current point in time to when the News API started collecting stories. The returned information can be rounded to a time also specified by you, for example by setting the results into hourly, daily, or weekly data points. 
@@ -775,6 +782,7 @@ Name | Type | Description  | Notes
 ## ListTrends
 
 > Trends ListTrends(ctx, field, optional)
+
 List trends
 
 The trends endpoint allows you to identify the most-mentioned entities, concepts and keywords relevant to your query. For example, this endpoint allows you to set parameters like a time period, a subject category, or an entity, and your request will return the most mentioned entities or keywords that are mentioned in relation to your query. 
