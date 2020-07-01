@@ -9,10 +9,17 @@
  */
 
 package newsapi
+import (
+	"time"
+)
 // Trends struct for Trends
 type Trends struct {
 	// The field of trends
 	Field string `json:"field,omitempty"`
 	// An array of trends
 	Trends []Trend `json:"trends,omitempty"`
+	// The end of a period in which searched stories were published
+	PublishedAtEnd time.Time `json:"published_at.end,omitempty"`
+	// The start of a period in which searched stories were published
+	PublishedAtStart time.Time `json:"published_at.start,omitempty"`
 }

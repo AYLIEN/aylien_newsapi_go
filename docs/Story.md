@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 **Source** | [**Source**](Source.md) |  | [optional] 
 **Summary** | [**Summary**](Summary.md) |  | [optional] 
 **Title** | **string** | Title of the story | [optional] 
-**Translations** | [**StoryTranslations**](Story_translations.md) |  | [optional] 
+**Translations** | [**StoryTranslations**](StoryTranslations.md) |  | [optional] 
 **WordsCount** | **int32** | Word count of the story body | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

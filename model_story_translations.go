@@ -11,5 +11,5 @@
 package newsapi
 // StoryTranslations Translations of the story. Each language has it's own key and object
 type StoryTranslations struct {
-	En StoryTranslationsEn `json:"en,omitempty"`
+	En StoryTranslation `json:"en,omitempty"`
 }

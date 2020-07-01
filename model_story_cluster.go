@@ -12,7 +12,7 @@ package newsapi
 // StoryCluster struct for StoryCluster
 type StoryCluster struct {
 	// A unique identification for the cluster
-	Id int32 `json:"id,omitempty"`
+	Id int64 `json:"id,omitempty"`
 	// Suggested labels for the cluster
 	Phrases []string `json:"phrases,omitempty"`
 	// The cluster score

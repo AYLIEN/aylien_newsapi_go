@@ -9,6 +9,9 @@
  */
 
 package newsapi
+import (
+	"time"
+)
 // Histograms struct for Histograms
 type Histograms struct {
 	Field string `json:"field,omitempty"`
@@ -20,4 +23,8 @@ type Histograms struct {
 	IntervalWidth int32 `json:"interval.width,omitempty"`
 	// The intervals of the histograms
 	Intervals []HistogramInterval `json:"intervals,omitempty"`
+	// The end of a period in which searched stories were published
+	PublishedAtEnd time.Time `json:"published_at.end,omitempty"`
+	// The start of a period in which searched stories were published
+	PublishedAtStart time.Time `json:"published_at.start,omitempty"`
 }

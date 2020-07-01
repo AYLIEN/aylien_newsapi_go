@@ -1,10 +1,11 @@
-# StoryTranslations
+# StoryTranslation
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**En** | [**StoryTranslation**](StoryTranslation.md) |  | [optional] 
+**Body** | **string** | Translation of body | [optional] 
+**Title** | **string** | Translation of title | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

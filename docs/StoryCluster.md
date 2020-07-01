@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **int32** | A unique identification for the cluster | [optional] 
+**Id** | **int64** | A unique identification for the cluster | [optional] 
 **Phrases** | **[]string** | Suggested labels for the cluster | [optional] 
 **Score** | **float64** | The cluster score | [optional] 
 **Size** | **int32** | Size of the cluster | [optional] 

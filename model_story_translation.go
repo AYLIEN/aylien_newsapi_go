@@ -9,14 +9,10 @@
  */
 
 package newsapi
-// StoryLinks struct for StoryLinks
-type StoryLinks struct {
-	// The story canonical URL
-	Canonical string `json:"canonical,omitempty"`
-	// The story permalink URL
-	Permalink string `json:"permalink,omitempty"`
-	// The related stories URL
-	RelatedStories string `json:"related_stories,omitempty"`
-	// The clusters endpoint URL for this story
-	Clusters string `json:"clusters,omitempty"`
+// StoryTranslation struct for StoryTranslation
+type StoryTranslation struct {
+	// Translation of body
+	Body string `json:"body,omitempty"`
+	// Translation of title
+	Title string `json:"title,omitempty"`
 }

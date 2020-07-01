@@ -15,6 +15,8 @@ type Category struct {
 	Confident bool `json:"confident,omitempty"`
 	// The ID of the category
 	Id string `json:"id,omitempty"`
+	// The label of the category
+	Label string `json:"label,omitempty"`
 	// The level of the category
 	Level int32 `json:"level,omitempty"`
 	Links CategoryLinks `json:"links,omitempty"`

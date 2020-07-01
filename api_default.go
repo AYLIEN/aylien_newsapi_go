@@ -56,7 +56,6 @@ func (a *DefaultApiService) ListAutocompletes(ctx _context.Context, type_ string
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/autocompletes"
-
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
@@ -133,16 +132,6 @@ func (a *DefaultApiService) ListAutocompletes(ctx _context.Context, type_ string
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 200 {
-			var v Autocompletes
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v Errors
@@ -222,6 +211,11 @@ type ListClustersOpts struct {
     LatestStoryEnd optional.String
     LocationCountry optional.Interface
     NotLocationCountry optional.Interface
+    Return_ optional.Interface
+    SortBy optional.String
+    SortDirection optional.String
+    Cursor optional.String
+    PerPage optional.Int32
 }
 
 /*
@@ -241,6 +235,11 @@ The clusters endpoint is used to return clusters based on parameters you set in 
  * @param "LatestStoryEnd" (optional.String) -  This parameter is used for finding clusters whose publication date of its latest story is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
  * @param "LocationCountry" (optional.Interface of []string) -  This parameter is used for finding clusters belonging to a specific country. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
  * @param "NotLocationCountry" (optional.Interface of []string) -  This parameter is used for excluding clusters belonging to a specific country. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
+ * @param "Return_" (optional.Interface of []string) -  This parameter is used for specifying return fields.
+ * @param "SortBy" (optional.String) -  This parameter is used for changing the order column of the results. You can read about sorting results [here](https://newsapi.aylien.com/docs/sorting-results). 
+ * @param "SortDirection" (optional.String) -  This parameter is used for changing the order direction of the result. You can read about sorting results [here](https://newsapi.aylien.com/docs/sorting-results). 
+ * @param "Cursor" (optional.String) -  This parameter is used for finding a specific page. You can read more about pagination of results [here](https://newsapi.aylien.com/docs/pagination-of-results). 
+ * @param "PerPage" (optional.Int32) -  This parameter is used for specifying number of items in each page You can read more about pagination of results [here](https://newsapi.aylien.com/docs/pagination-of-results) 
 @return Clusters
 */
 func (a *DefaultApiService) ListClusters(ctx _context.Context, localVarOptionals *ListClustersOpts) (Clusters, *_nethttp.Response, error) {
@@ -255,7 +254,6 @@ func (a *DefaultApiService) ListClusters(ctx _context.Context, localVarOptionals
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/clusters"
-
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
@@ -328,6 +326,29 @@ func (a *DefaultApiService) ListClusters(ctx _context.Context, localVarOptionals
 			localVarQueryParams.Add("!location.country", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.Return_.IsSet() {
+		t:=localVarOptionals.Return_.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("return[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("return[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.SortBy.IsSet() {
+		localVarQueryParams.Add("sort_by", parameterToString(localVarOptionals.SortBy.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SortDirection.IsSet() {
+		localVarQueryParams.Add("sort_direction", parameterToString(localVarOptionals.SortDirection.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Cursor.IsSet() {
+		localVarQueryParams.Add("cursor", parameterToString(localVarOptionals.Cursor.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PerPage.IsSet() {
+		localVarQueryParams.Add("per_page", parameterToString(localVarOptionals.PerPage.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -389,16 +410,6 @@ func (a *DefaultApiService) ListClusters(ctx _context.Context, localVarOptionals
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 200 {
-			var v Clusters
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v Errors
@@ -464,8 +475,8 @@ func (a *DefaultApiService) ListClusters(ctx _context.Context, localVarOptionals
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// ListCoveragesOpts Optional parameters for the method 'ListCoverages'
-type ListCoveragesOpts struct {
+// ListHistogramsOpts Optional parameters for the method 'ListHistograms'
+type ListHistogramsOpts struct {
     Id optional.Interface
     NotId optional.Interface
     Title optional.String
@@ -484,6 +495,8 @@ type ListCoveragesOpts struct {
     CategoriesConfident optional.Bool
     CategoriesId optional.Interface
     NotCategoriesId optional.Interface
+    CategoriesLabel optional.Interface
+    NotCategoriesLabel optional.Interface
     CategoriesLevel optional.Interface
     NotCategoriesLevel optional.Interface
     EntitiesTitleText optional.Interface
@@ -552,21 +565,17 @@ type ListCoveragesOpts struct {
     SocialSharesCountRedditMin optional.Int32
     SocialSharesCountRedditMax optional.Int32
     Clusters optional.Interface
-    Return_ optional.Interface
-    StoryId optional.Int64
-    StoryUrl optional.String
-    StoryTitle optional.String
-    StoryBody optional.String
-    StoryPublishedAt optional.Time
-    StoryLanguage optional.String
-    PerPage optional.Int32
+    IntervalStart optional.Int32
+    IntervalEnd optional.Int32
+    IntervalWidth optional.Int32
+    Field optional.String
 }
 
 /*
-ListCoverages List coverages
-The coverages endpoint allows you to understand the reach a document has had. For example, you can track the coverage of a press release or a Tweet based on how many times it has been mentioned in stories. 
+ListHistograms List histograms
+For the numerical metadata that the News API gathers (such as word counts or social shares for example), you can use the histograms endpoint to access and display this information. As this endpoint does not return actual stories, the results you are given will not count towards your story allowance provided by your subscription, so you can effectively query this endpoint free of charge. 
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *ListCoveragesOpts - Optional Parameters:
+ * @param optional nil or *ListHistogramsOpts - Optional Parameters:
  * @param "Id" (optional.Interface of []int64) -  This parameter is used for finding stories by story id. 
  * @param "NotId" (optional.Interface of []int64) -  This parameter is used for excluding stories by story id. 
  * @param "Title" (optional.String) -  This parameter is used for finding stories whose title contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
@@ -585,6 +594,8 @@ The coverages endpoint allows you to understand the reach a document has had. Fo
  * @param "CategoriesConfident" (optional.Bool) -  This parameter is used for finding stories whose categories are confident. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "CategoriesId" (optional.Interface of []string) -  This parameter is used for finding stories by categories id. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "NotCategoriesId" (optional.Interface of []string) -  This parameter is used for excluding stories by categories id. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "CategoriesLabel" (optional.Interface of []string) -  This parameter is used for finding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "NotCategoriesLabel" (optional.Interface of []string) -  This parameter is used for excluding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "CategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "NotCategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for excluding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "EntitiesTitleText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
@@ -653,29 +664,24 @@ The coverages endpoint allows you to understand the reach a document has had. Fo
  * @param "SocialSharesCountRedditMin" (optional.Int32) -  This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value. 
  * @param "SocialSharesCountRedditMax" (optional.Int32) -  This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value. 
  * @param "Clusters" (optional.Interface of []string) -  This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering). 
- * @param "Return_" (optional.Interface of []string) -  This parameter is used for specifying return fields.
- * @param "StoryId" (optional.Int64) -  A story id
- * @param "StoryUrl" (optional.String) -  An article or webpage
- * @param "StoryTitle" (optional.String) -  Title of the article
- * @param "StoryBody" (optional.String) -  Body of the article
- * @param "StoryPublishedAt" (optional.Time) -  Publish date of the article. If you use a url or title and body of an article for getting coverages, this parameter is required. The format used is a restricted form of the canonical representation of dateTime in the [XML Schema specification (ISO 8601)](https://www.w3.org/TR/xmlschema-2/#dateTime). 
- * @param "StoryLanguage" (optional.String) -  This parameter is used for setting the language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
- * @param "PerPage" (optional.Int32) -  This parameter is used for specifying number of items in each page. 
-@return Coverages
+ * @param "IntervalStart" (optional.Int32) -  This parameter is used for setting the start data point of histogram intervals. 
+ * @param "IntervalEnd" (optional.Int32) -  This parameter is used for setting the end data point of histogram intervals. 
+ * @param "IntervalWidth" (optional.Int32) -  This parameter is used for setting the width of histogram intervals. 
+ * @param "Field" (optional.String) -  This parameter is used for specifying the y-axis variable for the histogram. 
+@return Histograms
 */
-func (a *DefaultApiService) ListCoverages(ctx _context.Context, localVarOptionals *ListCoveragesOpts) (Coverages, *_nethttp.Response, error) {
+func (a *DefaultApiService) ListHistograms(ctx _context.Context, localVarOptionals *ListHistogramsOpts) (Histograms, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Coverages
+		localVarReturnValue  Histograms
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/coverages"
-
+	localVarPath := a.client.cfg.BasePath + "/histograms"
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
@@ -796,6 +802,28 @@ func (a *DefaultApiService) ListCoverages(ctx _context.Context, localVarOptional
 			}
 		} else {
 			localVarQueryParams.Add("!categories.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.CategoriesLabel.IsSet() {
+		t:=localVarOptionals.CategoriesLabel.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("categories.label[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("categories.label[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotCategoriesLabel.IsSet() {
+		t:=localVarOptionals.NotCategoriesLabel.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!categories.label[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!categories.label[]", parameterToString(t, "multi"))
 		}
 	}
 	if localVarOptionals != nil && localVarOptionals.CategoriesLevel.IsSet() {
@@ -1322,1011 +1350,6 @@ func (a *DefaultApiService) ListCoverages(ctx _context.Context, localVarOptional
 			localVarQueryParams.Add("clusters[]", parameterToString(t, "multi"))
 		}
 	}
-	if localVarOptionals != nil && localVarOptionals.Return_.IsSet() {
-		t:=localVarOptionals.Return_.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("return[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("return[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.StoryId.IsSet() {
-		localVarQueryParams.Add("story_id", parameterToString(localVarOptionals.StoryId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.StoryUrl.IsSet() {
-		localVarQueryParams.Add("story_url", parameterToString(localVarOptionals.StoryUrl.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.StoryTitle.IsSet() {
-		localVarQueryParams.Add("story_title", parameterToString(localVarOptionals.StoryTitle.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.StoryBody.IsSet() {
-		localVarQueryParams.Add("story_body", parameterToString(localVarOptionals.StoryBody.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.StoryPublishedAt.IsSet() {
-		localVarQueryParams.Add("story_published_at", parameterToString(localVarOptionals.StoryPublishedAt.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.StoryLanguage.IsSet() {
-		localVarQueryParams.Add("story_language", parameterToString(localVarOptionals.StoryLanguage.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.PerPage.IsSet() {
-		localVarQueryParams.Add("per_page", parameterToString(localVarOptionals.PerPage.Value(), ""))
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/xml"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if ctx != nil {
-		// API Key Authentication
-		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
-			var key string
-			if auth.Prefix != "" {
-				key = auth.Prefix + " " + auth.Key
-			} else {
-				key = auth.Key
-			}
-			localVarHeaderParams["X-AYLIEN-NewsAPI-Application-ID"] = key
-		}
-	}
-	if ctx != nil {
-		// API Key Authentication
-		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
-			var key string
-			if auth.Prefix != "" {
-				key = auth.Prefix + " " + auth.Key
-			} else {
-				key = auth.Key
-			}
-			localVarHeaderParams["X-AYLIEN-NewsAPI-Application-Key"] = key
-		}
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 200 {
-			var v Coverages
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Errors
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Errors
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v Errors
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v Errors
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v Errors
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-// ListHistogramsOpts Optional parameters for the method 'ListHistograms'
-type ListHistogramsOpts struct {
-    Id optional.Interface
-    NotId optional.Interface
-    Title optional.String
-    Body optional.String
-    Text optional.String
-    TranslationsEnTitle optional.String
-    TranslationsEnBody optional.String
-    TranslationsEnText optional.String
-    LinksPermalink optional.Interface
-    NotLinksPermalink optional.Interface
-    Language optional.Interface
-    NotLanguage optional.Interface
-    PublishedAtStart optional.String
-    PublishedAtEnd optional.String
-    CategoriesTaxonomy optional.String
-    CategoriesConfident optional.Bool
-    CategoriesId optional.Interface
-    NotCategoriesId optional.Interface
-    CategoriesLevel optional.Interface
-    NotCategoriesLevel optional.Interface
-    EntitiesTitleText optional.Interface
-    NotEntitiesTitleText optional.Interface
-    EntitiesTitleType optional.Interface
-    NotEntitiesTitleType optional.Interface
-    EntitiesTitleLinksDbpedia optional.Interface
-    NotEntitiesTitleLinksDbpedia optional.Interface
-    EntitiesBodyText optional.Interface
-    NotEntitiesBodyText optional.Interface
-    EntitiesBodyType optional.Interface
-    NotEntitiesBodyType optional.Interface
-    EntitiesBodyLinksDbpedia optional.Interface
-    NotEntitiesBodyLinksDbpedia optional.Interface
-    SentimentTitlePolarity optional.String
-    NotSentimentTitlePolarity optional.String
-    SentimentBodyPolarity optional.String
-    NotSentimentBodyPolarity optional.String
-    MediaImagesCountMin optional.Int32
-    MediaImagesCountMax optional.Int32
-    MediaImagesWidthMin optional.Int32
-    MediaImagesWidthMax optional.Int32
-    MediaImagesHeightMin optional.Int32
-    MediaImagesHeightMax optional.Int32
-    MediaImagesContentLengthMin optional.Int32
-    MediaImagesContentLengthMax optional.Int32
-    MediaImagesFormat optional.Interface
-    NotMediaImagesFormat optional.Interface
-    MediaVideosCountMin optional.Int32
-    MediaVideosCountMax optional.Int32
-    AuthorId optional.Interface
-    NotAuthorId optional.Interface
-    AuthorName optional.String
-    NotAuthorName optional.String
-    SourceId optional.Interface
-    NotSourceId optional.Interface
-    SourceName optional.Interface
-    NotSourceName optional.Interface
-    SourceDomain optional.Interface
-    NotSourceDomain optional.Interface
-    SourceLocationsCountry optional.Interface
-    NotSourceLocationsCountry optional.Interface
-    SourceLocationsState optional.Interface
-    NotSourceLocationsState optional.Interface
-    SourceLocationsCity optional.Interface
-    NotSourceLocationsCity optional.Interface
-    SourceScopesCountry optional.Interface
-    NotSourceScopesCountry optional.Interface
-    SourceScopesState optional.Interface
-    NotSourceScopesState optional.Interface
-    SourceScopesCity optional.Interface
-    NotSourceScopesCity optional.Interface
-    SourceScopesLevel optional.Interface
-    NotSourceScopesLevel optional.Interface
-    SourceLinksInCountMin optional.Int32
-    SourceLinksInCountMax optional.Int32
-    SourceRankingsAlexaRankMin optional.Int32
-    SourceRankingsAlexaRankMax optional.Int32
-    SourceRankingsAlexaCountry optional.Interface
-    SocialSharesCountFacebookMin optional.Int32
-    SocialSharesCountFacebookMax optional.Int32
-    SocialSharesCountGooglePlusMin optional.Int32
-    SocialSharesCountGooglePlusMax optional.Int32
-    SocialSharesCountLinkedinMin optional.Int32
-    SocialSharesCountLinkedinMax optional.Int32
-    SocialSharesCountRedditMin optional.Int32
-    SocialSharesCountRedditMax optional.Int32
-    IntervalStart optional.Int32
-    IntervalEnd optional.Int32
-    IntervalWidth optional.Int32
-    Field optional.String
-}
-
-/*
-ListHistograms List histograms
-For the numerical metadata that the News API gathers (such as word counts or social shares for example), you can use the histograms endpoint to access and display this information. As this endpoint does not return actual stories, the results you are given will not count towards your story allowance provided by your subscription, so you can effectively query this endpoint free of charge. 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *ListHistogramsOpts - Optional Parameters:
- * @param "Id" (optional.Interface of []int64) -  This parameter is used for finding stories by story id. 
- * @param "NotId" (optional.Interface of []int64) -  This parameter is used for excluding stories by story id. 
- * @param "Title" (optional.String) -  This parameter is used for finding stories whose title contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
- * @param "Body" (optional.String) -  This parameter is used for finding stories whose body contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
- * @param "Text" (optional.String) -  This parameter is used for finding stories whose title or body contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
- * @param "TranslationsEnTitle" (optional.String) -  This parameter is used for finding stories whose translation title contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
- * @param "TranslationsEnBody" (optional.String) -  This parameter is used for finding stories whose translation body contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
- * @param "TranslationsEnText" (optional.String) -  This parameter is used for finding stories whose translation title or body contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
- * @param "LinksPermalink" (optional.Interface of []string) -  This parameter is used to find stories based on their url. 
- * @param "NotLinksPermalink" (optional.Interface of []string) -  This parameter is used to exclude stories based on their url. 
- * @param "Language" (optional.Interface of []string) -  This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
- * @param "NotLanguage" (optional.Interface of []string) -  This parameter is used for excluding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
- * @param "PublishedAtStart" (optional.String) -  This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
- * @param "PublishedAtEnd" (optional.String) -  This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
- * @param "CategoriesTaxonomy" (optional.String) -  This parameter is used for defining the type of the taxonomy for the rest of the categories queries. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
- * @param "CategoriesConfident" (optional.Bool) -  This parameter is used for finding stories whose categories are confident. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
- * @param "CategoriesId" (optional.Interface of []string) -  This parameter is used for finding stories by categories id. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
- * @param "NotCategoriesId" (optional.Interface of []string) -  This parameter is used for excluding stories by categories id. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
- * @param "CategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
- * @param "NotCategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for excluding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
- * @param "EntitiesTitleText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
- * @param "NotEntitiesTitleText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
- * @param "EntitiesTitleType" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
- * @param "NotEntitiesTitleType" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
- * @param "EntitiesTitleLinksDbpedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
- * @param "NotEntitiesTitleLinksDbpedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
- * @param "EntitiesBodyText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
- * @param "NotEntitiesBodyText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
- * @param "EntitiesBodyType" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
- * @param "NotEntitiesBodyType" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
- * @param "EntitiesBodyLinksDbpedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
- * @param "NotEntitiesBodyLinksDbpedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
- * @param "SentimentTitlePolarity" (optional.String) -  This parameter is used for finding stories whose title sentiment is the specified value. 
- * @param "NotSentimentTitlePolarity" (optional.String) -  This parameter is used for excluding stories whose title sentiment is the specified value. 
- * @param "SentimentBodyPolarity" (optional.String) -  This parameter is used for finding stories whose body sentiment is the specified value. 
- * @param "NotSentimentBodyPolarity" (optional.String) -  This parameter is used for excluding stories whose body sentiment is the specified value. 
- * @param "MediaImagesCountMin" (optional.Int32) -  This parameter is used for finding stories whose number of images is greater than or equal to the specified value. 
- * @param "MediaImagesCountMax" (optional.Int32) -  This parameter is used for finding stories whose number of images is less than or equal to the specified value. 
- * @param "MediaImagesWidthMin" (optional.Int32) -  This parameter is used for finding stories whose width of images are greater than or equal to the specified value. 
- * @param "MediaImagesWidthMax" (optional.Int32) -  This parameter is used for finding stories whose width of images are less than or equal to the specified value. 
- * @param "MediaImagesHeightMin" (optional.Int32) -  This parameter is used for finding stories whose height of images are greater than or equal to the specified value. 
- * @param "MediaImagesHeightMax" (optional.Int32) -  This parameter is used for finding stories whose height of images are less than or equal to the specified value. 
- * @param "MediaImagesContentLengthMin" (optional.Int32) -  This parameter is used for finding stories whose images content length are greater than or equal to the specified value. 
- * @param "MediaImagesContentLengthMax" (optional.Int32) -  This parameter is used for finding stories whose images content length are less than or equal to the specified value. 
- * @param "MediaImagesFormat" (optional.Interface of []string) -  This parameter is used for finding stories whose images format are the specified value. 
- * @param "NotMediaImagesFormat" (optional.Interface of []string) -  This parameter is used for excluding stories whose images format are the specified value. 
- * @param "MediaVideosCountMin" (optional.Int32) -  This parameter is used for finding stories whose number of videos is greater than or equal to the specified value. 
- * @param "MediaVideosCountMax" (optional.Int32) -  This parameter is used for finding stories whose number of videos is less than or equal to the specified value. 
- * @param "AuthorId" (optional.Interface of []Int32) -  This parameter is used for finding stories whose author id is the specified value. 
- * @param "NotAuthorId" (optional.Interface of []Int32) -  This parameter is used for excluding stories whose author id is the specified value. 
- * @param "AuthorName" (optional.String) -  This parameter is used for finding stories whose author full name contains the specified value. 
- * @param "NotAuthorName" (optional.String) -  This parameter is used for excluding stories whose author full name contains the specified value. 
- * @param "SourceId" (optional.Interface of []Int32) -  This parameter is used for finding stories whose source id is the specified value. 
- * @param "NotSourceId" (optional.Interface of []Int32) -  This parameter is used for excluding stories whose source id is the specified value. 
- * @param "SourceName" (optional.Interface of []string) -  This parameter is used for finding stories whose source name contains the specified value. 
- * @param "NotSourceName" (optional.Interface of []string) -  This parameter is used for excluding stories whose source name contains the specified value. 
- * @param "SourceDomain" (optional.Interface of []string) -  This parameter is used for finding stories whose source domain is the specified value. 
- * @param "NotSourceDomain" (optional.Interface of []string) -  This parameter is used for excluding stories whose source domain is the specified value. 
- * @param "SourceLocationsCountry" (optional.Interface of []string) -  This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
- * @param "NotSourceLocationsCountry" (optional.Interface of []string) -  This parameter is used for excluding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
- * @param "SourceLocationsState" (optional.Interface of []string) -  This parameter is used for finding stories whose source state/province is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
- * @param "NotSourceLocationsState" (optional.Interface of []string) -  This parameter is used for excluding stories whose source state/province is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
- * @param "SourceLocationsCity" (optional.Interface of []string) -  This parameter is used for finding stories whose source city is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
- * @param "NotSourceLocationsCity" (optional.Interface of []string) -  This parameter is used for excluding stories whose source city is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
- * @param "SourceScopesCountry" (optional.Interface of []string) -  This parameter is used for finding stories whose source scopes is the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
- * @param "NotSourceScopesCountry" (optional.Interface of []string) -  This parameter is used for excluding stories whose source scopes is the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
- * @param "SourceScopesState" (optional.Interface of []string) -  This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
- * @param "NotSourceScopesState" (optional.Interface of []string) -  This parameter is used for excluding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
- * @param "SourceScopesCity" (optional.Interface of []string) -  This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
- * @param "NotSourceScopesCity" (optional.Interface of []string) -  This parameter is used for excluding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
- * @param "SourceScopesLevel" (optional.Interface of []string) -  This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
- * @param "NotSourceScopesLevel" (optional.Interface of []string) -  This parameter is used for excluding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
- * @param "SourceLinksInCountMin" (optional.Int32) -  This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count [here](https://newsapi.aylien.com/docs/working-with-links-in-count). 
- * @param "SourceLinksInCountMax" (optional.Int32) -  This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count [here](https://newsapi.aylien.com/docs/working-with-links-in-count). 
- * @param "SourceRankingsAlexaRankMin" (optional.Int32) -  This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks). 
- * @param "SourceRankingsAlexaRankMax" (optional.Int32) -  This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks). 
- * @param "SourceRankingsAlexaCountry" (optional.Interface of []string) -  This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks). 
- * @param "SocialSharesCountFacebookMin" (optional.Int32) -  This parameter is used for finding stories whose Facebook social shares count is greater than or equal to the specified value. 
- * @param "SocialSharesCountFacebookMax" (optional.Int32) -  This parameter is used for finding stories whose Facebook social shares count is less than or equal to the specified value. 
- * @param "SocialSharesCountGooglePlusMin" (optional.Int32) -  This parameter is used for finding stories whose Google+ social shares count is greater than or equal to the specified value. 
- * @param "SocialSharesCountGooglePlusMax" (optional.Int32) -  This parameter is used for finding stories whose Google+ social shares count is less than or equal to the specified value. 
- * @param "SocialSharesCountLinkedinMin" (optional.Int32) -  This parameter is used for finding stories whose LinkedIn social shares count is greater than or equal to the specified value. 
- * @param "SocialSharesCountLinkedinMax" (optional.Int32) -  This parameter is used for finding stories whose LinkedIn social shares count is less than or equal to the specified value. 
- * @param "SocialSharesCountRedditMin" (optional.Int32) -  This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value. 
- * @param "SocialSharesCountRedditMax" (optional.Int32) -  This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value. 
- * @param "IntervalStart" (optional.Int32) -  This parameter is used for setting the start data point of histogram intervals. 
- * @param "IntervalEnd" (optional.Int32) -  This parameter is used for setting the end data point of histogram intervals. 
- * @param "IntervalWidth" (optional.Int32) -  This parameter is used for setting the width of histogram intervals. 
- * @param "Field" (optional.String) -  This parameter is used for specifying the y-axis variable for the histogram. 
-@return Histograms
-*/
-func (a *DefaultApiService) ListHistograms(ctx _context.Context, localVarOptionals *ListHistogramsOpts) (Histograms, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Histograms
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/histograms"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	if localVarOptionals != nil && localVarOptionals.Id.IsSet() {
-		t:=localVarOptionals.Id.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("id[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("id[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotId.IsSet() {
-		t:=localVarOptionals.NotId.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!id[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!id[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.Title.IsSet() {
-		localVarQueryParams.Add("title", parameterToString(localVarOptionals.Title.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		localVarQueryParams.Add("body", parameterToString(localVarOptionals.Body.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Text.IsSet() {
-		localVarQueryParams.Add("text", parameterToString(localVarOptionals.Text.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.TranslationsEnTitle.IsSet() {
-		localVarQueryParams.Add("translations.en.title", parameterToString(localVarOptionals.TranslationsEnTitle.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.TranslationsEnBody.IsSet() {
-		localVarQueryParams.Add("translations.en.body", parameterToString(localVarOptionals.TranslationsEnBody.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.TranslationsEnText.IsSet() {
-		localVarQueryParams.Add("translations.en.text", parameterToString(localVarOptionals.TranslationsEnText.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.LinksPermalink.IsSet() {
-		t:=localVarOptionals.LinksPermalink.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("links.permalink[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("links.permalink[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotLinksPermalink.IsSet() {
-		t:=localVarOptionals.NotLinksPermalink.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!links.permalink[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!links.permalink[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.Language.IsSet() {
-		t:=localVarOptionals.Language.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("language[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("language[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotLanguage.IsSet() {
-		t:=localVarOptionals.NotLanguage.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!language[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!language[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.PublishedAtStart.IsSet() {
-		localVarQueryParams.Add("published_at.start", parameterToString(localVarOptionals.PublishedAtStart.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.PublishedAtEnd.IsSet() {
-		localVarQueryParams.Add("published_at.end", parameterToString(localVarOptionals.PublishedAtEnd.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.CategoriesTaxonomy.IsSet() {
-		localVarQueryParams.Add("categories.taxonomy", parameterToString(localVarOptionals.CategoriesTaxonomy.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.CategoriesConfident.IsSet() {
-		localVarQueryParams.Add("categories.confident", parameterToString(localVarOptionals.CategoriesConfident.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.CategoriesId.IsSet() {
-		t:=localVarOptionals.CategoriesId.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("categories.id[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("categories.id[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotCategoriesId.IsSet() {
-		t:=localVarOptionals.NotCategoriesId.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!categories.id[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!categories.id[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.CategoriesLevel.IsSet() {
-		t:=localVarOptionals.CategoriesLevel.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("categories.level[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("categories.level[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotCategoriesLevel.IsSet() {
-		t:=localVarOptionals.NotCategoriesLevel.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!categories.level[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!categories.level[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.EntitiesTitleText.IsSet() {
-		t:=localVarOptionals.EntitiesTitleText.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("entities.title.text[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("entities.title.text[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleText.IsSet() {
-		t:=localVarOptionals.NotEntitiesTitleText.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!entities.title.text[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!entities.title.text[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.EntitiesTitleType.IsSet() {
-		t:=localVarOptionals.EntitiesTitleType.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("entities.title.type[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("entities.title.type[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleType.IsSet() {
-		t:=localVarOptionals.NotEntitiesTitleType.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!entities.title.type[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!entities.title.type[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.EntitiesTitleLinksDbpedia.IsSet() {
-		t:=localVarOptionals.EntitiesTitleLinksDbpedia.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("entities.title.links.dbpedia[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("entities.title.links.dbpedia[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleLinksDbpedia.IsSet() {
-		t:=localVarOptionals.NotEntitiesTitleLinksDbpedia.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!entities.title.links.dbpedia[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!entities.title.links.dbpedia[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.EntitiesBodyText.IsSet() {
-		t:=localVarOptionals.EntitiesBodyText.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("entities.body.text[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("entities.body.text[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyText.IsSet() {
-		t:=localVarOptionals.NotEntitiesBodyText.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!entities.body.text[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!entities.body.text[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.EntitiesBodyType.IsSet() {
-		t:=localVarOptionals.EntitiesBodyType.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("entities.body.type[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("entities.body.type[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyType.IsSet() {
-		t:=localVarOptionals.NotEntitiesBodyType.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!entities.body.type[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!entities.body.type[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.EntitiesBodyLinksDbpedia.IsSet() {
-		t:=localVarOptionals.EntitiesBodyLinksDbpedia.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("entities.body.links.dbpedia[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("entities.body.links.dbpedia[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyLinksDbpedia.IsSet() {
-		t:=localVarOptionals.NotEntitiesBodyLinksDbpedia.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!entities.body.links.dbpedia[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!entities.body.links.dbpedia[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.SentimentTitlePolarity.IsSet() {
-		localVarQueryParams.Add("sentiment.title.polarity", parameterToString(localVarOptionals.SentimentTitlePolarity.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.NotSentimentTitlePolarity.IsSet() {
-		localVarQueryParams.Add("!sentiment.title.polarity", parameterToString(localVarOptionals.NotSentimentTitlePolarity.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SentimentBodyPolarity.IsSet() {
-		localVarQueryParams.Add("sentiment.body.polarity", parameterToString(localVarOptionals.SentimentBodyPolarity.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.NotSentimentBodyPolarity.IsSet() {
-		localVarQueryParams.Add("!sentiment.body.polarity", parameterToString(localVarOptionals.NotSentimentBodyPolarity.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.MediaImagesCountMin.IsSet() {
-		localVarQueryParams.Add("media.images.count.min", parameterToString(localVarOptionals.MediaImagesCountMin.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.MediaImagesCountMax.IsSet() {
-		localVarQueryParams.Add("media.images.count.max", parameterToString(localVarOptionals.MediaImagesCountMax.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.MediaImagesWidthMin.IsSet() {
-		localVarQueryParams.Add("media.images.width.min", parameterToString(localVarOptionals.MediaImagesWidthMin.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.MediaImagesWidthMax.IsSet() {
-		localVarQueryParams.Add("media.images.width.max", parameterToString(localVarOptionals.MediaImagesWidthMax.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.MediaImagesHeightMin.IsSet() {
-		localVarQueryParams.Add("media.images.height.min", parameterToString(localVarOptionals.MediaImagesHeightMin.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.MediaImagesHeightMax.IsSet() {
-		localVarQueryParams.Add("media.images.height.max", parameterToString(localVarOptionals.MediaImagesHeightMax.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.MediaImagesContentLengthMin.IsSet() {
-		localVarQueryParams.Add("media.images.content_length.min", parameterToString(localVarOptionals.MediaImagesContentLengthMin.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.MediaImagesContentLengthMax.IsSet() {
-		localVarQueryParams.Add("media.images.content_length.max", parameterToString(localVarOptionals.MediaImagesContentLengthMax.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.MediaImagesFormat.IsSet() {
-		t:=localVarOptionals.MediaImagesFormat.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("media.images.format[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("media.images.format[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotMediaImagesFormat.IsSet() {
-		t:=localVarOptionals.NotMediaImagesFormat.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!media.images.format[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!media.images.format[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.MediaVideosCountMin.IsSet() {
-		localVarQueryParams.Add("media.videos.count.min", parameterToString(localVarOptionals.MediaVideosCountMin.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.MediaVideosCountMax.IsSet() {
-		localVarQueryParams.Add("media.videos.count.max", parameterToString(localVarOptionals.MediaVideosCountMax.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.AuthorId.IsSet() {
-		t:=localVarOptionals.AuthorId.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("author.id[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("author.id[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotAuthorId.IsSet() {
-		t:=localVarOptionals.NotAuthorId.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!author.id[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!author.id[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.AuthorName.IsSet() {
-		localVarQueryParams.Add("author.name", parameterToString(localVarOptionals.AuthorName.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.NotAuthorName.IsSet() {
-		localVarQueryParams.Add("!author.name", parameterToString(localVarOptionals.NotAuthorName.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SourceId.IsSet() {
-		t:=localVarOptionals.SourceId.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("source.id[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("source.id[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotSourceId.IsSet() {
-		t:=localVarOptionals.NotSourceId.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!source.id[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!source.id[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.SourceName.IsSet() {
-		t:=localVarOptionals.SourceName.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("source.name[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("source.name[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotSourceName.IsSet() {
-		t:=localVarOptionals.NotSourceName.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!source.name[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!source.name[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.SourceDomain.IsSet() {
-		t:=localVarOptionals.SourceDomain.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("source.domain[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("source.domain[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotSourceDomain.IsSet() {
-		t:=localVarOptionals.NotSourceDomain.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!source.domain[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!source.domain[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.SourceLocationsCountry.IsSet() {
-		t:=localVarOptionals.SourceLocationsCountry.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("source.locations.country[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("source.locations.country[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotSourceLocationsCountry.IsSet() {
-		t:=localVarOptionals.NotSourceLocationsCountry.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!source.locations.country[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!source.locations.country[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.SourceLocationsState.IsSet() {
-		t:=localVarOptionals.SourceLocationsState.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("source.locations.state[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("source.locations.state[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotSourceLocationsState.IsSet() {
-		t:=localVarOptionals.NotSourceLocationsState.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!source.locations.state[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!source.locations.state[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.SourceLocationsCity.IsSet() {
-		t:=localVarOptionals.SourceLocationsCity.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("source.locations.city[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("source.locations.city[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotSourceLocationsCity.IsSet() {
-		t:=localVarOptionals.NotSourceLocationsCity.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!source.locations.city[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!source.locations.city[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.SourceScopesCountry.IsSet() {
-		t:=localVarOptionals.SourceScopesCountry.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("source.scopes.country[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("source.scopes.country[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotSourceScopesCountry.IsSet() {
-		t:=localVarOptionals.NotSourceScopesCountry.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!source.scopes.country[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!source.scopes.country[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.SourceScopesState.IsSet() {
-		t:=localVarOptionals.SourceScopesState.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("source.scopes.state[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("source.scopes.state[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotSourceScopesState.IsSet() {
-		t:=localVarOptionals.NotSourceScopesState.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!source.scopes.state[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!source.scopes.state[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.SourceScopesCity.IsSet() {
-		t:=localVarOptionals.SourceScopesCity.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("source.scopes.city[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("source.scopes.city[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotSourceScopesCity.IsSet() {
-		t:=localVarOptionals.NotSourceScopesCity.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!source.scopes.city[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!source.scopes.city[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.SourceScopesLevel.IsSet() {
-		t:=localVarOptionals.SourceScopesLevel.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("source.scopes.level[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("source.scopes.level[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.NotSourceScopesLevel.IsSet() {
-		t:=localVarOptionals.NotSourceScopesLevel.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("!source.scopes.level[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("!source.scopes.level[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.SourceLinksInCountMin.IsSet() {
-		localVarQueryParams.Add("source.links_in_count.min", parameterToString(localVarOptionals.SourceLinksInCountMin.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SourceLinksInCountMax.IsSet() {
-		localVarQueryParams.Add("source.links_in_count.max", parameterToString(localVarOptionals.SourceLinksInCountMax.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SourceRankingsAlexaRankMin.IsSet() {
-		localVarQueryParams.Add("source.rankings.alexa.rank.min", parameterToString(localVarOptionals.SourceRankingsAlexaRankMin.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SourceRankingsAlexaRankMax.IsSet() {
-		localVarQueryParams.Add("source.rankings.alexa.rank.max", parameterToString(localVarOptionals.SourceRankingsAlexaRankMax.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SourceRankingsAlexaCountry.IsSet() {
-		t:=localVarOptionals.SourceRankingsAlexaCountry.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("source.rankings.alexa.country[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("source.rankings.alexa.country[]", parameterToString(t, "multi"))
-		}
-	}
-	if localVarOptionals != nil && localVarOptionals.SocialSharesCountFacebookMin.IsSet() {
-		localVarQueryParams.Add("social_shares_count.facebook.min", parameterToString(localVarOptionals.SocialSharesCountFacebookMin.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SocialSharesCountFacebookMax.IsSet() {
-		localVarQueryParams.Add("social_shares_count.facebook.max", parameterToString(localVarOptionals.SocialSharesCountFacebookMax.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SocialSharesCountGooglePlusMin.IsSet() {
-		localVarQueryParams.Add("social_shares_count.google_plus.min", parameterToString(localVarOptionals.SocialSharesCountGooglePlusMin.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SocialSharesCountGooglePlusMax.IsSet() {
-		localVarQueryParams.Add("social_shares_count.google_plus.max", parameterToString(localVarOptionals.SocialSharesCountGooglePlusMax.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SocialSharesCountLinkedinMin.IsSet() {
-		localVarQueryParams.Add("social_shares_count.linkedin.min", parameterToString(localVarOptionals.SocialSharesCountLinkedinMin.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SocialSharesCountLinkedinMax.IsSet() {
-		localVarQueryParams.Add("social_shares_count.linkedin.max", parameterToString(localVarOptionals.SocialSharesCountLinkedinMax.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SocialSharesCountRedditMin.IsSet() {
-		localVarQueryParams.Add("social_shares_count.reddit.min", parameterToString(localVarOptionals.SocialSharesCountRedditMin.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SocialSharesCountRedditMax.IsSet() {
-		localVarQueryParams.Add("social_shares_count.reddit.max", parameterToString(localVarOptionals.SocialSharesCountRedditMax.Value(), ""))
-	}
 	if localVarOptionals != nil && localVarOptionals.IntervalStart.IsSet() {
 		localVarQueryParams.Add("interval.start", parameterToString(localVarOptionals.IntervalStart.Value(), ""))
 	}
@@ -2401,16 +1424,6 @@ func (a *DefaultApiService) ListHistograms(ctx _context.Context, localVarOptiona
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 200 {
-			var v Histograms
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -2475,8 +1488,8 @@ func (a *DefaultApiService) ListHistograms(ctx _context.Context, localVarOptiona
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// ListRelatedStoriesOpts Optional parameters for the method 'ListRelatedStories'
-type ListRelatedStoriesOpts struct {
+// ListRelatedStoriesGetOpts Optional parameters for the method 'ListRelatedStoriesGet'
+type ListRelatedStoriesGetOpts struct {
     Id optional.Interface
     NotId optional.Interface
     Title optional.String
@@ -2495,6 +1508,8 @@ type ListRelatedStoriesOpts struct {
     CategoriesConfident optional.Bool
     CategoriesId optional.Interface
     NotCategoriesId optional.Interface
+    CategoriesLabel optional.Interface
+    NotCategoriesLabel optional.Interface
     CategoriesLevel optional.Interface
     NotCategoriesLevel optional.Interface
     EntitiesTitleText optional.Interface
@@ -2574,10 +1589,9 @@ type ListRelatedStoriesOpts struct {
 }
 
 /*
-ListRelatedStories List related stories
-This endpoint is used for finding semantically similar stories based on the parameters you provide as inputs. For example, if you want to find stories similar to a Tweet or any text extract you input, the related stories endpoint will analyze the entities present and the meaning of the text, and find stories with a similar meaning. The maximum number of related stories returned is 100. 
+ListRelatedStoriesGet Method for ListRelatedStoriesGet
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *ListRelatedStoriesOpts - Optional Parameters:
+ * @param optional nil or *ListRelatedStoriesGetOpts - Optional Parameters:
  * @param "Id" (optional.Interface of []int64) -  This parameter is used for finding stories by story id. 
  * @param "NotId" (optional.Interface of []int64) -  This parameter is used for excluding stories by story id. 
  * @param "Title" (optional.String) -  This parameter is used for finding stories whose title contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
@@ -2596,6 +1610,8 @@ This endpoint is used for finding semantically similar stories based on the para
  * @param "CategoriesConfident" (optional.Bool) -  This parameter is used for finding stories whose categories are confident. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "CategoriesId" (optional.Interface of []string) -  This parameter is used for finding stories by categories id. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "NotCategoriesId" (optional.Interface of []string) -  This parameter is used for excluding stories by categories id. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "CategoriesLabel" (optional.Interface of []string) -  This parameter is used for finding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "NotCategoriesLabel" (optional.Interface of []string) -  This parameter is used for excluding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "CategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "NotCategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for excluding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "EntitiesTitleText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
@@ -2674,7 +1690,7 @@ This endpoint is used for finding semantically similar stories based on the para
  * @param "PerPage" (optional.Int32) -  This parameter is used for specifying number of items in each page. 
 @return RelatedStories
 */
-func (a *DefaultApiService) ListRelatedStories(ctx _context.Context, localVarOptionals *ListRelatedStoriesOpts) (RelatedStories, *_nethttp.Response, error) {
+func (a *DefaultApiService) ListRelatedStoriesGet(ctx _context.Context, localVarOptionals *ListRelatedStoriesGetOpts) (RelatedStories, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -2686,7 +1702,6 @@ func (a *DefaultApiService) ListRelatedStories(ctx _context.Context, localVarOpt
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/related_stories"
-
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
@@ -2807,6 +1822,28 @@ func (a *DefaultApiService) ListRelatedStories(ctx _context.Context, localVarOpt
 			}
 		} else {
 			localVarQueryParams.Add("!categories.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.CategoriesLabel.IsSet() {
+		t:=localVarOptionals.CategoriesLabel.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("categories.label[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("categories.label[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotCategoriesLabel.IsSet() {
+		t:=localVarOptionals.NotCategoriesLabel.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!categories.label[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!categories.label[]", parameterToString(t, "multi"))
 		}
 	}
 	if localVarOptionals != nil && localVarOptionals.CategoriesLevel.IsSet() {
@@ -3427,8 +2464,8 @@ func (a *DefaultApiService) ListRelatedStories(ctx _context.Context, localVarOpt
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 200 {
-			var v RelatedStories
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3436,6 +2473,1036 @@ func (a *DefaultApiService) ListRelatedStories(ctx _context.Context, localVarOpt
 			}
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Errors
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v Errors
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v Errors
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v Errors
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// ListRelatedStoriesPostOpts Optional parameters for the method 'ListRelatedStoriesPost'
+type ListRelatedStoriesPostOpts struct {
+    Id optional.Interface
+    NotId optional.Interface
+    Title optional.String
+    Body optional.String
+    Text optional.String
+    TranslationsEnTitle optional.String
+    TranslationsEnBody optional.String
+    TranslationsEnText optional.String
+    LinksPermalink optional.Interface
+    NotLinksPermalink optional.Interface
+    Language optional.Interface
+    NotLanguage optional.Interface
+    PublishedAtStart optional.String
+    PublishedAtEnd optional.String
+    CategoriesTaxonomy optional.String
+    CategoriesConfident optional.Bool
+    CategoriesId optional.Interface
+    NotCategoriesId optional.Interface
+    CategoriesLabel optional.Interface
+    NotCategoriesLabel optional.Interface
+    CategoriesLevel optional.Interface
+    NotCategoriesLevel optional.Interface
+    EntitiesTitleText optional.Interface
+    NotEntitiesTitleText optional.Interface
+    EntitiesTitleType optional.Interface
+    NotEntitiesTitleType optional.Interface
+    EntitiesTitleLinksDbpedia optional.Interface
+    NotEntitiesTitleLinksDbpedia optional.Interface
+    EntitiesBodyText optional.Interface
+    NotEntitiesBodyText optional.Interface
+    EntitiesBodyType optional.Interface
+    NotEntitiesBodyType optional.Interface
+    EntitiesBodyLinksDbpedia optional.Interface
+    NotEntitiesBodyLinksDbpedia optional.Interface
+    SentimentTitlePolarity optional.String
+    NotSentimentTitlePolarity optional.String
+    SentimentBodyPolarity optional.String
+    NotSentimentBodyPolarity optional.String
+    MediaImagesCountMin optional.Int32
+    MediaImagesCountMax optional.Int32
+    MediaImagesWidthMin optional.Int32
+    MediaImagesWidthMax optional.Int32
+    MediaImagesHeightMin optional.Int32
+    MediaImagesHeightMax optional.Int32
+    MediaImagesContentLengthMin optional.Int32
+    MediaImagesContentLengthMax optional.Int32
+    MediaImagesFormat optional.Interface
+    NotMediaImagesFormat optional.Interface
+    MediaVideosCountMin optional.Int32
+    MediaVideosCountMax optional.Int32
+    AuthorId optional.Interface
+    NotAuthorId optional.Interface
+    AuthorName optional.String
+    NotAuthorName optional.String
+    SourceId optional.Interface
+    NotSourceId optional.Interface
+    SourceName optional.Interface
+    NotSourceName optional.Interface
+    SourceDomain optional.Interface
+    NotSourceDomain optional.Interface
+    SourceLocationsCountry optional.Interface
+    NotSourceLocationsCountry optional.Interface
+    SourceLocationsState optional.Interface
+    NotSourceLocationsState optional.Interface
+    SourceLocationsCity optional.Interface
+    NotSourceLocationsCity optional.Interface
+    SourceScopesCountry optional.Interface
+    NotSourceScopesCountry optional.Interface
+    SourceScopesState optional.Interface
+    NotSourceScopesState optional.Interface
+    SourceScopesCity optional.Interface
+    NotSourceScopesCity optional.Interface
+    SourceScopesLevel optional.Interface
+    NotSourceScopesLevel optional.Interface
+    SourceLinksInCountMin optional.Int32
+    SourceLinksInCountMax optional.Int32
+    SourceRankingsAlexaRankMin optional.Int32
+    SourceRankingsAlexaRankMax optional.Int32
+    SourceRankingsAlexaCountry optional.Interface
+    SocialSharesCountFacebookMin optional.Int32
+    SocialSharesCountFacebookMax optional.Int32
+    SocialSharesCountGooglePlusMin optional.Int32
+    SocialSharesCountGooglePlusMax optional.Int32
+    SocialSharesCountLinkedinMin optional.Int32
+    SocialSharesCountLinkedinMax optional.Int32
+    SocialSharesCountRedditMin optional.Int32
+    SocialSharesCountRedditMax optional.Int32
+    Clusters optional.Interface
+    Return_ optional.Interface
+    StoryId optional.Int64
+    StoryUrl optional.String
+    StoryTitle optional.String
+    StoryBody optional.String
+    BoostBy optional.String
+    StoryLanguage optional.String
+    PerPage optional.Int32
+}
+
+/*
+ListRelatedStoriesPost Method for ListRelatedStoriesPost
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *ListRelatedStoriesPostOpts - Optional Parameters:
+ * @param "Id" (optional.Interface of []int64) -  This parameter is used for finding stories by story id. 
+ * @param "NotId" (optional.Interface of []int64) -  This parameter is used for excluding stories by story id. 
+ * @param "Title" (optional.String) -  This parameter is used for finding stories whose title contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
+ * @param "Body" (optional.String) -  This parameter is used for finding stories whose body contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
+ * @param "Text" (optional.String) -  This parameter is used for finding stories whose title or body contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
+ * @param "TranslationsEnTitle" (optional.String) -  This parameter is used for finding stories whose translation title contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
+ * @param "TranslationsEnBody" (optional.String) -  This parameter is used for finding stories whose translation body contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
+ * @param "TranslationsEnText" (optional.String) -  This parameter is used for finding stories whose translation title or body contains a specific keyword. It supports [boolean operators](https://newsapi.aylien.com/docs/boolean-operators). 
+ * @param "LinksPermalink" (optional.Interface of []string) -  This parameter is used to find stories based on their url. 
+ * @param "NotLinksPermalink" (optional.Interface of []string) -  This parameter is used to exclude stories based on their url. 
+ * @param "Language" (optional.Interface of []string) -  This parameter is used for finding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
+ * @param "NotLanguage" (optional.Interface of []string) -  This parameter is used for excluding stories whose language is the specified value. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
+ * @param "PublishedAtStart" (optional.String) -  This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
+ * @param "PublishedAtEnd" (optional.String) -  This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
+ * @param "CategoriesTaxonomy" (optional.String) -  This parameter is used for defining the type of the taxonomy for the rest of the categories queries. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "CategoriesConfident" (optional.Bool) -  This parameter is used for finding stories whose categories are confident. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "CategoriesId" (optional.Interface of []string) -  This parameter is used for finding stories by categories id. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "NotCategoriesId" (optional.Interface of []string) -  This parameter is used for excluding stories by categories id. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "CategoriesLabel" (optional.Interface of []string) -  This parameter is used for finding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "NotCategoriesLabel" (optional.Interface of []string) -  This parameter is used for excluding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "CategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "NotCategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for excluding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "EntitiesTitleText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleType" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleType" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleLinksDbpedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleLinksDbpedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyType" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyType" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyLinksDbpedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyLinksDbpedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "SentimentTitlePolarity" (optional.String) -  This parameter is used for finding stories whose title sentiment is the specified value. 
+ * @param "NotSentimentTitlePolarity" (optional.String) -  This parameter is used for excluding stories whose title sentiment is the specified value. 
+ * @param "SentimentBodyPolarity" (optional.String) -  This parameter is used for finding stories whose body sentiment is the specified value. 
+ * @param "NotSentimentBodyPolarity" (optional.String) -  This parameter is used for excluding stories whose body sentiment is the specified value. 
+ * @param "MediaImagesCountMin" (optional.Int32) -  This parameter is used for finding stories whose number of images is greater than or equal to the specified value. 
+ * @param "MediaImagesCountMax" (optional.Int32) -  This parameter is used for finding stories whose number of images is less than or equal to the specified value. 
+ * @param "MediaImagesWidthMin" (optional.Int32) -  This parameter is used for finding stories whose width of images are greater than or equal to the specified value. 
+ * @param "MediaImagesWidthMax" (optional.Int32) -  This parameter is used for finding stories whose width of images are less than or equal to the specified value. 
+ * @param "MediaImagesHeightMin" (optional.Int32) -  This parameter is used for finding stories whose height of images are greater than or equal to the specified value. 
+ * @param "MediaImagesHeightMax" (optional.Int32) -  This parameter is used for finding stories whose height of images are less than or equal to the specified value. 
+ * @param "MediaImagesContentLengthMin" (optional.Int32) -  This parameter is used for finding stories whose images content length are greater than or equal to the specified value. 
+ * @param "MediaImagesContentLengthMax" (optional.Int32) -  This parameter is used for finding stories whose images content length are less than or equal to the specified value. 
+ * @param "MediaImagesFormat" (optional.Interface of []string) -  This parameter is used for finding stories whose images format are the specified value. 
+ * @param "NotMediaImagesFormat" (optional.Interface of []string) -  This parameter is used for excluding stories whose images format are the specified value. 
+ * @param "MediaVideosCountMin" (optional.Int32) -  This parameter is used for finding stories whose number of videos is greater than or equal to the specified value. 
+ * @param "MediaVideosCountMax" (optional.Int32) -  This parameter is used for finding stories whose number of videos is less than or equal to the specified value. 
+ * @param "AuthorId" (optional.Interface of []Int32) -  This parameter is used for finding stories whose author id is the specified value. 
+ * @param "NotAuthorId" (optional.Interface of []Int32) -  This parameter is used for excluding stories whose author id is the specified value. 
+ * @param "AuthorName" (optional.String) -  This parameter is used for finding stories whose author full name contains the specified value. 
+ * @param "NotAuthorName" (optional.String) -  This parameter is used for excluding stories whose author full name contains the specified value. 
+ * @param "SourceId" (optional.Interface of []Int32) -  This parameter is used for finding stories whose source id is the specified value. 
+ * @param "NotSourceId" (optional.Interface of []Int32) -  This parameter is used for excluding stories whose source id is the specified value. 
+ * @param "SourceName" (optional.Interface of []string) -  This parameter is used for finding stories whose source name contains the specified value. 
+ * @param "NotSourceName" (optional.Interface of []string) -  This parameter is used for excluding stories whose source name contains the specified value. 
+ * @param "SourceDomain" (optional.Interface of []string) -  This parameter is used for finding stories whose source domain is the specified value. 
+ * @param "NotSourceDomain" (optional.Interface of []string) -  This parameter is used for excluding stories whose source domain is the specified value. 
+ * @param "SourceLocationsCountry" (optional.Interface of []string) -  This parameter is used for finding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
+ * @param "NotSourceLocationsCountry" (optional.Interface of []string) -  This parameter is used for excluding stories whose source country is the specified value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
+ * @param "SourceLocationsState" (optional.Interface of []string) -  This parameter is used for finding stories whose source state/province is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
+ * @param "NotSourceLocationsState" (optional.Interface of []string) -  This parameter is used for excluding stories whose source state/province is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
+ * @param "SourceLocationsCity" (optional.Interface of []string) -  This parameter is used for finding stories whose source city is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
+ * @param "NotSourceLocationsCity" (optional.Interface of []string) -  This parameter is used for excluding stories whose source city is the specified value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
+ * @param "SourceScopesCountry" (optional.Interface of []string) -  This parameter is used for finding stories whose source scopes is the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
+ * @param "NotSourceScopesCountry" (optional.Interface of []string) -  This parameter is used for excluding stories whose source scopes is the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
+ * @param "SourceScopesState" (optional.Interface of []string) -  This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
+ * @param "NotSourceScopesState" (optional.Interface of []string) -  This parameter is used for excluding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
+ * @param "SourceScopesCity" (optional.Interface of []string) -  This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
+ * @param "NotSourceScopesCity" (optional.Interface of []string) -  This parameter is used for excluding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
+ * @param "SourceScopesLevel" (optional.Interface of []string) -  This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
+ * @param "NotSourceScopesLevel" (optional.Interface of []string) -  This parameter is used for excluding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations). 
+ * @param "SourceLinksInCountMin" (optional.Int32) -  This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count [here](https://newsapi.aylien.com/docs/working-with-links-in-count). 
+ * @param "SourceLinksInCountMax" (optional.Int32) -  This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count [here](https://newsapi.aylien.com/docs/working-with-links-in-count). 
+ * @param "SourceRankingsAlexaRankMin" (optional.Int32) -  This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks). 
+ * @param "SourceRankingsAlexaRankMax" (optional.Int32) -  This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks). 
+ * @param "SourceRankingsAlexaCountry" (optional.Interface of []string) -  This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks [here](https://newsapi.aylien.com/docs/working-with-alexa-ranks). 
+ * @param "SocialSharesCountFacebookMin" (optional.Int32) -  This parameter is used for finding stories whose Facebook social shares count is greater than or equal to the specified value. 
+ * @param "SocialSharesCountFacebookMax" (optional.Int32) -  This parameter is used for finding stories whose Facebook social shares count is less than or equal to the specified value. 
+ * @param "SocialSharesCountGooglePlusMin" (optional.Int32) -  This parameter is used for finding stories whose Google+ social shares count is greater than or equal to the specified value. 
+ * @param "SocialSharesCountGooglePlusMax" (optional.Int32) -  This parameter is used for finding stories whose Google+ social shares count is less than or equal to the specified value. 
+ * @param "SocialSharesCountLinkedinMin" (optional.Int32) -  This parameter is used for finding stories whose LinkedIn social shares count is greater than or equal to the specified value. 
+ * @param "SocialSharesCountLinkedinMax" (optional.Int32) -  This parameter is used for finding stories whose LinkedIn social shares count is less than or equal to the specified value. 
+ * @param "SocialSharesCountRedditMin" (optional.Int32) -  This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value. 
+ * @param "SocialSharesCountRedditMax" (optional.Int32) -  This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value. 
+ * @param "Clusters" (optional.Interface of []string) -  This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering). 
+ * @param "Return_" (optional.Interface of []string) -  This parameter is used for specifying return fields.
+ * @param "StoryId" (optional.Int64) -  A story id
+ * @param "StoryUrl" (optional.String) -  An article or webpage
+ * @param "StoryTitle" (optional.String) -  Title of the article
+ * @param "StoryBody" (optional.String) -  Body of the article
+ * @param "BoostBy" (optional.String) -  This parameter is used for boosting the result by the specified value. 
+ * @param "StoryLanguage" (optional.String) -  This parameter is used for setting the language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
+ * @param "PerPage" (optional.Int32) -  This parameter is used for specifying number of items in each page. 
+@return RelatedStories
+*/
+func (a *DefaultApiService) ListRelatedStoriesPost(ctx _context.Context, localVarOptionals *ListRelatedStoriesPostOpts) (RelatedStories, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  RelatedStories
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/related_stories"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Id.IsSet() {
+		t:=localVarOptionals.Id.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotId.IsSet() {
+		t:=localVarOptionals.NotId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.Title.IsSet() {
+		localVarQueryParams.Add("title", parameterToString(localVarOptionals.Title.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarQueryParams.Add("body", parameterToString(localVarOptionals.Body.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Text.IsSet() {
+		localVarQueryParams.Add("text", parameterToString(localVarOptionals.Text.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.TranslationsEnTitle.IsSet() {
+		localVarQueryParams.Add("translations.en.title", parameterToString(localVarOptionals.TranslationsEnTitle.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.TranslationsEnBody.IsSet() {
+		localVarQueryParams.Add("translations.en.body", parameterToString(localVarOptionals.TranslationsEnBody.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.TranslationsEnText.IsSet() {
+		localVarQueryParams.Add("translations.en.text", parameterToString(localVarOptionals.TranslationsEnText.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.LinksPermalink.IsSet() {
+		t:=localVarOptionals.LinksPermalink.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("links.permalink[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("links.permalink[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotLinksPermalink.IsSet() {
+		t:=localVarOptionals.NotLinksPermalink.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!links.permalink[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!links.permalink[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.Language.IsSet() {
+		t:=localVarOptionals.Language.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("language[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("language[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotLanguage.IsSet() {
+		t:=localVarOptionals.NotLanguage.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!language[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!language[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.PublishedAtStart.IsSet() {
+		localVarQueryParams.Add("published_at.start", parameterToString(localVarOptionals.PublishedAtStart.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PublishedAtEnd.IsSet() {
+		localVarQueryParams.Add("published_at.end", parameterToString(localVarOptionals.PublishedAtEnd.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.CategoriesTaxonomy.IsSet() {
+		localVarQueryParams.Add("categories.taxonomy", parameterToString(localVarOptionals.CategoriesTaxonomy.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.CategoriesConfident.IsSet() {
+		localVarQueryParams.Add("categories.confident", parameterToString(localVarOptionals.CategoriesConfident.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.CategoriesId.IsSet() {
+		t:=localVarOptionals.CategoriesId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("categories.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("categories.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotCategoriesId.IsSet() {
+		t:=localVarOptionals.NotCategoriesId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!categories.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!categories.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.CategoriesLabel.IsSet() {
+		t:=localVarOptionals.CategoriesLabel.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("categories.label[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("categories.label[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotCategoriesLabel.IsSet() {
+		t:=localVarOptionals.NotCategoriesLabel.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!categories.label[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!categories.label[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.CategoriesLevel.IsSet() {
+		t:=localVarOptionals.CategoriesLevel.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("categories.level[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("categories.level[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotCategoriesLevel.IsSet() {
+		t:=localVarOptionals.NotCategoriesLevel.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!categories.level[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!categories.level[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleText.IsSet() {
+		t:=localVarOptionals.EntitiesTitleText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.text[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleText.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.text[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleType.IsSet() {
+		t:=localVarOptionals.EntitiesTitleType.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.type[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.type[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleType.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleType.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.type[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.type[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleLinksDbpedia.IsSet() {
+		t:=localVarOptionals.EntitiesTitleLinksDbpedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.links.dbpedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.links.dbpedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleLinksDbpedia.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleLinksDbpedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.links.dbpedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.links.dbpedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyText.IsSet() {
+		t:=localVarOptionals.EntitiesBodyText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.text[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyText.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.text[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyType.IsSet() {
+		t:=localVarOptionals.EntitiesBodyType.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.type[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.type[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyType.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyType.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.type[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.type[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyLinksDbpedia.IsSet() {
+		t:=localVarOptionals.EntitiesBodyLinksDbpedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.links.dbpedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.links.dbpedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyLinksDbpedia.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyLinksDbpedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.links.dbpedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.links.dbpedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.SentimentTitlePolarity.IsSet() {
+		localVarQueryParams.Add("sentiment.title.polarity", parameterToString(localVarOptionals.SentimentTitlePolarity.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.NotSentimentTitlePolarity.IsSet() {
+		localVarQueryParams.Add("!sentiment.title.polarity", parameterToString(localVarOptionals.NotSentimentTitlePolarity.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SentimentBodyPolarity.IsSet() {
+		localVarQueryParams.Add("sentiment.body.polarity", parameterToString(localVarOptionals.SentimentBodyPolarity.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.NotSentimentBodyPolarity.IsSet() {
+		localVarQueryParams.Add("!sentiment.body.polarity", parameterToString(localVarOptionals.NotSentimentBodyPolarity.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.MediaImagesCountMin.IsSet() {
+		localVarQueryParams.Add("media.images.count.min", parameterToString(localVarOptionals.MediaImagesCountMin.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.MediaImagesCountMax.IsSet() {
+		localVarQueryParams.Add("media.images.count.max", parameterToString(localVarOptionals.MediaImagesCountMax.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.MediaImagesWidthMin.IsSet() {
+		localVarQueryParams.Add("media.images.width.min", parameterToString(localVarOptionals.MediaImagesWidthMin.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.MediaImagesWidthMax.IsSet() {
+		localVarQueryParams.Add("media.images.width.max", parameterToString(localVarOptionals.MediaImagesWidthMax.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.MediaImagesHeightMin.IsSet() {
+		localVarQueryParams.Add("media.images.height.min", parameterToString(localVarOptionals.MediaImagesHeightMin.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.MediaImagesHeightMax.IsSet() {
+		localVarQueryParams.Add("media.images.height.max", parameterToString(localVarOptionals.MediaImagesHeightMax.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.MediaImagesContentLengthMin.IsSet() {
+		localVarQueryParams.Add("media.images.content_length.min", parameterToString(localVarOptionals.MediaImagesContentLengthMin.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.MediaImagesContentLengthMax.IsSet() {
+		localVarQueryParams.Add("media.images.content_length.max", parameterToString(localVarOptionals.MediaImagesContentLengthMax.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.MediaImagesFormat.IsSet() {
+		t:=localVarOptionals.MediaImagesFormat.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("media.images.format[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("media.images.format[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotMediaImagesFormat.IsSet() {
+		t:=localVarOptionals.NotMediaImagesFormat.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!media.images.format[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!media.images.format[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.MediaVideosCountMin.IsSet() {
+		localVarQueryParams.Add("media.videos.count.min", parameterToString(localVarOptionals.MediaVideosCountMin.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.MediaVideosCountMax.IsSet() {
+		localVarQueryParams.Add("media.videos.count.max", parameterToString(localVarOptionals.MediaVideosCountMax.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.AuthorId.IsSet() {
+		t:=localVarOptionals.AuthorId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("author.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("author.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotAuthorId.IsSet() {
+		t:=localVarOptionals.NotAuthorId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!author.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!author.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.AuthorName.IsSet() {
+		localVarQueryParams.Add("author.name", parameterToString(localVarOptionals.AuthorName.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.NotAuthorName.IsSet() {
+		localVarQueryParams.Add("!author.name", parameterToString(localVarOptionals.NotAuthorName.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SourceId.IsSet() {
+		t:=localVarOptionals.SourceId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("source.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("source.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotSourceId.IsSet() {
+		t:=localVarOptionals.NotSourceId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!source.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!source.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.SourceName.IsSet() {
+		t:=localVarOptionals.SourceName.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("source.name[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("source.name[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotSourceName.IsSet() {
+		t:=localVarOptionals.NotSourceName.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!source.name[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!source.name[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.SourceDomain.IsSet() {
+		t:=localVarOptionals.SourceDomain.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("source.domain[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("source.domain[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotSourceDomain.IsSet() {
+		t:=localVarOptionals.NotSourceDomain.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!source.domain[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!source.domain[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.SourceLocationsCountry.IsSet() {
+		t:=localVarOptionals.SourceLocationsCountry.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("source.locations.country[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("source.locations.country[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotSourceLocationsCountry.IsSet() {
+		t:=localVarOptionals.NotSourceLocationsCountry.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!source.locations.country[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!source.locations.country[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.SourceLocationsState.IsSet() {
+		t:=localVarOptionals.SourceLocationsState.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("source.locations.state[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("source.locations.state[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotSourceLocationsState.IsSet() {
+		t:=localVarOptionals.NotSourceLocationsState.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!source.locations.state[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!source.locations.state[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.SourceLocationsCity.IsSet() {
+		t:=localVarOptionals.SourceLocationsCity.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("source.locations.city[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("source.locations.city[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotSourceLocationsCity.IsSet() {
+		t:=localVarOptionals.NotSourceLocationsCity.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!source.locations.city[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!source.locations.city[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.SourceScopesCountry.IsSet() {
+		t:=localVarOptionals.SourceScopesCountry.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("source.scopes.country[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("source.scopes.country[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotSourceScopesCountry.IsSet() {
+		t:=localVarOptionals.NotSourceScopesCountry.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!source.scopes.country[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!source.scopes.country[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.SourceScopesState.IsSet() {
+		t:=localVarOptionals.SourceScopesState.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("source.scopes.state[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("source.scopes.state[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotSourceScopesState.IsSet() {
+		t:=localVarOptionals.NotSourceScopesState.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!source.scopes.state[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!source.scopes.state[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.SourceScopesCity.IsSet() {
+		t:=localVarOptionals.SourceScopesCity.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("source.scopes.city[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("source.scopes.city[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotSourceScopesCity.IsSet() {
+		t:=localVarOptionals.NotSourceScopesCity.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!source.scopes.city[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!source.scopes.city[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.SourceScopesLevel.IsSet() {
+		t:=localVarOptionals.SourceScopesLevel.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("source.scopes.level[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("source.scopes.level[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotSourceScopesLevel.IsSet() {
+		t:=localVarOptionals.NotSourceScopesLevel.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!source.scopes.level[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!source.scopes.level[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.SourceLinksInCountMin.IsSet() {
+		localVarQueryParams.Add("source.links_in_count.min", parameterToString(localVarOptionals.SourceLinksInCountMin.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SourceLinksInCountMax.IsSet() {
+		localVarQueryParams.Add("source.links_in_count.max", parameterToString(localVarOptionals.SourceLinksInCountMax.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SourceRankingsAlexaRankMin.IsSet() {
+		localVarQueryParams.Add("source.rankings.alexa.rank.min", parameterToString(localVarOptionals.SourceRankingsAlexaRankMin.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SourceRankingsAlexaRankMax.IsSet() {
+		localVarQueryParams.Add("source.rankings.alexa.rank.max", parameterToString(localVarOptionals.SourceRankingsAlexaRankMax.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SourceRankingsAlexaCountry.IsSet() {
+		t:=localVarOptionals.SourceRankingsAlexaCountry.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("source.rankings.alexa.country[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("source.rankings.alexa.country[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.SocialSharesCountFacebookMin.IsSet() {
+		localVarQueryParams.Add("social_shares_count.facebook.min", parameterToString(localVarOptionals.SocialSharesCountFacebookMin.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SocialSharesCountFacebookMax.IsSet() {
+		localVarQueryParams.Add("social_shares_count.facebook.max", parameterToString(localVarOptionals.SocialSharesCountFacebookMax.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SocialSharesCountGooglePlusMin.IsSet() {
+		localVarQueryParams.Add("social_shares_count.google_plus.min", parameterToString(localVarOptionals.SocialSharesCountGooglePlusMin.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SocialSharesCountGooglePlusMax.IsSet() {
+		localVarQueryParams.Add("social_shares_count.google_plus.max", parameterToString(localVarOptionals.SocialSharesCountGooglePlusMax.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SocialSharesCountLinkedinMin.IsSet() {
+		localVarQueryParams.Add("social_shares_count.linkedin.min", parameterToString(localVarOptionals.SocialSharesCountLinkedinMin.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SocialSharesCountLinkedinMax.IsSet() {
+		localVarQueryParams.Add("social_shares_count.linkedin.max", parameterToString(localVarOptionals.SocialSharesCountLinkedinMax.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SocialSharesCountRedditMin.IsSet() {
+		localVarQueryParams.Add("social_shares_count.reddit.min", parameterToString(localVarOptionals.SocialSharesCountRedditMin.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SocialSharesCountRedditMax.IsSet() {
+		localVarQueryParams.Add("social_shares_count.reddit.max", parameterToString(localVarOptionals.SocialSharesCountRedditMax.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Clusters.IsSet() {
+		t:=localVarOptionals.Clusters.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("clusters[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("clusters[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.Return_.IsSet() {
+		t:=localVarOptionals.Return_.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("return[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("return[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.StoryId.IsSet() {
+		localVarQueryParams.Add("story_id", parameterToString(localVarOptionals.StoryId.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.StoryUrl.IsSet() {
+		localVarQueryParams.Add("story_url", parameterToString(localVarOptionals.StoryUrl.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.StoryTitle.IsSet() {
+		localVarQueryParams.Add("story_title", parameterToString(localVarOptionals.StoryTitle.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.StoryBody.IsSet() {
+		localVarQueryParams.Add("story_body", parameterToString(localVarOptionals.StoryBody.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.BoostBy.IsSet() {
+		localVarQueryParams.Add("boost_by", parameterToString(localVarOptionals.BoostBy.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.StoryLanguage.IsSet() {
+		localVarQueryParams.Add("story_language", parameterToString(localVarOptionals.StoryLanguage.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PerPage.IsSet() {
+		localVarQueryParams.Add("per_page", parameterToString(localVarOptionals.PerPage.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/xml"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["X-AYLIEN-NewsAPI-Application-ID"] = key
+		}
+	}
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["X-AYLIEN-NewsAPI-Application-Key"] = key
+		}
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v Errors
@@ -3521,6 +3588,8 @@ type ListStoriesOpts struct {
     CategoriesConfident optional.Bool
     CategoriesId optional.Interface
     NotCategoriesId optional.Interface
+    CategoriesLabel optional.Interface
+    NotCategoriesLabel optional.Interface
     CategoriesLevel optional.Interface
     NotCategoriesLevel optional.Interface
     EntitiesTitleText optional.Interface
@@ -3619,6 +3688,8 @@ The stories endpoint is used to return stories based on parameters you set in yo
  * @param "CategoriesConfident" (optional.Bool) -  This parameter is used for finding stories whose categories are confident. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "CategoriesId" (optional.Interface of []string) -  This parameter is used for finding stories by categories id. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "NotCategoriesId" (optional.Interface of []string) -  This parameter is used for excluding stories by categories id. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "CategoriesLabel" (optional.Interface of []string) -  This parameter is used for finding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "NotCategoriesLabel" (optional.Interface of []string) -  This parameter is used for excluding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "CategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "NotCategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for excluding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "EntitiesTitleText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
@@ -3706,7 +3777,6 @@ func (a *DefaultApiService) ListStories(ctx _context.Context, localVarOptionals 
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/stories"
-
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
@@ -3827,6 +3897,28 @@ func (a *DefaultApiService) ListStories(ctx _context.Context, localVarOptionals 
 			}
 		} else {
 			localVarQueryParams.Add("!categories.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.CategoriesLabel.IsSet() {
+		t:=localVarOptionals.CategoriesLabel.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("categories.label[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("categories.label[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotCategoriesLabel.IsSet() {
+		t:=localVarOptionals.NotCategoriesLabel.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!categories.label[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!categories.label[]", parameterToString(t, "multi"))
 		}
 	}
 	if localVarOptionals != nil && localVarOptionals.CategoriesLevel.IsSet() {
@@ -4438,16 +4530,6 @@ func (a *DefaultApiService) ListStories(ctx _context.Context, localVarOptionals 
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 200 {
-			var v Stories
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v Errors
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -4528,6 +4610,8 @@ type ListTimeSeriesOpts struct {
     CategoriesConfident optional.Bool
     CategoriesId optional.Interface
     NotCategoriesId optional.Interface
+    CategoriesLabel optional.Interface
+    NotCategoriesLabel optional.Interface
     CategoriesLevel optional.Interface
     NotCategoriesLevel optional.Interface
     EntitiesTitleText optional.Interface
@@ -4595,6 +4679,7 @@ type ListTimeSeriesOpts struct {
     SocialSharesCountLinkedinMax optional.Int32
     SocialSharesCountRedditMin optional.Int32
     SocialSharesCountRedditMax optional.Int32
+    Clusters optional.Interface
     PublishedAtStart optional.String
     PublishedAtEnd optional.String
     Period optional.String
@@ -4619,6 +4704,8 @@ The time series endpoint allows you to track information contained in stories ov
  * @param "CategoriesConfident" (optional.Bool) -  This parameter is used for finding stories whose categories are confident. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "CategoriesId" (optional.Interface of []string) -  This parameter is used for finding stories by categories id. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "NotCategoriesId" (optional.Interface of []string) -  This parameter is used for excluding stories by categories id. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "CategoriesLabel" (optional.Interface of []string) -  This parameter is used for finding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "NotCategoriesLabel" (optional.Interface of []string) -  This parameter is used for excluding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "CategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "NotCategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for excluding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "EntitiesTitleText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
@@ -4686,6 +4773,7 @@ The time series endpoint allows you to track information contained in stories ov
  * @param "SocialSharesCountLinkedinMax" (optional.Int32) -  This parameter is used for finding stories whose LinkedIn social shares count is less than or equal to the specified value. 
  * @param "SocialSharesCountRedditMin" (optional.Int32) -  This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value. 
  * @param "SocialSharesCountRedditMax" (optional.Int32) -  This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value. 
+ * @param "Clusters" (optional.Interface of []string) -  This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering). 
  * @param "PublishedAtStart" (optional.String) -  This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
  * @param "PublishedAtEnd" (optional.String) -  This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
  * @param "Period" (optional.String) -  The size of each date range is expressed as an interval to be added to the lower bound. It supports Date Math Syntax. Valid options are `+` following an integer number greater than 0 and one of the Date Math keywords. e.g. `+1DAY`, `+2MINUTES` and `+1MONTH`. Here are [Supported keywords](https://newsapi.aylien.com/docs/working-with-dates#date-math). 
@@ -4703,7 +4791,6 @@ func (a *DefaultApiService) ListTimeSeries(ctx _context.Context, localVarOptiona
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/time_series"
-
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
@@ -4796,6 +4883,28 @@ func (a *DefaultApiService) ListTimeSeries(ctx _context.Context, localVarOptiona
 			}
 		} else {
 			localVarQueryParams.Add("!categories.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.CategoriesLabel.IsSet() {
+		t:=localVarOptionals.CategoriesLabel.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("categories.label[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("categories.label[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotCategoriesLabel.IsSet() {
+		t:=localVarOptionals.NotCategoriesLabel.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!categories.label[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!categories.label[]", parameterToString(t, "multi"))
 		}
 	}
 	if localVarOptionals != nil && localVarOptionals.CategoriesLevel.IsSet() {
@@ -5311,6 +5420,17 @@ func (a *DefaultApiService) ListTimeSeries(ctx _context.Context, localVarOptiona
 	if localVarOptionals != nil && localVarOptionals.SocialSharesCountRedditMax.IsSet() {
 		localVarQueryParams.Add("social_shares_count.reddit.max", parameterToString(localVarOptionals.SocialSharesCountRedditMax.Value(), ""))
 	}
+	if localVarOptionals != nil && localVarOptionals.Clusters.IsSet() {
+		t:=localVarOptionals.Clusters.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("clusters[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("clusters[]", parameterToString(t, "multi"))
+		}
+	}
 	if localVarOptionals != nil && localVarOptionals.PublishedAtStart.IsSet() {
 		localVarQueryParams.Add("published_at.start", parameterToString(localVarOptionals.PublishedAtStart.Value(), ""))
 	}
@@ -5381,16 +5501,6 @@ func (a *DefaultApiService) ListTimeSeries(ctx _context.Context, localVarOptiona
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 200 {
-			var v TimeSeriesList
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v Errors
@@ -5476,6 +5586,8 @@ type ListTrendsOpts struct {
     CategoriesConfident optional.Bool
     CategoriesId optional.Interface
     NotCategoriesId optional.Interface
+    CategoriesLabel optional.Interface
+    NotCategoriesLabel optional.Interface
     CategoriesLevel optional.Interface
     NotCategoriesLevel optional.Interface
     EntitiesTitleText optional.Interface
@@ -5543,6 +5655,7 @@ type ListTrendsOpts struct {
     SocialSharesCountLinkedinMax optional.Int32
     SocialSharesCountRedditMin optional.Int32
     SocialSharesCountRedditMax optional.Int32
+    Clusters optional.Interface
 }
 
 /*
@@ -5569,6 +5682,8 @@ The trends endpoint allows you to identify the most-mentioned entities, concepts
  * @param "CategoriesConfident" (optional.Bool) -  This parameter is used for finding stories whose categories are confident. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "CategoriesId" (optional.Interface of []string) -  This parameter is used for finding stories by categories id. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "NotCategoriesId" (optional.Interface of []string) -  This parameter is used for excluding stories by categories id. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "CategoriesLabel" (optional.Interface of []string) -  This parameter is used for finding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "NotCategoriesLabel" (optional.Interface of []string) -  This parameter is used for excluding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "CategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "NotCategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for excluding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "EntitiesTitleText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
@@ -5636,6 +5751,7 @@ The trends endpoint allows you to identify the most-mentioned entities, concepts
  * @param "SocialSharesCountLinkedinMax" (optional.Int32) -  This parameter is used for finding stories whose LinkedIn social shares count is less than or equal to the specified value. 
  * @param "SocialSharesCountRedditMin" (optional.Int32) -  This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value. 
  * @param "SocialSharesCountRedditMax" (optional.Int32) -  This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value. 
+ * @param "Clusters" (optional.Interface of []string) -  This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering). 
 @return Trends
 */
 func (a *DefaultApiService) ListTrends(ctx _context.Context, field string, localVarOptionals *ListTrendsOpts) (Trends, *_nethttp.Response, error) {
@@ -5650,7 +5766,6 @@ func (a *DefaultApiService) ListTrends(ctx _context.Context, field string, local
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/trends"
-
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
@@ -5773,6 +5888,28 @@ func (a *DefaultApiService) ListTrends(ctx _context.Context, field string, local
 			localVarQueryParams.Add("!categories.id[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.CategoriesLabel.IsSet() {
+		t:=localVarOptionals.CategoriesLabel.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("categories.label[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("categories.label[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotCategoriesLabel.IsSet() {
+		t:=localVarOptionals.NotCategoriesLabel.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!categories.label[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!categories.label[]", parameterToString(t, "multi"))
+		}
+	}
 	if localVarOptionals != nil && localVarOptionals.CategoriesLevel.IsSet() {
 		t:=localVarOptionals.CategoriesLevel.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -6286,6 +6423,17 @@ func (a *DefaultApiService) ListTrends(ctx _context.Context, field string, local
 	if localVarOptionals != nil && localVarOptionals.SocialSharesCountRedditMax.IsSet() {
 		localVarQueryParams.Add("social_shares_count.reddit.max", parameterToString(localVarOptionals.SocialSharesCountRedditMax.Value(), ""))
 	}
+	if localVarOptionals != nil && localVarOptionals.Clusters.IsSet() {
+		t:=localVarOptionals.Clusters.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("clusters[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("clusters[]", parameterToString(t, "multi"))
+		}
+	}
 	localVarQueryParams.Add("field", parameterToString(field, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6348,16 +6496,6 @@ func (a *DefaultApiService) ListTrends(ctx _context.Context, field string, local
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 200 {
-			var v Trends
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v Errors
