@@ -1,4 +1,4 @@
-module github.com/aylien/aylien_newsapi_go
+module github.com/aylien/aylien_newsapi_go/v4
 
 require (
 	github.com/antihax/optional v1.0.0
