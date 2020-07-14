@@ -9,8 +9,11 @@
  */
 
 package newsapi
-// ErrorLinks struct for ErrorLinks
-type ErrorLinks struct {
-	About string `json:"about,omitempty"`
-	Docs string `json:"docs,omitempty"`
+// Warning struct for Warning
+type Warning struct {
+	// The identfier of the warning, represents its origin.
+	Id String `json:"id,omitempty"`
+	Links ErrorLinks `json:"links,omitempty"`
+	// The detailed description of the warning.
+	Detail String `json:"detail,omitempty"`
 }

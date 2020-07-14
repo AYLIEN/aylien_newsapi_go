@@ -22,4 +22,6 @@ type Stories struct {
 	PublishedAtEnd time.Time `json:"published_at.end,omitempty"`
 	// The start of a period in which searched stories were published
 	PublishedAtStart time.Time `json:"published_at.start,omitempty"`
+	// Notifies about possible issues that occurred when searching for stories
+	Warnings []Warning `json:"warnings,omitempty"`
 }

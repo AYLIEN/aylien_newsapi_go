@@ -48,6 +48,7 @@ docs/TimeSeries.md
 docs/TimeSeriesList.md
 docs/Trend.md
 docs/Trends.md
+docs/Warning.md
 git_push.sh
 go.mod
 go.sum
@@ -94,4 +95,5 @@ model_time_series.go
 model_time_series_list.go
 model_trend.go
 model_trends.go
+model_warning.go
 response.go

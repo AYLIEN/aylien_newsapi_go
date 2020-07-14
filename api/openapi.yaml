@@ -10688,8 +10688,13 @@ components:
           type: string
       type: object
     ErrorLinks:
+      example:
+        docs: docs
+        about: about
       properties:
         about:
+          type: string
+        docs:
           type: string
       type: object
     Errors:
@@ -10855,7 +10860,9 @@ components:
     RelatedStories:
       example:
         story_body: story_body
+        published_at.start: 2000-01-23T04:56:07.000+00:00
         story_title: story_title
+        published_at.end: 2000-01-23T04:56:07.000+00:00
         related_stories:
         - summary:
             sentences:
@@ -11210,6 +11217,14 @@ components:
           type: string
         story_title:
           description: The input story title
+          type: string
+        published_at.end:
+          description: The end of a period in which searched stories were published
+          format: date-time
+          type: string
+        published_at.start:
+          description: The start of a period in which searched stories were published
+          format: date-time
           type: string
       type: object
     RepresentativeStory:
@@ -11767,6 +11782,17 @@ components:
           - 5
           - 5
           words_count: 4
+        warnings:
+        - links:
+            docs: docs
+            about: about
+          id: ""
+          detail: ""
+        - links:
+            docs: docs
+            about: about
+          id: ""
+          detail: ""
         published_at.end: 2000-01-23T04:56:07.000+00:00
         next_page_cursor: next_page_cursor
       properties:
@@ -11786,6 +11812,12 @@ components:
           description: The start of a period in which searched stories were published
           format: date-time
           type: string
+        warnings:
+          description: Notifies about possible issues that occurred when searching
+            for stories
+          items:
+            $ref: '#/components/schemas/Warning'
+          type: array
       type: object
     Story:
       example:
@@ -12199,6 +12231,23 @@ components:
           description: The start of a period in which searched stories were published
           format: date-time
           type: string
+      type: object
+    Warning:
+      example:
+        links:
+          docs: docs
+          about: about
+        id: ""
+        detail: ""
+      properties:
+        id:
+          description: The identfier of the warning, represents its origin.
+          type: String
+        links:
+          $ref: '#/components/schemas/ErrorLinks'
+        detail:
+          description: The detailed description of the warning.
+          type: String
       type: object
   securitySchemes:
     app_id:

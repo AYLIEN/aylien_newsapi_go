@@ -9,6 +9,9 @@
  */
 
 package newsapi
+import (
+	"time"
+)
 // RelatedStories struct for RelatedStories
 type RelatedStories struct {
 	// An array of related stories for the input story
@@ -19,4 +22,8 @@ type RelatedStories struct {
 	StoryLanguage string `json:"story_language,omitempty"`
 	// The input story title
 	StoryTitle string `json:"story_title,omitempty"`
+	// The end of a period in which searched stories were published
+	PublishedAtEnd time.Time `json:"published_at.end,omitempty"`
+	// The start of a period in which searched stories were published
+	PublishedAtStart time.Time `json:"published_at.start,omitempty"`
 }
