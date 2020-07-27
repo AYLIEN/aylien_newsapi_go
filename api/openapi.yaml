@@ -11786,13 +11786,13 @@ components:
         - links:
             docs: docs
             about: about
-          id: ""
-          detail: ""
+          id: id
+          detail: detail
         - links:
             docs: docs
             about: about
-          id: ""
-          detail: ""
+          id: id
+          detail: detail
         published_at.end: 2000-01-23T04:56:07.000+00:00
         next_page_cursor: next_page_cursor
       properties:
@@ -12237,17 +12237,17 @@ components:
         links:
           docs: docs
           about: about
-        id: ""
-        detail: ""
+        id: id
+        detail: detail
       properties:
         id:
           description: The identfier of the warning, represents its origin.
-          type: String
+          type: string
         links:
           $ref: '#/components/schemas/ErrorLinks'
         detail:
           description: The detailed description of the warning.
-          type: String
+          type: string
       type: object
   securitySchemes:
     app_id:

@@ -12,8 +12,8 @@ package newsapi
 // Warning struct for Warning
 type Warning struct {
 	// The identfier of the warning, represents its origin.
-	Id String `json:"id,omitempty"`
+	Id string `json:"id,omitempty"`
 	Links ErrorLinks `json:"links,omitempty"`
 	// The detailed description of the warning.
-	Detail String `json:"detail,omitempty"`
+	Detail string `json:"detail,omitempty"`
 }
