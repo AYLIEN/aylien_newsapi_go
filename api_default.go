@@ -27,6 +27,205 @@ var (
 // DefaultApiService DefaultApi service
 type DefaultApiService service
 
+// AdvancedListStoriesOpts Optional parameters for the method 'AdvancedListStories'
+type AdvancedListStoriesOpts struct {
+    PublishedAtStart optional.String
+    PublishedAtEnd optional.String
+    Return_ optional.Interface
+    SortBy optional.String
+    SortDirection optional.String
+    Cursor optional.String
+    PerPage optional.Int32
+}
+
+/*
+AdvancedListStories List Stories
+The stories endpoint is used to return stories based on the json query you set in your request body. The News API crawler gathers articles in near real-time and stores information about them, or metadata. Below you can see all of the query parameters, and JSON schema for the body, which you can use to narrow down your query. 
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param body /stories body schema to perform an advanced search with logical operators and nested objects. 
+ * @param optional nil or *AdvancedListStoriesOpts - Optional Parameters:
+ * @param "PublishedAtStart" (optional.String) -  This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
+ * @param "PublishedAtEnd" (optional.String) -  This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
+ * @param "Return_" (optional.Interface of []string) -  This parameter is used for specifying return fields.
+ * @param "SortBy" (optional.String) -  This parameter is used for changing the order column of the results. You can read about sorting results [here](https://newsapi.aylien.com/docs/sorting-results). 
+ * @param "SortDirection" (optional.String) -  This parameter is used for changing the order direction of the result. You can read about sorting results [here](https://newsapi.aylien.com/docs/sorting-results). 
+ * @param "Cursor" (optional.String) -  This parameter is used for finding a specific page. You can read more about pagination of results [here](https://newsapi.aylien.com/docs/pagination-of-results). 
+ * @param "PerPage" (optional.Int32) -  This parameter is used for specifying number of items in each page You can read more about pagination of results [here](https://newsapi.aylien.com/docs/pagination-of-results) 
+@return Stories
+*/
+func (a *DefaultApiService) AdvancedListStories(ctx _context.Context, body map[string]interface{}, localVarOptionals *AdvancedListStoriesOpts) (Stories, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  Stories
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/stories"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.PublishedAtStart.IsSet() {
+		localVarQueryParams.Add("published_at.start", parameterToString(localVarOptionals.PublishedAtStart.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PublishedAtEnd.IsSet() {
+		localVarQueryParams.Add("published_at.end", parameterToString(localVarOptionals.PublishedAtEnd.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Return_.IsSet() {
+		t:=localVarOptionals.Return_.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("return[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("return[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.SortBy.IsSet() {
+		localVarQueryParams.Add("sort_by", parameterToString(localVarOptionals.SortBy.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SortDirection.IsSet() {
+		localVarQueryParams.Add("sort_direction", parameterToString(localVarOptionals.SortDirection.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Cursor.IsSet() {
+		localVarQueryParams.Add("cursor", parameterToString(localVarOptionals.Cursor.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PerPage.IsSet() {
+		localVarQueryParams.Add("per_page", parameterToString(localVarOptionals.PerPage.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/xml"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = &body
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["X-AYLIEN-NewsAPI-Application-ID"] = key
+		}
+	}
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["X-AYLIEN-NewsAPI-Application-Key"] = key
+		}
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Errors
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Errors
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v Errors
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v Errors
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v Errors
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 // ListAutocompletesOpts Optional parameters for the method 'ListAutocompletes'
 type ListAutocompletesOpts struct {
     Language optional.String
@@ -499,18 +698,38 @@ type ListHistogramsOpts struct {
     NotCategoriesLabel optional.Interface
     CategoriesLevel optional.Interface
     NotCategoriesLevel optional.Interface
+    EntitiesTitleId optional.Interface
+    NotEntitiesTitleId optional.Interface
+    EntitiesTitleSurfaceFormsText optional.Interface
+    NotEntitiesTitleSurfaceFormsText optional.Interface
     EntitiesTitleText optional.Interface
     NotEntitiesTitleText optional.Interface
     EntitiesTitleType optional.Interface
     NotEntitiesTitleType optional.Interface
+    EntitiesTitleStockTicker optional.Interface
+    NotEntitiesTitleStockTicker optional.Interface
     EntitiesTitleLinksDbpedia optional.Interface
     NotEntitiesTitleLinksDbpedia optional.Interface
+    EntitiesTitleLinksWikipedia optional.Interface
+    NotEntitiesTitleLinksWikipedia optional.Interface
+    EntitiesTitleLinksWikidata optional.Interface
+    NotEntitiesTitleLinksWikidata optional.Interface
+    EntitiesBodyId optional.Interface
+    NotEntitiesBodyId optional.Interface
+    EntitiesBodySurfaceFormsText optional.Interface
+    NotEntitiesBodySurfaceFormsText optional.Interface
     EntitiesBodyText optional.Interface
     NotEntitiesBodyText optional.Interface
     EntitiesBodyType optional.Interface
     NotEntitiesBodyType optional.Interface
+    EntitiesBodyStockTicker optional.Interface
+    NotEntitiesBodyStockTicker optional.Interface
     EntitiesBodyLinksDbpedia optional.Interface
     NotEntitiesBodyLinksDbpedia optional.Interface
+    EntitiesBodyLinksWikipedia optional.Interface
+    NotEntitiesBodyLinksWikipedia optional.Interface
+    EntitiesBodyLinksWikidata optional.Interface
+    NotEntitiesBodyLinksWikidata optional.Interface
     SentimentTitlePolarity optional.String
     NotSentimentTitlePolarity optional.String
     SentimentBodyPolarity optional.String
@@ -598,18 +817,38 @@ For the numerical metadata that the News API gathers (such as word counts or soc
  * @param "NotCategoriesLabel" (optional.Interface of []string) -  This parameter is used for excluding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "CategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "NotCategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for excluding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "EntitiesTitleId" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `id` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleId" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `id` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleSurfaceFormsText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `surface_form` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleSurfaceFormsText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `surface_form` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesTitleText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesTitleText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesTitleType" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesTitleType" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleStockTicker" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `stock_ticker` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleStockTicker" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `stock_ticker` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesTitleLinksDbpedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesTitleLinksDbpedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleLinksWikipedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities Wikipedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleLinksWikipedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikipedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleLinksWikidata" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities Wikidata URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleLinksWikidata" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikidata URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyId" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyId" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodySurfaceFormsText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodySurfaceFormsText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesBodyText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesBodyText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesBodyType" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesBodyType" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyStockTicker" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyStockTicker" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesBodyLinksDbpedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesBodyLinksDbpedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyLinksWikipedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyLinksWikipedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyLinksWikidata" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyLinksWikidata" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "SentimentTitlePolarity" (optional.String) -  This parameter is used for finding stories whose title sentiment is the specified value. 
  * @param "NotSentimentTitlePolarity" (optional.String) -  This parameter is used for excluding stories whose title sentiment is the specified value. 
  * @param "SentimentBodyPolarity" (optional.String) -  This parameter is used for finding stories whose body sentiment is the specified value. 
@@ -848,6 +1087,50 @@ func (a *DefaultApiService) ListHistograms(ctx _context.Context, localVarOptiona
 			localVarQueryParams.Add("!categories.level[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleId.IsSet() {
+		t:=localVarOptionals.EntitiesTitleId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleId.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleSurfaceFormsText.IsSet() {
+		t:=localVarOptionals.EntitiesTitleSurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.surface_forms.text[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleSurfaceFormsText.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleSurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.surface_forms.text[]", parameterToString(t, "multi"))
+		}
+	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesTitleText.IsSet() {
 		t:=localVarOptionals.EntitiesTitleText.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -892,6 +1175,28 @@ func (a *DefaultApiService) ListHistograms(ctx _context.Context, localVarOptiona
 			localVarQueryParams.Add("!entities.title.type[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleStockTicker.IsSet() {
+		t:=localVarOptionals.EntitiesTitleStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleStockTicker.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesTitleLinksDbpedia.IsSet() {
 		t:=localVarOptionals.EntitiesTitleLinksDbpedia.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -912,6 +1217,94 @@ func (a *DefaultApiService) ListHistograms(ctx _context.Context, localVarOptiona
 			}
 		} else {
 			localVarQueryParams.Add("!entities.title.links.dbpedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleLinksWikipedia.IsSet() {
+		t:=localVarOptionals.EntitiesTitleLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleLinksWikipedia.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleLinksWikidata.IsSet() {
+		t:=localVarOptionals.EntitiesTitleLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.links.wikidata[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleLinksWikidata.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.links.wikidata[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyId.IsSet() {
+		t:=localVarOptionals.EntitiesBodyId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyId.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodySurfaceFormsText.IsSet() {
+		t:=localVarOptionals.EntitiesBodySurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.surface_forms.text[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodySurfaceFormsText.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodySurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.surface_forms.text[]", parameterToString(t, "multi"))
 		}
 	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesBodyText.IsSet() {
@@ -958,6 +1351,28 @@ func (a *DefaultApiService) ListHistograms(ctx _context.Context, localVarOptiona
 			localVarQueryParams.Add("!entities.body.type[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyStockTicker.IsSet() {
+		t:=localVarOptionals.EntitiesBodyStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyStockTicker.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesBodyLinksDbpedia.IsSet() {
 		t:=localVarOptionals.EntitiesBodyLinksDbpedia.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -978,6 +1393,50 @@ func (a *DefaultApiService) ListHistograms(ctx _context.Context, localVarOptiona
 			}
 		} else {
 			localVarQueryParams.Add("!entities.body.links.dbpedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyLinksWikipedia.IsSet() {
+		t:=localVarOptionals.EntitiesBodyLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyLinksWikipedia.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyLinksWikidata.IsSet() {
+		t:=localVarOptionals.EntitiesBodyLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.links.wikidata[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyLinksWikidata.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.links.wikidata[]", parameterToString(t, "multi"))
 		}
 	}
 	if localVarOptionals != nil && localVarOptionals.SentimentTitlePolarity.IsSet() {
@@ -1512,18 +1971,38 @@ type ListRelatedStoriesGetOpts struct {
     NotCategoriesLabel optional.Interface
     CategoriesLevel optional.Interface
     NotCategoriesLevel optional.Interface
+    EntitiesTitleId optional.Interface
+    NotEntitiesTitleId optional.Interface
+    EntitiesTitleSurfaceFormsText optional.Interface
+    NotEntitiesTitleSurfaceFormsText optional.Interface
     EntitiesTitleText optional.Interface
     NotEntitiesTitleText optional.Interface
     EntitiesTitleType optional.Interface
     NotEntitiesTitleType optional.Interface
+    EntitiesTitleStockTicker optional.Interface
+    NotEntitiesTitleStockTicker optional.Interface
     EntitiesTitleLinksDbpedia optional.Interface
     NotEntitiesTitleLinksDbpedia optional.Interface
+    EntitiesTitleLinksWikipedia optional.Interface
+    NotEntitiesTitleLinksWikipedia optional.Interface
+    EntitiesTitleLinksWikidata optional.Interface
+    NotEntitiesTitleLinksWikidata optional.Interface
+    EntitiesBodyId optional.Interface
+    NotEntitiesBodyId optional.Interface
+    EntitiesBodySurfaceFormsText optional.Interface
+    NotEntitiesBodySurfaceFormsText optional.Interface
     EntitiesBodyText optional.Interface
     NotEntitiesBodyText optional.Interface
     EntitiesBodyType optional.Interface
     NotEntitiesBodyType optional.Interface
+    EntitiesBodyStockTicker optional.Interface
+    NotEntitiesBodyStockTicker optional.Interface
     EntitiesBodyLinksDbpedia optional.Interface
     NotEntitiesBodyLinksDbpedia optional.Interface
+    EntitiesBodyLinksWikipedia optional.Interface
+    NotEntitiesBodyLinksWikipedia optional.Interface
+    EntitiesBodyLinksWikidata optional.Interface
+    NotEntitiesBodyLinksWikidata optional.Interface
     SentimentTitlePolarity optional.String
     NotSentimentTitlePolarity optional.String
     SentimentBodyPolarity optional.String
@@ -1614,18 +2093,38 @@ ListRelatedStoriesGet Method for ListRelatedStoriesGet
  * @param "NotCategoriesLabel" (optional.Interface of []string) -  This parameter is used for excluding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "CategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "NotCategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for excluding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "EntitiesTitleId" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `id` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleId" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `id` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleSurfaceFormsText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `surface_form` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleSurfaceFormsText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `surface_form` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesTitleText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesTitleText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesTitleType" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesTitleType" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleStockTicker" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `stock_ticker` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleStockTicker" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `stock_ticker` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesTitleLinksDbpedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesTitleLinksDbpedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleLinksWikipedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities Wikipedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleLinksWikipedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikipedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleLinksWikidata" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities Wikidata URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleLinksWikidata" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikidata URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyId" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyId" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodySurfaceFormsText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodySurfaceFormsText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesBodyText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesBodyText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesBodyType" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesBodyType" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyStockTicker" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyStockTicker" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesBodyLinksDbpedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesBodyLinksDbpedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyLinksWikipedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyLinksWikipedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyLinksWikidata" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyLinksWikidata" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "SentimentTitlePolarity" (optional.String) -  This parameter is used for finding stories whose title sentiment is the specified value. 
  * @param "NotSentimentTitlePolarity" (optional.String) -  This parameter is used for excluding stories whose title sentiment is the specified value. 
  * @param "SentimentBodyPolarity" (optional.String) -  This parameter is used for finding stories whose body sentiment is the specified value. 
@@ -1868,6 +2367,50 @@ func (a *DefaultApiService) ListRelatedStoriesGet(ctx _context.Context, localVar
 			localVarQueryParams.Add("!categories.level[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleId.IsSet() {
+		t:=localVarOptionals.EntitiesTitleId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleId.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleSurfaceFormsText.IsSet() {
+		t:=localVarOptionals.EntitiesTitleSurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.surface_forms.text[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleSurfaceFormsText.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleSurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.surface_forms.text[]", parameterToString(t, "multi"))
+		}
+	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesTitleText.IsSet() {
 		t:=localVarOptionals.EntitiesTitleText.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -1912,6 +2455,28 @@ func (a *DefaultApiService) ListRelatedStoriesGet(ctx _context.Context, localVar
 			localVarQueryParams.Add("!entities.title.type[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleStockTicker.IsSet() {
+		t:=localVarOptionals.EntitiesTitleStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleStockTicker.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesTitleLinksDbpedia.IsSet() {
 		t:=localVarOptionals.EntitiesTitleLinksDbpedia.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -1932,6 +2497,94 @@ func (a *DefaultApiService) ListRelatedStoriesGet(ctx _context.Context, localVar
 			}
 		} else {
 			localVarQueryParams.Add("!entities.title.links.dbpedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleLinksWikipedia.IsSet() {
+		t:=localVarOptionals.EntitiesTitleLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleLinksWikipedia.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleLinksWikidata.IsSet() {
+		t:=localVarOptionals.EntitiesTitleLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.links.wikidata[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleLinksWikidata.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.links.wikidata[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyId.IsSet() {
+		t:=localVarOptionals.EntitiesBodyId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyId.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodySurfaceFormsText.IsSet() {
+		t:=localVarOptionals.EntitiesBodySurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.surface_forms.text[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodySurfaceFormsText.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodySurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.surface_forms.text[]", parameterToString(t, "multi"))
 		}
 	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesBodyText.IsSet() {
@@ -1978,6 +2631,28 @@ func (a *DefaultApiService) ListRelatedStoriesGet(ctx _context.Context, localVar
 			localVarQueryParams.Add("!entities.body.type[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyStockTicker.IsSet() {
+		t:=localVarOptionals.EntitiesBodyStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyStockTicker.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesBodyLinksDbpedia.IsSet() {
 		t:=localVarOptionals.EntitiesBodyLinksDbpedia.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -1998,6 +2673,50 @@ func (a *DefaultApiService) ListRelatedStoriesGet(ctx _context.Context, localVar
 			}
 		} else {
 			localVarQueryParams.Add("!entities.body.links.dbpedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyLinksWikipedia.IsSet() {
+		t:=localVarOptionals.EntitiesBodyLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyLinksWikipedia.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyLinksWikidata.IsSet() {
+		t:=localVarOptionals.EntitiesBodyLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.links.wikidata[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyLinksWikidata.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.links.wikidata[]", parameterToString(t, "multi"))
 		}
 	}
 	if localVarOptionals != nil && localVarOptionals.SentimentTitlePolarity.IsSet() {
@@ -2552,18 +3271,38 @@ type ListRelatedStoriesPostOpts struct {
     NotCategoriesLabel optional.Interface
     CategoriesLevel optional.Interface
     NotCategoriesLevel optional.Interface
+    EntitiesTitleId optional.Interface
+    NotEntitiesTitleId optional.Interface
+    EntitiesTitleSurfaceFormsText optional.Interface
+    NotEntitiesTitleSurfaceFormsText optional.Interface
     EntitiesTitleText optional.Interface
     NotEntitiesTitleText optional.Interface
     EntitiesTitleType optional.Interface
     NotEntitiesTitleType optional.Interface
+    EntitiesTitleStockTicker optional.Interface
+    NotEntitiesTitleStockTicker optional.Interface
     EntitiesTitleLinksDbpedia optional.Interface
     NotEntitiesTitleLinksDbpedia optional.Interface
+    EntitiesTitleLinksWikipedia optional.Interface
+    NotEntitiesTitleLinksWikipedia optional.Interface
+    EntitiesTitleLinksWikidata optional.Interface
+    NotEntitiesTitleLinksWikidata optional.Interface
+    EntitiesBodyId optional.Interface
+    NotEntitiesBodyId optional.Interface
+    EntitiesBodySurfaceFormsText optional.Interface
+    NotEntitiesBodySurfaceFormsText optional.Interface
     EntitiesBodyText optional.Interface
     NotEntitiesBodyText optional.Interface
     EntitiesBodyType optional.Interface
     NotEntitiesBodyType optional.Interface
+    EntitiesBodyStockTicker optional.Interface
+    NotEntitiesBodyStockTicker optional.Interface
     EntitiesBodyLinksDbpedia optional.Interface
     NotEntitiesBodyLinksDbpedia optional.Interface
+    EntitiesBodyLinksWikipedia optional.Interface
+    NotEntitiesBodyLinksWikipedia optional.Interface
+    EntitiesBodyLinksWikidata optional.Interface
+    NotEntitiesBodyLinksWikidata optional.Interface
     SentimentTitlePolarity optional.String
     NotSentimentTitlePolarity optional.String
     SentimentBodyPolarity optional.String
@@ -2654,18 +3393,38 @@ ListRelatedStoriesPost Method for ListRelatedStoriesPost
  * @param "NotCategoriesLabel" (optional.Interface of []string) -  This parameter is used for excluding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "CategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "NotCategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for excluding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "EntitiesTitleId" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `id` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleId" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `id` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleSurfaceFormsText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `surface_form` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleSurfaceFormsText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `surface_form` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesTitleText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesTitleText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesTitleType" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesTitleType" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleStockTicker" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `stock_ticker` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleStockTicker" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `stock_ticker` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesTitleLinksDbpedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesTitleLinksDbpedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleLinksWikipedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities Wikipedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleLinksWikipedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikipedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleLinksWikidata" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities Wikidata URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleLinksWikidata" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikidata URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyId" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyId" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodySurfaceFormsText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodySurfaceFormsText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesBodyText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesBodyText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesBodyType" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesBodyType" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyStockTicker" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyStockTicker" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesBodyLinksDbpedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesBodyLinksDbpedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyLinksWikipedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyLinksWikipedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyLinksWikidata" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyLinksWikidata" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "SentimentTitlePolarity" (optional.String) -  This parameter is used for finding stories whose title sentiment is the specified value. 
  * @param "NotSentimentTitlePolarity" (optional.String) -  This parameter is used for excluding stories whose title sentiment is the specified value. 
  * @param "SentimentBodyPolarity" (optional.String) -  This parameter is used for finding stories whose body sentiment is the specified value. 
@@ -2908,6 +3667,50 @@ func (a *DefaultApiService) ListRelatedStoriesPost(ctx _context.Context, localVa
 			localVarQueryParams.Add("!categories.level[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleId.IsSet() {
+		t:=localVarOptionals.EntitiesTitleId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleId.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleSurfaceFormsText.IsSet() {
+		t:=localVarOptionals.EntitiesTitleSurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.surface_forms.text[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleSurfaceFormsText.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleSurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.surface_forms.text[]", parameterToString(t, "multi"))
+		}
+	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesTitleText.IsSet() {
 		t:=localVarOptionals.EntitiesTitleText.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -2952,6 +3755,28 @@ func (a *DefaultApiService) ListRelatedStoriesPost(ctx _context.Context, localVa
 			localVarQueryParams.Add("!entities.title.type[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleStockTicker.IsSet() {
+		t:=localVarOptionals.EntitiesTitleStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleStockTicker.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesTitleLinksDbpedia.IsSet() {
 		t:=localVarOptionals.EntitiesTitleLinksDbpedia.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -2972,6 +3797,94 @@ func (a *DefaultApiService) ListRelatedStoriesPost(ctx _context.Context, localVa
 			}
 		} else {
 			localVarQueryParams.Add("!entities.title.links.dbpedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleLinksWikipedia.IsSet() {
+		t:=localVarOptionals.EntitiesTitleLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleLinksWikipedia.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleLinksWikidata.IsSet() {
+		t:=localVarOptionals.EntitiesTitleLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.links.wikidata[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleLinksWikidata.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.links.wikidata[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyId.IsSet() {
+		t:=localVarOptionals.EntitiesBodyId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyId.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodySurfaceFormsText.IsSet() {
+		t:=localVarOptionals.EntitiesBodySurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.surface_forms.text[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodySurfaceFormsText.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodySurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.surface_forms.text[]", parameterToString(t, "multi"))
 		}
 	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesBodyText.IsSet() {
@@ -3018,6 +3931,28 @@ func (a *DefaultApiService) ListRelatedStoriesPost(ctx _context.Context, localVa
 			localVarQueryParams.Add("!entities.body.type[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyStockTicker.IsSet() {
+		t:=localVarOptionals.EntitiesBodyStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyStockTicker.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesBodyLinksDbpedia.IsSet() {
 		t:=localVarOptionals.EntitiesBodyLinksDbpedia.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -3038,6 +3973,50 @@ func (a *DefaultApiService) ListRelatedStoriesPost(ctx _context.Context, localVa
 			}
 		} else {
 			localVarQueryParams.Add("!entities.body.links.dbpedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyLinksWikipedia.IsSet() {
+		t:=localVarOptionals.EntitiesBodyLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyLinksWikipedia.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyLinksWikidata.IsSet() {
+		t:=localVarOptionals.EntitiesBodyLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.links.wikidata[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyLinksWikidata.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.links.wikidata[]", parameterToString(t, "multi"))
 		}
 	}
 	if localVarOptionals != nil && localVarOptionals.SentimentTitlePolarity.IsSet() {
@@ -3592,18 +4571,38 @@ type ListStoriesOpts struct {
     NotCategoriesLabel optional.Interface
     CategoriesLevel optional.Interface
     NotCategoriesLevel optional.Interface
+    EntitiesTitleId optional.Interface
+    NotEntitiesTitleId optional.Interface
+    EntitiesTitleSurfaceFormsText optional.Interface
+    NotEntitiesTitleSurfaceFormsText optional.Interface
     EntitiesTitleText optional.Interface
     NotEntitiesTitleText optional.Interface
     EntitiesTitleType optional.Interface
     NotEntitiesTitleType optional.Interface
+    EntitiesTitleStockTicker optional.Interface
+    NotEntitiesTitleStockTicker optional.Interface
     EntitiesTitleLinksDbpedia optional.Interface
     NotEntitiesTitleLinksDbpedia optional.Interface
+    EntitiesTitleLinksWikipedia optional.Interface
+    NotEntitiesTitleLinksWikipedia optional.Interface
+    EntitiesTitleLinksWikidata optional.Interface
+    NotEntitiesTitleLinksWikidata optional.Interface
+    EntitiesBodyId optional.Interface
+    NotEntitiesBodyId optional.Interface
+    EntitiesBodySurfaceFormsText optional.Interface
+    NotEntitiesBodySurfaceFormsText optional.Interface
     EntitiesBodyText optional.Interface
     NotEntitiesBodyText optional.Interface
     EntitiesBodyType optional.Interface
     NotEntitiesBodyType optional.Interface
+    EntitiesBodyStockTicker optional.Interface
+    NotEntitiesBodyStockTicker optional.Interface
     EntitiesBodyLinksDbpedia optional.Interface
     NotEntitiesBodyLinksDbpedia optional.Interface
+    EntitiesBodyLinksWikipedia optional.Interface
+    NotEntitiesBodyLinksWikipedia optional.Interface
+    EntitiesBodyLinksWikidata optional.Interface
+    NotEntitiesBodyLinksWikidata optional.Interface
     SentimentTitlePolarity optional.String
     NotSentimentTitlePolarity optional.String
     SentimentBodyPolarity optional.String
@@ -3692,18 +4691,38 @@ The stories endpoint is used to return stories based on parameters you set in yo
  * @param "NotCategoriesLabel" (optional.Interface of []string) -  This parameter is used for excluding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "CategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "NotCategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for excluding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "EntitiesTitleId" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `id` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleId" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `id` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleSurfaceFormsText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `surface_form` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleSurfaceFormsText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `surface_form` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesTitleText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesTitleText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesTitleType" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesTitleType" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleStockTicker" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `stock_ticker` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleStockTicker" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `stock_ticker` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesTitleLinksDbpedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesTitleLinksDbpedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleLinksWikipedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities Wikipedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleLinksWikipedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikipedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleLinksWikidata" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities Wikidata URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleLinksWikidata" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikidata URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyId" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyId" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodySurfaceFormsText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodySurfaceFormsText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesBodyText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesBodyText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesBodyType" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesBodyType" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyStockTicker" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyStockTicker" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesBodyLinksDbpedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesBodyLinksDbpedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyLinksWikipedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyLinksWikipedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyLinksWikidata" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyLinksWikidata" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "SentimentTitlePolarity" (optional.String) -  This parameter is used for finding stories whose title sentiment is the specified value. 
  * @param "NotSentimentTitlePolarity" (optional.String) -  This parameter is used for excluding stories whose title sentiment is the specified value. 
  * @param "SentimentBodyPolarity" (optional.String) -  This parameter is used for finding stories whose body sentiment is the specified value. 
@@ -3943,6 +4962,50 @@ func (a *DefaultApiService) ListStories(ctx _context.Context, localVarOptionals 
 			localVarQueryParams.Add("!categories.level[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleId.IsSet() {
+		t:=localVarOptionals.EntitiesTitleId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleId.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleSurfaceFormsText.IsSet() {
+		t:=localVarOptionals.EntitiesTitleSurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.surface_forms.text[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleSurfaceFormsText.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleSurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.surface_forms.text[]", parameterToString(t, "multi"))
+		}
+	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesTitleText.IsSet() {
 		t:=localVarOptionals.EntitiesTitleText.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -3987,6 +5050,28 @@ func (a *DefaultApiService) ListStories(ctx _context.Context, localVarOptionals 
 			localVarQueryParams.Add("!entities.title.type[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleStockTicker.IsSet() {
+		t:=localVarOptionals.EntitiesTitleStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleStockTicker.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesTitleLinksDbpedia.IsSet() {
 		t:=localVarOptionals.EntitiesTitleLinksDbpedia.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -4007,6 +5092,94 @@ func (a *DefaultApiService) ListStories(ctx _context.Context, localVarOptionals 
 			}
 		} else {
 			localVarQueryParams.Add("!entities.title.links.dbpedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleLinksWikipedia.IsSet() {
+		t:=localVarOptionals.EntitiesTitleLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleLinksWikipedia.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleLinksWikidata.IsSet() {
+		t:=localVarOptionals.EntitiesTitleLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.links.wikidata[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleLinksWikidata.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.links.wikidata[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyId.IsSet() {
+		t:=localVarOptionals.EntitiesBodyId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyId.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodySurfaceFormsText.IsSet() {
+		t:=localVarOptionals.EntitiesBodySurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.surface_forms.text[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodySurfaceFormsText.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodySurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.surface_forms.text[]", parameterToString(t, "multi"))
 		}
 	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesBodyText.IsSet() {
@@ -4053,6 +5226,28 @@ func (a *DefaultApiService) ListStories(ctx _context.Context, localVarOptionals 
 			localVarQueryParams.Add("!entities.body.type[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyStockTicker.IsSet() {
+		t:=localVarOptionals.EntitiesBodyStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyStockTicker.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesBodyLinksDbpedia.IsSet() {
 		t:=localVarOptionals.EntitiesBodyLinksDbpedia.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -4073,6 +5268,50 @@ func (a *DefaultApiService) ListStories(ctx _context.Context, localVarOptionals 
 			}
 		} else {
 			localVarQueryParams.Add("!entities.body.links.dbpedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyLinksWikipedia.IsSet() {
+		t:=localVarOptionals.EntitiesBodyLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyLinksWikipedia.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyLinksWikidata.IsSet() {
+		t:=localVarOptionals.EntitiesBodyLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.links.wikidata[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyLinksWikidata.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.links.wikidata[]", parameterToString(t, "multi"))
 		}
 	}
 	if localVarOptionals != nil && localVarOptionals.SentimentTitlePolarity.IsSet() {
@@ -4614,18 +5853,38 @@ type ListTimeSeriesOpts struct {
     NotCategoriesLabel optional.Interface
     CategoriesLevel optional.Interface
     NotCategoriesLevel optional.Interface
+    EntitiesTitleId optional.Interface
+    NotEntitiesTitleId optional.Interface
+    EntitiesTitleSurfaceFormsText optional.Interface
+    NotEntitiesTitleSurfaceFormsText optional.Interface
     EntitiesTitleText optional.Interface
     NotEntitiesTitleText optional.Interface
     EntitiesTitleType optional.Interface
     NotEntitiesTitleType optional.Interface
+    EntitiesTitleStockTicker optional.Interface
+    NotEntitiesTitleStockTicker optional.Interface
     EntitiesTitleLinksDbpedia optional.Interface
     NotEntitiesTitleLinksDbpedia optional.Interface
+    EntitiesTitleLinksWikipedia optional.Interface
+    NotEntitiesTitleLinksWikipedia optional.Interface
+    EntitiesTitleLinksWikidata optional.Interface
+    NotEntitiesTitleLinksWikidata optional.Interface
+    EntitiesBodyId optional.Interface
+    NotEntitiesBodyId optional.Interface
+    EntitiesBodySurfaceFormsText optional.Interface
+    NotEntitiesBodySurfaceFormsText optional.Interface
     EntitiesBodyText optional.Interface
     NotEntitiesBodyText optional.Interface
     EntitiesBodyType optional.Interface
     NotEntitiesBodyType optional.Interface
+    EntitiesBodyStockTicker optional.Interface
+    NotEntitiesBodyStockTicker optional.Interface
     EntitiesBodyLinksDbpedia optional.Interface
     NotEntitiesBodyLinksDbpedia optional.Interface
+    EntitiesBodyLinksWikipedia optional.Interface
+    NotEntitiesBodyLinksWikipedia optional.Interface
+    EntitiesBodyLinksWikidata optional.Interface
+    NotEntitiesBodyLinksWikidata optional.Interface
     SentimentTitlePolarity optional.String
     NotSentimentTitlePolarity optional.String
     SentimentBodyPolarity optional.String
@@ -4708,18 +5967,38 @@ The time series endpoint allows you to track information contained in stories ov
  * @param "NotCategoriesLabel" (optional.Interface of []string) -  This parameter is used for excluding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "CategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "NotCategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for excluding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "EntitiesTitleId" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `id` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleId" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `id` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleSurfaceFormsText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `surface_form` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleSurfaceFormsText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `surface_form` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesTitleText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesTitleText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesTitleType" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesTitleType" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleStockTicker" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `stock_ticker` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleStockTicker" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `stock_ticker` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesTitleLinksDbpedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesTitleLinksDbpedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleLinksWikipedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities Wikipedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleLinksWikipedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikipedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleLinksWikidata" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities Wikidata URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleLinksWikidata" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikidata URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyId" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyId" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodySurfaceFormsText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodySurfaceFormsText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesBodyText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesBodyText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesBodyType" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesBodyType" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyStockTicker" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyStockTicker" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesBodyLinksDbpedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesBodyLinksDbpedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyLinksWikipedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyLinksWikipedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyLinksWikidata" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyLinksWikidata" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "SentimentTitlePolarity" (optional.String) -  This parameter is used for finding stories whose title sentiment is the specified value. 
  * @param "NotSentimentTitlePolarity" (optional.String) -  This parameter is used for excluding stories whose title sentiment is the specified value. 
  * @param "SentimentBodyPolarity" (optional.String) -  This parameter is used for finding stories whose body sentiment is the specified value. 
@@ -4929,6 +6208,50 @@ func (a *DefaultApiService) ListTimeSeries(ctx _context.Context, localVarOptiona
 			localVarQueryParams.Add("!categories.level[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleId.IsSet() {
+		t:=localVarOptionals.EntitiesTitleId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleId.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleSurfaceFormsText.IsSet() {
+		t:=localVarOptionals.EntitiesTitleSurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.surface_forms.text[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleSurfaceFormsText.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleSurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.surface_forms.text[]", parameterToString(t, "multi"))
+		}
+	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesTitleText.IsSet() {
 		t:=localVarOptionals.EntitiesTitleText.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -4973,6 +6296,28 @@ func (a *DefaultApiService) ListTimeSeries(ctx _context.Context, localVarOptiona
 			localVarQueryParams.Add("!entities.title.type[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleStockTicker.IsSet() {
+		t:=localVarOptionals.EntitiesTitleStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleStockTicker.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesTitleLinksDbpedia.IsSet() {
 		t:=localVarOptionals.EntitiesTitleLinksDbpedia.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -4993,6 +6338,94 @@ func (a *DefaultApiService) ListTimeSeries(ctx _context.Context, localVarOptiona
 			}
 		} else {
 			localVarQueryParams.Add("!entities.title.links.dbpedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleLinksWikipedia.IsSet() {
+		t:=localVarOptionals.EntitiesTitleLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleLinksWikipedia.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleLinksWikidata.IsSet() {
+		t:=localVarOptionals.EntitiesTitleLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.links.wikidata[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleLinksWikidata.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.links.wikidata[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyId.IsSet() {
+		t:=localVarOptionals.EntitiesBodyId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyId.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodySurfaceFormsText.IsSet() {
+		t:=localVarOptionals.EntitiesBodySurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.surface_forms.text[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodySurfaceFormsText.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodySurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.surface_forms.text[]", parameterToString(t, "multi"))
 		}
 	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesBodyText.IsSet() {
@@ -5039,6 +6472,28 @@ func (a *DefaultApiService) ListTimeSeries(ctx _context.Context, localVarOptiona
 			localVarQueryParams.Add("!entities.body.type[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyStockTicker.IsSet() {
+		t:=localVarOptionals.EntitiesBodyStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyStockTicker.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesBodyLinksDbpedia.IsSet() {
 		t:=localVarOptionals.EntitiesBodyLinksDbpedia.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -5059,6 +6514,50 @@ func (a *DefaultApiService) ListTimeSeries(ctx _context.Context, localVarOptiona
 			}
 		} else {
 			localVarQueryParams.Add("!entities.body.links.dbpedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyLinksWikipedia.IsSet() {
+		t:=localVarOptionals.EntitiesBodyLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyLinksWikipedia.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyLinksWikidata.IsSet() {
+		t:=localVarOptionals.EntitiesBodyLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.links.wikidata[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyLinksWikidata.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.links.wikidata[]", parameterToString(t, "multi"))
 		}
 	}
 	if localVarOptionals != nil && localVarOptionals.SentimentTitlePolarity.IsSet() {
@@ -5590,18 +7089,38 @@ type ListTrendsOpts struct {
     NotCategoriesLabel optional.Interface
     CategoriesLevel optional.Interface
     NotCategoriesLevel optional.Interface
+    EntitiesTitleId optional.Interface
+    NotEntitiesTitleId optional.Interface
+    EntitiesTitleSurfaceFormsText optional.Interface
+    NotEntitiesTitleSurfaceFormsText optional.Interface
     EntitiesTitleText optional.Interface
     NotEntitiesTitleText optional.Interface
     EntitiesTitleType optional.Interface
     NotEntitiesTitleType optional.Interface
+    EntitiesTitleStockTicker optional.Interface
+    NotEntitiesTitleStockTicker optional.Interface
     EntitiesTitleLinksDbpedia optional.Interface
     NotEntitiesTitleLinksDbpedia optional.Interface
+    EntitiesTitleLinksWikipedia optional.Interface
+    NotEntitiesTitleLinksWikipedia optional.Interface
+    EntitiesTitleLinksWikidata optional.Interface
+    NotEntitiesTitleLinksWikidata optional.Interface
+    EntitiesBodyId optional.Interface
+    NotEntitiesBodyId optional.Interface
+    EntitiesBodySurfaceFormsText optional.Interface
+    NotEntitiesBodySurfaceFormsText optional.Interface
     EntitiesBodyText optional.Interface
     NotEntitiesBodyText optional.Interface
     EntitiesBodyType optional.Interface
     NotEntitiesBodyType optional.Interface
+    EntitiesBodyStockTicker optional.Interface
+    NotEntitiesBodyStockTicker optional.Interface
     EntitiesBodyLinksDbpedia optional.Interface
     NotEntitiesBodyLinksDbpedia optional.Interface
+    EntitiesBodyLinksWikipedia optional.Interface
+    NotEntitiesBodyLinksWikipedia optional.Interface
+    EntitiesBodyLinksWikidata optional.Interface
+    NotEntitiesBodyLinksWikidata optional.Interface
     SentimentTitlePolarity optional.String
     NotSentimentTitlePolarity optional.String
     SentimentBodyPolarity optional.String
@@ -5686,18 +7205,38 @@ The trends endpoint allows you to identify the most-mentioned entities, concepts
  * @param "NotCategoriesLabel" (optional.Interface of []string) -  This parameter is used for excluding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "CategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
  * @param "NotCategoriesLevel" (optional.Interface of []Int32) -  This parameter is used for excluding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories). 
+ * @param "EntitiesTitleId" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `id` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleId" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `id` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleSurfaceFormsText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `surface_form` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleSurfaceFormsText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `surface_form` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesTitleText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesTitleText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesTitleType" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesTitleType" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleStockTicker" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `stock_ticker` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleStockTicker" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `stock_ticker` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesTitleLinksDbpedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesTitleLinksDbpedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleLinksWikipedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities Wikipedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleLinksWikipedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikipedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesTitleLinksWikidata" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities Wikidata URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesTitleLinksWikidata" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikidata URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyId" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyId" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodySurfaceFormsText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodySurfaceFormsText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesBodyText" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesBodyText" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesBodyType" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesBodyType" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyStockTicker" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyStockTicker" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "EntitiesBodyLinksDbpedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "NotEntitiesBodyLinksDbpedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyLinksWikipedia" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyLinksWikipedia" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "EntitiesBodyLinksWikidata" (optional.Interface of []string) -  This parameter is used to find stories based on the specified entities wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
+ * @param "NotEntitiesBodyLinksWikidata" (optional.Interface of []string) -  This parameter is used to exclude stories based on the specified entities Wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities). 
  * @param "SentimentTitlePolarity" (optional.String) -  This parameter is used for finding stories whose title sentiment is the specified value. 
  * @param "NotSentimentTitlePolarity" (optional.String) -  This parameter is used for excluding stories whose title sentiment is the specified value. 
  * @param "SentimentBodyPolarity" (optional.String) -  This parameter is used for finding stories whose body sentiment is the specified value. 
@@ -5932,6 +7471,50 @@ func (a *DefaultApiService) ListTrends(ctx _context.Context, field string, local
 			localVarQueryParams.Add("!categories.level[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleId.IsSet() {
+		t:=localVarOptionals.EntitiesTitleId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleId.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleSurfaceFormsText.IsSet() {
+		t:=localVarOptionals.EntitiesTitleSurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.surface_forms.text[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleSurfaceFormsText.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleSurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.surface_forms.text[]", parameterToString(t, "multi"))
+		}
+	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesTitleText.IsSet() {
 		t:=localVarOptionals.EntitiesTitleText.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -5976,6 +7559,28 @@ func (a *DefaultApiService) ListTrends(ctx _context.Context, field string, local
 			localVarQueryParams.Add("!entities.title.type[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleStockTicker.IsSet() {
+		t:=localVarOptionals.EntitiesTitleStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleStockTicker.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesTitleLinksDbpedia.IsSet() {
 		t:=localVarOptionals.EntitiesTitleLinksDbpedia.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -5996,6 +7601,94 @@ func (a *DefaultApiService) ListTrends(ctx _context.Context, field string, local
 			}
 		} else {
 			localVarQueryParams.Add("!entities.title.links.dbpedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleLinksWikipedia.IsSet() {
+		t:=localVarOptionals.EntitiesTitleLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleLinksWikipedia.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesTitleLinksWikidata.IsSet() {
+		t:=localVarOptionals.EntitiesTitleLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.title.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.title.links.wikidata[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesTitleLinksWikidata.IsSet() {
+		t:=localVarOptionals.NotEntitiesTitleLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.title.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.title.links.wikidata[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyId.IsSet() {
+		t:=localVarOptionals.EntitiesBodyId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyId.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyId.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.id[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.id[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodySurfaceFormsText.IsSet() {
+		t:=localVarOptionals.EntitiesBodySurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.surface_forms.text[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodySurfaceFormsText.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodySurfaceFormsText.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.surface_forms.text[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.surface_forms.text[]", parameterToString(t, "multi"))
 		}
 	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesBodyText.IsSet() {
@@ -6042,6 +7735,28 @@ func (a *DefaultApiService) ListTrends(ctx _context.Context, field string, local
 			localVarQueryParams.Add("!entities.body.type[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyStockTicker.IsSet() {
+		t:=localVarOptionals.EntitiesBodyStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyStockTicker.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyStockTicker.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.stock_ticker[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.stock_ticker[]", parameterToString(t, "multi"))
+		}
+	}
 	if localVarOptionals != nil && localVarOptionals.EntitiesBodyLinksDbpedia.IsSet() {
 		t:=localVarOptionals.EntitiesBodyLinksDbpedia.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -6062,6 +7777,50 @@ func (a *DefaultApiService) ListTrends(ctx _context.Context, field string, local
 			}
 		} else {
 			localVarQueryParams.Add("!entities.body.links.dbpedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyLinksWikipedia.IsSet() {
+		t:=localVarOptionals.EntitiesBodyLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyLinksWikipedia.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyLinksWikipedia.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.links.wikipedia[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.links.wikipedia[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.EntitiesBodyLinksWikidata.IsSet() {
+		t:=localVarOptionals.EntitiesBodyLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entities.body.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entities.body.links.wikidata[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.NotEntitiesBodyLinksWikidata.IsSet() {
+		t:=localVarOptionals.NotEntitiesBodyLinksWikidata.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("!entities.body.links.wikidata[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("!entities.body.links.wikidata[]", parameterToString(t, "multi"))
 		}
 	}
 	if localVarOptionals != nil && localVarOptionals.SentimentTitlePolarity.IsSet() {

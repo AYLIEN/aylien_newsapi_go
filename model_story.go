@@ -32,6 +32,8 @@ type Story struct {
 	Keywords []string `json:"keywords,omitempty"`
 	// Language of the story
 	Language string `json:"language,omitempty"`
+	// License type of the story
+	LicenseType int32 `json:"license_type,omitempty"`
 	Links StoryLinks `json:"links,omitempty"`
 	// An array of extracted media such as images and videos
 	Media []Media `json:"media,omitempty"`

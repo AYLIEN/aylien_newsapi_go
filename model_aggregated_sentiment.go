@@ -9,11 +9,12 @@
  */
 
 package newsapi
-// Warning struct for Warning
-type Warning struct {
-	// The detailed description of the warning.
-	Detail string `json:"detail,omitempty"`
-	// The identfier of the warning, represents its origin.
-	Id string `json:"id,omitempty"`
-	Links ErrorLinks `json:"links,omitempty"`
+// AggregatedSentiment The aggregation of sentiments
+type AggregatedSentiment struct {
+	// Negative sentiments count
+	Negative int32 `json:"negative,omitempty"`
+	// Neutral sentiments count
+	Neutral int32 `json:"neutral,omitempty"`
+	// Positive sentiments count
+	Positive int32 `json:"positive,omitempty"`
 }

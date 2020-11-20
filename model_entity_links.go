@@ -11,6 +11,10 @@
 package newsapi
 // EntityLinks struct for EntityLinks
 type EntityLinks struct {
-	// A dbpedia resource URL
+	// A dbpedia resource URL (deprecated)
 	Dbpedia string `json:"dbpedia,omitempty"`
+	// A wikidata resource URL
+	Wikidata string `json:"wikidata,omitempty"`
+	// A wikipedia resource URL
+	Wikipedia string `json:"wikipedia,omitempty"`
 }

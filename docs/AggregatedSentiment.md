@@ -1,12 +1,12 @@
-# Warning
+# AggregatedSentiment
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Detail** | **string** | The detailed description of the warning. | [optional] 
-**Id** | **string** | The identfier of the warning, represents its origin. | [optional] 
-**Links** | [**ErrorLinks**](ErrorLinks.md) |  | [optional] 
+**Negative** | **int32** | Negative sentiments count | [optional] 
+**Neutral** | **int32** | Neutral sentiments count | [optional] 
+**Positive** | **int32** | Positive sentiments count | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

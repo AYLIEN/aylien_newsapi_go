@@ -11,13 +11,17 @@
 package newsapi
 // Entity struct for Entity
 type Entity struct {
+	// The unique ID of the entity
+	Id string `json:"id,omitempty"`
 	// The indices of the entity text
 	Indices [][]int32 `json:"indices,omitempty"`
 	Links EntityLinks `json:"links,omitempty"`
-	// The entity score
-	Score float64 `json:"score,omitempty"`
+	Sentiment EntitySentiment `json:"sentiment,omitempty"`
+	// The stock_ticker of the entity (might be null)
+	StockTicker string `json:"stock_ticker,omitempty"`
+	SurfaceForms []EntitySurfaceForm `json:"surface_forms,omitempty"`
 	// The entity text
 	Text string `json:"text,omitempty"`
-	// An array of the dbpedia types
+	// An array of the entity types
 	Types []string `json:"types,omitempty"`
 }

@@ -9,11 +9,9 @@
  */
 
 package newsapi
-// Warning struct for Warning
-type Warning struct {
-	// The detailed description of the warning.
-	Detail string `json:"detail,omitempty"`
-	// The identfier of the warning, represents its origin.
-	Id string `json:"id,omitempty"`
-	Links ErrorLinks `json:"links,omitempty"`
+// EntitySentiment struct for EntitySentiment
+type EntitySentiment struct {
+	// Polarity confidence of the sentiment
+	Confidence float64 `json:"confidence,omitempty"`
+	Polarity SentimentPolarity `json:"polarity,omitempty"`
 }

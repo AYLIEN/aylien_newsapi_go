@@ -14,6 +14,10 @@ import (
 )
 // RelatedStories struct for RelatedStories
 type RelatedStories struct {
+	// The end of a period in which searched stories were published
+	PublishedAtEnd time.Time `json:"published_at.end,omitempty"`
+	// The start of a period in which searched stories were published
+	PublishedAtStart time.Time `json:"published_at.start,omitempty"`
 	// An array of related stories for the input story
 	RelatedStories []Story `json:"related_stories,omitempty"`
 	// The input story body
@@ -22,8 +26,4 @@ type RelatedStories struct {
 	StoryLanguage string `json:"story_language,omitempty"`
 	// The input story title
 	StoryTitle string `json:"story_title,omitempty"`
-	// The end of a period in which searched stories were published
-	PublishedAtEnd time.Time `json:"published_at.end,omitempty"`
-	// The start of a period in which searched stories were published
-	PublishedAtStart time.Time `json:"published_at.start,omitempty"`
 }

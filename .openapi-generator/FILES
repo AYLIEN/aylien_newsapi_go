@@ -4,6 +4,7 @@ api/openapi.yaml
 api_default.go
 client.go
 configuration.go
+docs/AggregatedSentiment.md
 docs/Author.md
 docs/Autocomplete.md
 docs/Autocompletes.md
@@ -16,6 +17,8 @@ docs/DefaultApi.md
 docs/Entities.md
 docs/Entity.md
 docs/EntityLinks.md
+docs/EntitySentiment.md
+docs/EntitySurfaceForm.md
 docs/Error.md
 docs/ErrorLinks.md
 docs/Errors.md
@@ -52,6 +55,7 @@ docs/Warning.md
 git_push.sh
 go.mod
 go.sum
+model_aggregated_sentiment.go
 model_author.go
 model_autocomplete.go
 model_autocompletes.go
@@ -63,6 +67,8 @@ model_clusters.go
 model_entities.go
 model_entity.go
 model_entity_links.go
+model_entity_sentiment.go
+model_entity_surface_form.go
 model_error.go
 model_error_links.go
 model_errors.go

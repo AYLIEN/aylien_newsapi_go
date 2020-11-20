@@ -13,6 +13,7 @@ package newsapi
 type Trend struct {
 	// The count of the trend
 	Count int32 `json:"count,omitempty"`
+	Sentiment AggregatedSentiment `json:"sentiment,omitempty"`
 	// The value of the trend
 	Value string `json:"value,omitempty"`
 }

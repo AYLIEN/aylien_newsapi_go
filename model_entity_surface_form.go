@@ -9,11 +9,10 @@
  */
 
 package newsapi
-// Warning struct for Warning
-type Warning struct {
-	// The detailed description of the warning.
-	Detail string `json:"detail,omitempty"`
-	// The identfier of the warning, represents its origin.
-	Id string `json:"id,omitempty"`
-	Links ErrorLinks `json:"links,omitempty"`
+// EntitySurfaceForm struct for EntitySurfaceForm
+type EntitySurfaceForm struct {
+	// The indices of the entity text
+	Indices [][]int32 `json:"indices,omitempty"`
+	// The entity text
+	Text string `json:"text,omitempty"`
 }

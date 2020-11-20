@@ -18,4 +18,5 @@ type TimeSeries struct {
 	Count int32 `json:"count,omitempty"`
 	// The published date of the time series bin
 	PublishedAt time.Time `json:"published_at,omitempty"`
+	Sentiment AggregatedSentiment `json:"sentiment,omitempty"`
 }

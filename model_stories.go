@@ -16,12 +16,12 @@ import (
 type Stories struct {
 	// The next page cursor
 	NextPageCursor string `json:"next_page_cursor,omitempty"`
-	// An array of stories
-	Stories []Story `json:"stories,omitempty"`
 	// The end of a period in which searched stories were published
 	PublishedAtEnd time.Time `json:"published_at.end,omitempty"`
 	// The start of a period in which searched stories were published
 	PublishedAtStart time.Time `json:"published_at.start,omitempty"`
+	// An array of stories
+	Stories []Story `json:"stories,omitempty"`
 	// Notifies about possible issues that occurred when searching for stories
 	Warnings []Warning `json:"warnings,omitempty"`
 }
