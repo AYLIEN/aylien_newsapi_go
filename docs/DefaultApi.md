@@ -305,6 +305,7 @@ Name | Type | Description  | Notes
  **socialSharesCountRedditMin** | **optional.NotInt3**| This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value.  | 
  **socialSharesCountRedditMax** | **optional.NotInt3**| This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value.  | 
  **clusters** | [**optional.Interface of []string**](string.md)| This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering).  | 
+ **query** | **optional.String**| This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string.  | 
  **intervalStart** | **optional.NotInt3**| This parameter is used for setting the start data point of histogram intervals.  | 
  **intervalEnd** | **optional.NotInt3**| This parameter is used for setting the end data point of histogram intervals.  | 
  **intervalWidth** | **optional.NotInt3**| This parameter is used for setting the width of histogram intervals.  | 
@@ -462,6 +463,7 @@ Name | Type | Description  | Notes
  **storyUrl** | **optional.String**| An article or webpage | 
  **storyTitle** | **optional.String**| Title of the article | 
  **storyBody** | **optional.String**| Body of the article | 
+ **query** | **optional.String**| This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string.  | 
  **boostBy** | **optional.String**| This parameter is used for boosting the result by the specified value.  | 
  **storyLanguage** | **optional.String**| This parameter is used for setting the language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.  | [default to auto]
  **perPage** | **optional.NotInt3**| This parameter is used for specifying number of items in each page.  | [default to 3]
@@ -618,6 +620,7 @@ Name | Type | Description  | Notes
  **storyUrl** | **optional.String**| An article or webpage | 
  **storyTitle** | **optional.String**| Title of the article | 
  **storyBody** | **optional.String**| Body of the article | 
+ **query** | **optional.String**| This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string.  | 
  **boostBy** | **optional.String**| This parameter is used for boosting the result by the specified value.  | 
  **storyLanguage** | **optional.String**| This parameter is used for setting the language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.  | [default to auto]
  **perPage** | **optional.NotInt3**| This parameter is used for specifying number of items in each page.  | [default to 3]
@@ -772,6 +775,7 @@ Name | Type | Description  | Notes
  **socialSharesCountRedditMax** | **optional.NotInt3**| This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value.  | 
  **clusters** | [**optional.Interface of []string**](string.md)| This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering).  | 
  **return_** | [**optional.Interface of []string**](string.md)| This parameter is used for specifying return fields. | 
+ **query** | **optional.String**| This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string.  | 
  **sortBy** | **optional.String**| This parameter is used for changing the order column of the results. You can read about sorting results [here](https://newsapi.aylien.com/docs/sorting-results).  | [default to published_at]
  **sortDirection** | **optional.String**| This parameter is used for changing the order direction of the result. You can read about sorting results [here](https://newsapi.aylien.com/docs/sorting-results).  | [default to desc]
  **cursor** | **optional.String**| This parameter is used for finding a specific page. You can read more about pagination of results [here](https://newsapi.aylien.com/docs/pagination-of-results).  | [default to *]
@@ -922,6 +926,7 @@ Name | Type | Description  | Notes
  **socialSharesCountRedditMin** | **optional.NotInt3**| This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value.  | 
  **socialSharesCountRedditMax** | **optional.NotInt3**| This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value.  | 
  **clusters** | [**optional.Interface of []string**](string.md)| This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering).  | 
+ **query** | **optional.String**| This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string.  | 
  **publishedAtStart** | **optional.String**| This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).  | [default to NOW-7DAYS/DAY]
  **publishedAtEnd** | **optional.String**| This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).  | [default to NOW/DAY]
  **period** | **optional.String**| The size of each date range is expressed as an interval to be added to the lower bound. It supports Date Math Syntax. Valid options are &#x60;+&#x60; following an integer number greater than 0 and one of the Date Math keywords. e.g. &#x60;+1DAY&#x60;, &#x60;+2MINUTES&#x60; and &#x60;+1MONTH&#x60;. Here are [Supported keywords](https://newsapi.aylien.com/docs/working-with-dates#date-math).  | [default to +1DAY]
@@ -1077,6 +1082,7 @@ Name | Type | Description  | Notes
  **socialSharesCountRedditMin** | **optional.NotInt3**| This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value.  | 
  **socialSharesCountRedditMax** | **optional.NotInt3**| This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value.  | 
  **clusters** | [**optional.Interface of []string**](string.md)| This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering).  | 
+ **query** | **optional.String**| This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string.  | 
 
 ### Return type
 

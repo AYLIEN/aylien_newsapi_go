@@ -784,6 +784,7 @@ type ListHistogramsOpts struct {
     SocialSharesCountRedditMin optional.Int32
     SocialSharesCountRedditMax optional.Int32
     Clusters optional.Interface
+    Query optional.String
     IntervalStart optional.Int32
     IntervalEnd optional.Int32
     IntervalWidth optional.Int32
@@ -903,6 +904,7 @@ For the numerical metadata that the News API gathers (such as word counts or soc
  * @param "SocialSharesCountRedditMin" (optional.Int32) -  This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value. 
  * @param "SocialSharesCountRedditMax" (optional.Int32) -  This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value. 
  * @param "Clusters" (optional.Interface of []string) -  This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering). 
+ * @param "Query" (optional.String) -  This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
  * @param "IntervalStart" (optional.Int32) -  This parameter is used for setting the start data point of histogram intervals. 
  * @param "IntervalEnd" (optional.Int32) -  This parameter is used for setting the end data point of histogram intervals. 
  * @param "IntervalWidth" (optional.Int32) -  This parameter is used for setting the width of histogram intervals. 
@@ -1809,6 +1811,9 @@ func (a *DefaultApiService) ListHistograms(ctx _context.Context, localVarOptiona
 			localVarQueryParams.Add("clusters[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.Query.IsSet() {
+		localVarQueryParams.Add("query", parameterToString(localVarOptionals.Query.Value(), ""))
+	}
 	if localVarOptionals != nil && localVarOptionals.IntervalStart.IsSet() {
 		localVarQueryParams.Add("interval.start", parameterToString(localVarOptionals.IntervalStart.Value(), ""))
 	}
@@ -2062,6 +2067,7 @@ type ListRelatedStoriesGetOpts struct {
     StoryUrl optional.String
     StoryTitle optional.String
     StoryBody optional.String
+    Query optional.String
     BoostBy optional.String
     StoryLanguage optional.String
     PerPage optional.Int32
@@ -2184,6 +2190,7 @@ ListRelatedStoriesGet Method for ListRelatedStoriesGet
  * @param "StoryUrl" (optional.String) -  An article or webpage
  * @param "StoryTitle" (optional.String) -  Title of the article
  * @param "StoryBody" (optional.String) -  Body of the article
+ * @param "Query" (optional.String) -  This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
  * @param "BoostBy" (optional.String) -  This parameter is used for boosting the result by the specified value. 
  * @param "StoryLanguage" (optional.String) -  This parameter is used for setting the language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
  * @param "PerPage" (optional.Int32) -  This parameter is used for specifying number of items in each page. 
@@ -3112,6 +3119,9 @@ func (a *DefaultApiService) ListRelatedStoriesGet(ctx _context.Context, localVar
 	if localVarOptionals != nil && localVarOptionals.StoryBody.IsSet() {
 		localVarQueryParams.Add("story_body", parameterToString(localVarOptionals.StoryBody.Value(), ""))
 	}
+	if localVarOptionals != nil && localVarOptionals.Query.IsSet() {
+		localVarQueryParams.Add("query", parameterToString(localVarOptionals.Query.Value(), ""))
+	}
 	if localVarOptionals != nil && localVarOptionals.BoostBy.IsSet() {
 		localVarQueryParams.Add("boost_by", parameterToString(localVarOptionals.BoostBy.Value(), ""))
 	}
@@ -3362,6 +3372,7 @@ type ListRelatedStoriesPostOpts struct {
     StoryUrl optional.String
     StoryTitle optional.String
     StoryBody optional.String
+    Query optional.String
     BoostBy optional.String
     StoryLanguage optional.String
     PerPage optional.Int32
@@ -3484,6 +3495,7 @@ ListRelatedStoriesPost Method for ListRelatedStoriesPost
  * @param "StoryUrl" (optional.String) -  An article or webpage
  * @param "StoryTitle" (optional.String) -  Title of the article
  * @param "StoryBody" (optional.String) -  Body of the article
+ * @param "Query" (optional.String) -  This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
  * @param "BoostBy" (optional.String) -  This parameter is used for boosting the result by the specified value. 
  * @param "StoryLanguage" (optional.String) -  This parameter is used for setting the language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
  * @param "PerPage" (optional.Int32) -  This parameter is used for specifying number of items in each page. 
@@ -4412,6 +4424,9 @@ func (a *DefaultApiService) ListRelatedStoriesPost(ctx _context.Context, localVa
 	if localVarOptionals != nil && localVarOptionals.StoryBody.IsSet() {
 		localVarQueryParams.Add("story_body", parameterToString(localVarOptionals.StoryBody.Value(), ""))
 	}
+	if localVarOptionals != nil && localVarOptionals.Query.IsSet() {
+		localVarQueryParams.Add("query", parameterToString(localVarOptionals.Query.Value(), ""))
+	}
 	if localVarOptionals != nil && localVarOptionals.BoostBy.IsSet() {
 		localVarQueryParams.Add("boost_by", parameterToString(localVarOptionals.BoostBy.Value(), ""))
 	}
@@ -4658,6 +4673,7 @@ type ListStoriesOpts struct {
     SocialSharesCountRedditMax optional.Int32
     Clusters optional.Interface
     Return_ optional.Interface
+    Query optional.String
     SortBy optional.String
     SortDirection optional.String
     Cursor optional.String
@@ -4778,6 +4794,7 @@ The stories endpoint is used to return stories based on parameters you set in yo
  * @param "SocialSharesCountRedditMax" (optional.Int32) -  This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value. 
  * @param "Clusters" (optional.Interface of []string) -  This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering). 
  * @param "Return_" (optional.Interface of []string) -  This parameter is used for specifying return fields.
+ * @param "Query" (optional.String) -  This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
  * @param "SortBy" (optional.String) -  This parameter is used for changing the order column of the results. You can read about sorting results [here](https://newsapi.aylien.com/docs/sorting-results). 
  * @param "SortDirection" (optional.String) -  This parameter is used for changing the order direction of the result. You can read about sorting results [here](https://newsapi.aylien.com/docs/sorting-results). 
  * @param "Cursor" (optional.String) -  This parameter is used for finding a specific page. You can read more about pagination of results [here](https://newsapi.aylien.com/docs/pagination-of-results). 
@@ -5695,6 +5712,9 @@ func (a *DefaultApiService) ListStories(ctx _context.Context, localVarOptionals 
 			localVarQueryParams.Add("return[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.Query.IsSet() {
+		localVarQueryParams.Add("query", parameterToString(localVarOptionals.Query.Value(), ""))
+	}
 	if localVarOptionals != nil && localVarOptionals.SortBy.IsSet() {
 		localVarQueryParams.Add("sort_by", parameterToString(localVarOptionals.SortBy.Value(), ""))
 	}
@@ -5939,6 +5959,7 @@ type ListTimeSeriesOpts struct {
     SocialSharesCountRedditMin optional.Int32
     SocialSharesCountRedditMax optional.Int32
     Clusters optional.Interface
+    Query optional.String
     PublishedAtStart optional.String
     PublishedAtEnd optional.String
     Period optional.String
@@ -6053,6 +6074,7 @@ The time series endpoint allows you to track information contained in stories ov
  * @param "SocialSharesCountRedditMin" (optional.Int32) -  This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value. 
  * @param "SocialSharesCountRedditMax" (optional.Int32) -  This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value. 
  * @param "Clusters" (optional.Interface of []string) -  This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering). 
+ * @param "Query" (optional.String) -  This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
  * @param "PublishedAtStart" (optional.String) -  This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
  * @param "PublishedAtEnd" (optional.String) -  This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
  * @param "Period" (optional.String) -  The size of each date range is expressed as an interval to be added to the lower bound. It supports Date Math Syntax. Valid options are `+` following an integer number greater than 0 and one of the Date Math keywords. e.g. `+1DAY`, `+2MINUTES` and `+1MONTH`. Here are [Supported keywords](https://newsapi.aylien.com/docs/working-with-dates#date-math). 
@@ -6930,6 +6952,9 @@ func (a *DefaultApiService) ListTimeSeries(ctx _context.Context, localVarOptiona
 			localVarQueryParams.Add("clusters[]", parameterToString(t, "multi"))
 		}
 	}
+	if localVarOptionals != nil && localVarOptionals.Query.IsSet() {
+		localVarQueryParams.Add("query", parameterToString(localVarOptionals.Query.Value(), ""))
+	}
 	if localVarOptionals != nil && localVarOptionals.PublishedAtStart.IsSet() {
 		localVarQueryParams.Add("published_at.start", parameterToString(localVarOptionals.PublishedAtStart.Value(), ""))
 	}
@@ -7175,6 +7200,7 @@ type ListTrendsOpts struct {
     SocialSharesCountRedditMin optional.Int32
     SocialSharesCountRedditMax optional.Int32
     Clusters optional.Interface
+    Query optional.String
 }
 
 /*
@@ -7291,6 +7317,7 @@ The trends endpoint allows you to identify the most-mentioned entities, concepts
  * @param "SocialSharesCountRedditMin" (optional.Int32) -  This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value. 
  * @param "SocialSharesCountRedditMax" (optional.Int32) -  This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value. 
  * @param "Clusters" (optional.Interface of []string) -  This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering). 
+ * @param "Query" (optional.String) -  This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
 @return Trends
 */
 func (a *DefaultApiService) ListTrends(ctx _context.Context, field string, localVarOptionals *ListTrendsOpts) (Trends, *_nethttp.Response, error) {
@@ -8192,6 +8219,9 @@ func (a *DefaultApiService) ListTrends(ctx _context.Context, field string, local
 		} else {
 			localVarQueryParams.Add("clusters[]", parameterToString(t, "multi"))
 		}
+	}
+	if localVarOptionals != nil && localVarOptionals.Query.IsSet() {
+		localVarQueryParams.Add("query", parameterToString(localVarOptionals.Query.Value(), ""))
 	}
 	localVarQueryParams.Add("field", parameterToString(field, ""))
 	// to determine the Content-Type header
