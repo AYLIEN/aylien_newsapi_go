@@ -39,6 +39,8 @@ paths:
           - source_domains
           - entity_types
           - dbpedia_resources
+          - aylien_entities_names
+          - aylien_entities_types
           type: string
         style: form
       - description: |
@@ -1873,6 +1875,27 @@ paths:
             type: string
           nullable: true
           type: array
+        style: form
+      - description: |
+          This parameter is used to supply a query in AYLIEN Query Language.
+        explode: true
+        in: query
+        name: aql
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: |
+          This parameter is used to supply an optional default field name used in the AQL query.
+        explode: true
+        in: query
+        name: aql_default_field
+        required: false
+        schema:
+          default: text
+          nullable: true
+          type: string
         style: form
       - description: |
           This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string.
@@ -3728,6 +3751,27 @@ paths:
           type: string
         style: form
       - description: |
+          This parameter is used to supply a query in AYLIEN Query Language.
+        explode: true
+        in: query
+        name: aql
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: |
+          This parameter is used to supply an optional default field name used in the AQL query.
+        explode: true
+        in: query
+        name: aql_default_field
+        required: false
+        schema:
+          default: text
+          nullable: true
+          type: string
+        style: form
+      - description: |
           This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string.
         explode: true
         in: query
@@ -5316,6 +5360,27 @@ paths:
           type: string
         style: form
       - description: |
+          This parameter is used to supply a query in AYLIEN Query Language.
+        explode: true
+        in: query
+        name: aql
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: |
+          This parameter is used to supply an optional default field name used in the AQL query.
+        explode: true
+        in: query
+        name: aql_default_field
+        required: false
+        schema:
+          default: text
+          nullable: true
+          type: string
+        style: form
+      - description: |
           This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string.
         explode: true
         in: query
@@ -6869,6 +6934,27 @@ paths:
             type: string
           nullable: true
           type: array
+        style: form
+      - description: |
+          This parameter is used to supply a query in AYLIEN Query Language.
+        explode: true
+        in: query
+        name: aql
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: |
+          This parameter is used to supply an optional default field name used in the AQL query.
+        explode: true
+        in: query
+        name: aql_default_field
+        required: false
+        schema:
+          default: text
+          nullable: true
+          type: string
         style: form
       - description: |
           This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string.
@@ -9100,6 +9186,27 @@ paths:
           type: array
         style: form
       - description: |
+          This parameter is used to supply a query in AYLIEN Query Language.
+        explode: true
+        in: query
+        name: aql
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: |
+          This parameter is used to supply an optional default field name used in the AQL query.
+        explode: true
+        in: query
+        name: aql_default_field
+        required: false
+        schema:
+          default: text
+          nullable: true
+          type: string
+        style: form
+      - description: |
           This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string.
         explode: true
         in: query
@@ -10610,6 +10717,27 @@ paths:
           type: array
         style: form
       - description: |
+          This parameter is used to supply a query in AYLIEN Query Language.
+        explode: true
+        in: query
+        name: aql
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: |
+          This parameter is used to supply an optional default field name used in the AQL query.
+        explode: true
+        in: query
+        name: aql_default_field
+        required: false
+        schema:
+          default: text
+          nullable: true
+          type: string
+        style: form
+      - description: |
           This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string.
         explode: true
         in: query
@@ -10755,6 +10883,29 @@ paths:
       summary: List trends
 components:
   parameters:
+    aql:
+      description: |
+        This parameter is used to supply a query in AYLIEN Query Language.
+      explode: true
+      in: query
+      name: aql
+      required: false
+      schema:
+        nullable: true
+        type: string
+      style: form
+    aql_default_field:
+      description: |
+        This parameter is used to supply an optional default field name used in the AQL query.
+      explode: true
+      in: query
+      name: aql_default_field
+      required: false
+      schema:
+        default: text
+        nullable: true
+        type: string
+      style: form
     author_id:
       description: |
         This parameter is used for finding stories whose author id is the specified value.
@@ -12841,20 +12992,22 @@ components:
         body:
         - stock_ticker: stock_ticker
           sentiment:
-            confidence: 0.7061401241503109
+            confidence: 0.9301444243932576
           surface_forms:
           - indices:
-            - - 9
-              - 9
-            - - 9
-              - 9
+            - - 2
+              - 2
+            - - 2
+              - 2
             text: text
+            frequency: 0
           - indices:
-            - - 9
-              - 9
-            - - 9
-              - 9
+            - - 2
+              - 2
+            - - 2
+              - 2
             text: text
+            frequency: 0
           indices:
           - - 2
             - 2
@@ -12863,6 +13016,7 @@ components:
           types:
           - types
           - types
+          prominence_score: 0.7061401
           links:
             dbpedia: dbpedia
             wikipedia: wikipedia
@@ -12871,20 +13025,22 @@ components:
           text: text
         - stock_ticker: stock_ticker
           sentiment:
-            confidence: 0.7061401241503109
+            confidence: 0.9301444243932576
           surface_forms:
           - indices:
-            - - 9
-              - 9
-            - - 9
-              - 9
+            - - 2
+              - 2
+            - - 2
+              - 2
             text: text
+            frequency: 0
           - indices:
-            - - 9
-              - 9
-            - - 9
-              - 9
+            - - 2
+              - 2
+            - - 2
+              - 2
             text: text
+            frequency: 0
           indices:
           - - 2
             - 2
@@ -12893,6 +13049,7 @@ components:
           types:
           - types
           - types
+          prominence_score: 0.7061401
           links:
             dbpedia: dbpedia
             wikipedia: wikipedia
@@ -12902,20 +13059,22 @@ components:
         title:
         - stock_ticker: stock_ticker
           sentiment:
-            confidence: 0.7061401241503109
+            confidence: 0.9301444243932576
           surface_forms:
           - indices:
-            - - 9
-              - 9
-            - - 9
-              - 9
+            - - 2
+              - 2
+            - - 2
+              - 2
             text: text
+            frequency: 0
           - indices:
-            - - 9
-              - 9
-            - - 9
-              - 9
+            - - 2
+              - 2
+            - - 2
+              - 2
             text: text
+            frequency: 0
           indices:
           - - 2
             - 2
@@ -12924,6 +13083,7 @@ components:
           types:
           - types
           - types
+          prominence_score: 0.7061401
           links:
             dbpedia: dbpedia
             wikipedia: wikipedia
@@ -12932,20 +13092,22 @@ components:
           text: text
         - stock_ticker: stock_ticker
           sentiment:
-            confidence: 0.7061401241503109
+            confidence: 0.9301444243932576
           surface_forms:
           - indices:
-            - - 9
-              - 9
-            - - 9
-              - 9
+            - - 2
+              - 2
+            - - 2
+              - 2
             text: text
+            frequency: 0
           - indices:
-            - - 9
-              - 9
-            - - 9
-              - 9
+            - - 2
+              - 2
+            - - 2
+              - 2
             text: text
+            frequency: 0
           indices:
           - - 2
             - 2
@@ -12954,6 +13116,7 @@ components:
           types:
           - types
           - types
+          prominence_score: 0.7061401
           links:
             dbpedia: dbpedia
             wikipedia: wikipedia
@@ -12976,20 +13139,22 @@ components:
       example:
         stock_ticker: stock_ticker
         sentiment:
-          confidence: 0.7061401241503109
+          confidence: 0.9301444243932576
         surface_forms:
         - indices:
-          - - 9
-            - 9
-          - - 9
-            - 9
+          - - 2
+            - 2
+          - - 2
+            - 2
           text: text
+          frequency: 0
         - indices:
-          - - 9
-            - 9
-          - - 9
-            - 9
+          - - 2
+            - 2
+          - - 2
+            - 2
           text: text
+          frequency: 0
         indices:
         - - 2
           - 2
@@ -12998,6 +13163,7 @@ components:
         types:
         - types
         - types
+        prominence_score: 0.7061401
         links:
           dbpedia: dbpedia
           wikipedia: wikipedia
@@ -13018,6 +13184,12 @@ components:
           type: array
         links:
           $ref: '#/components/schemas/EntityLinks'
+        prominence_score:
+          description: Describes how relevant an entity is to the article
+          format: float
+          maximum: 1
+          minimum: 0
+          type: number
         sentiment:
           $ref: '#/components/schemas/EntitySentiment'
         stock_ticker:
@@ -13055,7 +13227,7 @@ components:
       type: object
     EntitySentiment:
       example:
-        confidence: 0.7061401241503109
+        confidence: 0.9301444243932576
       properties:
         confidence:
           description: Polarity confidence of the sentiment
@@ -13069,12 +13241,18 @@ components:
     EntitySurfaceForm:
       example:
         indices:
-        - - 9
-          - 9
-        - - 9
-          - 9
+        - - 2
+          - 2
+        - - 2
+          - 2
         text: text
+        frequency: 0
       properties:
+        frequency:
+          description: Amount of entity surface form mentions in the article
+          format: int32
+          minimum: 0
+          type: integer
         indices:
           description: The indices of the entity text
           items:
@@ -13195,9 +13373,9 @@ components:
     Media:
       example:
         width: 1
-        content_length: 4
+        content_length: 1
         url: url
-        height: 7
+        height: 1
       properties:
         content_length:
           description: The content length of media
@@ -13243,7 +13421,7 @@ components:
       example:
         country: country
         fetched_at: 2000-01-23T04:56:07.000+00:00
-        rank: 5
+        rank: 9
       properties:
         country:
           description: The country code which the rank is in it
@@ -13262,10 +13440,10 @@ components:
         alexa:
         - country: country
           fetched_at: 2000-01-23T04:56:07.000+00:00
-          rank: 5
+          rank: 9
         - country: country
           fetched_at: 2000-01-23T04:56:07.000+00:00
-          rank: 5
+          rank: 9
       properties:
         alexa:
           items:
@@ -13285,43 +13463,43 @@ components:
             - sentences
           sentiment:
             body:
-              score: 0.684685269835264
+              score: 0.11730742509559433
             title:
-              score: 0.684685269835264
+              score: 0.11730742509559433
           hashtags:
           - hashtags
           - hashtags
           keywords:
           - keywords
           - keywords
-          sentences_count: 1
+          sentences_count: 7
           author:
             avatar_url: avatar_url
             name: name
             id: 0
-          license_type: 2
-          paragraphs_count: 1
+          license_type: 7
+          paragraphs_count: 6
           language: language
           media:
           - width: 1
-            content_length: 4
+            content_length: 1
             url: url
-            height: 7
+            height: 1
           - width: 1
-            content_length: 4
+            content_length: 1
             url: url
-            height: 7
+            height: 1
           source:
             home_page_url: home_page_url
-            links_in_count: 4
+            links_in_count: 9
             rankings:
               alexa:
               - country: country
                 fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 5
+                rank: 9
               - country: country
                 fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 5
+                rank: 9
             logo_url: logo_url
             domain: domain
             name: name
@@ -13333,7 +13511,7 @@ components:
             - country: country
               city: city
               state: state
-            id: 1
+            id: 5
             scopes:
             - country: country
               city: city
@@ -13348,20 +13526,22 @@ components:
             body:
             - stock_ticker: stock_ticker
               sentiment:
-                confidence: 0.7061401241503109
+                confidence: 0.9301444243932576
               surface_forms:
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               indices:
               - - 2
                 - 2
@@ -13370,6 +13550,7 @@ components:
               types:
               - types
               - types
+              prominence_score: 0.7061401
               links:
                 dbpedia: dbpedia
                 wikipedia: wikipedia
@@ -13378,20 +13559,22 @@ components:
               text: text
             - stock_ticker: stock_ticker
               sentiment:
-                confidence: 0.7061401241503109
+                confidence: 0.9301444243932576
               surface_forms:
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               indices:
               - - 2
                 - 2
@@ -13400,6 +13583,7 @@ components:
               types:
               - types
               - types
+              prominence_score: 0.7061401
               links:
                 dbpedia: dbpedia
                 wikipedia: wikipedia
@@ -13409,20 +13593,22 @@ components:
             title:
             - stock_ticker: stock_ticker
               sentiment:
-                confidence: 0.7061401241503109
+                confidence: 0.9301444243932576
               surface_forms:
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               indices:
               - - 2
                 - 2
@@ -13431,6 +13617,7 @@ components:
               types:
               - types
               - types
+              prominence_score: 0.7061401
               links:
                 dbpedia: dbpedia
                 wikipedia: wikipedia
@@ -13439,20 +13626,22 @@ components:
               text: text
             - stock_ticker: stock_ticker
               sentiment:
-                confidence: 0.7061401241503109
+                confidence: 0.9301444243932576
               surface_forms:
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               indices:
               - - 2
                 - 2
@@ -13461,6 +13650,7 @@ components:
               types:
               - types
               - types
+              prominence_score: 0.7061401
               links:
                 dbpedia: dbpedia
                 wikipedia: wikipedia
@@ -13494,76 +13684,76 @@ components:
               self: self
             id: id
             label: label
-          id: 3
+          id: 4
           social_shares_count:
             facebook:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             reddit:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             google_plus:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             linkedin:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
           published_at: 2000-01-23T04:56:07.000+00:00
           clusters:
           - 5
           - 5
-          words_count: 9
+          words_count: 6
         - summary:
             sentences:
             - sentences
             - sentences
           sentiment:
             body:
-              score: 0.684685269835264
+              score: 0.11730742509559433
             title:
-              score: 0.684685269835264
+              score: 0.11730742509559433
           hashtags:
           - hashtags
           - hashtags
           keywords:
           - keywords
           - keywords
-          sentences_count: 1
+          sentences_count: 7
           author:
             avatar_url: avatar_url
             name: name
             id: 0
-          license_type: 2
-          paragraphs_count: 1
+          license_type: 7
+          paragraphs_count: 6
           language: language
           media:
           - width: 1
-            content_length: 4
+            content_length: 1
             url: url
-            height: 7
+            height: 1
           - width: 1
-            content_length: 4
+            content_length: 1
             url: url
-            height: 7
+            height: 1
           source:
             home_page_url: home_page_url
-            links_in_count: 4
+            links_in_count: 9
             rankings:
               alexa:
               - country: country
                 fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 5
+                rank: 9
               - country: country
                 fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 5
+                rank: 9
             logo_url: logo_url
             domain: domain
             name: name
@@ -13575,7 +13765,7 @@ components:
             - country: country
               city: city
               state: state
-            id: 1
+            id: 5
             scopes:
             - country: country
               city: city
@@ -13590,20 +13780,22 @@ components:
             body:
             - stock_ticker: stock_ticker
               sentiment:
-                confidence: 0.7061401241503109
+                confidence: 0.9301444243932576
               surface_forms:
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               indices:
               - - 2
                 - 2
@@ -13612,6 +13804,7 @@ components:
               types:
               - types
               - types
+              prominence_score: 0.7061401
               links:
                 dbpedia: dbpedia
                 wikipedia: wikipedia
@@ -13620,20 +13813,22 @@ components:
               text: text
             - stock_ticker: stock_ticker
               sentiment:
-                confidence: 0.7061401241503109
+                confidence: 0.9301444243932576
               surface_forms:
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               indices:
               - - 2
                 - 2
@@ -13642,6 +13837,7 @@ components:
               types:
               - types
               - types
+              prominence_score: 0.7061401
               links:
                 dbpedia: dbpedia
                 wikipedia: wikipedia
@@ -13651,20 +13847,22 @@ components:
             title:
             - stock_ticker: stock_ticker
               sentiment:
-                confidence: 0.7061401241503109
+                confidence: 0.9301444243932576
               surface_forms:
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               indices:
               - - 2
                 - 2
@@ -13673,6 +13871,7 @@ components:
               types:
               - types
               - types
+              prominence_score: 0.7061401
               links:
                 dbpedia: dbpedia
                 wikipedia: wikipedia
@@ -13681,20 +13880,22 @@ components:
               text: text
             - stock_ticker: stock_ticker
               sentiment:
-                confidence: 0.7061401241503109
+                confidence: 0.9301444243932576
               surface_forms:
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               indices:
               - - 2
                 - 2
@@ -13703,6 +13904,7 @@ components:
               types:
               - types
               - types
+              prominence_score: 0.7061401
               links:
                 dbpedia: dbpedia
                 wikipedia: wikipedia
@@ -13736,33 +13938,33 @@ components:
               self: self
             id: id
             label: label
-          id: 3
+          id: 4
           social_shares_count:
             facebook:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             reddit:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             google_plus:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             linkedin:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
           published_at: 2000-01-23T04:56:07.000+00:00
           clusters:
           - 5
           - 5
-          words_count: 9
+          words_count: 6
         story_language: story_language
       properties:
         published_at.end:
@@ -13838,7 +14040,7 @@ components:
       type: string
     Sentiment:
       example:
-        score: 0.684685269835264
+        score: 0.11730742509559433
       properties:
         polarity:
           $ref: '#/components/schemas/SentimentPolarity'
@@ -13859,9 +14061,9 @@ components:
     Sentiments:
       example:
         body:
-          score: 0.684685269835264
+          score: 0.11730742509559433
         title:
-          score: 0.684685269835264
+          score: 0.11730742509559433
       properties:
         body:
           $ref: '#/components/schemas/Sentiment'
@@ -13871,7 +14073,7 @@ components:
     ShareCount:
       example:
         fetched_at: 2000-01-23T04:56:07.000+00:00
-        count: 7
+        count: 4
       properties:
         count:
           description: The number of shares
@@ -13886,24 +14088,24 @@ components:
       example:
         facebook:
         - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 7
+          count: 4
         - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 7
+          count: 4
         reddit:
         - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 7
+          count: 4
         - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 7
+          count: 4
         google_plus:
         - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 7
+          count: 4
         - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 7
+          count: 4
         linkedin:
         - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 7
+          count: 4
         - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 7
+          count: 4
       properties:
         facebook:
           description: Facebook shares count
@@ -13929,15 +14131,15 @@ components:
     Source:
       example:
         home_page_url: home_page_url
-        links_in_count: 4
+        links_in_count: 9
         rankings:
           alexa:
           - country: country
             fetched_at: 2000-01-23T04:56:07.000+00:00
-            rank: 5
+            rank: 9
           - country: country
             fetched_at: 2000-01-23T04:56:07.000+00:00
-            rank: 5
+            rank: 9
         logo_url: logo_url
         domain: domain
         name: name
@@ -13949,7 +14151,7 @@ components:
         - country: country
           city: city
           state: state
-        id: 1
+        id: 5
         scopes:
         - country: country
           city: city
@@ -14011,43 +14213,43 @@ components:
             - sentences
           sentiment:
             body:
-              score: 0.684685269835264
+              score: 0.11730742509559433
             title:
-              score: 0.684685269835264
+              score: 0.11730742509559433
           hashtags:
           - hashtags
           - hashtags
           keywords:
           - keywords
           - keywords
-          sentences_count: 1
+          sentences_count: 7
           author:
             avatar_url: avatar_url
             name: name
             id: 0
-          license_type: 2
-          paragraphs_count: 1
+          license_type: 7
+          paragraphs_count: 6
           language: language
           media:
           - width: 1
-            content_length: 4
+            content_length: 1
             url: url
-            height: 7
+            height: 1
           - width: 1
-            content_length: 4
+            content_length: 1
             url: url
-            height: 7
+            height: 1
           source:
             home_page_url: home_page_url
-            links_in_count: 4
+            links_in_count: 9
             rankings:
               alexa:
               - country: country
                 fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 5
+                rank: 9
               - country: country
                 fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 5
+                rank: 9
             logo_url: logo_url
             domain: domain
             name: name
@@ -14059,7 +14261,7 @@ components:
             - country: country
               city: city
               state: state
-            id: 1
+            id: 5
             scopes:
             - country: country
               city: city
@@ -14074,20 +14276,22 @@ components:
             body:
             - stock_ticker: stock_ticker
               sentiment:
-                confidence: 0.7061401241503109
+                confidence: 0.9301444243932576
               surface_forms:
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               indices:
               - - 2
                 - 2
@@ -14096,6 +14300,7 @@ components:
               types:
               - types
               - types
+              prominence_score: 0.7061401
               links:
                 dbpedia: dbpedia
                 wikipedia: wikipedia
@@ -14104,20 +14309,22 @@ components:
               text: text
             - stock_ticker: stock_ticker
               sentiment:
-                confidence: 0.7061401241503109
+                confidence: 0.9301444243932576
               surface_forms:
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               indices:
               - - 2
                 - 2
@@ -14126,6 +14333,7 @@ components:
               types:
               - types
               - types
+              prominence_score: 0.7061401
               links:
                 dbpedia: dbpedia
                 wikipedia: wikipedia
@@ -14135,20 +14343,22 @@ components:
             title:
             - stock_ticker: stock_ticker
               sentiment:
-                confidence: 0.7061401241503109
+                confidence: 0.9301444243932576
               surface_forms:
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               indices:
               - - 2
                 - 2
@@ -14157,6 +14367,7 @@ components:
               types:
               - types
               - types
+              prominence_score: 0.7061401
               links:
                 dbpedia: dbpedia
                 wikipedia: wikipedia
@@ -14165,20 +14376,22 @@ components:
               text: text
             - stock_ticker: stock_ticker
               sentiment:
-                confidence: 0.7061401241503109
+                confidence: 0.9301444243932576
               surface_forms:
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               indices:
               - - 2
                 - 2
@@ -14187,6 +14400,7 @@ components:
               types:
               - types
               - types
+              prominence_score: 0.7061401
               links:
                 dbpedia: dbpedia
                 wikipedia: wikipedia
@@ -14220,76 +14434,76 @@ components:
               self: self
             id: id
             label: label
-          id: 3
+          id: 4
           social_shares_count:
             facebook:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             reddit:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             google_plus:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             linkedin:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
           published_at: 2000-01-23T04:56:07.000+00:00
           clusters:
           - 5
           - 5
-          words_count: 9
+          words_count: 6
         - summary:
             sentences:
             - sentences
             - sentences
           sentiment:
             body:
-              score: 0.684685269835264
+              score: 0.11730742509559433
             title:
-              score: 0.684685269835264
+              score: 0.11730742509559433
           hashtags:
           - hashtags
           - hashtags
           keywords:
           - keywords
           - keywords
-          sentences_count: 1
+          sentences_count: 7
           author:
             avatar_url: avatar_url
             name: name
             id: 0
-          license_type: 2
-          paragraphs_count: 1
+          license_type: 7
+          paragraphs_count: 6
           language: language
           media:
           - width: 1
-            content_length: 4
+            content_length: 1
             url: url
-            height: 7
+            height: 1
           - width: 1
-            content_length: 4
+            content_length: 1
             url: url
-            height: 7
+            height: 1
           source:
             home_page_url: home_page_url
-            links_in_count: 4
+            links_in_count: 9
             rankings:
               alexa:
               - country: country
                 fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 5
+                rank: 9
               - country: country
                 fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 5
+                rank: 9
             logo_url: logo_url
             domain: domain
             name: name
@@ -14301,7 +14515,7 @@ components:
             - country: country
               city: city
               state: state
-            id: 1
+            id: 5
             scopes:
             - country: country
               city: city
@@ -14316,20 +14530,22 @@ components:
             body:
             - stock_ticker: stock_ticker
               sentiment:
-                confidence: 0.7061401241503109
+                confidence: 0.9301444243932576
               surface_forms:
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               indices:
               - - 2
                 - 2
@@ -14338,6 +14554,7 @@ components:
               types:
               - types
               - types
+              prominence_score: 0.7061401
               links:
                 dbpedia: dbpedia
                 wikipedia: wikipedia
@@ -14346,20 +14563,22 @@ components:
               text: text
             - stock_ticker: stock_ticker
               sentiment:
-                confidence: 0.7061401241503109
+                confidence: 0.9301444243932576
               surface_forms:
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               indices:
               - - 2
                 - 2
@@ -14368,6 +14587,7 @@ components:
               types:
               - types
               - types
+              prominence_score: 0.7061401
               links:
                 dbpedia: dbpedia
                 wikipedia: wikipedia
@@ -14377,20 +14597,22 @@ components:
             title:
             - stock_ticker: stock_ticker
               sentiment:
-                confidence: 0.7061401241503109
+                confidence: 0.9301444243932576
               surface_forms:
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               indices:
               - - 2
                 - 2
@@ -14399,6 +14621,7 @@ components:
               types:
               - types
               - types
+              prominence_score: 0.7061401
               links:
                 dbpedia: dbpedia
                 wikipedia: wikipedia
@@ -14407,20 +14630,22 @@ components:
               text: text
             - stock_ticker: stock_ticker
               sentiment:
-                confidence: 0.7061401241503109
+                confidence: 0.9301444243932576
               surface_forms:
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               - indices:
-                - - 9
-                  - 9
-                - - 9
-                  - 9
+                - - 2
+                  - 2
+                - - 2
+                  - 2
                 text: text
+                frequency: 0
               indices:
               - - 2
                 - 2
@@ -14429,6 +14654,7 @@ components:
               types:
               - types
               - types
+              prominence_score: 0.7061401
               links:
                 dbpedia: dbpedia
                 wikipedia: wikipedia
@@ -14462,33 +14688,33 @@ components:
               self: self
             id: id
             label: label
-          id: 3
+          id: 4
           social_shares_count:
             facebook:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             reddit:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             google_plus:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             linkedin:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 7
+              count: 4
           published_at: 2000-01-23T04:56:07.000+00:00
           clusters:
           - 5
           - 5
-          words_count: 9
+          words_count: 6
         warnings:
         - links:
             docs: docs
@@ -14534,43 +14760,43 @@ components:
           - sentences
         sentiment:
           body:
-            score: 0.684685269835264
+            score: 0.11730742509559433
           title:
-            score: 0.684685269835264
+            score: 0.11730742509559433
         hashtags:
         - hashtags
         - hashtags
         keywords:
         - keywords
         - keywords
-        sentences_count: 1
+        sentences_count: 7
         author:
           avatar_url: avatar_url
           name: name
           id: 0
-        license_type: 2
-        paragraphs_count: 1
+        license_type: 7
+        paragraphs_count: 6
         language: language
         media:
         - width: 1
-          content_length: 4
+          content_length: 1
           url: url
-          height: 7
+          height: 1
         - width: 1
-          content_length: 4
+          content_length: 1
           url: url
-          height: 7
+          height: 1
         source:
           home_page_url: home_page_url
-          links_in_count: 4
+          links_in_count: 9
           rankings:
             alexa:
             - country: country
               fetched_at: 2000-01-23T04:56:07.000+00:00
-              rank: 5
+              rank: 9
             - country: country
               fetched_at: 2000-01-23T04:56:07.000+00:00
-              rank: 5
+              rank: 9
           logo_url: logo_url
           domain: domain
           name: name
@@ -14582,7 +14808,7 @@ components:
           - country: country
             city: city
             state: state
-          id: 1
+          id: 5
           scopes:
           - country: country
             city: city
@@ -14597,20 +14823,22 @@ components:
           body:
           - stock_ticker: stock_ticker
             sentiment:
-              confidence: 0.7061401241503109
+              confidence: 0.9301444243932576
             surface_forms:
             - indices:
-              - - 9
-                - 9
-              - - 9
-                - 9
+              - - 2
+                - 2
+              - - 2
+                - 2
               text: text
+              frequency: 0
             - indices:
-              - - 9
-                - 9
-              - - 9
-                - 9
+              - - 2
+                - 2
+              - - 2
+                - 2
               text: text
+              frequency: 0
             indices:
             - - 2
               - 2
@@ -14619,6 +14847,7 @@ components:
             types:
             - types
             - types
+            prominence_score: 0.7061401
             links:
               dbpedia: dbpedia
               wikipedia: wikipedia
@@ -14627,20 +14856,22 @@ components:
             text: text
           - stock_ticker: stock_ticker
             sentiment:
-              confidence: 0.7061401241503109
+              confidence: 0.9301444243932576
             surface_forms:
             - indices:
-              - - 9
-                - 9
-              - - 9
-                - 9
+              - - 2
+                - 2
+              - - 2
+                - 2
               text: text
+              frequency: 0
             - indices:
-              - - 9
-                - 9
-              - - 9
-                - 9
+              - - 2
+                - 2
+              - - 2
+                - 2
               text: text
+              frequency: 0
             indices:
             - - 2
               - 2
@@ -14649,6 +14880,7 @@ components:
             types:
             - types
             - types
+            prominence_score: 0.7061401
             links:
               dbpedia: dbpedia
               wikipedia: wikipedia
@@ -14658,20 +14890,22 @@ components:
           title:
           - stock_ticker: stock_ticker
             sentiment:
-              confidence: 0.7061401241503109
+              confidence: 0.9301444243932576
             surface_forms:
             - indices:
-              - - 9
-                - 9
-              - - 9
-                - 9
+              - - 2
+                - 2
+              - - 2
+                - 2
               text: text
+              frequency: 0
             - indices:
-              - - 9
-                - 9
-              - - 9
-                - 9
+              - - 2
+                - 2
+              - - 2
+                - 2
               text: text
+              frequency: 0
             indices:
             - - 2
               - 2
@@ -14680,6 +14914,7 @@ components:
             types:
             - types
             - types
+            prominence_score: 0.7061401
             links:
               dbpedia: dbpedia
               wikipedia: wikipedia
@@ -14688,20 +14923,22 @@ components:
             text: text
           - stock_ticker: stock_ticker
             sentiment:
-              confidence: 0.7061401241503109
+              confidence: 0.9301444243932576
             surface_forms:
             - indices:
-              - - 9
-                - 9
-              - - 9
-                - 9
+              - - 2
+                - 2
+              - - 2
+                - 2
               text: text
+              frequency: 0
             - indices:
-              - - 9
-                - 9
-              - - 9
-                - 9
+              - - 2
+                - 2
+              - - 2
+                - 2
               text: text
+              frequency: 0
             indices:
             - - 2
               - 2
@@ -14710,6 +14947,7 @@ components:
             types:
             - types
             - types
+            prominence_score: 0.7061401
             links:
               dbpedia: dbpedia
               wikipedia: wikipedia
@@ -14743,33 +14981,33 @@ components:
             self: self
           id: id
           label: label
-        id: 3
+        id: 4
         social_shares_count:
           facebook:
           - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 7
+            count: 4
           - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 7
+            count: 4
           reddit:
           - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 7
+            count: 4
           - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 7
+            count: 4
           google_plus:
           - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 7
+            count: 4
           - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 7
+            count: 4
           linkedin:
           - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 7
+            count: 4
           - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 7
+            count: 4
         published_at: 2000-01-23T04:56:07.000+00:00
         clusters:
         - 5
         - 5
-        words_count: 9
+        words_count: 6
       properties:
         author:
           $ref: '#/components/schemas/Author'

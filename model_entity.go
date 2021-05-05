@@ -16,6 +16,8 @@ type Entity struct {
 	// The indices of the entity text
 	Indices [][]int32 `json:"indices,omitempty"`
 	Links EntityLinks `json:"links,omitempty"`
+	// Describes how relevant an entity is to the article
+	ProminenceScore float32 `json:"prominence_score,omitempty"`
 	Sentiment EntitySentiment `json:"sentiment,omitempty"`
 	// The stock_ticker of the entity (might be null)
 	StockTicker string `json:"stock_ticker,omitempty"`

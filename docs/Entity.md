@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Id** | **string** | The unique ID of the entity | [optional] 
 **Indices** | [**[][]int32**](array.md) | The indices of the entity text | [optional] 
 **Links** | [**EntityLinks**](EntityLinks.md) |  | [optional] 
+**ProminenceScore** | **float32** | Describes how relevant an entity is to the article | [optional] 
 **Sentiment** | [**EntitySentiment**](EntitySentiment.md) |  | [optional] 
 **StockTicker** | **string** | The stock_ticker of the entity (might be null) | [optional] 
 **SurfaceForms** | [**[]EntitySurfaceForm**](EntitySurfaceForm.md) |  | [optional] 

@@ -11,6 +11,8 @@
 package newsapi
 // EntitySurfaceForm struct for EntitySurfaceForm
 type EntitySurfaceForm struct {
+	// Amount of entity surface form mentions in the article
+	Frequency int32 `json:"frequency,omitempty"`
 	// The indices of the entity text
 	Indices [][]int32 `json:"indices,omitempty"`
 	// The entity text

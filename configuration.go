@@ -85,7 +85,7 @@ func NewConfiguration() *Configuration {
 	cfg := &Configuration{
 		BasePath:      "https://api.aylien.com/news",
 		DefaultHeader: make(map[string]string),
-		UserAgent:     "OpenAPI-Generator/4.3.1/go",
+		UserAgent:     "OpenAPI-Generator/4.4.0/go",
 		Debug:         false,
 		Servers:       []ServerConfiguration{
 			{
