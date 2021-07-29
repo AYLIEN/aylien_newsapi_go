@@ -12,7 +12,7 @@ package newsapi
 import (
 	"time"
 )
-// Stories struct for Stories
+// Stories Stories containing new V3 entities - available for new_v3_entities feature flag
 type Stories struct {
 	// The next page cursor
 	NextPageCursor string `json:"next_page_cursor,omitempty"`

@@ -12,8 +12,8 @@ package newsapi
 import (
 	"time"
 )
-// Story struct for Story
-type Story struct {
+// DeprecatedStory struct for DeprecatedStory
+type DeprecatedStory struct {
 	Author Author `json:"author,omitempty"`
 	// Body of the story
 	Body string `json:"body,omitempty"`
@@ -23,8 +23,7 @@ type Story struct {
 	CharactersCount int32 `json:"characters_count,omitempty"`
 	// An array of clusters the story is associated with
 	Clusters []int64 `json:"clusters,omitempty"`
-	// An array of entities
-	Entities []Entity `json:"entities,omitempty"`
+	Entities DeprecatedEntities `json:"entities,omitempty"`
 	// An array of suggested Story hashtags
 	Hashtags []string `json:"hashtags,omitempty"`
 	// ID of the story which is a unique identification

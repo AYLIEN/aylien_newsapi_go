@@ -9,12 +9,12 @@
  */
 
 package newsapi
-// EntitySurfaceForm struct for EntitySurfaceForm
-type EntitySurfaceForm struct {
+// DeprecatedEntitySurfaceForm struct for DeprecatedEntitySurfaceForm
+type DeprecatedEntitySurfaceForm struct {
 	// Amount of entity surface form mentions in the article
 	Frequency int32 `json:"frequency,omitempty"`
-	// Mentions of the entity text
-	Mentions []EntityMention `json:"mentions,omitempty"`
+	// The indices of the entity text
+	Indices [][]int32 `json:"indices,omitempty"`
 	// The entity text
 	Text string `json:"text,omitempty"`
 }

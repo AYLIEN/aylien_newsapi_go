@@ -9,12 +9,8 @@
  */
 
 package newsapi
-// EntitySurfaceForm struct for EntitySurfaceForm
-type EntitySurfaceForm struct {
-	// Amount of entity surface form mentions in the article
-	Frequency int32 `json:"frequency,omitempty"`
-	// Mentions of the entity text
-	Mentions []EntityMention `json:"mentions,omitempty"`
-	// The entity text
-	Text string `json:"text,omitempty"`
+// EntityMention struct for EntityMention
+type EntityMention struct {
+	Index EntityMentionIndex `json:"index,omitempty"`
+	Sentiment EntitySentiment `json:"sentiment,omitempty"`
 }
