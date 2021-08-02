@@ -11,19 +11,18 @@
 package newsapi
 // Entity struct for Entity
 type Entity struct {
+	Body EntityInText `json:"body,omitempty"`
 	// The unique ID of the entity
 	Id string `json:"id,omitempty"`
-	// The indices of the entity text
-	Indices [][]int32 `json:"indices,omitempty"`
 	Links EntityLinks `json:"links,omitempty"`
+	// Amount of entity surface form mentions in the article
+	OverallFrequency int32 `json:"overall_frequency,omitempty"`
 	// Describes how relevant an entity is to the article
-	ProminenceScore float32 `json:"prominence_score,omitempty"`
-	Sentiment EntitySentiment `json:"sentiment,omitempty"`
-	// The stock_ticker of the entity (might be null)
-	StockTicker string `json:"stock_ticker,omitempty"`
-	SurfaceForms []EntitySurfaceForm `json:"surface_forms,omitempty"`
-	// The entity text
-	Text string `json:"text,omitempty"`
+	OverallProminence float32 `json:"overall_prominence,omitempty"`
+	OverallSentiment EntitySentiment `json:"overall_sentiment,omitempty"`
+	// The stock tickers of the entity (might be empty)
+	StockTickers []string `json:"stock_tickers,omitempty"`
+	Title EntityInText `json:"title,omitempty"`
 	// An array of the entity types
 	Types []string `json:"types,omitempty"`
 }

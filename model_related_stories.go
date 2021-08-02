@@ -12,7 +12,7 @@ package newsapi
 import (
 	"time"
 )
-// RelatedStories struct for RelatedStories
+// RelatedStories Story containing new V3 entities - available for new_v3_entities feature flag
 type RelatedStories struct {
 	// The end of a period in which searched stories were published
 	PublishedAtEnd time.Time `json:"published_at.end,omitempty"`

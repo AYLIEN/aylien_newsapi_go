@@ -23,7 +23,8 @@ type Story struct {
 	CharactersCount int32 `json:"characters_count,omitempty"`
 	// An array of clusters the story is associated with
 	Clusters []int64 `json:"clusters,omitempty"`
-	Entities Entities `json:"entities,omitempty"`
+	// An array of entities
+	Entities []Entity `json:"entities,omitempty"`
 	// An array of suggested Story hashtags
 	Hashtags []string `json:"hashtags,omitempty"`
 	// ID of the story which is a unique identification
