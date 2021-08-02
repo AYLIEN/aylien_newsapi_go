@@ -12,18 +12,16 @@ package newsapi
 import (
 	"time"
 )
-// RelatedStories Story containing new V3 entities - available for new_v3_entities feature flag
-type RelatedStories struct {
+// DeprecatedStories Stories containing deprecated entities
+type DeprecatedStories struct {
+	// The next page cursor
+	NextPageCursor string `json:"next_page_cursor,omitempty"`
 	// The end of a period in which searched stories were published
 	PublishedAtEnd time.Time `json:"published_at.end,omitempty"`
 	// The start of a period in which searched stories were published
 	PublishedAtStart time.Time `json:"published_at.start,omitempty"`
-	// An array of related stories for the input story
-	RelatedStories []Story `json:"related_stories,omitempty"`
-	// The input story body
-	StoryBody string `json:"story_body,omitempty"`
-	// The input story language
-	StoryLanguage string `json:"story_language,omitempty"`
-	// The input story title
-	StoryTitle string `json:"story_title,omitempty"`
+	// An array of stories
+	Stories []DeprecatedStory `json:"stories,omitempty"`
+	// Notifies about possible issues that occurred when searching for stories
+	Warnings []Warning `json:"warnings,omitempty"`
 }
