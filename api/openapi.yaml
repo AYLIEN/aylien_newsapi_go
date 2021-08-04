@@ -8,7 +8,7 @@ info:
     The AYLIEN News API is the most powerful way of sourcing, searching and syndicating analyzed and enriched news content. It is accessed by sending HTTP requests to our server, which returns information to your client.
   termsOfService: https://newsapi.aylien.com/tos
   title: AYLIEN News API
-  version: "3.0"
+  version: "4.6"
 servers:
 - url: https://api.aylien.com/news
 tags:
@@ -4092,14 +4092,10 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/RelatedStories'
-                - $ref: '#/components/schemas/DeprecatedRelatedStories'
+                $ref: '#/components/schemas/OneOfRelatedStoriesDeprecatedRelatedStories'
             text/xml:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/RelatedStories'
-                - $ref: '#/components/schemas/DeprecatedRelatedStories'
+                $ref: '#/components/schemas/OneOfRelatedStoriesDeprecatedRelatedStories'
           description: An object including an array of related stories
           headers:
             X-RateLimit-Limit:
@@ -5835,14 +5831,10 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/RelatedStories'
-                - $ref: '#/components/schemas/DeprecatedRelatedStories'
+                $ref: '#/components/schemas/OneOfRelatedStoriesDeprecatedRelatedStories'
             text/xml:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/RelatedStories'
-                - $ref: '#/components/schemas/DeprecatedRelatedStories'
+                $ref: '#/components/schemas/OneOfRelatedStoriesDeprecatedRelatedStories'
           description: An object including an array of related stories
           headers:
             X-RateLimit-Limit:
@@ -7812,14 +7804,10 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/Stories'
-                - $ref: '#/components/schemas/DeprecatedStories'
+                $ref: '#/components/schemas/OneOfStoriesDeprecatedStories'
             text/xml:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/Stories'
-                - $ref: '#/components/schemas/DeprecatedStories'
+                $ref: '#/components/schemas/OneOfStoriesDeprecatedStories'
           description: An object including an array of stories
           headers:
             X-RateLimit-Limit:
@@ -8299,14 +8287,10 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/Stories'
-                - $ref: '#/components/schemas/DeprecatedStories'
+                $ref: '#/components/schemas/OneOfStoriesDeprecatedStories'
             text/xml:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/Stories'
-                - $ref: '#/components/schemas/DeprecatedStories'
+                $ref: '#/components/schemas/OneOfStoriesDeprecatedStories'
           description: An object including an array of stories
           headers:
             X-RateLimit-Limit:
@@ -13696,14 +13680,10 @@ components:
       content:
         application/json:
           schema:
-            oneOf:
-            - $ref: '#/components/schemas/Stories'
-            - $ref: '#/components/schemas/DeprecatedStories'
+            $ref: '#/components/schemas/OneOfStoriesDeprecatedStories'
         text/xml:
           schema:
-            oneOf:
-            - $ref: '#/components/schemas/Stories'
-            - $ref: '#/components/schemas/DeprecatedStories'
+            $ref: '#/components/schemas/OneOfStoriesDeprecatedStories'
       description: An object including an array of stories
       headers:
         X-RateLimit-Limit:
@@ -14439,6 +14419,16 @@ components:
       - image
       - video
       type: string
+    OneOfRelatedStoriesDeprecatedRelatedStories:
+      description: Wrapper of RelatedStories or DeprecatedRelatedStories
+      oneOf:
+      - $ref: '#/components/schemas/RelatedStories'
+      - $ref: '#/components/schemas/DeprecatedRelatedStories'
+    OneOfStoriesDeprecatedStories:
+      description: Wrapper of Stories or DeprecatedStories
+      oneOf:
+      - $ref: '#/components/schemas/Stories'
+      - $ref: '#/components/schemas/DeprecatedStories'
     Rank:
       properties:
         country:

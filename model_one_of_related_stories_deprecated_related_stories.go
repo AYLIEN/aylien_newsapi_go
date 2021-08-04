@@ -12,19 +12,18 @@ package newsapi
 import (
 	"time"
 )
-// Histograms struct for Histograms
-type Histograms struct {
-	Field string `json:"field,omitempty"`
-	// The end interval of the histogram
-	IntervalEnd int32 `json:"interval.end,omitempty"`
-	// The start interval of the histogram
-	IntervalStart int32 `json:"interval.start,omitempty"`
-	// The width of the histogram
-	IntervalWidth int32 `json:"interval.width,omitempty"`
-	// The intervals of the histograms
-	Intervals []HistogramInterval `json:"intervals,omitempty"`
+// OneOfRelatedStoriesDeprecatedRelatedStories Wrapper of RelatedStories or DeprecatedRelatedStories
+type OneOfRelatedStoriesDeprecatedRelatedStories struct {
 	// The end of a period in which searched stories were published
 	PublishedAtEnd time.Time `json:"published_at.end,omitempty"`
 	// The start of a period in which searched stories were published
 	PublishedAtStart time.Time `json:"published_at.start,omitempty"`
+	// An array of related stories for the input story
+	RelatedStories []DeprecatedStory `json:"related_stories,omitempty"`
+	// The input story body
+	StoryBody string `json:"story_body,omitempty"`
+	// The input story language
+	StoryLanguage string `json:"story_language,omitempty"`
+	// The input story title
+	StoryTitle string `json:"story_title,omitempty"`
 }

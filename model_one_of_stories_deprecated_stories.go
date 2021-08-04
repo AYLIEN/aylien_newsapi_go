@@ -12,19 +12,16 @@ package newsapi
 import (
 	"time"
 )
-// Histograms struct for Histograms
-type Histograms struct {
-	Field string `json:"field,omitempty"`
-	// The end interval of the histogram
-	IntervalEnd int32 `json:"interval.end,omitempty"`
-	// The start interval of the histogram
-	IntervalStart int32 `json:"interval.start,omitempty"`
-	// The width of the histogram
-	IntervalWidth int32 `json:"interval.width,omitempty"`
-	// The intervals of the histograms
-	Intervals []HistogramInterval `json:"intervals,omitempty"`
+// OneOfStoriesDeprecatedStories Wrapper of Stories or DeprecatedStories
+type OneOfStoriesDeprecatedStories struct {
+	// The next page cursor
+	NextPageCursor string `json:"next_page_cursor,omitempty"`
 	// The end of a period in which searched stories were published
 	PublishedAtEnd time.Time `json:"published_at.end,omitempty"`
 	// The start of a period in which searched stories were published
 	PublishedAtStart time.Time `json:"published_at.start,omitempty"`
+	// An array of stories
+	Stories []DeprecatedStory `json:"stories,omitempty"`
+	// Notifies about possible issues that occurred when searching for stories
+	Warnings []Warning `json:"warnings,omitempty"`
 }

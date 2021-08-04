@@ -1,7 +1,5 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
-README.md
 api/openapi.yaml
 api_default.go
 client.go
@@ -38,6 +36,8 @@ docs/Location.md
 docs/Media.md
 docs/MediaFormat.md
 docs/MediaType.md
+docs/OneOfRelatedStoriesDeprecatedRelatedStories.md
+docs/OneOfStoriesDeprecatedStories.md
 docs/Rank.md
 docs/Rankings.md
 docs/RelatedStories.md
@@ -96,6 +96,8 @@ model_location.go
 model_media.go
 model_media_format.go
 model_media_type.go
+model_one_of_related_stories_deprecated_related_stories.go
+model_one_of_stories_deprecated_stories.go
 model_rank.go
 model_rankings.go
 model_related_stories.go

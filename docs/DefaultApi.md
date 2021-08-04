@@ -51,7 +51,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OneOfStoriesDeprecatedStories**](oneOf&lt;Stories,DeprecatedStories&gt;.md)
+[**OneOfStoriesDeprecatedStories**](OneOfStoriesDeprecatedStories.md)
 
 ### Authorization
 
@@ -496,7 +496,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OneOfRelatedStoriesDeprecatedRelatedStories**](oneOf&lt;RelatedStories,DeprecatedRelatedStories&gt;.md)
+[**OneOfRelatedStoriesDeprecatedRelatedStories**](OneOfRelatedStoriesDeprecatedRelatedStories.md)
 
 ### Authorization
 
@@ -666,7 +666,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OneOfRelatedStoriesDeprecatedRelatedStories**](oneOf&lt;RelatedStories,DeprecatedRelatedStories&gt;.md)
+[**OneOfRelatedStoriesDeprecatedRelatedStories**](OneOfRelatedStoriesDeprecatedRelatedStories.md)
 
 ### Authorization
 
@@ -835,7 +835,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OneOfStoriesDeprecatedStories**](oneOf&lt;Stories,DeprecatedStories&gt;.md)
+[**OneOfStoriesDeprecatedStories**](OneOfStoriesDeprecatedStories.md)
 
 ### Authorization
 
