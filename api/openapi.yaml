@@ -8,7 +8,7 @@ info:
     The AYLIEN News API is the most powerful way of sourcing, searching and syndicating analyzed and enriched news content. It is accessed by sending HTTP requests to our server, which returns information to your client.
   termsOfService: https://newsapi.aylien.com/tos
   title: AYLIEN News API
-  version: "5.0"
+  version: 5.0.1
 servers:
 - url: https://api.aylien.com/news
 tags:
@@ -905,10 +905,10 @@ paths:
           type: array
         style: form
       - description: |
-          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+          This parameter is used to find stories based on the specified entities `surface_form`. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
         explode: true
         in: query
-        name: entities.body.surface_forms.text[]
+        name: entities.surface_forms.text[]
         required: false
         schema:
           items:
@@ -943,6 +943,18 @@ paths:
         explode: true
         in: query
         name: '!entities.title.surface_forms.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.surface_forms.text[]
         required: false
         schema:
           items:
@@ -2504,10 +2516,10 @@ paths:
           type: array
         style: form
       - description: |
-          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+          This parameter is used to find stories based on the specified entities `surface_form`. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
         explode: true
         in: query
-        name: entities.body.surface_forms.text[]
+        name: entities.surface_forms.text[]
         required: false
         schema:
           items:
@@ -2542,6 +2554,18 @@ paths:
         explode: true
         in: query
         name: '!entities.title.surface_forms.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.surface_forms.text[]
         required: false
         schema:
           items:
@@ -3907,10 +3931,10 @@ paths:
           type: array
         style: form
       - description: |
-          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+          This parameter is used to find stories based on the specified entities `surface_form`. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
         explode: true
         in: query
-        name: entities.body.surface_forms.text[]
+        name: entities.surface_forms.text[]
         required: false
         schema:
           items:
@@ -3945,6 +3969,18 @@ paths:
         explode: true
         in: query
         name: '!entities.title.surface_forms.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.surface_forms.text[]
         required: false
         schema:
           items:
@@ -5314,10 +5350,10 @@ paths:
           type: array
         style: form
       - description: |
-          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+          This parameter is used to find stories based on the specified entities `surface_form`. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
         explode: true
         in: query
-        name: entities.body.surface_forms.text[]
+        name: entities.surface_forms.text[]
         required: false
         schema:
           items:
@@ -5352,6 +5388,18 @@ paths:
         explode: true
         in: query
         name: '!entities.title.surface_forms.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.surface_forms.text[]
         required: false
         schema:
           items:
@@ -7390,10 +7438,10 @@ paths:
           type: array
         style: form
       - description: |
-          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+          This parameter is used to find stories based on the specified entities `surface_form`. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
         explode: true
         in: query
-        name: entities.body.surface_forms.text[]
+        name: entities.surface_forms.text[]
         required: false
         schema:
           items:
@@ -7428,6 +7476,18 @@ paths:
         explode: true
         in: query
         name: '!entities.title.surface_forms.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.surface_forms.text[]
         required: false
         schema:
           items:
@@ -8715,10 +8775,10 @@ paths:
           type: array
         style: form
       - description: |
-          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+          This parameter is used to find stories based on the specified entities `surface_form`. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
         explode: true
         in: query
-        name: entities.body.surface_forms.text[]
+        name: entities.surface_forms.text[]
         required: false
         schema:
           items:
@@ -8753,6 +8813,18 @@ paths:
         explode: true
         in: query
         name: '!entities.title.surface_forms.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.surface_forms.text[]
         required: false
         schema:
           items:
@@ -9848,10 +9920,10 @@ components:
       style: form
     entities_surface_forms_text:
       description: |
-        This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        This parameter is used to find stories based on the specified entities `surface_form`. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
       explode: true
       in: query
-      name: entities.body.surface_forms.text[]
+      name: entities.surface_forms.text[]
       required: false
       schema:
         items:
