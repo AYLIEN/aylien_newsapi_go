@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Entities** | [**DeprecatedEntities**](DeprecatedEntities.md) |  | [optional] 
 **Hashtags** | **[]string** | An array of suggested Story hashtags | [optional] 
 **Id** | **int64** | ID of the story which is a unique identification | [optional] 
+**Industries** | [**[]Category**](Category.md) | An array of industries categories | [optional] 
 **Keywords** | **[]string** | Extracted keywords mentioned in the story title or body | [optional] 
 **Language** | **string** | Language of the story | [optional] 
 **LicenseType** | **int32** | License type of the story | [optional] 

@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 ## AdvancedListStories
 
-> OneOfStoriesDeprecatedStories AdvancedListStories(ctx, body, optional)
+> DeprecatedStories AdvancedListStories(ctx, body, optional)
 
 List Stories
 
@@ -51,7 +51,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OneOfStoriesDeprecatedStories**](oneOf&lt;Stories,DeprecatedStories&gt;.md)
+[**DeprecatedStories**](DeprecatedStories.md)
 
 ### Authorization
 
@@ -219,18 +219,6 @@ Name | Type | Description  | Notes
  **NotCategoriesLabel** | [**optional.Interface of []string**](string.md)| This parameter is used for excluding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).  | 
  **categoriesLevel** | [**optional.Interface of []NotInt3**](NotInt3.md)| This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).  | 
  **NotCategoriesLevel** | [**optional.Interface of []NotInt3**](NotInt3.md)| This parameter is used for excluding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).  | 
- **entitiesId** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;id&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesId** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;id&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesLinksWikipedia** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities wikipedia URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesLinksWikipedia** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s Wikipedia URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesLinksWikidata** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities wikidata URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesLinksWikidata** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s Wikidata URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesTypes** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;types&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesTypes** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;types&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesStockTickers** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;stock_tickers&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesBodyStockTickers** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;stock_tickers&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesBodySurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;surface_form&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesSurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;surface_form&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesTitleId** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;id&#x60; in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesTitleId** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;id&#x60; in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesTitleSurfaceFormsText** | **optional.String**| This parameter is used to find stories based on the specified entities &#x60;surface_form&#x60; in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
@@ -249,6 +237,7 @@ Name | Type | Description  | Notes
  **NotEntitiesTitleLinksWikidata** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s Wikidata URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesBodyId** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;id&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesBodyId** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;id&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
+ **entitiesBodySurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;surface_form&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesBodySurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;surface_form&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesBodyText** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesBodyText** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entities &#x60;text&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
@@ -344,7 +333,7 @@ Name | Type | Description  | Notes
 
 ## ListRelatedStoriesGet
 
-> OneOfRelatedStoriesDeprecatedRelatedStories ListRelatedStoriesGet(ctx, optional)
+> DeprecatedRelatedStories ListRelatedStoriesGet(ctx, optional)
 
 
 
@@ -385,18 +374,6 @@ Name | Type | Description  | Notes
  **NotCategoriesLabel** | [**optional.Interface of []string**](string.md)| This parameter is used for excluding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).  | 
  **categoriesLevel** | [**optional.Interface of []NotInt3**](NotInt3.md)| This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).  | 
  **NotCategoriesLevel** | [**optional.Interface of []NotInt3**](NotInt3.md)| This parameter is used for excluding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).  | 
- **entitiesId** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;id&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesId** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;id&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesLinksWikipedia** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities wikipedia URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesLinksWikipedia** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s Wikipedia URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesLinksWikidata** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities wikidata URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesLinksWikidata** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s Wikidata URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesTypes** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;types&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesTypes** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;types&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesStockTickers** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;stock_tickers&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesBodyStockTickers** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;stock_tickers&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesBodySurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;surface_form&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesSurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;surface_form&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesTitleId** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;id&#x60; in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesTitleId** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;id&#x60; in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesTitleSurfaceFormsText** | **optional.String**| This parameter is used to find stories based on the specified entities &#x60;surface_form&#x60; in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
@@ -415,6 +392,7 @@ Name | Type | Description  | Notes
  **NotEntitiesTitleLinksWikidata** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s Wikidata URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesBodyId** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;id&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesBodyId** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;id&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
+ **entitiesBodySurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;surface_form&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesBodySurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;surface_form&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesBodyText** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesBodyText** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entities &#x60;text&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
@@ -496,7 +474,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OneOfRelatedStoriesDeprecatedRelatedStories**](oneOf&lt;RelatedStories,DeprecatedRelatedStories&gt;.md)
+[**DeprecatedRelatedStories**](DeprecatedRelatedStories.md)
 
 ### Authorization
 
@@ -514,7 +492,7 @@ Name | Type | Description  | Notes
 
 ## ListRelatedStoriesPost
 
-> OneOfRelatedStoriesDeprecatedRelatedStories ListRelatedStoriesPost(ctx, optional)
+> DeprecatedRelatedStories ListRelatedStoriesPost(ctx, optional)
 
 
 
@@ -555,18 +533,6 @@ Name | Type | Description  | Notes
  **NotCategoriesLabel** | [**optional.Interface of []string**](string.md)| This parameter is used for excluding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).  | 
  **categoriesLevel** | [**optional.Interface of []NotInt3**](NotInt3.md)| This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).  | 
  **NotCategoriesLevel** | [**optional.Interface of []NotInt3**](NotInt3.md)| This parameter is used for excluding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).  | 
- **entitiesId** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;id&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesId** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;id&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesLinksWikipedia** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities wikipedia URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesLinksWikipedia** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s Wikipedia URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesLinksWikidata** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities wikidata URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesLinksWikidata** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s Wikidata URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesTypes** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;types&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesTypes** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;types&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesStockTickers** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;stock_tickers&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesBodyStockTickers** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;stock_tickers&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesBodySurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;surface_form&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesSurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;surface_form&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesTitleId** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;id&#x60; in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesTitleId** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;id&#x60; in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesTitleSurfaceFormsText** | **optional.String**| This parameter is used to find stories based on the specified entities &#x60;surface_form&#x60; in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
@@ -585,6 +551,7 @@ Name | Type | Description  | Notes
  **NotEntitiesTitleLinksWikidata** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s Wikidata URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesBodyId** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;id&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesBodyId** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;id&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
+ **entitiesBodySurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;surface_form&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesBodySurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;surface_form&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesBodyText** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesBodyText** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entities &#x60;text&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
@@ -666,7 +633,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OneOfRelatedStoriesDeprecatedRelatedStories**](oneOf&lt;RelatedStories,DeprecatedRelatedStories&gt;.md)
+[**DeprecatedRelatedStories**](DeprecatedRelatedStories.md)
 
 ### Authorization
 
@@ -684,7 +651,7 @@ Name | Type | Description  | Notes
 
 ## ListStories
 
-> OneOfStoriesDeprecatedStories ListStories(ctx, optional)
+> DeprecatedStories ListStories(ctx, optional)
 
 List Stories
 
@@ -727,18 +694,6 @@ Name | Type | Description  | Notes
  **NotCategoriesLabel** | [**optional.Interface of []string**](string.md)| This parameter is used for excluding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).  | 
  **categoriesLevel** | [**optional.Interface of []NotInt3**](NotInt3.md)| This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).  | 
  **NotCategoriesLevel** | [**optional.Interface of []NotInt3**](NotInt3.md)| This parameter is used for excluding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).  | 
- **entitiesId** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;id&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesId** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;id&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesLinksWikipedia** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities wikipedia URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesLinksWikipedia** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s Wikipedia URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesLinksWikidata** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities wikidata URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesLinksWikidata** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s Wikidata URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesTypes** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;types&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesTypes** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;types&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesStockTickers** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;stock_tickers&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesBodyStockTickers** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;stock_tickers&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesBodySurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;surface_form&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesSurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;surface_form&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesTitleId** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;id&#x60; in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesTitleId** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;id&#x60; in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesTitleSurfaceFormsText** | **optional.String**| This parameter is used to find stories based on the specified entities &#x60;surface_form&#x60; in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
@@ -757,6 +712,7 @@ Name | Type | Description  | Notes
  **NotEntitiesTitleLinksWikidata** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s Wikidata URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesBodyId** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;id&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesBodyId** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;id&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
+ **entitiesBodySurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;surface_form&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesBodySurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;surface_form&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesBodyText** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesBodyText** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entities &#x60;text&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
@@ -835,7 +791,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OneOfStoriesDeprecatedStories**](oneOf&lt;Stories,DeprecatedStories&gt;.md)
+[**DeprecatedStories**](DeprecatedStories.md)
 
 ### Authorization
 
@@ -892,18 +848,6 @@ Name | Type | Description  | Notes
  **NotCategoriesLabel** | [**optional.Interface of []string**](string.md)| This parameter is used for excluding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).  | 
  **categoriesLevel** | [**optional.Interface of []NotInt3**](NotInt3.md)| This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).  | 
  **NotCategoriesLevel** | [**optional.Interface of []NotInt3**](NotInt3.md)| This parameter is used for excluding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).  | 
- **entitiesId** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;id&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesId** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;id&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesLinksWikipedia** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities wikipedia URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesLinksWikipedia** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s Wikipedia URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesLinksWikidata** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities wikidata URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesLinksWikidata** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s Wikidata URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesTypes** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;types&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesTypes** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;types&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesStockTickers** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;stock_tickers&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesBodyStockTickers** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;stock_tickers&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesBodySurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;surface_form&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesSurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;surface_form&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesTitleId** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;id&#x60; in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesTitleId** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;id&#x60; in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesTitleSurfaceFormsText** | **optional.String**| This parameter is used to find stories based on the specified entities &#x60;surface_form&#x60; in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
@@ -922,6 +866,7 @@ Name | Type | Description  | Notes
  **NotEntitiesTitleLinksWikidata** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s Wikidata URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesBodyId** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;id&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesBodyId** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;id&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
+ **entitiesBodySurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;surface_form&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesBodySurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;surface_form&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesBodyText** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesBodyText** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entities &#x60;text&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
@@ -1061,18 +1006,6 @@ Name | Type | Description  | Notes
  **NotCategoriesLabel** | [**optional.Interface of []string**](string.md)| This parameter is used for excluding stories by categories label. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).  | 
  **categoriesLevel** | [**optional.Interface of []NotInt3**](NotInt3.md)| This parameter is used for finding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).  | 
  **NotCategoriesLevel** | [**optional.Interface of []NotInt3**](NotInt3.md)| This parameter is used for excluding stories by categories level. You can read more about working with categories [here](https://newsapi.aylien.com/docs/working-with-categories).  | 
- **entitiesId** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;id&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesId** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;id&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesLinksWikipedia** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities wikipedia URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesLinksWikipedia** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s Wikipedia URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesLinksWikidata** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities wikidata URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesLinksWikidata** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s Wikidata URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesTypes** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;types&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **NotEntitiesTypes** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;types&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesStockTickers** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;stock_tickers&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesBodyStockTickers** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;stock_tickers&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesBodySurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;surface_form&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
- **entitiesSurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;surface_form&#x60;. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesTitleId** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;id&#x60; in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesTitleId** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;id&#x60; in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesTitleSurfaceFormsText** | **optional.String**| This parameter is used to find stories based on the specified entities &#x60;surface_form&#x60; in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
@@ -1091,6 +1024,7 @@ Name | Type | Description  | Notes
  **NotEntitiesTitleLinksWikidata** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s Wikidata URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesBodyId** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;id&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesBodyId** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;id&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
+ **entitiesBodySurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;surface_form&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesBodySurfaceFormsText** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entity&#39;s &#x60;surface_form&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **entitiesBodyText** | [**optional.Interface of []string**](string.md)| This parameter is used to find stories based on the specified entities &#x60;text&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
  **NotEntitiesBodyText** | [**optional.Interface of []string**](string.md)| This parameter is used to exclude stories based on the specified entities &#x60;text&#x60; in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).  | 
