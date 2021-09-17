@@ -8,7 +8,7 @@ info:
     The AYLIEN News API is the most powerful way of sourcing, searching and syndicating analyzed and enriched news content. It is accessed by sending HTTP requests to our server, which returns information to your client.
   termsOfService: https://newsapi.aylien.com/tos
   title: AYLIEN News API
-  version: 5.0.1
+  version: "3.1"
 servers:
 - url: https://api.aylien.com/news
 tags:
@@ -905,10 +905,10 @@ paths:
           type: array
         style: form
       - description: |
-          This parameter is used to find stories based on the specified entities `surface_form`. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
         explode: true
         in: query
-        name: entities.surface_forms.text[]
+        name: entities.body.surface_forms.text[]
         required: false
         schema:
           items:
@@ -921,6 +921,30 @@ paths:
         explode: true
         in: query
         name: '!entities.surface_forms.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `id` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.id[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `id` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.id[]'
         required: false
         schema:
           items:
@@ -951,10 +975,166 @@ paths:
           type: array
         style: form
       - description: |
-          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+          This parameter is used to find stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
         explode: true
         in: query
-        name: entities.body.surface_forms.text[]
+        name: entities.title.text[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.type[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.type[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `stock_ticker` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.stock_ticker[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `stock_ticker` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.stock_ticker[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.links.dbpedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.links.dbpedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikipedia URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.links.wikipedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikipedia URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.links.wikipedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikidata URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.links.wikidata[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikidata URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.links.wikidata[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.id[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.id[]'
         required: false
         schema:
           items:
@@ -967,6 +1147,150 @@ paths:
         explode: true
         in: query
         name: '!entities.body.surface_forms.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.text[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.type[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.type[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.stock_ticker[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.stock_ticker[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.links.dbpedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.links.dbpedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.links.wikipedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.links.wikipedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.links.wikidata[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.links.wikidata[]'
         required: false
         schema:
           items:
@@ -2516,10 +2840,10 @@ paths:
           type: array
         style: form
       - description: |
-          This parameter is used to find stories based on the specified entities `surface_form`. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
         explode: true
         in: query
-        name: entities.surface_forms.text[]
+        name: entities.body.surface_forms.text[]
         required: false
         schema:
           items:
@@ -2532,6 +2856,30 @@ paths:
         explode: true
         in: query
         name: '!entities.surface_forms.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `id` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.id[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `id` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.id[]'
         required: false
         schema:
           items:
@@ -2562,10 +2910,166 @@ paths:
           type: array
         style: form
       - description: |
-          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+          This parameter is used to find stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
         explode: true
         in: query
-        name: entities.body.surface_forms.text[]
+        name: entities.title.text[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.type[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.type[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `stock_ticker` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.stock_ticker[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `stock_ticker` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.stock_ticker[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.links.dbpedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.links.dbpedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikipedia URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.links.wikipedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikipedia URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.links.wikipedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikidata URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.links.wikidata[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikidata URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.links.wikidata[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.id[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.id[]'
         required: false
         schema:
           items:
@@ -2578,6 +3082,150 @@ paths:
         explode: true
         in: query
         name: '!entities.body.surface_forms.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.text[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.type[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.type[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.stock_ticker[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.stock_ticker[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.links.dbpedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.links.dbpedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.links.wikipedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.links.wikipedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.links.wikidata[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.links.wikidata[]'
         required: false
         schema:
           items:
@@ -3444,10 +4092,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RelatedStories'
+                oneOf:
+                - $ref: '#/components/schemas/RelatedStories'
+                - $ref: '#/components/schemas/DeprecatedRelatedStories'
             text/xml:
               schema:
-                $ref: '#/components/schemas/RelatedStories'
+                oneOf:
+                - $ref: '#/components/schemas/RelatedStories'
+                - $ref: '#/components/schemas/DeprecatedRelatedStories'
           description: An object including an array of related stories
           headers:
             X-RateLimit-Limit:
@@ -3931,10 +4583,10 @@ paths:
           type: array
         style: form
       - description: |
-          This parameter is used to find stories based on the specified entities `surface_form`. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
         explode: true
         in: query
-        name: entities.surface_forms.text[]
+        name: entities.body.surface_forms.text[]
         required: false
         schema:
           items:
@@ -3947,6 +4599,30 @@ paths:
         explode: true
         in: query
         name: '!entities.surface_forms.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `id` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.id[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `id` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.id[]'
         required: false
         schema:
           items:
@@ -3977,10 +4653,166 @@ paths:
           type: array
         style: form
       - description: |
-          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+          This parameter is used to find stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
         explode: true
         in: query
-        name: entities.body.surface_forms.text[]
+        name: entities.title.text[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.type[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.type[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `stock_ticker` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.stock_ticker[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `stock_ticker` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.stock_ticker[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.links.dbpedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.links.dbpedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikipedia URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.links.wikipedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikipedia URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.links.wikipedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikidata URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.links.wikidata[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikidata URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.links.wikidata[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.id[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.id[]'
         required: false
         schema:
           items:
@@ -3993,6 +4825,150 @@ paths:
         explode: true
         in: query
         name: '!entities.body.surface_forms.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.text[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.type[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.type[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.stock_ticker[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.stock_ticker[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.links.dbpedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.links.dbpedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.links.wikipedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.links.wikipedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.links.wikidata[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.links.wikidata[]'
         required: false
         schema:
           items:
@@ -4859,10 +5835,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RelatedStories'
+                oneOf:
+                - $ref: '#/components/schemas/RelatedStories'
+                - $ref: '#/components/schemas/DeprecatedRelatedStories'
             text/xml:
               schema:
-                $ref: '#/components/schemas/RelatedStories'
+                oneOf:
+                - $ref: '#/components/schemas/RelatedStories'
+                - $ref: '#/components/schemas/DeprecatedRelatedStories'
           description: An object including an array of related stories
           headers:
             X-RateLimit-Limit:
@@ -5350,10 +6330,10 @@ paths:
           type: array
         style: form
       - description: |
-          This parameter is used to find stories based on the specified entities `surface_form`. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
         explode: true
         in: query
-        name: entities.surface_forms.text[]
+        name: entities.body.surface_forms.text[]
         required: false
         schema:
           items:
@@ -5366,6 +6346,30 @@ paths:
         explode: true
         in: query
         name: '!entities.surface_forms.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `id` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.id[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `id` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.id[]'
         required: false
         schema:
           items:
@@ -5396,10 +6400,166 @@ paths:
           type: array
         style: form
       - description: |
-          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+          This parameter is used to find stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
         explode: true
         in: query
-        name: entities.body.surface_forms.text[]
+        name: entities.title.text[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.type[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.type[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `stock_ticker` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.stock_ticker[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `stock_ticker` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.stock_ticker[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.links.dbpedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.links.dbpedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikipedia URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.links.wikipedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikipedia URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.links.wikipedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikidata URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.links.wikidata[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikidata URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.links.wikidata[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.id[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.id[]'
         required: false
         schema:
           items:
@@ -5412,6 +6572,150 @@ paths:
         explode: true
         in: query
         name: '!entities.body.surface_forms.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.text[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.type[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.type[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.stock_ticker[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.stock_ticker[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.links.dbpedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.links.dbpedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.links.wikipedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.links.wikipedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.links.wikidata[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.links.wikidata[]'
         required: false
         schema:
           items:
@@ -6508,10 +7812,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Stories'
+                oneOf:
+                - $ref: '#/components/schemas/Stories'
+                - $ref: '#/components/schemas/DeprecatedStories'
             text/xml:
               schema:
-                $ref: '#/components/schemas/Stories'
+                oneOf:
+                - $ref: '#/components/schemas/Stories'
+                - $ref: '#/components/schemas/DeprecatedStories'
           description: An object including an array of stories
           headers:
             X-RateLimit-Limit:
@@ -6991,10 +8299,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Stories'
+                oneOf:
+                - $ref: '#/components/schemas/Stories'
+                - $ref: '#/components/schemas/DeprecatedStories'
             text/xml:
               schema:
-                $ref: '#/components/schemas/Stories'
+                oneOf:
+                - $ref: '#/components/schemas/Stories'
+                - $ref: '#/components/schemas/DeprecatedStories'
           description: An object including an array of stories
           headers:
             X-RateLimit-Limit:
@@ -7438,10 +8750,10 @@ paths:
           type: array
         style: form
       - description: |
-          This parameter is used to find stories based on the specified entities `surface_form`. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
         explode: true
         in: query
-        name: entities.surface_forms.text[]
+        name: entities.body.surface_forms.text[]
         required: false
         schema:
           items:
@@ -7454,6 +8766,30 @@ paths:
         explode: true
         in: query
         name: '!entities.surface_forms.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `id` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.id[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `id` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.id[]'
         required: false
         schema:
           items:
@@ -7484,10 +8820,166 @@ paths:
           type: array
         style: form
       - description: |
-          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+          This parameter is used to find stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
         explode: true
         in: query
-        name: entities.body.surface_forms.text[]
+        name: entities.title.text[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.type[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.type[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `stock_ticker` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.stock_ticker[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `stock_ticker` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.stock_ticker[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.links.dbpedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.links.dbpedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikipedia URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.links.wikipedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikipedia URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.links.wikipedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikidata URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.links.wikidata[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikidata URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.links.wikidata[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.id[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.id[]'
         required: false
         schema:
           items:
@@ -7500,6 +8992,150 @@ paths:
         explode: true
         in: query
         name: '!entities.body.surface_forms.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.text[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.type[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.type[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.stock_ticker[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.stock_ticker[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.links.dbpedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.links.dbpedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.links.wikipedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.links.wikipedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.links.wikidata[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.links.wikidata[]'
         required: false
         schema:
           items:
@@ -8775,10 +10411,10 @@ paths:
           type: array
         style: form
       - description: |
-          This parameter is used to find stories based on the specified entities `surface_form`. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
         explode: true
         in: query
-        name: entities.surface_forms.text[]
+        name: entities.body.surface_forms.text[]
         required: false
         schema:
           items:
@@ -8791,6 +10427,30 @@ paths:
         explode: true
         in: query
         name: '!entities.surface_forms.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `id` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.id[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `id` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.id[]'
         required: false
         schema:
           items:
@@ -8821,10 +10481,166 @@ paths:
           type: array
         style: form
       - description: |
-          This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+          This parameter is used to find stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
         explode: true
         in: query
-        name: entities.body.surface_forms.text[]
+        name: entities.title.text[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.type[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.type[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `stock_ticker` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.stock_ticker[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `stock_ticker` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.stock_ticker[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.links.dbpedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.links.dbpedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikipedia URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.links.wikipedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikipedia URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.links.wikipedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikidata URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.title.links.wikidata[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikidata URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.title.links.wikidata[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.id[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.id[]'
         required: false
         schema:
           items:
@@ -8837,6 +10653,150 @@ paths:
         explode: true
         in: query
         name: '!entities.body.surface_forms.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.text[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.text[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.type[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.type[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.stock_ticker[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.stock_ticker[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.links.dbpedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.links.dbpedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.links.wikipedia[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.links.wikipedia[]'
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to find stories based on the specified entities wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: entities.body.links.wikidata[]
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: |
+          This parameter is used to exclude stories based on the specified entity's Wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        explode: true
+        in: query
+        name: '!entities.body.links.wikidata[]'
         required: false
         schema:
           items:
@@ -9601,7 +11561,13 @@ paths:
           - entities.links.wikipedia
           - entities.links.wikidata
           - entities.title.surface_forms.text
+          - entities.title.text
+          - entities.title.type
+          - entities.title.links.dbpedia
           - entities.body.surface_forms.text
+          - entities.body.text
+          - entities.body.type
+          - entities.body.links.dbpedia
           - hashtags
           - categories.id
           - sentiment.title.polarity
@@ -9853,12 +11819,116 @@ components:
         nullable: true
         type: array
       style: form
+    entities_body_id:
+      description: |
+        This parameter is used to find stories based on the specified entities `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: entities.body.id[]
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    entities_body_links_dbpedia:
+      description: |
+        This parameter is used to find stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: entities.body.links.dbpedia[]
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    entities_body_links_wikidata:
+      description: |
+        This parameter is used to find stories based on the specified entities wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: entities.body.links.wikidata[]
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    entities_body_links_wikipedia:
+      description: |
+        This parameter is used to find stories based on the specified entities wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: entities.body.links.wikipedia[]
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    entities_body_stock_ticker:
+      description: |
+        This parameter is used to find stories based on the specified entities `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: entities.body.stock_ticker[]
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
     entities_body_surface_forms_text:
       description: |
         This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
       explode: true
       in: query
       name: entities.body.surface_forms.text[]
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    entities_body_text:
+      description: |
+        This parameter is used to find stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: entities.body.text[]
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    entities_body_type:
+      description: |
+        This parameter is used to find stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: entities.body.type[]
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    entities_body_types:
+      description: |
+        This parameter is used to find stories based on the specified entities `types` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: entities.body.types[]
       required: false
       schema:
         items:
@@ -9920,10 +11990,75 @@ components:
       style: form
     entities_surface_forms_text:
       description: |
-        This parameter is used to find stories based on the specified entities `surface_form`. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
       explode: true
       in: query
-      name: entities.surface_forms.text[]
+      name: entities.body.surface_forms.text[]
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    entities_title_id:
+      description: |
+        This parameter is used to find stories based on the specified entities `id` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: entities.title.id[]
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    entities_title_links_dbpedia:
+      description: |
+        This parameter is used to find stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: entities.title.links.dbpedia[]
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    entities_title_links_wikidata:
+      description: |
+        This parameter is used to find stories based on the specified entities wikidata URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: entities.title.links.wikidata[]
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    entities_title_links_wikipedia:
+      description: |
+        This parameter is used to find stories based on the specified entities wikipedia URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: entities.title.links.wikipedia[]
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    entities_title_stock_ticker:
+      description: |
+        This parameter is used to find stories based on the specified entities `stock_ticker` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: entities.title.stock_ticker[]
       required: false
       schema:
         items:
@@ -9941,6 +12076,45 @@ components:
       schema:
         nullable: true
         type: string
+      style: form
+    entities_title_text:
+      description: |
+        This parameter is used to find stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: entities.title.text[]
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    entities_title_type:
+      description: |
+        This parameter is used to find stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: entities.title.type[]
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    entities_title_types:
+      description: |
+        This parameter is used to find stories based on the specified entities `types` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: entities.title.types[]
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
       style: form
     entities_types:
       description: |
@@ -10230,12 +12404,116 @@ components:
         nullable: true
         type: array
       style: form
+    notentities_body_id:
+      description: |
+        This parameter is used to exclude stories based on the specified entity's `id` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: '!entities.body.id[]'
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    notentities_body_links_dbpedia:
+      description: |
+        This parameter is used to exclude stories based on the specified entities dbpedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: '!entities.body.links.dbpedia[]'
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    notentities_body_links_wikidata:
+      description: |
+        This parameter is used to exclude stories based on the specified entity's Wikidata URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: '!entities.body.links.wikidata[]'
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    notentities_body_links_wikipedia:
+      description: |
+        This parameter is used to exclude stories based on the specified entity's Wikipedia URL in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: '!entities.body.links.wikipedia[]'
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    notentities_body_stock_ticker:
+      description: |
+        This parameter is used to exclude stories based on the specified entity's `stock_ticker` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: '!entities.body.stock_ticker[]'
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
     notentities_body_surface_forms_text:
       description: |
         This parameter is used to exclude stories based on the specified entity's `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
       explode: true
       in: query
       name: '!entities.body.surface_forms.text[]'
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    notentities_body_text:
+      description: |
+        This parameter is used to exclude stories based on the specified entities `text` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: '!entities.body.text[]'
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    notentities_body_type:
+      description: |
+        This parameter is used to exclude stories based on the specified entities `type` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: '!entities.body.type[]'
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    notentities_body_types:
+      description: |
+        This parameter is used to exclude stories based on the specified entity's `types` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: '!entities.body.types[]'
       required: false
       schema:
         items:
@@ -10308,12 +12586,116 @@ components:
         nullable: true
         type: array
       style: form
+    notentities_title_id:
+      description: |
+        This parameter is used to exclude stories based on the specified entity's `id` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: '!entities.title.id[]'
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    notentities_title_links_dbpedia:
+      description: |
+        This parameter is used to exclude stories based on the specified entities dbpedia URL in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: '!entities.title.links.dbpedia[]'
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    notentities_title_links_wikidata:
+      description: |
+        This parameter is used to exclude stories based on the specified entity's Wikidata URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: '!entities.title.links.wikidata[]'
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    notentities_title_links_wikipedia:
+      description: |
+        This parameter is used to exclude stories based on the specified entity's Wikipedia URL in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: '!entities.title.links.wikipedia[]'
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    notentities_title_stock_ticker:
+      description: |
+        This parameter is used to exclude stories based on the specified entity's `stock_ticker` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: '!entities.title.stock_ticker[]'
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
     notentities_title_surface_forms_text:
       description: |
         This parameter is used to exclude stories based on the specified entity's `surface_form` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
       explode: true
       in: query
       name: '!entities.title.surface_forms.text[]'
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    notentities_title_text:
+      description: |
+        This parameter is used to exclude stories based on the specified entities `text` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: '!entities.title.text[]'
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    notentities_title_type:
+      description: |
+        This parameter is used to exclude stories based on the specified entities `type` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: '!entities.title.type[]'
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
+      style: form
+    notentities_title_types:
+      description: |
+        This parameter is used to exclude stories based on the specified entity's `types` in the title of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: '!entities.title.types[]'
       required: false
       schema:
         items:
@@ -11314,10 +13696,14 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Stories'
+            oneOf:
+            - $ref: '#/components/schemas/Stories'
+            - $ref: '#/components/schemas/DeprecatedStories'
         text/xml:
           schema:
-            $ref: '#/components/schemas/Stories'
+            oneOf:
+            - $ref: '#/components/schemas/Stories'
+            - $ref: '#/components/schemas/DeprecatedStories'
       description: An object including an array of stories
       headers:
         X-RateLimit-Limit:
@@ -11428,10 +13814,6 @@ components:
           type: integer
       type: object
     Author:
-      example:
-        avatar_url: avatar_url
-        name: name
-        id: 0
       properties:
         avatar_url:
           description: A URL which points to the author avatar
@@ -11471,18 +13853,10 @@ components:
           type: array
       type: object
     Category:
-      example:
-        score: 1.4658129805029452
-        level: 6
-        confident: true
-        links:
-          parent: parent
-          self: self
-        id: id
-        label: label
       properties:
         confident:
           description: It defines whether the extracted category is confident or not
+          nullable: true
           type: boolean
         id:
           description: The ID of the category
@@ -11493,33 +13867,39 @@ components:
         level:
           description: The level of the category
           format: int32
+          nullable: true
           type: integer
         links:
           $ref: '#/components/schemas/CategoryLinks'
         score:
           description: The score of the category
           format: double
+          nullable: true
           type: number
         taxonomy:
           $ref: '#/components/schemas/CategoryTaxonomy'
       type: object
     CategoryLinks:
-      example:
-        parent: parent
-        self: self
       properties:
         parent:
           description: A URL pointing to the parent category
+          nullable: true
           type: string
+        parents:
+          description: A collection of URLs pointing to the category parents
+          items:
+            type: string
+          nullable: true
+          type: array
         self:
           description: A URL pointing to the category
           type: string
-      type: object
     CategoryTaxonomy:
       description: The taxonomy of the category
       enum:
       - iab-qag
       - iptc-subjectcode
+      - aylien
       type: string
     Cluster:
       example:
@@ -11610,83 +13990,218 @@ components:
           description: The next page cursor
           type: string
       type: object
-    Entity:
-      example:
-        types:
-        - types
-        - types
-        overall_frequency: 0
-        overall_sentiment:
-          confidence: 0.23021358869347652
-        links:
-          dbpedia: dbpedia
-          wikipedia: wikipedia
-          wikidata: wikidata
-        stock_tickers:
-        - stock_tickers
-        - stock_tickers
-        id: id
+    DeprecatedEntities:
+      properties:
         body:
-          sentiment:
-            confidence: 0.23021358869347652
-          surface_forms:
-          - mentions:
-            - sentiment:
-                confidence: 0.23021358869347652
-              index:
-                start: 0
-                end: 1
-            - sentiment:
-                confidence: 0.23021358869347652
-              index:
-                start: 0
-                end: 1
-            text: text
-            frequency: 0
-          - mentions:
-            - sentiment:
-                confidence: 0.23021358869347652
-              index:
-                start: 0
-                end: 1
-            - sentiment:
-                confidence: 0.23021358869347652
-              index:
-                start: 0
-                end: 1
-            text: text
-            frequency: 0
-        overall_prominence: 0.4145608029883936
+          description: An array of extracted entities from the story body
+          items:
+            $ref: '#/components/schemas/DeprecatedEntity'
+          type: array
         title:
-          sentiment:
-            confidence: 0.23021358869347652
-          surface_forms:
-          - mentions:
-            - sentiment:
-                confidence: 0.23021358869347652
-              index:
-                start: 0
-                end: 1
-            - sentiment:
-                confidence: 0.23021358869347652
-              index:
-                start: 0
-                end: 1
-            text: text
-            frequency: 0
-          - mentions:
-            - sentiment:
-                confidence: 0.23021358869347652
-              index:
-                start: 0
-                end: 1
-            - sentiment:
-                confidence: 0.23021358869347652
-              index:
-                start: 0
-                end: 1
-            text: text
-            frequency: 0
+          description: An array of extracted entities from the story title
+          items:
+            $ref: '#/components/schemas/DeprecatedEntity'
+          type: array
+      type: object
+    DeprecatedEntity:
+      properties:
+        id:
+          description: The unique ID of the entity
+          type: string
+        indices:
+          description: The indices of the entity text
+          items:
+            items:
+              format: int32
+              type: integer
+            type: array
+          type: array
+        links:
+          $ref: '#/components/schemas/EntityLinks'
+        prominence_score:
+          description: Describes how relevant an entity is to the article
+          format: float
+          maximum: 1
+          minimum: 0
+          type: number
+        sentiment:
+          $ref: '#/components/schemas/EntitySentiment'
+        stock_ticker:
+          description: The stock_ticker of the entity (might be null)
+          type: string
+        surface_forms:
+          items:
+            $ref: '#/components/schemas/DeprecatedEntitySurfaceForm'
+          type: array
+        text:
+          description: The entity text
+          type: string
+        types:
+          description: An array of the entity types
+          items:
+            description: An entity type
+            type: string
+          type: array
+      type: object
+    DeprecatedEntitySurfaceForm:
+      properties:
+        frequency:
+          description: Amount of entity surface form mentions in the article
+          format: int32
+          minimum: 0
+          type: integer
+        indices:
+          description: The indices of the entity text
+          items:
+            items:
+              format: int32
+              type: integer
+            type: array
+          type: array
+        text:
+          description: The entity text
+          type: string
+      type: object
+    DeprecatedRelatedStories:
+      description: Story with deprecated entities
+      properties:
+        published_at.end:
+          description: The end of a period in which searched stories were published
+          format: date-time
+          type: string
+        published_at.start:
+          description: The start of a period in which searched stories were published
+          format: date-time
+          type: string
+        related_stories:
+          description: An array of related stories for the input story
+          items:
+            $ref: '#/components/schemas/DeprecatedStory'
+          type: array
+        story_body:
+          description: The input story body
+          type: string
+        story_language:
+          description: The input story language
+          type: string
+        story_title:
+          description: The input story title
+          type: string
+      type: object
+    DeprecatedStories:
+      description: Stories containing deprecated entities
+      properties:
+        next_page_cursor:
+          description: The next page cursor
+          type: string
+        published_at.end:
+          description: The end of a period in which searched stories were published
+          format: date-time
+          type: string
+        published_at.start:
+          description: The start of a period in which searched stories were published
+          format: date-time
+          type: string
+        stories:
+          description: An array of stories
+          items:
+            $ref: '#/components/schemas/DeprecatedStory'
+          type: array
+        warnings:
+          description: Notifies about possible issues that occurred when searching
+            for stories
+          items:
+            $ref: '#/components/schemas/Warning'
+          type: array
+      type: object
+    DeprecatedStory:
+      properties:
+        author:
+          $ref: '#/components/schemas/Author'
+        body:
+          description: Body of the story
+          type: string
+        categories:
+          description: Suggested categories for the story
+          items:
+            $ref: '#/components/schemas/Category'
+          type: array
+        characters_count:
+          description: Character count of the story body
+          format: int32
+          type: integer
+        clusters:
+          description: An array of clusters the story is associated with
+          items:
+            format: int64
+            type: integer
+          type: array
+        entities:
+          $ref: '#/components/schemas/DeprecatedEntities'
+        hashtags:
+          description: An array of suggested Story hashtags
+          items:
+            type: string
+          type: array
+        id:
+          description: ID of the story which is a unique identification
+          format: int64
+          type: integer
+        keywords:
+          description: Extracted keywords mentioned in the story title or body
+          items:
+            type: string
+          type: array
+        language:
+          description: Language of the story
+          type: string
+        license_type:
+          description: License type of the story
+          format: int32
+          type: integer
+        links:
+          $ref: '#/components/schemas/StoryLinks'
+        media:
+          description: An array of extracted media such as images and videos
+          items:
+            $ref: '#/components/schemas/Media'
+          type: array
+        paragraphs_count:
+          description: Paragraph count of the story body
+          format: int32
+          type: integer
+        published_at:
+          description: Acquisition time of the story
+          format: date-time
+          type: string
+        published_datetime:
+          description: Publication time of the story, if available, otherwise time
+            of acquisition
+          format: date-time
+          type: string
+        sentences_count:
+          description: Sentence count of the story body
+          format: int32
+          type: integer
+        sentiment:
+          $ref: '#/components/schemas/Sentiments'
+        social_shares_count:
+          $ref: '#/components/schemas/ShareCounts'
+        source:
+          $ref: '#/components/schemas/Source'
+        summary:
+          $ref: '#/components/schemas/Summary'
+        title:
+          description: Title of the story
+          type: string
+        translations:
+          $ref: '#/components/schemas/StoryTranslations'
+        words_count:
+          description: Word count of the story body
+          format: int32
+          type: integer
+      type: object
+    Entity:
       properties:
         body:
           $ref: '#/components/schemas/EntityInText'
@@ -11723,36 +14238,6 @@ components:
           type: array
       type: object
     EntityInText:
-      example:
-        sentiment:
-          confidence: 0.23021358869347652
-        surface_forms:
-        - mentions:
-          - sentiment:
-              confidence: 0.23021358869347652
-            index:
-              start: 0
-              end: 1
-          - sentiment:
-              confidence: 0.23021358869347652
-            index:
-              start: 0
-              end: 1
-          text: text
-          frequency: 0
-        - mentions:
-          - sentiment:
-              confidence: 0.23021358869347652
-            index:
-              start: 0
-              end: 1
-          - sentiment:
-              confidence: 0.23021358869347652
-            index:
-              start: 0
-              end: 1
-          text: text
-          frequency: 0
       properties:
         sentiment:
           $ref: '#/components/schemas/EntitySentiment'
@@ -11762,10 +14247,6 @@ components:
           type: array
       type: object
     EntityLinks:
-      example:
-        dbpedia: dbpedia
-        wikipedia: wikipedia
-        wikidata: wikidata
       properties:
         dbpedia:
           description: A dbpedia resource URL (deprecated)
@@ -11778,12 +14259,6 @@ components:
           type: string
       type: object
     EntityMention:
-      example:
-        sentiment:
-          confidence: 0.23021358869347652
-        index:
-          start: 0
-          end: 1
       properties:
         index:
           $ref: '#/components/schemas/EntityMentionIndex'
@@ -11791,9 +14266,6 @@ components:
           $ref: '#/components/schemas/EntitySentiment'
       type: object
     EntityMentionIndex:
-      example:
-        start: 0
-        end: 1
       properties:
         end:
           description: End index of a single entity mention in the text (counting
@@ -11812,8 +14284,6 @@ components:
       - start
       type: object
     EntitySentiment:
-      example:
-        confidence: 0.23021358869347652
       properties:
         confidence:
           description: Polarity confidence of the sentiment
@@ -11825,20 +14295,6 @@ components:
           $ref: '#/components/schemas/SentimentPolarity'
       type: object
     EntitySurfaceForm:
-      example:
-        mentions:
-        - sentiment:
-            confidence: 0.23021358869347652
-          index:
-            start: 0
-            end: 1
-        - sentiment:
-            confidence: 0.23021358869347652
-          index:
-            start: 0
-            end: 1
-        text: text
-        frequency: 0
       properties:
         frequency:
           description: Amount of entity surface form mentions in the article
@@ -11870,9 +14326,6 @@ components:
           type: string
       type: object
     ErrorLinks:
-      example:
-        docs: docs
-        about: about
       properties:
         about:
           type: string
@@ -11960,11 +14413,6 @@ components:
           type: string
       type: object
     Media:
-      example:
-        width: 6
-        content_length: 1
-        url: url
-        height: 1
       properties:
         content_length:
           description: The content length of media
@@ -12007,10 +14455,6 @@ components:
       - video
       type: string
     Rank:
-      example:
-        country: country
-        fetched_at: 2000-01-23T04:56:07.000+00:00
-        rank: 6
       properties:
         country:
           description: The country code which the rank is in it
@@ -12025,14 +14469,6 @@ components:
           type: integer
       type: object
     Rankings:
-      example:
-        alexa:
-        - country: country
-          fetched_at: 2000-01-23T04:56:07.000+00:00
-          rank: 6
-        - country: country
-          fetched_at: 2000-01-23T04:56:07.000+00:00
-          rank: 6
       properties:
         alexa:
           items:
@@ -12042,553 +14478,6 @@ components:
     RelatedStories:
       description: Story containing new V3 entities - available for new_v3_entities
         feature flag
-      example:
-        story_body: story_body
-        published_at.start: 2000-01-23T04:56:07.000+00:00
-        story_title: story_title
-        published_at.end: 2000-01-23T04:56:07.000+00:00
-        related_stories:
-        - summary:
-            sentences:
-            - sentences
-            - sentences
-          sentiment:
-            body:
-              score: 0.4965218492984954
-            title:
-              score: 0.4965218492984954
-          hashtags:
-          - hashtags
-          - hashtags
-          keywords:
-          - keywords
-          - keywords
-          sentences_count: 1
-          author:
-            avatar_url: avatar_url
-            name: name
-            id: 0
-          license_type: 1
-          paragraphs_count: 7
-          language: language
-          media:
-          - width: 6
-            content_length: 1
-            url: url
-            height: 1
-          - width: 6
-            content_length: 1
-            url: url
-            height: 1
-          source:
-            home_page_url: home_page_url
-            links_in_count: 9
-            rankings:
-              alexa:
-              - country: country
-                fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 6
-              - country: country
-                fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 6
-            logo_url: logo_url
-            domain: domain
-            name: name
-            description: description
-            locations:
-            - country: country
-              city: city
-              state: state
-            - country: country
-              city: city
-              state: state
-            id: 9
-            scopes:
-            - country: country
-              city: city
-              state: state
-            - country: country
-              city: city
-              state: state
-            title: title
-          body: body
-          title: title
-          entities:
-          - types:
-            - types
-            - types
-            overall_frequency: 0
-            overall_sentiment:
-              confidence: 0.23021358869347652
-            links:
-              dbpedia: dbpedia
-              wikipedia: wikipedia
-              wikidata: wikidata
-            stock_tickers:
-            - stock_tickers
-            - stock_tickers
-            id: id
-            body:
-              sentiment:
-                confidence: 0.23021358869347652
-              surface_forms:
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-            overall_prominence: 0.4145608029883936
-            title:
-              sentiment:
-                confidence: 0.23021358869347652
-              surface_forms:
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-          - types:
-            - types
-            - types
-            overall_frequency: 0
-            overall_sentiment:
-              confidence: 0.23021358869347652
-            links:
-              dbpedia: dbpedia
-              wikipedia: wikipedia
-              wikidata: wikidata
-            stock_tickers:
-            - stock_tickers
-            - stock_tickers
-            id: id
-            body:
-              sentiment:
-                confidence: 0.23021358869347652
-              surface_forms:
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-            overall_prominence: 0.4145608029883936
-            title:
-              sentiment:
-                confidence: 0.23021358869347652
-              surface_forms:
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-          characters_count: 5
-          translations:
-            en:
-              body: body
-              title: title
-          links:
-            canonical: canonical
-            permalink: permalink
-            related_stories: related_stories
-            clusters: clusters
-          categories:
-          - score: 1.4658129805029452
-            level: 6
-            confident: true
-            links:
-              parent: parent
-              self: self
-            id: id
-            label: label
-          - score: 1.4658129805029452
-            level: 6
-            confident: true
-            links:
-              parent: parent
-              self: self
-            id: id
-            label: label
-          id: 7
-          social_shares_count:
-            facebook:
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            reddit:
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            google_plus:
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            linkedin:
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-          published_at: 2000-01-23T04:56:07.000+00:00
-          clusters:
-          - 5
-          - 5
-          words_count: 8
-        - summary:
-            sentences:
-            - sentences
-            - sentences
-          sentiment:
-            body:
-              score: 0.4965218492984954
-            title:
-              score: 0.4965218492984954
-          hashtags:
-          - hashtags
-          - hashtags
-          keywords:
-          - keywords
-          - keywords
-          sentences_count: 1
-          author:
-            avatar_url: avatar_url
-            name: name
-            id: 0
-          license_type: 1
-          paragraphs_count: 7
-          language: language
-          media:
-          - width: 6
-            content_length: 1
-            url: url
-            height: 1
-          - width: 6
-            content_length: 1
-            url: url
-            height: 1
-          source:
-            home_page_url: home_page_url
-            links_in_count: 9
-            rankings:
-              alexa:
-              - country: country
-                fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 6
-              - country: country
-                fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 6
-            logo_url: logo_url
-            domain: domain
-            name: name
-            description: description
-            locations:
-            - country: country
-              city: city
-              state: state
-            - country: country
-              city: city
-              state: state
-            id: 9
-            scopes:
-            - country: country
-              city: city
-              state: state
-            - country: country
-              city: city
-              state: state
-            title: title
-          body: body
-          title: title
-          entities:
-          - types:
-            - types
-            - types
-            overall_frequency: 0
-            overall_sentiment:
-              confidence: 0.23021358869347652
-            links:
-              dbpedia: dbpedia
-              wikipedia: wikipedia
-              wikidata: wikidata
-            stock_tickers:
-            - stock_tickers
-            - stock_tickers
-            id: id
-            body:
-              sentiment:
-                confidence: 0.23021358869347652
-              surface_forms:
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-            overall_prominence: 0.4145608029883936
-            title:
-              sentiment:
-                confidence: 0.23021358869347652
-              surface_forms:
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-          - types:
-            - types
-            - types
-            overall_frequency: 0
-            overall_sentiment:
-              confidence: 0.23021358869347652
-            links:
-              dbpedia: dbpedia
-              wikipedia: wikipedia
-              wikidata: wikidata
-            stock_tickers:
-            - stock_tickers
-            - stock_tickers
-            id: id
-            body:
-              sentiment:
-                confidence: 0.23021358869347652
-              surface_forms:
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-            overall_prominence: 0.4145608029883936
-            title:
-              sentiment:
-                confidence: 0.23021358869347652
-              surface_forms:
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-          characters_count: 5
-          translations:
-            en:
-              body: body
-              title: title
-          links:
-            canonical: canonical
-            permalink: permalink
-            related_stories: related_stories
-            clusters: clusters
-          categories:
-          - score: 1.4658129805029452
-            level: 6
-            confident: true
-            links:
-              parent: parent
-              self: self
-            id: id
-            label: label
-          - score: 1.4658129805029452
-            level: 6
-            confident: true
-            links:
-              parent: parent
-              self: self
-            id: id
-            label: label
-          id: 7
-          social_shares_count:
-            facebook:
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            reddit:
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            google_plus:
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            linkedin:
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-          published_at: 2000-01-23T04:56:07.000+00:00
-          clusters:
-          - 5
-          - 5
-          words_count: 8
-        story_language: story_language
       properties:
         published_at.end:
           description: The end of a period in which searched stories were published
@@ -12636,10 +14525,6 @@ components:
           type: string
       type: object
     Scope:
-      example:
-        country: country
-        city: city
-        state: state
       properties:
         city:
           description: The scope by city
@@ -12662,8 +14547,6 @@ components:
       - local
       type: string
     Sentiment:
-      example:
-        score: 0.4965218492984954
       properties:
         polarity:
           $ref: '#/components/schemas/SentimentPolarity'
@@ -12682,11 +14565,6 @@ components:
       - negative
       type: string
     Sentiments:
-      example:
-        body:
-          score: 0.4965218492984954
-        title:
-          score: 0.4965218492984954
       properties:
         body:
           $ref: '#/components/schemas/Sentiment'
@@ -12694,9 +14572,6 @@ components:
           $ref: '#/components/schemas/Sentiment'
       type: object
     ShareCount:
-      example:
-        fetched_at: 2000-01-23T04:56:07.000+00:00
-        count: 5
       properties:
         count:
           description: The number of shares
@@ -12708,27 +14583,6 @@ components:
           type: string
       type: object
     ShareCounts:
-      example:
-        facebook:
-        - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 5
-        - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 5
-        reddit:
-        - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 5
-        - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 5
-        google_plus:
-        - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 5
-        - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 5
-        linkedin:
-        - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 5
-        - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 5
       properties:
         facebook:
           description: Facebook shares count
@@ -12752,37 +14606,6 @@ components:
           type: array
       type: object
     Source:
-      example:
-        home_page_url: home_page_url
-        links_in_count: 9
-        rankings:
-          alexa:
-          - country: country
-            fetched_at: 2000-01-23T04:56:07.000+00:00
-            rank: 6
-          - country: country
-            fetched_at: 2000-01-23T04:56:07.000+00:00
-            rank: 6
-        logo_url: logo_url
-        domain: domain
-        name: name
-        description: description
-        locations:
-        - country: country
-          city: city
-          state: state
-        - country: country
-          city: city
-          state: state
-        id: 9
-        scopes:
-        - country: country
-          city: city
-          state: state
-        - country: country
-          city: city
-          state: state
-        title: title
       properties:
         description:
           description: A general explanation about the source
@@ -12829,562 +14652,6 @@ components:
     Stories:
       description: Stories containing new V3 entities - available for new_v3_entities
         feature flag
-      example:
-        published_at.start: 2000-01-23T04:56:07.000+00:00
-        stories:
-        - summary:
-            sentences:
-            - sentences
-            - sentences
-          sentiment:
-            body:
-              score: 0.4965218492984954
-            title:
-              score: 0.4965218492984954
-          hashtags:
-          - hashtags
-          - hashtags
-          keywords:
-          - keywords
-          - keywords
-          sentences_count: 1
-          author:
-            avatar_url: avatar_url
-            name: name
-            id: 0
-          license_type: 1
-          paragraphs_count: 7
-          language: language
-          media:
-          - width: 6
-            content_length: 1
-            url: url
-            height: 1
-          - width: 6
-            content_length: 1
-            url: url
-            height: 1
-          source:
-            home_page_url: home_page_url
-            links_in_count: 9
-            rankings:
-              alexa:
-              - country: country
-                fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 6
-              - country: country
-                fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 6
-            logo_url: logo_url
-            domain: domain
-            name: name
-            description: description
-            locations:
-            - country: country
-              city: city
-              state: state
-            - country: country
-              city: city
-              state: state
-            id: 9
-            scopes:
-            - country: country
-              city: city
-              state: state
-            - country: country
-              city: city
-              state: state
-            title: title
-          body: body
-          title: title
-          entities:
-          - types:
-            - types
-            - types
-            overall_frequency: 0
-            overall_sentiment:
-              confidence: 0.23021358869347652
-            links:
-              dbpedia: dbpedia
-              wikipedia: wikipedia
-              wikidata: wikidata
-            stock_tickers:
-            - stock_tickers
-            - stock_tickers
-            id: id
-            body:
-              sentiment:
-                confidence: 0.23021358869347652
-              surface_forms:
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-            overall_prominence: 0.4145608029883936
-            title:
-              sentiment:
-                confidence: 0.23021358869347652
-              surface_forms:
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-          - types:
-            - types
-            - types
-            overall_frequency: 0
-            overall_sentiment:
-              confidence: 0.23021358869347652
-            links:
-              dbpedia: dbpedia
-              wikipedia: wikipedia
-              wikidata: wikidata
-            stock_tickers:
-            - stock_tickers
-            - stock_tickers
-            id: id
-            body:
-              sentiment:
-                confidence: 0.23021358869347652
-              surface_forms:
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-            overall_prominence: 0.4145608029883936
-            title:
-              sentiment:
-                confidence: 0.23021358869347652
-              surface_forms:
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-          characters_count: 5
-          translations:
-            en:
-              body: body
-              title: title
-          links:
-            canonical: canonical
-            permalink: permalink
-            related_stories: related_stories
-            clusters: clusters
-          categories:
-          - score: 1.4658129805029452
-            level: 6
-            confident: true
-            links:
-              parent: parent
-              self: self
-            id: id
-            label: label
-          - score: 1.4658129805029452
-            level: 6
-            confident: true
-            links:
-              parent: parent
-              self: self
-            id: id
-            label: label
-          id: 7
-          social_shares_count:
-            facebook:
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            reddit:
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            google_plus:
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            linkedin:
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-          published_at: 2000-01-23T04:56:07.000+00:00
-          clusters:
-          - 5
-          - 5
-          words_count: 8
-        - summary:
-            sentences:
-            - sentences
-            - sentences
-          sentiment:
-            body:
-              score: 0.4965218492984954
-            title:
-              score: 0.4965218492984954
-          hashtags:
-          - hashtags
-          - hashtags
-          keywords:
-          - keywords
-          - keywords
-          sentences_count: 1
-          author:
-            avatar_url: avatar_url
-            name: name
-            id: 0
-          license_type: 1
-          paragraphs_count: 7
-          language: language
-          media:
-          - width: 6
-            content_length: 1
-            url: url
-            height: 1
-          - width: 6
-            content_length: 1
-            url: url
-            height: 1
-          source:
-            home_page_url: home_page_url
-            links_in_count: 9
-            rankings:
-              alexa:
-              - country: country
-                fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 6
-              - country: country
-                fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 6
-            logo_url: logo_url
-            domain: domain
-            name: name
-            description: description
-            locations:
-            - country: country
-              city: city
-              state: state
-            - country: country
-              city: city
-              state: state
-            id: 9
-            scopes:
-            - country: country
-              city: city
-              state: state
-            - country: country
-              city: city
-              state: state
-            title: title
-          body: body
-          title: title
-          entities:
-          - types:
-            - types
-            - types
-            overall_frequency: 0
-            overall_sentiment:
-              confidence: 0.23021358869347652
-            links:
-              dbpedia: dbpedia
-              wikipedia: wikipedia
-              wikidata: wikidata
-            stock_tickers:
-            - stock_tickers
-            - stock_tickers
-            id: id
-            body:
-              sentiment:
-                confidence: 0.23021358869347652
-              surface_forms:
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-            overall_prominence: 0.4145608029883936
-            title:
-              sentiment:
-                confidence: 0.23021358869347652
-              surface_forms:
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-          - types:
-            - types
-            - types
-            overall_frequency: 0
-            overall_sentiment:
-              confidence: 0.23021358869347652
-            links:
-              dbpedia: dbpedia
-              wikipedia: wikipedia
-              wikidata: wikidata
-            stock_tickers:
-            - stock_tickers
-            - stock_tickers
-            id: id
-            body:
-              sentiment:
-                confidence: 0.23021358869347652
-              surface_forms:
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-            overall_prominence: 0.4145608029883936
-            title:
-              sentiment:
-                confidence: 0.23021358869347652
-              surface_forms:
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-              - mentions:
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                - sentiment:
-                    confidence: 0.23021358869347652
-                  index:
-                    start: 0
-                    end: 1
-                text: text
-                frequency: 0
-          characters_count: 5
-          translations:
-            en:
-              body: body
-              title: title
-          links:
-            canonical: canonical
-            permalink: permalink
-            related_stories: related_stories
-            clusters: clusters
-          categories:
-          - score: 1.4658129805029452
-            level: 6
-            confident: true
-            links:
-              parent: parent
-              self: self
-            id: id
-            label: label
-          - score: 1.4658129805029452
-            level: 6
-            confident: true
-            links:
-              parent: parent
-              self: self
-            id: id
-            label: label
-          id: 7
-          social_shares_count:
-            facebook:
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            reddit:
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            google_plus:
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            linkedin:
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-            - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 5
-          published_at: 2000-01-23T04:56:07.000+00:00
-          clusters:
-          - 5
-          - 5
-          words_count: 8
-        warnings:
-        - links:
-            docs: docs
-            about: about
-          detail: detail
-          id: id
-        - links:
-            docs: docs
-            about: about
-          detail: detail
-          id: id
-        published_at.end: 2000-01-23T04:56:07.000+00:00
-        next_page_cursor: next_page_cursor
       properties:
         next_page_cursor:
           description: The next page cursor
@@ -13410,277 +14677,6 @@ components:
           type: array
       type: object
     Story:
-      example:
-        summary:
-          sentences:
-          - sentences
-          - sentences
-        sentiment:
-          body:
-            score: 0.4965218492984954
-          title:
-            score: 0.4965218492984954
-        hashtags:
-        - hashtags
-        - hashtags
-        keywords:
-        - keywords
-        - keywords
-        sentences_count: 1
-        author:
-          avatar_url: avatar_url
-          name: name
-          id: 0
-        license_type: 1
-        paragraphs_count: 7
-        language: language
-        media:
-        - width: 6
-          content_length: 1
-          url: url
-          height: 1
-        - width: 6
-          content_length: 1
-          url: url
-          height: 1
-        source:
-          home_page_url: home_page_url
-          links_in_count: 9
-          rankings:
-            alexa:
-            - country: country
-              fetched_at: 2000-01-23T04:56:07.000+00:00
-              rank: 6
-            - country: country
-              fetched_at: 2000-01-23T04:56:07.000+00:00
-              rank: 6
-          logo_url: logo_url
-          domain: domain
-          name: name
-          description: description
-          locations:
-          - country: country
-            city: city
-            state: state
-          - country: country
-            city: city
-            state: state
-          id: 9
-          scopes:
-          - country: country
-            city: city
-            state: state
-          - country: country
-            city: city
-            state: state
-          title: title
-        body: body
-        title: title
-        entities:
-        - types:
-          - types
-          - types
-          overall_frequency: 0
-          overall_sentiment:
-            confidence: 0.23021358869347652
-          links:
-            dbpedia: dbpedia
-            wikipedia: wikipedia
-            wikidata: wikidata
-          stock_tickers:
-          - stock_tickers
-          - stock_tickers
-          id: id
-          body:
-            sentiment:
-              confidence: 0.23021358869347652
-            surface_forms:
-            - mentions:
-              - sentiment:
-                  confidence: 0.23021358869347652
-                index:
-                  start: 0
-                  end: 1
-              - sentiment:
-                  confidence: 0.23021358869347652
-                index:
-                  start: 0
-                  end: 1
-              text: text
-              frequency: 0
-            - mentions:
-              - sentiment:
-                  confidence: 0.23021358869347652
-                index:
-                  start: 0
-                  end: 1
-              - sentiment:
-                  confidence: 0.23021358869347652
-                index:
-                  start: 0
-                  end: 1
-              text: text
-              frequency: 0
-          overall_prominence: 0.4145608029883936
-          title:
-            sentiment:
-              confidence: 0.23021358869347652
-            surface_forms:
-            - mentions:
-              - sentiment:
-                  confidence: 0.23021358869347652
-                index:
-                  start: 0
-                  end: 1
-              - sentiment:
-                  confidence: 0.23021358869347652
-                index:
-                  start: 0
-                  end: 1
-              text: text
-              frequency: 0
-            - mentions:
-              - sentiment:
-                  confidence: 0.23021358869347652
-                index:
-                  start: 0
-                  end: 1
-              - sentiment:
-                  confidence: 0.23021358869347652
-                index:
-                  start: 0
-                  end: 1
-              text: text
-              frequency: 0
-        - types:
-          - types
-          - types
-          overall_frequency: 0
-          overall_sentiment:
-            confidence: 0.23021358869347652
-          links:
-            dbpedia: dbpedia
-            wikipedia: wikipedia
-            wikidata: wikidata
-          stock_tickers:
-          - stock_tickers
-          - stock_tickers
-          id: id
-          body:
-            sentiment:
-              confidence: 0.23021358869347652
-            surface_forms:
-            - mentions:
-              - sentiment:
-                  confidence: 0.23021358869347652
-                index:
-                  start: 0
-                  end: 1
-              - sentiment:
-                  confidence: 0.23021358869347652
-                index:
-                  start: 0
-                  end: 1
-              text: text
-              frequency: 0
-            - mentions:
-              - sentiment:
-                  confidence: 0.23021358869347652
-                index:
-                  start: 0
-                  end: 1
-              - sentiment:
-                  confidence: 0.23021358869347652
-                index:
-                  start: 0
-                  end: 1
-              text: text
-              frequency: 0
-          overall_prominence: 0.4145608029883936
-          title:
-            sentiment:
-              confidence: 0.23021358869347652
-            surface_forms:
-            - mentions:
-              - sentiment:
-                  confidence: 0.23021358869347652
-                index:
-                  start: 0
-                  end: 1
-              - sentiment:
-                  confidence: 0.23021358869347652
-                index:
-                  start: 0
-                  end: 1
-              text: text
-              frequency: 0
-            - mentions:
-              - sentiment:
-                  confidence: 0.23021358869347652
-                index:
-                  start: 0
-                  end: 1
-              - sentiment:
-                  confidence: 0.23021358869347652
-                index:
-                  start: 0
-                  end: 1
-              text: text
-              frequency: 0
-        characters_count: 5
-        translations:
-          en:
-            body: body
-            title: title
-        links:
-          canonical: canonical
-          permalink: permalink
-          related_stories: related_stories
-          clusters: clusters
-        categories:
-        - score: 1.4658129805029452
-          level: 6
-          confident: true
-          links:
-            parent: parent
-            self: self
-          id: id
-          label: label
-        - score: 1.4658129805029452
-          level: 6
-          confident: true
-          links:
-            parent: parent
-            self: self
-          id: id
-          label: label
-        id: 7
-        social_shares_count:
-          facebook:
-          - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 5
-          - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 5
-          reddit:
-          - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 5
-          - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 5
-          google_plus:
-          - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 5
-          - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 5
-          linkedin:
-          - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 5
-          - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 5
-        published_at: 2000-01-23T04:56:07.000+00:00
-        clusters:
-        - 5
-        - 5
-        words_count: 8
       properties:
         author:
           $ref: '#/components/schemas/Author'
@@ -13716,6 +14712,11 @@ components:
           description: ID of the story which is a unique identification
           format: int64
           type: integer
+        industries:
+          description: An array of industries categories
+          items:
+            $ref: '#/components/schemas/Category'
+          type: array
         keywords:
           description: Extracted keywords mentioned in the story title or body
           items:
@@ -13740,7 +14741,12 @@ components:
           format: int32
           type: integer
         published_at:
-          description: Published date of the story
+          description: Acquisition time of the story
+          format: date-time
+          type: string
+        published_datetime:
+          description: Publication time of the story, if available, otherwise time
+            of acquisition
           format: date-time
           type: string
         sentences_count:
@@ -13792,11 +14798,6 @@ components:
           type: array
       type: object
     StoryLinks:
-      example:
-        canonical: canonical
-        permalink: permalink
-        related_stories: related_stories
-        clusters: clusters
       properties:
         canonical:
           description: The story canonical URL
@@ -13812,9 +14813,6 @@ components:
           type: string
       type: object
     StoryTranslation:
-      example:
-        body: body
-        title: title
       properties:
         body:
           description: Translation of body
@@ -13825,19 +14823,11 @@ components:
       type: object
     StoryTranslations:
       description: Translations of the story. Each language has it's own key and object
-      example:
-        en:
-          body: body
-          title: title
       properties:
         en:
           $ref: '#/components/schemas/StoryTranslation'
       type: object
     Summary:
-      example:
-        sentences:
-        - sentences
-        - sentences
       properties:
         sentences:
           description: An array of the suggested summary sentences
@@ -13959,12 +14949,6 @@ components:
           type: array
       type: object
     Warning:
-      example:
-        links:
-          docs: docs
-          about: about
-        detail: detail
-        id: id
       properties:
         detail:
           description: The detailed description of the warning.
