@@ -8,9 +8,9 @@ Name | Type | Description | Notes
 **Id** | **string** | The ID of the category | [optional] 
 **Label** | **string** | The label of the category | [optional] 
 **Level** | Pointer to **int32** | The level of the category | [optional] 
-**Links** | [**CategoryLinks**](CategoryLinks.md) |  | [optional] 
-**Score** | Pointer to **float64** | The score of the category | [optional] 
+**Score** | **float32** | The score of the category | [optional] 
 **Taxonomy** | [**CategoryTaxonomy**](CategoryTaxonomy.md) |  | [optional] 
+**Links** | [**CategoryLinks**](CategoryLinks.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

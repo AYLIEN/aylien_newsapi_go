@@ -9,12 +9,7 @@
  */
 
 package newsapi
-// Error struct for Error
-type Error struct {
-	Code string `json:"code,omitempty"`
-	Detail string `json:"detail,omitempty"`
+// DunsNumber struct for DunsNumber
+type DunsNumber struct {
 	Id string `json:"id,omitempty"`
-	Links ErrorLinks `json:"links,omitempty"`
-	Status string `json:"status,omitempty"`
-	Title string `json:"title,omitempty"`
 }

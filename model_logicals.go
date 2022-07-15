@@ -9,12 +9,9 @@
  */
 
 package newsapi
-// Error struct for Error
-type Error struct {
-	Code string `json:"code,omitempty"`
-	Detail string `json:"detail,omitempty"`
-	Id string `json:"id,omitempty"`
-	Links ErrorLinks `json:"links,omitempty"`
-	Status string `json:"status,omitempty"`
-	Title string `json:"title,omitempty"`
+// Logicals struct for Logicals
+type Logicals struct {
+	And []AnyOfLogicalsParameter `json:"$and,omitempty"`
+	Or []AnyOfLogicalsParameter `json:"$or,omitempty"`
+	Not []AnyOfLogicalsParameter `json:"$not,omitempty"`
 }

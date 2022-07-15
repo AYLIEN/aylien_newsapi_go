@@ -9,12 +9,14 @@
  */
 
 package newsapi
-// Error struct for Error
-type Error struct {
-	Code string `json:"code,omitempty"`
-	Detail string `json:"detail,omitempty"`
-	Id string `json:"id,omitempty"`
-	Links ErrorLinks `json:"links,omitempty"`
-	Status string `json:"status,omitempty"`
-	Title string `json:"title,omitempty"`
+// Query struct for Query
+type Query struct {
+	Eq OneOfstringnumber `json:"$eq,omitempty"`
+	Text OneOfstringnumber `json:"$text,omitempty"`
+	In []OneOfstringnumber `json:"$in,omitempty"`
+	Gt float32 `json:"$gt,omitempty"`
+	Gte float32 `json:"$gte,omitempty"`
+	Lt float32 `json:"$lt,omitempty"`
+	Lte float32 `json:"$lte,omitempty"`
+	Boost float32 `json:"$boost,omitempty"`
 }
