@@ -12,13 +12,15 @@ Name | Type | Description | Notes
 **Entities** | [**[]Entity**](Entity.md) | An array of entities | [optional] 
 **Hashtags** | **[]string** | An array of suggested Story hashtags | [optional] 
 **Id** | **int64** | ID of the story which is a unique identification | [optional] 
+**Industries** | [**[]Category**](Category.md) | An array of industries categories | [optional] 
 **Keywords** | **[]string** | Extracted keywords mentioned in the story title or body | [optional] 
 **Language** | **string** | Language of the story | [optional] 
+**LicenseType** | **int32** | License type of the story | [optional] 
 **Links** | [**StoryLinks**](StoryLinks.md) |  | [optional] 
 **Media** | [**[]Media**](Media.md) | An array of extracted media such as images and videos | [optional] 
 **ParagraphsCount** | **int32** | Paragraph count of the story body | [optional] 
-**PublishedDatetime** | [**time.Time**](time.Time.md) | Publication time of the story, if available, otherwise time of acquisition | [optional] 
 **PublishedAt** | [**time.Time**](time.Time.md) | Acquisition time of the story | [optional] 
+**PublishedDatetime** | [**time.Time**](time.Time.md) | Publication time of the story, if available, otherwise time of acquisition | [optional] 
 **SentencesCount** | **int32** | Sentence count of the story body | [optional] 
 **Sentiment** | [**Sentiments**](Sentiments.md) |  | [optional] 
 **SocialSharesCount** | [**ShareCounts**](ShareCounts.md) |  | [optional] 
@@ -27,8 +29,6 @@ Name | Type | Description | Notes
 **Title** | **string** | Title of the story | [optional] 
 **Translations** | [**StoryTranslations**](StoryTranslations.md) |  | [optional] 
 **WordsCount** | **int32** | Word count of the story body | [optional] 
-**LicenseType** | **int32** | License type of the story | [optional] 
-**Industries** | [**[]Category**](Category.md) | An array of industries categories | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
