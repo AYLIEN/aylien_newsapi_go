@@ -36,7 +36,7 @@ package main
 import (
 	"context"
 	"fmt"
-	newsapi "github.com/AYLIEN/aylien_newsapi_go/v5"
+	newsapi "github.com/AYLIEN/aylien_newsapi_go/v4"
 	"os"
 
 	"github.com/antihax/optional"
@@ -100,14 +100,12 @@ Class | Method | HTTP request | Description
  - [Cluster](docs/Cluster.md)
  - [Clusters](docs/Clusters.md)
  - [Coverages](docs/Coverages.md)
- - [DunsNumber](docs/DunsNumber.md)
  - [Entities](docs/Entities.md)
  - [Entity](docs/Entity.md)
  - [EntityLinks](docs/EntityLinks.md)
  - [Error](docs/Error.md)
  - [ErrorLinks](docs/ErrorLinks.md)
  - [Errors](docs/Errors.md)
- - [ExternalIds](docs/ExternalIds.md)
  - [HistogramInterval](docs/HistogramInterval.md)
  - [Histograms](docs/Histograms.md)
  - [Location](docs/Location.md)
