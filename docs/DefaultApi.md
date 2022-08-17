@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 ## AdvancedListStories
 
-> Stories AdvancedListStories(ctx, uNKNOWNBASETYPE, optional)
+> Stories AdvancedListStories(ctx, body, optional)
 
 List Stories
 
@@ -30,7 +30,7 @@ The stories endpoint is used to return stories based on the json query you set i
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**uNKNOWNBASETYPE** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)| /stories body schema to perform an advanced search with logical operators and nested objects.  | 
+**body** | **map[string]interface{}**| /stories body schema to perform an advanced search with logical operators and nested objects.  | 
  **optional** | ***AdvancedListStoriesOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
