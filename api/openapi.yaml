@@ -8,7 +8,7 @@ info:
     The AYLIEN News API is the most powerful way of sourcing, searching and syndicating analyzed and enriched news content. It is accessed by sending HTTP requests to our server, which returns information to your client.
   termsOfService: https://newsapi.aylien.com/tos
   title: AYLIEN News API
-  version: 5.1.1
+  version: 5.2.2
 servers:
 - url: https://api.aylien.com/news
 tags:
@@ -6979,7 +6979,13 @@ paths:
           type: integer
         style: form
       requestBody:
-        $ref: '#/components/requestBodies/StoriesBody'
+        content:
+          application/json:
+            schema:
+              type: object
+        description: |
+          /stories body schema to perform an advanced search with logical operators and nested objects.
+        required: true
       responses:
         "200":
           content:
@@ -9847,25 +9853,12 @@ components:
         nullable: true
         type: array
       style: form
-    links_permalink:
+    entities_body_surface_forms_text:
       description: |
-        This parameter is used to find stories based on their url.
+        This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
       explode: true
       in: query
-      name: links.permalink[]
-      required: false
-      schema:
-        items:
-          type: string
-        nullable: true
-        type: array
-      style: form
-    notlinks_permalink:
-      description: |
-        This parameter is used to exclude stories based on their url.
-      explode: true
-      in: query
-      name: '!links.permalink[]'
+      name: entities.body.surface_forms.text[]
       required: false
       schema:
         items:
@@ -9886,19 +9879,6 @@ components:
         nullable: true
         type: array
       style: form
-    entities_links_wikipedia:
-      description: |
-        This parameter is used to find stories based on the specified entities wikipedia URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
-      explode: true
-      in: query
-      name: entities.links.wikipedia[]
-      required: false
-      schema:
-        items:
-          type: string
-        nullable: true
-        type: array
-      style: form
     entities_links_wikidata:
       description: |
         This parameter is used to find stories based on the specified entities wikidata URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
@@ -9912,12 +9892,12 @@ components:
         nullable: true
         type: array
       style: form
-    entities_types:
+    entities_links_wikipedia:
       description: |
-        This parameter is used to find stories based on the specified entities `types`. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        This parameter is used to find stories based on the specified entities wikipedia URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
       explode: true
       in: query
-      name: entities.types[]
+      name: entities.links.wikipedia[]
       required: false
       schema:
         items:
@@ -9951,19 +9931,6 @@ components:
         nullable: true
         type: array
       style: form
-    entities_body_surface_forms_text:
-      description: |
-        This parameter is used to find stories based on the specified entities `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
-      explode: true
-      in: query
-      name: entities.body.surface_forms.text[]
-      required: false
-      schema:
-        items:
-          type: string
-        nullable: true
-        type: array
-      style: form
     entities_title_surface_forms_text:
       description: |
         This parameter is used to find stories based on the specified entities `surface_form` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
@@ -9974,6 +9941,19 @@ components:
       schema:
         nullable: true
         type: string
+      style: form
+    entities_types:
+      description: |
+        This parameter is used to find stories based on the specified entities `types`. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+      explode: true
+      in: query
+      name: entities.types[]
+      required: false
+      schema:
+        items:
+          type: string
+        nullable: true
+        type: array
       style: form
     id:
       description: |
@@ -10005,6 +9985,19 @@ components:
           - it
           - es
           - pt
+          type: string
+        nullable: true
+        type: array
+      style: form
+    links_permalink:
+      description: |
+        This parameter is used to find stories based on their url.
+      explode: true
+      in: query
+      name: links.permalink[]
+      required: false
+      schema:
+        items:
           type: string
         nullable: true
         type: array
@@ -10237,12 +10230,12 @@ components:
         nullable: true
         type: array
       style: form
-    notentities_id:
+    notentities_body_surface_forms_text:
       description: |
-        This parameter is used to exclude stories based on the specified entity's `id`. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        This parameter is used to exclude stories based on the specified entity's `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
       explode: true
       in: query
-      name: '!entities.id[]'
+      name: '!entities.body.surface_forms.text[]'
       required: false
       schema:
         items:
@@ -10250,12 +10243,12 @@ components:
         nullable: true
         type: array
       style: form
-    notentities_links_wikipedia:
+    notentities_id:
       description: |
-        This parameter is used to exclude stories based on the specified entity's Wikipedia URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        This parameter is used to exclude stories based on the specified entity's `id`. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
       explode: true
       in: query
-      name: '!entities.links.wikipedia[]'
+      name: '!entities.id[]'
       required: false
       schema:
         items:
@@ -10276,12 +10269,12 @@ components:
         nullable: true
         type: array
       style: form
-    notentities_types:
+    notentities_links_wikipedia:
       description: |
-        This parameter is used to exclude stories based on the specified entity's `types`. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        This parameter is used to exclude stories based on the specified entity's Wikipedia URL. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
       explode: true
       in: query
-      name: '!entities.types[]'
+      name: '!entities.links.wikipedia[]'
       required: false
       schema:
         items:
@@ -10315,12 +10308,12 @@ components:
         nullable: true
         type: array
       style: form
-    notentities_body_surface_forms_text:
+    notentities_title_surface_forms_text:
       description: |
-        This parameter is used to exclude stories based on the specified entity's `surface_form` in the body of stories. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        This parameter is used to exclude stories based on the specified entity's `surface_form` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
       explode: true
       in: query
-      name: '!entities.body.surface_forms.text[]'
+      name: '!entities.title.surface_forms.text[]'
       required: false
       schema:
         items:
@@ -10328,12 +10321,12 @@ components:
         nullable: true
         type: array
       style: form
-    notentities_title_surface_forms_text:
+    notentities_types:
       description: |
-        This parameter is used to exclude stories based on the specified entity's `surface_form` in story titles. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
+        This parameter is used to exclude stories based on the specified entity's `types`. You can read more about working with entities [here](https://newsapi.aylien.com/docs/working-with-entities).
       explode: true
       in: query
-      name: '!entities.title.surface_forms.text[]'
+      name: '!entities.types[]'
       required: false
       schema:
         items:
@@ -10371,6 +10364,19 @@ components:
           - it
           - es
           - pt
+          type: string
+        nullable: true
+        type: array
+      style: form
+    notlinks_permalink:
+      description: |
+        This parameter is used to exclude stories based on their url.
+      explode: true
+      in: query
+      name: '!links.permalink[]'
+      required: false
+      schema:
+        items:
           type: string
         nullable: true
         type: array
@@ -10596,6 +10602,17 @@ components:
       explode: true
       in: query
       name: published_at.start
+      required: false
+      schema:
+        nullable: true
+        type: string
+      style: form
+    query:
+      description: |
+        This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string.
+      explode: true
+      in: query
+      name: query
       required: false
       schema:
         nullable: true
@@ -11096,44 +11113,6 @@ components:
         nullable: true
         type: string
       style: form
-    query:
-      description: |
-        This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string.
-      explode: true
-      in: query
-      name: query
-      required: false
-      schema:
-        nullable: true
-        type: string
-      style: form
-  requestBodies:
-    StoriesBody:
-      content:
-        application/json:
-          example:
-            $and:
-            - $or:
-              - body:
-                  $text: Tim Cook
-              - social.shares.count.reddit.max:
-                  $gte: 5000
-                  $boost: 5
-            - entity:
-                $and:
-                - name:
-                    $text: Apple
-                    $boost: 2
-                - $not:
-                  - type:
-                      $eq: Fruit
-          schema:
-            oneOf:
-            - $ref: '#/components/schemas/Logicals'
-            - $ref: '#/components/schemas/Parameter'
-      description: |
-        /stories body schema to perform an advanced search with logical operators and nested objects.
-      required: true
   responses:
     autocompletes:
       content:
@@ -11428,6 +11407,26 @@ components:
             type: integer
           style: simple
   schemas:
+    AggregatedSentiment:
+      description: The aggregation of sentiments
+      example:
+        negative: 6
+        neutral: 1
+        positive: 5
+      properties:
+        negative:
+          description: Negative sentiments count
+          format: int32
+          type: integer
+        neutral:
+          description: Neutral sentiments count
+          format: int32
+          type: integer
+        positive:
+          description: Positive sentiments count
+          format: int32
+          type: integer
+      type: object
     Author:
       example:
         avatar_url: avatar_url
@@ -11471,6 +11470,67 @@ components:
             $ref: '#/components/schemas/Autocomplete'
           type: array
       type: object
+    Category:
+      example:
+        score: 0.14658129805029452
+        level: 6
+        confident: true
+        links:
+          parent: parent
+          self: self
+          parents:
+          - parents
+          - parents
+        id: id
+        label: label
+      properties:
+        confident:
+          description: It defines whether the extracted category is confident or not
+          nullable: true
+          type: boolean
+        id:
+          description: The ID of the category
+          type: string
+        label:
+          description: The label of the category
+          type: string
+        level:
+          description: The level of the category
+          format: int32
+          nullable: true
+          type: integer
+        links:
+          $ref: '#/components/schemas/CategoryLinks'
+        score:
+          description: The score of the category
+          format: bigdecimal
+          maximum: 1
+          minimum: 0
+          type: number
+        taxonomy:
+          $ref: '#/components/schemas/CategoryTaxonomy'
+      type: object
+    CategoryLinks:
+      example:
+        parent: parent
+        self: self
+        parents:
+        - parents
+        - parents
+      properties:
+        parent:
+          description: A URL pointing to the parent category
+          nullable: true
+          type: string
+        parents:
+          description: A collection of URLs pointing to the category parents
+          items:
+            type: string
+          nullable: true
+          type: array
+        self:
+          description: A URL pointing to the category
+          type: string
     CategoryTaxonomy:
       description: The taxonomy of the category
       enum:
@@ -11567,6 +11627,13 @@ components:
           description: The next page cursor
           type: string
       type: object
+    DunsNumber:
+      example:
+        id: id
+      properties:
+        id:
+          type: string
+      type: object
     Entity:
       example:
         types:
@@ -11583,7 +11650,6 @@ components:
         - stock_tickers
         - stock_tickers
         id: id
-        overall_prominence: 0.7061401241503109
         body:
           sentiment:
             confidence: 0.23021358869347652
@@ -11614,6 +11680,7 @@ components:
                 end: 1
             text: text
             frequency: 0
+        overall_prominence: 0.4145608029883936
         title:
           sentiment:
             confidence: 0.23021358869347652
@@ -11649,61 +11716,41 @@ components:
           - id: id
           - id: id
       properties:
+        body:
+          $ref: '#/components/schemas/EntityInText'
+        external_ids:
+          $ref: '#/components/schemas/ExternalIds'
         id:
           description: The unique ID of the entity
           type: string
         links:
           $ref: '#/components/schemas/EntityLinks'
-        stock_tickers:
-          description: The stock tickers of the entity (might be empty)
-          items:
-            type: string
-          type: array
-        types:
-          description: An array of the entity types
-          items:
-            description: An entity type
-            type: string
-          type: array
-        overall_sentiment:
-          $ref: '#/components/schemas/EntitySentiment'
+        overall_frequency:
+          description: Amount of entity surface form mentions in the article
+          format: int32
+          minimum: 0
+          type: integer
         overall_prominence:
           description: Describes how relevant an entity is to the article
           format: bigdecimal
           maximum: 1
           minimum: 0
           type: number
-        overall_frequency:
-          description: Amount of entity surface form mentions in the article
-          format: int32
-          minimum: 0
-          type: integer
-        body:
-          $ref: '#/components/schemas/EntityInText'
+        overall_sentiment:
+          $ref: '#/components/schemas/EntitySentiment'
+        stock_tickers:
+          description: The stock tickers of the entity (might be empty)
+          items:
+            type: string
+          type: array
         title:
           $ref: '#/components/schemas/EntityInText'
-        external_ids:
-          $ref: '#/components/schemas/ExternalIds'
-      type: object
-    ExternalIds:
-      description: External Ids of an entity
-      example:
-        duns:
-        - id: id
-        - id: id
-      properties:
-        duns:
-          description: DUNS number(s) of the entity
+        types:
+          description: An array of the entity types
           items:
-            $ref: '#/components/schemas/DunsNumber'
+            description: An entity type
+            type: string
           type: array
-      type: object
-    DunsNumber:
-      example:
-        id: id
-      properties:
-        id:
-          type: string
       type: object
     EntityInText:
       example:
@@ -11744,35 +11791,21 @@ components:
             $ref: '#/components/schemas/EntitySurfaceForm'
           type: array
       type: object
-    EntitySurfaceForm:
+    EntityLinks:
       example:
-        mentions:
-        - sentiment:
-            confidence: 0.23021358869347652
-          index:
-            start: 0
-            end: 1
-        - sentiment:
-            confidence: 0.23021358869347652
-          index:
-            start: 0
-            end: 1
-        text: text
-        frequency: 0
+        dbpedia: dbpedia
+        wikipedia: wikipedia
+        wikidata: wikidata
       properties:
-        text:
-          description: The entity text
+        dbpedia:
+          description: A dbpedia resource URL (deprecated)
           type: string
-        frequency:
-          description: Amount of entity surface form mentions in the article
-          format: int32
-          minimum: 0
-          type: integer
-        mentions:
-          description: Mentions of the entity text
-          items:
-            $ref: '#/components/schemas/EntityMention'
-          type: array
+        wikidata:
+          description: A wikidata resource URL
+          type: string
+        wikipedia:
+          description: A wikipedia resource URL
+          type: string
       type: object
     EntityMention:
       example:
@@ -11792,50 +11825,64 @@ components:
         start: 0
         end: 1
       properties:
-        start:
-          description: Start index of a single entity mention in the text (counting
-            from 0)
-          format: int32
-          minimum: 0
-          type: integer
         end:
           description: End index of a single entity mention in the text (counting
             from 0)
           format: int32
           minimum: 1
           type: integer
+        start:
+          description: Start index of a single entity mention in the text (counting
+            from 0)
+          format: int32
+          minimum: 0
+          type: integer
       required:
       - end
       - start
-      type: object
-    EntityLinks:
-      example:
-        dbpedia: dbpedia
-        wikipedia: wikipedia
-        wikidata: wikidata
-      properties:
-        dbpedia:
-          description: A dbpedia resource URL (deprecated)
-          type: string
-        wikipedia:
-          description: A wikipedia resource URL
-          type: string
-        wikidata:
-          description: A wikidata resource URL
-          type: string
       type: object
     EntitySentiment:
       example:
         confidence: 0.23021358869347652
       properties:
-        polarity:
-          $ref: '#/components/schemas/SentimentPolarity'
         confidence:
           description: Polarity confidence of the sentiment
           format: double
           maximum: 1
           minimum: 0
           type: number
+        polarity:
+          $ref: '#/components/schemas/SentimentPolarity'
+      type: object
+    EntitySurfaceForm:
+      example:
+        mentions:
+        - sentiment:
+            confidence: 0.23021358869347652
+          index:
+            start: 0
+            end: 1
+        - sentiment:
+            confidence: 0.23021358869347652
+          index:
+            start: 0
+            end: 1
+        text: text
+        frequency: 0
+      properties:
+        frequency:
+          description: Amount of entity surface form mentions in the article
+          format: int32
+          minimum: 0
+          type: integer
+        mentions:
+          description: Mentions of the entity text
+          items:
+            $ref: '#/components/schemas/EntityMention'
+          type: array
+        text:
+          description: The entity text
+          type: string
       type: object
     Error:
       properties:
@@ -11848,7 +11895,7 @@ components:
         links:
           $ref: '#/components/schemas/ErrorLinks'
         status:
-          type: string
+          type: number
         title:
           type: string
       type: object
@@ -11867,6 +11914,19 @@ components:
         errors:
           items:
             $ref: '#/components/schemas/Error'
+          type: array
+      type: object
+    ExternalIds:
+      description: External Ids of an entity
+      example:
+        duns:
+        - id: id
+        - id: id
+      properties:
+        duns:
+          description: DUNS number(s) of the entity
+          items:
+            $ref: '#/components/schemas/DunsNumber'
           type: array
       type: object
     HistogramInterval:
@@ -11942,29 +12002,9 @@ components:
           description: The state of the location
           type: string
       type: object
-    MediaFormat:
-      description: The format of media
-      enum:
-      - BMP
-      - GIF
-      - JPEG
-      - PNG
-      - TIFF
-      - PSD
-      - ICO
-      - CUR
-      - WEBP
-      - SVG
-      type: string
-    MediaType:
-      description: The type of media
-      enum:
-      - image
-      - video
-      type: string
     Media:
       example:
-        width: 1
+        width: 6
         content_length: 1
         url: url
         height: 1
@@ -11989,11 +12029,31 @@ components:
           format: int32
           type: integer
       type: object
+    MediaFormat:
+      description: The format of media
+      enum:
+      - BMP
+      - GIF
+      - JPEG
+      - PNG
+      - TIFF
+      - PSD
+      - ICO
+      - CUR
+      - WEBP
+      - SVG
+      type: string
+    MediaType:
+      description: The type of media
+      enum:
+      - image
+      - video
+      type: string
     Rank:
       example:
         country: country
         fetched_at: 2000-01-23T04:56:07.000+00:00
-        rank: 9
+        rank: 6
       properties:
         country:
           description: The country code which the rank is in it
@@ -12012,10 +12072,10 @@ components:
         alexa:
         - country: country
           fetched_at: 2000-01-23T04:56:07.000+00:00
-          rank: 9
+          rank: 6
         - country: country
           fetched_at: 2000-01-23T04:56:07.000+00:00
-          rank: 9
+          rank: 6
       properties:
         alexa:
           items:
@@ -12033,23 +12093,23 @@ components:
         related_stories:
         - sentiment:
             body:
-              score: 0.11730742509559433
+              score: 0.4965218492984954
             title:
-              score: 0.11730742509559433
+              score: 0.4965218492984954
           hashtags:
           - hashtags
           - hashtags
           keywords:
           - keywords
           - keywords
-          paragraphs_count: 6
+          paragraphs_count: 7
           language: language
           media:
-          - width: 1
+          - width: 6
             content_length: 1
             url: url
             height: 1
-          - width: 1
+          - width: 6
             content_length: 1
             url: url
             height: 1
@@ -12060,10 +12120,10 @@ components:
               alexa:
               - country: country
                 fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 9
+                rank: 6
               - country: country
                 fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 9
+                rank: 6
             logo_url: logo_url
             domain: domain
             name: name
@@ -12075,7 +12135,7 @@ components:
             - country: country
               city: city
               state: state
-            id: 5
+            id: 9
             scopes:
             - country: country
               city: city
@@ -12128,12 +12188,12 @@ components:
             sentences:
             - sentences
             - sentences
-          sentences_count: 7
+          sentences_count: 1
           author:
             avatar_url: avatar_url
             name: name
             id: 0
-          license_type: 8
+          license_type: 1
           entities:
           - types:
             - types
@@ -12149,7 +12209,6 @@ components:
             - stock_tickers
             - stock_tickers
             id: id
-            overall_prominence: 0.7061401241503109
             body:
               sentiment:
                 confidence: 0.23021358869347652
@@ -12180,6 +12239,7 @@ components:
                     end: 1
                 text: text
                 frequency: 0
+            overall_prominence: 0.4145608029883936
             title:
               sentiment:
                 confidence: 0.23021358869347652
@@ -12228,7 +12288,6 @@ components:
             - stock_tickers
             - stock_tickers
             id: id
-            overall_prominence: 0.7061401241503109
             body:
               sentiment:
                 confidence: 0.23021358869347652
@@ -12259,6 +12318,7 @@ components:
                     end: 1
                 text: text
                 frequency: 0
+            overall_prominence: 0.4145608029883936
             title:
               sentiment:
                 confidence: 0.23021358869347652
@@ -12320,44 +12380,44 @@ components:
           social_shares_count:
             facebook:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             reddit:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             google_plus:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             linkedin:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
-          words_count: 6
+              count: 5
+          words_count: 8
         - sentiment:
             body:
-              score: 0.11730742509559433
+              score: 0.4965218492984954
             title:
-              score: 0.11730742509559433
+              score: 0.4965218492984954
           hashtags:
           - hashtags
           - hashtags
           keywords:
           - keywords
           - keywords
-          paragraphs_count: 6
+          paragraphs_count: 7
           language: language
           media:
-          - width: 1
+          - width: 6
             content_length: 1
             url: url
             height: 1
-          - width: 1
+          - width: 6
             content_length: 1
             url: url
             height: 1
@@ -12368,10 +12428,10 @@ components:
               alexa:
               - country: country
                 fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 9
+                rank: 6
               - country: country
                 fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 9
+                rank: 6
             logo_url: logo_url
             domain: domain
             name: name
@@ -12383,7 +12443,7 @@ components:
             - country: country
               city: city
               state: state
-            id: 5
+            id: 9
             scopes:
             - country: country
               city: city
@@ -12436,12 +12496,12 @@ components:
             sentences:
             - sentences
             - sentences
-          sentences_count: 7
+          sentences_count: 1
           author:
             avatar_url: avatar_url
             name: name
             id: 0
-          license_type: 8
+          license_type: 1
           entities:
           - types:
             - types
@@ -12457,7 +12517,6 @@ components:
             - stock_tickers
             - stock_tickers
             id: id
-            overall_prominence: 0.7061401241503109
             body:
               sentiment:
                 confidence: 0.23021358869347652
@@ -12488,6 +12547,7 @@ components:
                     end: 1
                 text: text
                 frequency: 0
+            overall_prominence: 0.4145608029883936
             title:
               sentiment:
                 confidence: 0.23021358869347652
@@ -12536,7 +12596,6 @@ components:
             - stock_tickers
             - stock_tickers
             id: id
-            overall_prominence: 0.7061401241503109
             body:
               sentiment:
                 confidence: 0.23021358869347652
@@ -12567,6 +12626,7 @@ components:
                     end: 1
                 text: text
                 frequency: 0
+            overall_prominence: 0.4145608029883936
             title:
               sentiment:
                 confidence: 0.23021358869347652
@@ -12628,27 +12688,35 @@ components:
           social_shares_count:
             facebook:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             reddit:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             google_plus:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             linkedin:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
-          words_count: 6
+              count: 5
+          words_count: 8
         story_language: story_language
       properties:
+        published_at.end:
+          description: The end of a period in which searched stories were published
+          format: date-time
+          type: string
+        published_at.start:
+          description: The start of a period in which searched stories were published
+          format: date-time
+          type: string
         related_stories:
           description: An array of related stories for the input story
           items:
@@ -12662,14 +12730,6 @@ components:
           type: string
         story_title:
           description: The input story title
-          type: string
-        published_at.end:
-          description: The end of a period in which searched stories were published
-          format: date-time
-          type: string
-        published_at.start:
-          description: The start of a period in which searched stories were published
-          format: date-time
           type: string
       type: object
     RepresentativeStory:
@@ -12694,13 +12754,6 @@ components:
           description: Title of the story
           type: string
       type: object
-    ScopeLevel:
-      description: The scope by level
-      enum:
-      - international
-      - national
-      - local
-      type: string
     Scope:
       example:
         country: country
@@ -12720,16 +12773,16 @@ components:
           description: The scope by state
           type: string
       type: object
-    SentimentPolarity:
-      description: Polarity of the sentiment
+    ScopeLevel:
+      description: The scope by level
       enum:
-      - positive
-      - neutral
-      - negative
+      - international
+      - national
+      - local
       type: string
     Sentiment:
       example:
-        score: 0.11730742509559433
+        score: 0.4965218492984954
       properties:
         polarity:
           $ref: '#/components/schemas/SentimentPolarity'
@@ -12740,12 +12793,19 @@ components:
           minimum: 0
           type: number
       type: object
+    SentimentPolarity:
+      description: Polarity of the sentiment
+      enum:
+      - positive
+      - neutral
+      - negative
+      type: string
     Sentiments:
       example:
         body:
-          score: 0.11730742509559433
+          score: 0.4965218492984954
         title:
-          score: 0.11730742509559433
+          score: 0.4965218492984954
       properties:
         body:
           $ref: '#/components/schemas/Sentiment'
@@ -12755,7 +12815,7 @@ components:
     ShareCount:
       example:
         fetched_at: 2000-01-23T04:56:07.000+00:00
-        count: 4
+        count: 5
       properties:
         count:
           description: The number of shares
@@ -12770,24 +12830,24 @@ components:
       example:
         facebook:
         - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 4
+          count: 5
         - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 4
+          count: 5
         reddit:
         - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 4
+          count: 5
         - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 4
+          count: 5
         google_plus:
         - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 4
+          count: 5
         - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 4
+          count: 5
         linkedin:
         - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 4
+          count: 5
         - fetched_at: 2000-01-23T04:56:07.000+00:00
-          count: 4
+          count: 5
       properties:
         facebook:
           description: Facebook shares count
@@ -12818,10 +12878,10 @@ components:
           alexa:
           - country: country
             fetched_at: 2000-01-23T04:56:07.000+00:00
-            rank: 9
+            rank: 6
           - country: country
             fetched_at: 2000-01-23T04:56:07.000+00:00
-            rank: 9
+            rank: 6
         logo_url: logo_url
         domain: domain
         name: name
@@ -12833,7 +12893,7 @@ components:
         - country: country
           city: city
           state: state
-        id: 5
+        id: 9
         scopes:
         - country: country
           city: city
@@ -12893,23 +12953,23 @@ components:
         stories:
         - sentiment:
             body:
-              score: 0.11730742509559433
+              score: 0.4965218492984954
             title:
-              score: 0.11730742509559433
+              score: 0.4965218492984954
           hashtags:
           - hashtags
           - hashtags
           keywords:
           - keywords
           - keywords
-          paragraphs_count: 6
+          paragraphs_count: 7
           language: language
           media:
-          - width: 1
+          - width: 6
             content_length: 1
             url: url
             height: 1
-          - width: 1
+          - width: 6
             content_length: 1
             url: url
             height: 1
@@ -12920,10 +12980,10 @@ components:
               alexa:
               - country: country
                 fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 9
+                rank: 6
               - country: country
                 fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 9
+                rank: 6
             logo_url: logo_url
             domain: domain
             name: name
@@ -12935,7 +12995,7 @@ components:
             - country: country
               city: city
               state: state
-            id: 5
+            id: 9
             scopes:
             - country: country
               city: city
@@ -12988,12 +13048,12 @@ components:
             sentences:
             - sentences
             - sentences
-          sentences_count: 7
+          sentences_count: 1
           author:
             avatar_url: avatar_url
             name: name
             id: 0
-          license_type: 8
+          license_type: 1
           entities:
           - types:
             - types
@@ -13009,7 +13069,6 @@ components:
             - stock_tickers
             - stock_tickers
             id: id
-            overall_prominence: 0.7061401241503109
             body:
               sentiment:
                 confidence: 0.23021358869347652
@@ -13040,6 +13099,7 @@ components:
                     end: 1
                 text: text
                 frequency: 0
+            overall_prominence: 0.4145608029883936
             title:
               sentiment:
                 confidence: 0.23021358869347652
@@ -13088,7 +13148,6 @@ components:
             - stock_tickers
             - stock_tickers
             id: id
-            overall_prominence: 0.7061401241503109
             body:
               sentiment:
                 confidence: 0.23021358869347652
@@ -13119,6 +13178,7 @@ components:
                     end: 1
                 text: text
                 frequency: 0
+            overall_prominence: 0.4145608029883936
             title:
               sentiment:
                 confidence: 0.23021358869347652
@@ -13180,44 +13240,44 @@ components:
           social_shares_count:
             facebook:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             reddit:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             google_plus:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             linkedin:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
-          words_count: 6
+              count: 5
+          words_count: 8
         - sentiment:
             body:
-              score: 0.11730742509559433
+              score: 0.4965218492984954
             title:
-              score: 0.11730742509559433
+              score: 0.4965218492984954
           hashtags:
           - hashtags
           - hashtags
           keywords:
           - keywords
           - keywords
-          paragraphs_count: 6
+          paragraphs_count: 7
           language: language
           media:
-          - width: 1
+          - width: 6
             content_length: 1
             url: url
             height: 1
-          - width: 1
+          - width: 6
             content_length: 1
             url: url
             height: 1
@@ -13228,10 +13288,10 @@ components:
               alexa:
               - country: country
                 fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 9
+                rank: 6
               - country: country
                 fetched_at: 2000-01-23T04:56:07.000+00:00
-                rank: 9
+                rank: 6
             logo_url: logo_url
             domain: domain
             name: name
@@ -13243,7 +13303,7 @@ components:
             - country: country
               city: city
               state: state
-            id: 5
+            id: 9
             scopes:
             - country: country
               city: city
@@ -13296,12 +13356,12 @@ components:
             sentences:
             - sentences
             - sentences
-          sentences_count: 7
+          sentences_count: 1
           author:
             avatar_url: avatar_url
             name: name
             id: 0
-          license_type: 8
+          license_type: 1
           entities:
           - types:
             - types
@@ -13317,7 +13377,6 @@ components:
             - stock_tickers
             - stock_tickers
             id: id
-            overall_prominence: 0.7061401241503109
             body:
               sentiment:
                 confidence: 0.23021358869347652
@@ -13348,6 +13407,7 @@ components:
                     end: 1
                 text: text
                 frequency: 0
+            overall_prominence: 0.4145608029883936
             title:
               sentiment:
                 confidence: 0.23021358869347652
@@ -13396,7 +13456,6 @@ components:
             - stock_tickers
             - stock_tickers
             id: id
-            overall_prominence: 0.7061401241503109
             body:
               sentiment:
                 confidence: 0.23021358869347652
@@ -13427,6 +13486,7 @@ components:
                     end: 1
                 text: text
                 frequency: 0
+            overall_prominence: 0.4145608029883936
             title:
               sentiment:
                 confidence: 0.23021358869347652
@@ -13488,47 +13548,42 @@ components:
           social_shares_count:
             facebook:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             reddit:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             google_plus:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             linkedin:
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
+              count: 5
             - fetched_at: 2000-01-23T04:56:07.000+00:00
-              count: 4
-          words_count: 6
+              count: 5
+          words_count: 8
         warnings:
         - links:
             docs: docs
             about: about
-          id: id
           detail: detail
+          id: id
         - links:
             docs: docs
             about: about
-          id: id
           detail: detail
+          id: id
         published_at.end: 2000-01-23T04:56:07.000+00:00
         next_page_cursor: next_page_cursor
       properties:
         next_page_cursor:
           description: The next page cursor
           type: string
-        stories:
-          description: An array of stories
-          items:
-            $ref: '#/components/schemas/Story'
-          type: array
         published_at.end:
           description: The end of a period in which searched stories were published
           format: date-time
@@ -13537,6 +13592,11 @@ components:
           description: The start of a period in which searched stories were published
           format: date-time
           type: string
+        stories:
+          description: An array of stories
+          items:
+            $ref: '#/components/schemas/Story'
+          type: array
         warnings:
           description: Notifies about possible issues that occurred when searching
             for stories
@@ -13548,23 +13608,23 @@ components:
       example:
         sentiment:
           body:
-            score: 0.11730742509559433
+            score: 0.4965218492984954
           title:
-            score: 0.11730742509559433
+            score: 0.4965218492984954
         hashtags:
         - hashtags
         - hashtags
         keywords:
         - keywords
         - keywords
-        paragraphs_count: 6
+        paragraphs_count: 7
         language: language
         media:
-        - width: 1
+        - width: 6
           content_length: 1
           url: url
           height: 1
-        - width: 1
+        - width: 6
           content_length: 1
           url: url
           height: 1
@@ -13575,10 +13635,10 @@ components:
             alexa:
             - country: country
               fetched_at: 2000-01-23T04:56:07.000+00:00
-              rank: 9
+              rank: 6
             - country: country
               fetched_at: 2000-01-23T04:56:07.000+00:00
-              rank: 9
+              rank: 6
           logo_url: logo_url
           domain: domain
           name: name
@@ -13590,7 +13650,7 @@ components:
           - country: country
             city: city
             state: state
-          id: 5
+          id: 9
           scopes:
           - country: country
             city: city
@@ -13643,12 +13703,12 @@ components:
           sentences:
           - sentences
           - sentences
-        sentences_count: 7
+        sentences_count: 1
         author:
           avatar_url: avatar_url
           name: name
           id: 0
-        license_type: 8
+        license_type: 1
         entities:
         - types:
           - types
@@ -13664,7 +13724,6 @@ components:
           - stock_tickers
           - stock_tickers
           id: id
-          overall_prominence: 0.7061401241503109
           body:
             sentiment:
               confidence: 0.23021358869347652
@@ -13695,6 +13754,7 @@ components:
                   end: 1
               text: text
               frequency: 0
+          overall_prominence: 0.4145608029883936
           title:
             sentiment:
               confidence: 0.23021358869347652
@@ -13743,7 +13803,6 @@ components:
           - stock_tickers
           - stock_tickers
           id: id
-          overall_prominence: 0.7061401241503109
           body:
             sentiment:
               confidence: 0.23021358869347652
@@ -13774,6 +13833,7 @@ components:
                   end: 1
               text: text
               frequency: 0
+          overall_prominence: 0.4145608029883936
           title:
             sentiment:
               confidence: 0.23021358869347652
@@ -13835,25 +13895,25 @@ components:
         social_shares_count:
           facebook:
           - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 4
+            count: 5
           - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 4
+            count: 5
           reddit:
           - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 4
+            count: 5
           - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 4
+            count: 5
           google_plus:
           - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 4
+            count: 5
           - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 4
+            count: 5
           linkedin:
           - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 4
+            count: 5
           - fetched_at: 2000-01-23T04:56:07.000+00:00
-            count: 4
-        words_count: 6
+            count: 5
+        words_count: 8
       properties:
         author:
           $ref: '#/components/schemas/Author'
@@ -13889,6 +13949,11 @@ components:
           description: ID of the story which is a unique identification
           format: int64
           type: integer
+        industries:
+          description: An array of industries categories
+          items:
+            $ref: '#/components/schemas/Category'
+          type: array
         keywords:
           description: Extracted keywords mentioned in the story title or body
           items:
@@ -13897,6 +13962,10 @@ components:
         language:
           description: Language of the story
           type: string
+        license_type:
+          description: License type of the story
+          format: int32
+          type: integer
         links:
           $ref: '#/components/schemas/StoryLinks'
         media:
@@ -13908,13 +13977,13 @@ components:
           description: Paragraph count of the story body
           format: int32
           type: integer
+        published_at:
+          description: Acquisition time of the story
+          format: date-time
+          type: string
         published_datetime:
           description: Publication time of the story, if available, otherwise time
             of acquisition
-          format: date-time
-          type: string
-        published_at:
-          description: Acquisition time of the story
           format: date-time
           type: string
         sentences_count:
@@ -13938,15 +14007,6 @@ components:
           description: Word count of the story body
           format: int32
           type: integer
-        license_type:
-          description: License type of the story
-          format: int32
-          type: integer
-        industries:
-          description: An array of industries categories
-          items:
-            $ref: '#/components/schemas/Category'
-          type: array
       type: object
     StoryCluster:
       properties:
@@ -13984,25 +14044,15 @@ components:
         canonical:
           description: The story canonical URL
           type: string
+        clusters:
+          description: The clusters endpoint URL for this story
+          type: string
         permalink:
           description: The story permalink URL
           type: string
         related_stories:
           description: The related stories URL
           type: string
-        clusters:
-          description: The clusters endpoint URL for this story
-          type: string
-      type: object
-    StoryTranslations:
-      description: Translations of the story. Each language has it's own key and object
-      example:
-        en:
-          body: body
-          title: title
-      properties:
-        en:
-          $ref: '#/components/schemas/StoryTranslation'
       type: object
     StoryTranslation:
       example:
@@ -14015,6 +14065,16 @@ components:
         title:
           description: Translation of title
           type: string
+      type: object
+    StoryTranslations:
+      description: Translations of the story. Each language has it's own key and object
+      example:
+        en:
+          body: body
+          title: title
+      properties:
+        en:
+          $ref: '#/components/schemas/StoryTranslation'
       type: object
     Summary:
       example:
@@ -14029,73 +14089,12 @@ components:
             type: string
           type: array
       type: object
-    Category:
-      example:
-        score: 0.14658129805029452
-        level: 6
-        confident: true
-        links:
-          parent: parent
-          self: self
-          parents:
-          - parents
-          - parents
-        id: id
-        label: label
-      properties:
-        confident:
-          description: It defines whether the extracted category is confident or not
-          nullable: true
-          type: boolean
-        id:
-          description: The ID of the category
-          type: string
-        label:
-          description: The label of the category
-          type: string
-        level:
-          description: The level of the category
-          format: int32
-          nullable: true
-          type: integer
-        score:
-          description: The score of the category
-          format: bigdecimal
-          maximum: 1
-          minimum: 0
-          type: number
-        taxonomy:
-          $ref: '#/components/schemas/CategoryTaxonomy'
-        links:
-          $ref: '#/components/schemas/CategoryLinks'
-      type: object
-    CategoryLinks:
-      example:
-        parent: parent
-        self: self
-        parents:
-        - parents
-        - parents
-      properties:
-        parent:
-          description: A URL pointing to the parent category
-          nullable: true
-          type: string
-        parents:
-          description: A collection of URLs pointing to the category parents
-          items:
-            type: string
-          nullable: true
-          type: array
-        self:
-          description: A URL pointing to the category
-          type: string
     TimeSeries:
       example:
         sentiment:
-          negative: 5
+          negative: 6
           neutral: 1
-          positive: 6
+          positive: 5
         count: 0
         published_at: 2000-01-23T04:56:07.000+00:00
       properties:
@@ -14116,15 +14115,15 @@ components:
         published_at.start: 2000-01-23T04:56:07.000+00:00
         time_series:
         - sentiment:
-            negative: 5
+            negative: 6
             neutral: 1
-            positive: 6
+            positive: 5
           count: 0
           published_at: 2000-01-23T04:56:07.000+00:00
         - sentiment:
-            negative: 5
+            negative: 6
             neutral: 1
-            positive: 6
+            positive: 5
           count: 0
           published_at: 2000-01-23T04:56:07.000+00:00
         published_at.end: 2000-01-23T04:56:07.000+00:00
@@ -14147,32 +14146,12 @@ components:
             $ref: '#/components/schemas/TimeSeries'
           type: array
       type: object
-    AggregatedSentiment:
-      description: The aggregation of sentiments
-      example:
-        negative: 5
-        neutral: 1
-        positive: 6
-      properties:
-        positive:
-          description: Positive sentiments count
-          format: int32
-          type: integer
-        neutral:
-          description: Neutral sentiments count
-          format: int32
-          type: integer
-        negative:
-          description: Negative sentiments count
-          format: int32
-          type: integer
-      type: object
     Trend:
       example:
         sentiment:
-          negative: 5
+          negative: 6
           neutral: 1
-          positive: 6
+          positive: 5
         count: 0
         value: value
       properties:
@@ -14180,11 +14159,11 @@ components:
           description: The count of the trend
           format: int32
           type: integer
+        sentiment:
+          $ref: '#/components/schemas/AggregatedSentiment'
         value:
           description: The value of the trend
           type: string
-        sentiment:
-          $ref: '#/components/schemas/AggregatedSentiment'
       type: object
     Trends:
       example:
@@ -14193,26 +14172,21 @@ components:
         published_at.end: 2000-01-23T04:56:07.000+00:00
         trends:
         - sentiment:
-            negative: 5
+            negative: 6
             neutral: 1
-            positive: 6
+            positive: 5
           count: 0
           value: value
         - sentiment:
-            negative: 5
+            negative: 6
             neutral: 1
-            positive: 6
+            positive: 5
           count: 0
           value: value
       properties:
         field:
           description: The field of trends
           type: string
-        trends:
-          description: An array of trends
-          items:
-            $ref: '#/components/schemas/Trend'
-          type: array
         published_at.end:
           description: The end of a period in which searched stories were published
           format: date-time
@@ -14221,231 +14195,28 @@ components:
           description: The start of a period in which searched stories were published
           format: date-time
           type: string
+        trends:
+          description: An array of trends
+          items:
+            $ref: '#/components/schemas/Trend'
+          type: array
       type: object
     Warning:
       example:
         links:
           docs: docs
           about: about
-        id: id
         detail: detail
+        id: id
       properties:
+        detail:
+          description: The detailed description of the warning.
+          type: string
         id:
           description: The identfier of the warning, represents its origin.
           type: string
         links:
           $ref: '#/components/schemas/ErrorLinks'
-        detail:
-          description: The detailed description of the warning.
-          type: string
-      type: object
-    Logicals:
-      properties:
-        $and:
-          items:
-            anyOf:
-            - $ref: '#/components/schemas/Logicals'
-            - $ref: '#/components/schemas/Parameter'
-          title: Logical operators
-          type: array
-        $or:
-          items:
-            anyOf:
-            - $ref: '#/components/schemas/Logicals'
-            - $ref: '#/components/schemas/Parameter'
-          title: Logical operators
-          type: array
-        $not:
-          items:
-            anyOf:
-            - $ref: '#/components/schemas/Logicals'
-            - $ref: '#/components/schemas/Parameter'
-          title: Logical operators
-          type: array
-      title: One of the logical operators such as $and, $or, $not
-      type: object
-    Logical:
-      items:
-        anyOf:
-        - $ref: '#/components/schemas/Logicals'
-        - $ref: '#/components/schemas/Parameter'
-      title: Logical operators
-      type: array
-    Parameter:
-      properties:
-        author.id:
-          $ref: '#/components/schemas/Query'
-        author.name:
-          $ref: '#/components/schemas/Query'
-        body:
-          $ref: '#/components/schemas/Query'
-        categories.confident:
-          $ref: '#/components/schemas/Query'
-        categories.id:
-          $ref: '#/components/schemas/Query'
-        categories.level:
-          $ref: '#/components/schemas/Query'
-        categories.taxonomy:
-          $ref: '#/components/schemas/Query'
-        clusters:
-          $ref: '#/components/schemas/Query'
-        links.permalink:
-          $ref: '#/components/schemas/Query'
-        entities.id:
-          $ref: '#/components/schemas/Query'
-        entities.surface_forms.text:
-          $ref: '#/components/schemas/Query'
-        entities.links.wikipedia:
-          $ref: '#/components/schemas/Query'
-        entities.links.wikidata:
-          $ref: '#/components/schemas/Query'
-        entities.title.surface_forms.text:
-          $ref: '#/components/schemas/Query'
-        entities.body.surface_forms.text:
-          $ref: '#/components/schemas/Query'
-        id:
-          $ref: '#/components/schemas/Query'
-        language:
-          $ref: '#/components/schemas/Query'
-        media.images.content.length.max:
-          $ref: '#/components/schemas/Query'
-        media.images.content.length.min:
-          $ref: '#/components/schemas/Query'
-        media.images.count.max:
-          $ref: '#/components/schemas/Query'
-        media.images.count.min:
-          $ref: '#/components/schemas/Query'
-        media.images.format:
-          $ref: '#/components/schemas/Query'
-        media.images.height.max:
-          $ref: '#/components/schemas/Query'
-        media.images.height.min:
-          $ref: '#/components/schemas/Query'
-        media.images.width.max:
-          $ref: '#/components/schemas/Query'
-        media.images.width.min:
-          $ref: '#/components/schemas/Query'
-        media.videos.count.max:
-          $ref: '#/components/schemas/Query'
-        media.videos.count.min:
-          $ref: '#/components/schemas/Query'
-        sentiment.body.polarity:
-          $ref: '#/components/schemas/Query'
-        sentiment.title.polarity:
-          $ref: '#/components/schemas/Query'
-        social.shares.count.facebook.max:
-          $ref: '#/components/schemas/Query'
-        social.shares.count.facebook.min:
-          $ref: '#/components/schemas/Query'
-        social.shares.count.reddit.max:
-          $ref: '#/components/schemas/Query'
-        social.shares.count.reddit.min:
-          $ref: '#/components/schemas/Query'
-        source.domain:
-          $ref: '#/components/schemas/Query'
-        source.id:
-          $ref: '#/components/schemas/Query'
-        source.links.in.count.max:
-          $ref: '#/components/schemas/Query'
-        source.links.in.count.min:
-          $ref: '#/components/schemas/Query'
-        source.locations.city:
-          $ref: '#/components/schemas/Query'
-        source.locations.country:
-          $ref: '#/components/schemas/Query'
-        source.locations.state:
-          $ref: '#/components/schemas/Query'
-        source.rankings.alexa.country:
-          $ref: '#/components/schemas/Query'
-        source.rankings.alexa.rank.max:
-          $ref: '#/components/schemas/Query'
-        source.rankings.alexa.rank.min:
-          $ref: '#/components/schemas/Query'
-        source.scopes.city:
-          $ref: '#/components/schemas/Query'
-        source.scopes.country:
-          $ref: '#/components/schemas/Query'
-        source.scopes.level:
-          $ref: '#/components/schemas/Query'
-        source.scopes.state:
-          $ref: '#/components/schemas/Query'
-        story_url:
-          $ref: '#/components/schemas/Query'
-        story_language:
-          $ref: '#/components/schemas/Query'
-        text:
-          $ref: '#/components/schemas/Query'
-        title:
-          $ref: '#/components/schemas/Query'
-        translations.en.body:
-          $ref: '#/components/schemas/Query'
-        translations.en.text:
-          $ref: '#/components/schemas/Query'
-        translations.en.title:
-          $ref: '#/components/schemas/Query'
-        entity:
-          oneOf:
-          - $ref: '#/components/schemas/NestedEntity'
-          - $ref: '#/components/schemas/Logicals'
-      title: Query defines the search query on a field
-      type: object
-    Query:
-      properties:
-        $eq:
-          oneOf:
-          - type: string
-          - type: number
-          title: Perform an exact match search on the given value
-        $text:
-          oneOf:
-          - type: string
-          - type: number
-          title: Perform a text search on the given value
-        $in:
-          items:
-            oneOf:
-            - type: string
-            - type: number
-          title: Perform a search on an array of values
-          type: array
-        $gt:
-          title: Perform a greater than search on the given value
-          type: number
-        $gte:
-          title: Perform a greater than equal search on the given value
-          type: number
-        $lt:
-          title: Perform a less than search on the given value
-          type: number
-        $lte:
-          title: Perform a less than equal search on the given value
-          type: number
-        $boost:
-          title: Gives a weight to the field on performing the query
-          type: number
-      title: Query defines the search query on a field
-      type: object
-    NestedEntity:
-      properties:
-        id:
-          $ref: '#/components/schemas/Query'
-        name:
-          $ref: '#/components/schemas/Query'
-        surface_forms.text:
-          $ref: '#/components/schemas/Query'
-        sentiment:
-          $ref: '#/components/schemas/Query'
-        element:
-          $ref: '#/components/schemas/Query'
-        links.wikipedia:
-          $ref: '#/components/schemas/Query'
-        links.wikidata:
-          $ref: '#/components/schemas/Query'
-        stock_ticker:
-          $ref: '#/components/schemas/Query'
-        type:
-          $ref: '#/components/schemas/Query'
-      title: To perform a nested search on entities use this.
       type: object
   securitySchemes:
     app_id:

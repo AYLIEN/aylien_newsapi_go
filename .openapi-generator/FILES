@@ -1,5 +1,7 @@
 .gitignore
+.openapi-generator-ignore
 .travis.yml
+README.md
 api/openapi.yaml
 api_default.go
 client.go
@@ -29,13 +31,9 @@ docs/ExternalIds.md
 docs/HistogramInterval.md
 docs/Histograms.md
 docs/Location.md
-docs/Logicals.md
 docs/Media.md
 docs/MediaFormat.md
 docs/MediaType.md
-docs/NestedEntity.md
-docs/Parameter.md
-docs/Query.md
 docs/Rank.md
 docs/Rankings.md
 docs/RelatedStories.md
@@ -87,13 +85,9 @@ model_external_ids.go
 model_histogram_interval.go
 model_histograms.go
 model_location.go
-model_logicals.go
 model_media.go
 model_media_format.go
 model_media_type.go
-model_nested_entity.go
-model_parameter.go
-model_query.go
 model_rank.go
 model_rankings.go
 model_related_stories.go
